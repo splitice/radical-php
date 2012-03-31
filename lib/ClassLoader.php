@@ -77,7 +77,7 @@ class ClassLoader extends Autoloader {
 		$vars = static::getVars();
 		$path = realpath($path);
 
-		$path = new File($path);
+		$path = new File\Instance($path);
 		return $path->compact($vars);
 	}
 	

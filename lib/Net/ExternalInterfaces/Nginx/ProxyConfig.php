@@ -16,14 +16,14 @@ class ProxyConfig {
 	
 	private $upstream_count = 0;
 	
-	static function IP(\Basic\IP $ip) {
+	static function IP(\Net\IP $ip) {
 		if ($ip->getVersion() == 6) {
 			return '[' . $ip . ']';
 		}
 		return $ip;
 	}
 	
-	function __construct(\Basic\IP $ip_addr, \Basic\IP $to_addr) {
+	function __construct(\Net\IP $ip_addr, \Net\IP $to_addr) {
 		if ($ip_addr->isValid()) {
 			$this->ip_addr = $ip_addr;
 		}

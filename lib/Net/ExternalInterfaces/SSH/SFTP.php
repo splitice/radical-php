@@ -23,7 +23,7 @@ class SFTP {
 		return $file;
 	}
 	function newFile($path){
-		return new \File($this->getPath($path));
+		return new \File\Instance($this->getPath($path));
 	}
 	function getPath($path){
 		return "ssh2.sftp://${sftp}${path}";

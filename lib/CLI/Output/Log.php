@@ -29,7 +29,7 @@ class Log {
 		if(self::$group){
 			$file .= self::$group.'/';
 		}
-		$file .= \File::NiceName($name);
+		$file .= $name;
 		$file .= self::LOG_EXT;
 		
 		$ret = new LogFile($file);
