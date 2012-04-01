@@ -2,25 +2,17 @@
 //Class Autoloader
 class AutoLoader {
 	const BOOTSTRAP_FILE = 'bootstrap.php';
-	
-	static $instance;
+	static $projectDirs = array('system','app');
 	
 	static $baseDir;
 	
-	static $projectDirs = array('system','app');
-	
 	function __construct(){
-		$this->InitPathCache();
+		static::InitPathCache();
 		spl_autoload_register(array($this,'__autoload'));
-		static::$instance = $this;
 	}
 	
-	function getPathCache(){
-		return $this->pathCache;
-	}
-	
-	private $pathCache = array();
-	private function _buildPathCache($libDir){
+	protected static $pathCache = array();
+	private static function _buildPathCache($libDir){
 		$pathCache = array();
 		$expr = $libDir.'*';
 		foreach(array_reverse(glob($expr)) as $directory){
@@ -56,7 +48,7 @@ class AutoLoader {
 		
 		return $pathCache;
 	}
-	function InitPathCache(){
+	static function InitPathCache(){
 		//Important Paths
 		self::$baseDir = realpath(__DIR__ . DIRECTORY_SEPARATOR.'..'. DIRECTORY_SEPARATOR.'..').DIRECTORY_SEPARATOR;
 		
@@ -64,13 +56,13 @@ class AutoLoader {
 		foreach(self::$projectDirs as $project){
 			$libDir = self::$baseDir.DIRECTORY_SEPARATOR.$project.DIRECTORY_SEPARATOR.'lib'.DIRECTORY_SEPARATOR;
 			
-			$this->pathCache = array_merge($this->pathCache,$this->_buildPathCache($libDir));
+			static::$pathCache = array_merge(static::$pathCache,static::_buildPathCache($libDir));
 		}
 	}
 	
-	function resolve($name){
+	static function resolve($name){
 		$name = str_replace ( '\\', '/', $name ).'.php';
-		foreach($this->pathCache as $p){
+		foreach(static::$pathCache as $p){
 			$path = $p.$name;
 			if(file_exists($path)){
 				return $path;
@@ -80,7 +72,7 @@ class AutoLoader {
 	}
 	
 	function __autoload($n){
-		if($file = $this->resolve($n)){
+		if($file = static::resolve($n)){
 			include($file);
 			return true;
 		}

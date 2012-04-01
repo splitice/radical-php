@@ -5,7 +5,7 @@ use \Basic\ArrayLib\Object\SortedCollectionObject;
 class ClassLoader extends Autoloader {
 	static function toPath($class,$full = false){
 		if($full){
-			return AutoLoader::$instance->resolve($class);
+			return AutoLoader::resolve($class);
 		}
 		return str_replace('\\', DIRECTORY_SEPARATOR, $class);
 	}
