@@ -5,9 +5,9 @@ class AutoLoader {
 	
 	static $instance;
 	
-	static $webDir;
-	static $libDir;
 	static $baseDir;
+	
+	static $projectDirs = array('system','app');
 	
 	function __construct(){
 		$this->InitPathCache();
@@ -20,42 +20,51 @@ class AutoLoader {
 	}
 	
 	private $pathCache = array();
-	function InitPathCache(){
-		//Important Paths
-		self::$webDir = realpath(__DIR__ . DIRECTORY_SEPARATOR.'..').DIRECTORY_SEPARATOR;
-		self::$baseDir = realpath(self::$webDir. DIRECTORY_SEPARATOR.'..').DIRECTORY_SEPARATOR;
-		self::$libDir = realpath(self::$webDir . 'lib').DIRECTORY_SEPARATOR;
-		
-		//Build Cache
-		foreach(array_reverse(glob(self::$libDir.'*')) as $directory){
+	private function _buildPathCache($libDir){
+		$pathCache = array();
+		$expr = $libDir.'*';
+		foreach(array_reverse(glob($expr)) as $directory){
 			if(is_dir($directory)){
-				$this->pathCache[] = rtrim(realpath($directory),DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
+				$pathCache[] = rtrim(realpath($directory),DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
 			}
 		}
 		
 		//Do ordering
-		$bootstrapFile = self::$libDir.DIRECTORY_SEPARATOR.static::BOOTSTRAP_FILE;
+		$bootstrapFile = $libDir.static::BOOTSTRAP_FILE;
 		if(file_exists($bootstrapFile)){
 			include($bootstrapFile);
-			
+				
 			if(isset($__BOOTSTRAP__)){//Something is wrong with the file, ignore it
 				$newPathCache = array();
 				foreach($__BOOTSTRAP__ as $lib){
-					foreach($this->pathCache as $k=>$path){
+					foreach($pathCache as $k=>$path){
 						$p = basename($path);
 						if($lib == $p){
-							unset($this->pathCache[$k]);
+							unset($pathCache[$k]);
 							$newPathCache[] = $path;
 						}
 					}
 				}
-				
+		
 				//Merge ordered results with unordered results
-				$newPathCache = array_merge($newPathCache,$this->pathCache);
-				
+				$newPathCache = array_merge($newPathCache,$pathCache);
+		
 				//store path cache
-				$this->pathCache = $newPathCache;
+				$pathCache = $newPathCache;
 			}
+		}
+		
+		return $pathCache;
+	}
+	function InitPathCache(){
+		//Important Paths
+		self::$baseDir = realpath(__DIR__ . DIRECTORY_SEPARATOR.'..'. DIRECTORY_SEPARATOR.'..').DIRECTORY_SEPARATOR;
+		
+		//Build Cache
+		foreach(self::$projectDirs as $project){
+			$libDir = self::$baseDir.DIRECTORY_SEPARATOR.$project.DIRECTORY_SEPARATOR.'lib'.DIRECTORY_SEPARATOR;
+			
+			$this->pathCache = array_merge($this->pathCache,$this->_buildPathCache($libDir));
 		}
 	}
 	
