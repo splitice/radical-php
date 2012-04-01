@@ -12,7 +12,7 @@ class Model extends ModelData {
 		$this->table = $table;
 		$this->tableInfo = $table->Info();
 		$structure = CreateTable::fromTable($table);
-		
+
 		if(isset($structure->indexes['PRIMARY'])){
 			$this->id = $structure->indexes['PRIMARY']->getKeys();
 		}

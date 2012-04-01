@@ -20,7 +20,9 @@ class UserSession extends Internal {
 		$class = $this->table->getClass();
 
 		$data = $this->getFields($username,$password);
+
 		$res = $class::fromFields($data);
+
 		if($res){
 			$password = $res->getSQLField(static::FIELD_PASSWORD);
 			if($password){

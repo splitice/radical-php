@@ -40,8 +40,12 @@ class CreateTable extends CollectionObject {
 	
 	static function fromTable($table){
 		$table = new \Database\SQL\ShowCreateTable($table);
-		$res = \DB::Q($table->toSQL());
-		$data = \DB::Fetch($res,DBAL\Fetch::NUM);
+		try {
+			$res = \DB::Q($table->toSQL());
+			$data = \DB::Fetch($res,DBAL\Fetch::NUM);
+		}catch(\Exception $ex){
+			throw new \Exception('Couldnt get Create Table (permissions?) for '.$table,null,$ex);
+		}
 		return new static($data[1]);
 	}
 }

@@ -311,7 +311,7 @@ abstract class Table extends \Core\Object implements ITable, \JsonSerializable {
 	}
 	private static function _fromFields(array $fields){
 		$orm = ORM\Manager::getModel(new TableReferenceInstance(get_called_class()));
-		
+
 		//prefix
 		$prefixedFields = array();
 		foreach($fields as $k=>$f){
