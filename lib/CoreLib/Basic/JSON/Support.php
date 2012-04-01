@@ -1,5 +1,5 @@
 <?php
-namespace Basic;
+namespace Basic\JSON;
 
 /**
  * Converts to and from JSON format.

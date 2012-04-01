@@ -86,7 +86,7 @@ class FileFactory extends Internal\HostBase implements Interfaces\IUploadHost {
 			//$data = preg_replace('/(\w+):/i', '"\1":', $data);
 				
 			//$data = preg_replace('/([{,])(\s*)([^"]+?)\s*:/','$1"$3":',$data);
-			$J = new \Basic\Services_JSON();
+			$J = new \Basic\JSON\Support();
 			$json = $J->decode($data);
 			
 			if(!$json || !isset($json->files)) {
