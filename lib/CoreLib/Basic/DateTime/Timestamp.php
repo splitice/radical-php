@@ -1,11 +1,16 @@
 <?php
 namespace Basic\DateTime;
 
-class Timestamp {
+use Core\StandardObject;
+
+class Timestamp extends StandardObject {
 	protected $timestamp;
 	
 	function __construct($timestamp){
 		$this->timestamp = $timestamp;
+	}
+	function toFormat($format){
+		return date($format,$this->timestamp);
 	}
 	function toAgo($ago=true)
 	{
@@ -14,7 +19,7 @@ class Timestamp {
 	
 		$now = time();
 	
-		$difference     = $now - $time;
+		$difference     = $now - $this->timestamp;
 		$tense         = "ago";
 	
 		for($j = 0; $difference >= $lengths[$j] && $j < count($lengths)-1; $j++) {
