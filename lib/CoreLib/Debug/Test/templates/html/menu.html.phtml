@@ -15,9 +15,10 @@
 			}
 		}
 	?>
-	<?php if (!isset($current)): ?>
-		<ul class="menu">
-	<?php endif ?>
+	<?php if (!isset($current)): 
+	echo '<ul class="menu">';
+	
+	endif ?>
 
 	<?php while ($depth >= $caseDepth+1): ?>
 		<?php
