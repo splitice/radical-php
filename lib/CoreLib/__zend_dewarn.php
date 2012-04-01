@@ -104,6 +104,9 @@ function xcache_isset(){
 function xcache_get(){
 	
 }
+function xcache_unset(){
+	
+}
 class Memcache{
 	
 }
