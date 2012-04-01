@@ -9,6 +9,6 @@ class FunctionCache extends GlobalCache {
 		$key = $file.':'.$line;
 		$cache = static::Get($cache);
 		
-		return $this->CachedValue($key,$callback,$ttl);
+		return $cache->CachedValue($key,$callback,$ttl);
 	}
 }

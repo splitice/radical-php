@@ -2,7 +2,6 @@
 namespace Tests;
 
 use Debug\Test\IUnitTest;
-
 use Debug\Test\Unit;
 
 class Autoloader extends Unit implements IUnitTest {

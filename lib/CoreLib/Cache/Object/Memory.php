@@ -42,4 +42,14 @@ class Memory extends Internal\CacheBase implements ICache {
 			return xcache_set ( $key, $value, $ttl );
 		}
 	}
+	
+	function Delete($key){
+		$key = $this->key($key);
+		if (function_exists ( 'apc_delete' )) {
+			return apc_delete ( $key );
+		}
+		if (function_exists ( 'xcache_unset' )) {
+			return xcache_unset ( $key );
+		}
+	}
 }
