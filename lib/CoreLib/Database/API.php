@@ -1,6 +1,8 @@
 <?php
 namespace Database;
 
+use Database\Model\TableReferenceInstance;
+
 class API {
 	protected $table;
 	function __construct(TableReferenceInstance $table){
