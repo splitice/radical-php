@@ -12,4 +12,4 @@ class DateTime extends Timestamp {
 		$this->assertEqual(strtotime($date),(string)$dt, 'DateTime fromSQL');
 		$this->assertEqual($date,$dt->toSQL(), 'DateTime toSQL');
 	}
-} // End arr
+}

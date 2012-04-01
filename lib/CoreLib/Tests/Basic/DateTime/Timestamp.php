@@ -43,4 +43,4 @@ class Timestamp extends Unit implements IUnitTest {
 		$dt = new \Basic\DateTime\Timestamp(time()-11000);
 		$this->assertEqual('3 hours ago',$dt->toAgo(),'Ago 3h Test');
 	}
-} // End arr
+}
