@@ -37,4 +37,9 @@ class WeakRef {
 		}
 		$this->data[$key] = $value;
 	}
+	function Delete($key){
+		if(isset($this->data[$key])){
+			unset($this->data[$key]);
+		}
+	}
 }

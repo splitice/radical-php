@@ -4,7 +4,7 @@ namespace Cache\Object;
 class FileCache extends Internal\FileCacheBase implements ICache {
 	const PATH = 'main';
 
-	function path($key){
+	protected function path($key){
 		$hash = md5($key);
 		
 		$dir = $this->CachePath();
@@ -23,15 +23,21 @@ class FileCache extends Internal\FileCacheBase implements ICache {
 		
 		return $path;
 	}
-	function get($key){
+	function Get($key){
 		if($path = $this->path($key)){
 			return file_get_contents($path);
 		}
 	}
-	function set($key,$value,$ttl = null){
+	function Set($key,$value,$ttl = null){
 		$path = $this->path($key);
 		if($path){
 			@file_put_contents($path, $value);
+		}
+	}
+	function Delete($key){
+		$path = $this->path($key);
+		if($path){
+			@unlink($path);
 		}
 	}
 }
