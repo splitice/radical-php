@@ -95,6 +95,15 @@ function shm_detach(){
 function shm_remove(){
 	
 }
+function xcache_set(){
+	
+}
+function xcache_isset(){
+	
+}
+function xcache_get(){
+	
+}
 class Memcache{
 	
 }

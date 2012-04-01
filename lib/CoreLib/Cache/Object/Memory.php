@@ -13,10 +13,15 @@ class Memory extends Internal\CacheBase implements ICache {
 	 * @return mixed
 	 */
 	function Get($key) {
+		$key = $this->key($key);
 		if (function_exists ( 'apc_fetch' )) {
-			$key = $this->key($key);
 			if(apc_exists($key)){
 				return apc_fetch ( $key );
+			}
+		}
+		if (function_exists ( 'xcache_get' )) {
+			if(xcache_isset($key)){
+				return xcache_get ( $key );
 			}
 		}
 		return null;
@@ -29,9 +34,12 @@ class Memory extends Internal\CacheBase implements ICache {
 	 * @param int $ttl Time to cache in memory for
 	 */
 	function Set($key, $value, $ttl = 3600) {
+		$key = $this->key($key);
 		if (function_exists ( 'apc_store' )) {
-			$key = $this->key($key);
 			return apc_store ( $key, $value, $ttl );
+		}
+		if (function_exists ( 'xcache_set' )) {
+			return xcache_set ( $key, $value, $ttl );
 		}
 	}
 }
