@@ -375,7 +375,7 @@ class IMDB extends Internal\ModuleBase implements \Net\ExternalInterfaces\Conten
 			if($pos = strpos($d,':')){
 				$d = substr($d,$pos+1);
 			}
-			$ret['running_time'] = \Language\Raw::fromTimeSpan(trim($d));
+			$ret['running_time'] = \Basic\DateTime\Timespan::fromHuman(trim($d));
 		}
 	
 		if(!isset($ret['running_time'])){
@@ -388,7 +388,7 @@ class IMDB extends Internal\ModuleBase implements \Net\ExternalInterfaces\Conten
 					$s->innertext = '';
 				}
 				if(preg_match('#([0-9]+) min#',(string)$temp,$m)){
-					$ret['running_time'] = \Language\Raw::fromTimeSpan($m[0]);
+					$ret['running_time'] = \Basic\DateTime\Timespan::fromHuman($m[0]);
 				}
 			}catch(\Exception $ex){
 	

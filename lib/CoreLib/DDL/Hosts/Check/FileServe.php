@@ -18,7 +18,7 @@ class FileServe extends Internal\HostBase {
 				$ret->setFilename(trim($m[1]));
 			}
 			if(preg_match('#<strong>(.+)</strong> \| Uploaded#',$data,$m)){
-				$fs = \Language\Raw::fromFileSize($m[1]);
+				$fs = \File\Size::fromHuman($m[1]);
 				$ret->setFilesize($fs);
 			}
 		}

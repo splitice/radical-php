@@ -14,7 +14,7 @@ class MediaFire extends Internal\HostBase {
 			$ret->setStatus('ok');
 			$ret->setFilename(trim($m[1]));
 			if(preg_match('#<input type="hidden" id="sharedtabsfileinfo1-fs" value="([^"]+)">#',$data,$m)){
-				$fs = \Language\Raw::fromFileSize($m[1]);
+				$fs = \File\Size::fromHuman($m[1]);
 				$ret->setFilesize($fs);
 			}
 		}

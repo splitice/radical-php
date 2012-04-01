@@ -18,7 +18,7 @@ class MegaUpload extends Internal\HostBase {
 				$ret->setFilename(trim($m[1]));
 			}
 			if(preg_match('#<div class="download_file_size">([^>]+)</div>#',$data,$m)){
-				$fs = \Language\Raw::fromFileSize(trim($m[1]));
+				$fs = \File\Size::fromHuman(trim($m[1]));
 				$ret->setFilesize($fs);
 			}
 		}
