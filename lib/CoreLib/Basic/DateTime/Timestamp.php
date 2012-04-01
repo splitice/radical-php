@@ -38,4 +38,7 @@ class Timestamp extends StandardObject {
 	
 		return $difference.' '.$periods[$j].$ago;
 	}
+	function __toString(){
+		return (string)$this->timestamp;
+	}
 }
