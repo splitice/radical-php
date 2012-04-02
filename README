@@ -5,3 +5,5 @@ Currently pre-alpha, not recomended for public use unless you know what you are 
 Inspired by lithium, kohana and django. Currently looking for team members.
 
 This branch includes a new layout that will be merged back when it is stable
+
+The new layout is more framework like
