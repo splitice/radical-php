@@ -17,6 +17,7 @@ $user_include = $user_dir . DS . 'include' . DS;
 include (__DIR__ . '/autoloader.php');
 include (__DIR__ . '/functions.php');
 
+//Config
 include (__DIR__ . '/../config.php');
 if($user_include && file_exists($user_dir.'config.php')){
 	include($user_dir.'config.php');
