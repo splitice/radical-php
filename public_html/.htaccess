@@ -4,5 +4,5 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule .* - [L]
 RewriteRule ^favicon.ico$ favicon_local.ico [QSA,L]
-RewriteRule ^(.*)$ ../bin/handle.php [QSA,L]
+RewriteRule ^(.*)$ ../system/bin/handle.php [QSA,L]
 </IfModule>

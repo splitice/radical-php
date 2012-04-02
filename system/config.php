@@ -1,0 +1,2 @@
+<?php
+//Default Config
