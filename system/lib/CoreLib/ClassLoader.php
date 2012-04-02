@@ -83,7 +83,7 @@ class ClassLoader extends Autoloader {
 	
 	static function getLibraries(){
 		$ret = array();
-		foreach(parent::$instance->getPathCache() as $pc){
+		foreach(static::$pathCache as $pc){
 			$ret[basename($pc)] = $pc;
 		}
 		return $ret;
