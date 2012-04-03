@@ -8,6 +8,7 @@ if (version_compare (PHP_VERSION, '5.3.3') < 0)
 	die ("You need PHP 5.3.3 or higher to run this script.\n");
 }
 
+//Path to user directory
 $user_dir = __DIR__.DS.'..'.DS.'..'.DS;
 if(!file_exists($user_include)){
 	$user_include = null;
@@ -23,6 +24,7 @@ if($user_include && file_exists($user_dir.'config.php')){
 	include($user_dir.'config.php');
 }
 
+//Connect SQL if used
 if(isset($_SQL)){
 	DB::Connect ( $_SQL );
 }
