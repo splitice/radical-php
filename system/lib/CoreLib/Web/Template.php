@@ -121,4 +121,3 @@ class Template extends PageHandler\PageBase {
 		return $this->GET ();
 	}
 }
-?>
