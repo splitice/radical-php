@@ -1,26 +1,21 @@
 <?php
 namespace Web;
 
+use Web\Templates\Scope;
+
 use Core\Resource;
 
-use HTML\Form\Builder\FormBuilder;
-
 class Template extends PageHandler\PageBase {
-	public $vars = array ('title' => 'Template Error', 'body' => 'No template specified.' );
-	public $form;
-	
+	protected $vars = array();
+	protected $file;
 	protected $name = 'error';
-	protected $container = 'HTML';
-	protected $handler = false;	
-	public $JSData;
+	protected $handler = false;
 	
 	function __construct($name, $vars = array(), $container = 'HTML') {
 		$this->vars = $vars;
 		$this->name = $name;
-		$this->container = $container;
-		$this->file = new Resource($name);
-		die(var_dump($this->file));
-		$this->form = new FormBuilder();
+		$this->file = new \File\Instance(static::getPath($name,$container));
+		
 		foreach(array_slice(debug_backtrace(true),1) as $r){
 			if(isset($r['object']) && $r['object'] instanceof PageHandler\IPage && !($r['object'] instanceof Template)){
 				$this->handler = $r['object'];
@@ -38,27 +33,66 @@ class Template extends PageHandler\PageBase {
 		$this->vars[$k] = $v;
 	}
 	
+	static function adapters(){
+		return \ClassLoader::getNSExpression('Web\\Templates\\Adapter\\*');
+	}
 	static function isSupported($path){
+		if(!($path instanceof \File\Instance)){
+			$path = new \File\Instance($path);
+		}
 		
+		$handlers = static::adapters();
+		foreach($handlers as $class){
+			if(class_exists($class)){
+				if($class::is($path)){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	static function getPath($name,$output = 'HTML'){
 		global $BASEPATH;
-		$expr = $BASEPATH . 'template' . DS . $output . DS . $name.'.*';
+		//Normally we would use the resource handler for this
+		//howeaver as well as detirming which part of the system
+		//to fetch from we also have a variable extension
+		//@todo overriding order
+		$expr = $BASEPATH . DS . '*' . DS . 'template' . DS . $output . DS . $name.'.*';
 		foreach(glob($expr) as $path){
 			if(static::isSupported($path)){
-				
+				return $path;
 			}
 		}
+		
 	}
 	
 	static function Exists($name,$output='HTML'){
 		return file_exists(static::getPath($name,$output));
 	}
 	
+	function adapter(){	
+		$handlers = static::adapters();
+		foreach($handlers as $class){
+			if(class_exists($class)){
+				if($class::is($this->file)){
+					return new $class($this->file);
+				}
+			}
+		}
+	}
+	
 	function GET() {		
-		$TEMPLATE_FILE = static::getPath($this->name,$this->output);
-			
-		return $this->Load($TEMPLATE_FILE);
+		$adapter = $this->adapter();
+		if($adapter == null){
+			throw new \Exception('Template file couldnt be found');
+		}
+		
+		if($adapter instanceof Templates\Adapter\ITemplateAdapter){
+			$scope = new Scope($this->vars, $this->handler);
+			$adapter->Output($scope);
+		}else{
+			throw new \Exception('Invalid Template Adapter');
+		}
 	}
 	
 	function Load($file,$locals = array()){
