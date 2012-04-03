@@ -1,6 +1,8 @@
 <?php
 namespace Web;
 
+use Core\Resource;
+
 use HTML\Form\Builder\FormBuilder;
 
 class Template extends PageHandler\PageBase {
@@ -8,13 +10,16 @@ class Template extends PageHandler\PageBase {
 	public $form;
 	
 	protected $name = 'error';
-	protected $output = 'HTML';
+	protected $container = 'HTML';
 	protected $handler = false;	
 	public $JSData;
 	
-	function __construct($name, $vars = array()) {
+	function __construct($name, $vars = array(), $container = 'HTML') {
 		$this->vars = $vars;
 		$this->name = $name;
+		$this->container = $container;
+		$this->file = new Resource($name);
+		die(var_dump($this->file));
 		$this->form = new FormBuilder();
 		foreach(array_slice(debug_backtrace(true),1) as $r){
 			if(isset($r['object']) && $r['object'] instanceof PageHandler\IPage && !($r['object'] instanceof Template)){
@@ -33,14 +38,17 @@ class Template extends PageHandler\PageBase {
 		$this->vars[$k] = $v;
 	}
 	
-	static $baseDir;
-	static function getBaseDir(){
-		if(static::$baseDir) return static::$baseDir;
-		static::$baseDir = __DIR__ . DS . '..'. DS . '..'. DS . '..' . DS . 'template'. DS;
-		return static::$baseDir;
+	static function isSupported($path){
+		
 	}
 	static function getPath($name,$output = 'HTML'){
-		return static::getBaseDir() . $output . DS . $name.'.php';
+		global $BASEPATH;
+		$expr = $BASEPATH . 'template' . DS . $output . DS . $name.'.*';
+		foreach(glob($expr) as $path){
+			if(static::isSupported($path)){
+				
+			}
+		}
 	}
 	
 	static function Exists($name,$output='HTML'){

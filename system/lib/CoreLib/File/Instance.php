@@ -33,6 +33,9 @@ class Instance {
 		return $path;
 	}
 	
+	function getExtension(){
+		return pathinfo($this->file,PATHINFO_EXTENSION);
+	}
 	function Exists(){
 		return file_exists($this->file);
 	}
