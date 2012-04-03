@@ -2,6 +2,7 @@ Options +FollowSymLinks +ExecCGI
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -f
+RewriteCond %{REQUEST_URI} "/system/" [OR]
 RewriteRule .* - [L]
 RewriteRule ^favicon.ico$ favicon_local.ico [QSA,L]
 RewriteRule ^(.*)$ system/bin/handle.php [QSA,L]
