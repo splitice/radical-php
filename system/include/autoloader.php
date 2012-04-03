@@ -49,12 +49,11 @@ class AutoLoader {
 		return $pathCache;
 	}
 	static function InitPathCache(){
-		//Important Paths
-		self::$baseDir = realpath(__DIR__ . DIRECTORY_SEPARATOR.'..'. DIRECTORY_SEPARATOR.'..').DIRECTORY_SEPARATOR;
+		global $BASEPATH;
 		
 		//Build Cache
 		foreach(self::$projectDirs as $project){
-			$libDir = self::$baseDir.DIRECTORY_SEPARATOR.$project.DIRECTORY_SEPARATOR.'lib'.DIRECTORY_SEPARATOR;
+			$libDir = $BASEPATH.DIRECTORY_SEPARATOR.$project.DIRECTORY_SEPARATOR.'lib'.DIRECTORY_SEPARATOR;
 			
 			static::$pathCache = array_merge(static::$pathCache,static::_buildPathCache($libDir));
 		}

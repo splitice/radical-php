@@ -1,6 +1,6 @@
 <?php
 define ( 'DS', DIRECTORY_SEPARATOR );
-$BASEPATH = rtrim(dirname ( realpath($_SERVER ["SCRIPT_NAME"].'/../') ),'/') . '/';
+$BASEPATH = $_SERVER['DOCUMENT_ROOT'] . DS;
 
 //Check PHP Version
 if (version_compare (PHP_VERSION, '5.3.3') < 0)
@@ -9,9 +9,9 @@ if (version_compare (PHP_VERSION, '5.3.3') < 0)
 }
 
 //Path to user directory
-$user_dir = __DIR__.DS.'..'.DS.'..'.DS;
-if(!file_exists($user_include)){
-	$user_include = null;
+$user_dir = $BASEPATH.'app'.DS;
+if(!($user_dir = realpath($user_dir))){
+	die('Application directory not provided.');
 }
 $user_include = $user_dir . DS . 'include' . DS;
 
@@ -19,7 +19,7 @@ include (__DIR__ . '/autoloader.php');
 include (__DIR__ . '/functions.php');
 
 //Config
-include (__DIR__ . '/../config.php');
+include ($user_dir . '/config.php');
 if($user_include && file_exists($user_dir.'config.php')){
 	include($user_dir.'config.php');
 }

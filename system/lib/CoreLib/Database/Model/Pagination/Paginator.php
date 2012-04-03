@@ -1,6 +1,8 @@
 <?php
 namespace Database\Model\Pagination;
 
+use Database\Model\TableReferenceInstance;
+
 use Net\URL\Pagination\IPaginator;
 
 use Net\URL\Pagination\Template\IPaginationTemplate;
@@ -30,13 +32,13 @@ class Paginator implements \IteratorAggregate {
 		
 		return $this->table->getAll($sql);
 	}
-	function __construct(TableReference $table,$page = 1, $perPage = 30){
+	function __construct(TableReferenceInstance $table,$page = 1, $perPage = 30){
 		$this->table = $table;
 		$this->page = $page;
 		$this->perPage = $perPage;
+		$this->sql = new SQL\SelectStatement();
 		$this->set = $this->_get();
 		$this->totalRows = $this->table->getAll()->getCount();
-		$this->sql = new SQL\SelectStatement();
 	}
 	
 	public function getIterator() {

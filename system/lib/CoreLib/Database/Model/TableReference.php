@@ -33,7 +33,7 @@ class TableReference extends \Core\Object {
 		try {
 			return static::_create($tableClass);
 		}catch(\Exception $ex){
-			
+	
 		}
 	}
 }

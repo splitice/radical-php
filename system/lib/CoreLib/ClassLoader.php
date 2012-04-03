@@ -23,8 +23,8 @@ class ClassLoader extends Autoloader {
 		$ret = array();
 	
 		$path_expr = static::toPath($expr).'.php';
-	
-		$paths = static::$instance->getPathCache();
+
+		$paths = parent::$pathCache;
 		foreach($paths as $p){
 			foreach(glob($p.$path_expr) as $file){
 				$key = static::toClass($file);
