@@ -15,6 +15,9 @@ class Template extends PageHandler\PageBase {
 		$this->vars = $vars;
 		$this->name = $name;
 		$this->file = new \File\Instance(static::getPath($name,$container));
+		if(!$this->file->Exists()){
+			throw new \Exception('Template '.$name.' in '.$container.' doesnt exist');
+		}
 		
 		foreach(array_slice(debug_backtrace(true),1) as $r){
 			if(isset($r['object']) && $r['object'] instanceof PageHandler\IPage && !($r['object'] instanceof Template)){
@@ -57,7 +60,8 @@ class Template extends PageHandler\PageBase {
 		//howeaver as well as detirming which part of the system
 		//to fetch from we also have a variable extension
 		//@todo overriding order
-		$expr = $BASEPATH . DS . '*' . DS . 'template' . DS . $output . DS . $name.'.*';
+		$expr = $BASEPATH . '*' . DS . 'template' . DS . $output . DS . $name.'.*';
+		ob_flush();
 		foreach(glob($expr) as $path){
 			if(static::isSupported($path)){
 				return $path;
@@ -80,42 +84,20 @@ class Template extends PageHandler\PageBase {
 			}
 		}
 	}
-	
 	function GET() {		
 		$adapter = $this->adapter();
 		if($adapter == null){
 			throw new \Exception('Template file couldnt be found');
 		}
-		
+
 		if($adapter instanceof Templates\Adapter\ITemplateAdapter){
 			$scope = new Scope($this->vars, $this->handler);
+			PageHandler::Top()->headers->Add('Content-Type', 'text/html;charset=utf-8');
+			//$VAR,$HANDLER,$TEMPLATE_FILE
 			$adapter->Output($scope);
 		}else{
 			throw new \Exception('Invalid Template Adapter');
 		}
-	}
-	
-	function Load($file,$locals = array()){
-		global $_CONFIG;
-		$VAR = $this->vars;
-		
-		$HANDLER = $this->handler;
-		
-		extract($locals);
-		if(!isset($locals['TEMPLATE_FILE'])){
-			$TEMPLATE_FILE = $file;
-		}
-		
-		ob_start();
-		include ($file);
-		$contents = ob_get_contents();
-		ob_end_clean();
-		
-		PageHandler::Top()->headers->Add('Content-Type', 'text/html;charset=utf-8');
-
-		echo $contents;//TODO: GZIP/Optimise
-		//$contents = \Optimiser\HTML::Optimise($contents);
-		//return new \PageHandler\GZIP($contents); //END OF CHAIN
 	}
 	function POST() {
 		return $this->GET ();

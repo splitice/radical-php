@@ -14,7 +14,7 @@ class Error extends PageHandler\HTMLPageBase {
 	
 	
 	function GET(){
-		return new Template('error',array('error'=>$this->error));
+		return new Template('error',array('error'=>$this->error),'framework');
 	}
 	function POST(){
 		return $this->GET();
