@@ -3,7 +3,7 @@ namespace Web\Templates\Adapter;
 
 use Web\Templates\Scope;
 
-class PHPTemplate {
+class PHPTemplate implements ITemplateAdapter {
 	private $file;
 	function __construct(\File\Instance $file){
 		$this->file = $file;
