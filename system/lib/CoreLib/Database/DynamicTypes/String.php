@@ -1,6 +1,8 @@
 <?php
 namespace Database\DynamicTypes;
 
+use Database\Model\ITable;
+
 class String implements IDynamicType {
 	protected $value;
 	protected $extra;
@@ -19,7 +21,7 @@ class String implements IDynamicType {
 	function __toString(){
 		return (string)$this->value;
 	}
-	static function fromDatabaseModel($value,array $extra){
+	static function fromDatabaseModel($value,array $extra,ITable $model){
 		return new static($value,$extra);
 	}
 }

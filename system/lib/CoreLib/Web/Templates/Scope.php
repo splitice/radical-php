@@ -21,15 +21,18 @@ class Scope {
 	}
 	
 	/* Helper Functions */
-	function html($string,$encoding='UTF8'){
-		
+	function html($string,$encoding='UTF-8'){
+		return htmlspecialchars(@iconv ( $encoding, $encoding."//IGNORE", $string ));
 	}
 	function h($string){
 		return $this->html($string);
 	}
 	
 	function url($object){
-		
+		if(is_object($object)){
+			return $object->toURL();
+		}
+		return $object;
 	}
 	function u($object){
 		return $this->url($object);
