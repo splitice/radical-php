@@ -160,7 +160,7 @@ abstract class Table extends \Core\Object implements ITable, \JsonSerializable {
 			if(!strpos($dT, '\\') || ($dT{0} != '\\' && !class_exists($dT))){
 				$dT = '\\Database\\DynamicTypes\\'.$dT;
 			}
-			$this->$field = $dT::fromDatabaseModel($this->$field,$value['extra']);
+			$this->$field = $dT::fromDatabaseModel($this->$field,$value['extra'],$this);
 		}
 	}
 	
