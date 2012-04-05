@@ -55,7 +55,10 @@ class OutputErrorHandler extends Internal\ErrorHandlerBase {
 			if(ob_get_level()) ob_end_clean();
 			try {
 				//@todo Remove ugly hack
-				$error->getPage()->GET();
+				$page = $error->getPage();
+				while($page){
+					$page = $page->GET();
+				}
 			}catch(\Exception $ex){
 				die('Error: '.$ex->getMessage());
 			}

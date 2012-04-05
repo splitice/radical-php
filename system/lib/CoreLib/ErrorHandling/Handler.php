@@ -12,7 +12,7 @@ abstract class Handler {
 	
 	static function getInstance(){
 		if(!self::$instance){
-			self::$instance = new Handlers\NullErrorHandler();
+			self::$instance = new Handlers\OutputErrorHandler();
 		}
 		return self::$instance;
 	}

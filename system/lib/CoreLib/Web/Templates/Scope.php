@@ -19,4 +19,19 @@ class Scope {
 			$this->$k = $v;
 		}
 	}
+	
+	/* Helper Functions */
+	function html($string,$encoding='UTF8'){
+		
+	}
+	function h($string){
+		return $this->html($string);
+	}
+	
+	function url($object){
+		
+	}
+	function u($object){
+		return $this->url($object);
+	}
 }
