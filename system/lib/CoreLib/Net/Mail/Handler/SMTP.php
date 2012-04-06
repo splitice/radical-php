@@ -35,7 +35,6 @@ class SMTP extends Internal {
     if(!$this->connect()) return;
     if(!$this->auth()) return;
     $this->isLogin = true;
-    return;
   }
 
   /* Connect to the server */
