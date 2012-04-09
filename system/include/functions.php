@@ -31,13 +31,16 @@ function _U($url,$param=null){
 function U($url,$param=null) {
 	global $BASEPATH;
 	
+	$length = strlen($_SERVER['DOCUMENT_ROOT']);
+	$base = substr($BASEPATH,$length);
+	
 	//Convert to URL
 	if (is_object ( $url ) && $url instanceof IToURL) {
 		$url = $url->toURL($param);
 	}
 	
 	//Return
-	return $BASEPATH . ltrim ( $url, '/' );
+	return $base . ltrim ( $url, '/' );
 }
 /*function R($resource_id,$filters=array()) {
 	$url = CDN('resource/' . $resource_id);

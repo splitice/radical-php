@@ -9,7 +9,8 @@ class Recognise extends \Core\Object {
 		return static::fromURL($url);
 	}
 	static function fromURL(\Net\URL $url){
-		foreach(\ClassLoader::getNSExpression('\\Web\\PageRecogniser\\Recognisers\\*') as $class){
+		$recognisers = \ClassLoader::getNSExpression('\\Web\\PageRecogniser\\Recognisers\\*');
+		foreach($recognisers as $class){
 			if(\oneof($class,'\\Web\PageRecogniser\\IPageRecognise')){
 				$r = $class::Recognise(clone $url);
 				if($r){

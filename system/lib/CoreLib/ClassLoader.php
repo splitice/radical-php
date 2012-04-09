@@ -65,9 +65,8 @@ class ClassLoader extends Autoloader {
 			if($a > $b) return -1;
 			return 1;
 		});
-		$vars['libDir'] = AutoLoader::$libDir;
+		//$vars['projectDir'] = AutoLoader::$;
 		$vars['baseDir'] = AutoLoader::$baseDir;
-		$vars['webDir'] = AutoLoader::$webDir;
 		
 		return $vars;
 	}

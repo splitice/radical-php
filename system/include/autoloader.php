@@ -71,7 +71,12 @@ class AutoLoader {
 	}
 	
 	function __autoload($n){
-		if($file = static::resolve($n)){
+		if($n{0} == '_' && $n{1} == '\\'){
+			$file = \Core\MagicNamespace::fromString($n)->Load();
+		}else{
+			$file = static::resolve($n);
+		}
+		if($file){
 			include($file);
 			return true;
 		}

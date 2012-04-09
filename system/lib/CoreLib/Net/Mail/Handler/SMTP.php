@@ -20,17 +20,17 @@ class SMTP extends Internal {
   public $attachments = array();
 
   private $conn;
-  private $newline = "rn";
+  private $newline = "\r\n";
   private $localhost = 'localhost';
   private $timeout = '60';
   private $debug = false;
 
-  public function __construct($server, $port, $username=null, $password=null, $secure=null) {
+  public function __construct($server, $port = 21, $username=null, $password=null, $secure=null) {
     $this->server = $server;
     $this->port = $port;
     $this->username = $username;
     $this->password = $password;
-    $this->secure = $secure;
+    $this->secure = strtolower(trim($secure));
 
     if(!$this->connect()) return;
     if(!$this->auth()) return;
@@ -39,7 +39,7 @@ class SMTP extends Internal {
 
   /* Connect to the server */
   private function connect() {
-    if(strtolower(trim($this->secure)) == 'ssl') {
+    if($this->secure == 'ssl') {
       $this->server = 'ssl://' . $this->server;
     }
     $this->conn = fsockopen($this->server, $this->port, $errno, $errstr, $this->timeout);
@@ -51,7 +51,7 @@ class SMTP extends Internal {
   private function auth() {
     fputs($this->conn, 'HELO ' . $this->localhost . $this->newline);
     $this->getServerResponse();
-    if(strtolower(trim($this->secure)) == 'tls') {
+    if($this->secure == 'tls') {
       fputs($this->conn, 'STARTTLS' . $this->newline);
       if (substr($this->getServerResponse(),0,3)!='220') { return false; }
       stream_socket_enable_crypto($this->conn, true,STREAM_CRYPTO_METHOD_TLS_CLIENT);

@@ -28,6 +28,19 @@ class Resource {
 			}
 		}
 	}
+	function getFiles($expr = '*'){
+		global $BASEPATH;
+		
+		$files = array();
+		foreach($this->dirs as $dir){
+			$file = $BASEPATH.$dir.DS.$this->path;
+			if(file_exists($file) && is_dir($file)){
+				$files = array_merge($files,glob($file.DIRECTORY_SEPARATOR.$expr));
+			}
+		}
+		
+		return $files;
+	}
 	function getFile(){
 		return new \File\Instance($this->getFullPath());
 	}

@@ -76,6 +76,6 @@ class Message {
 	}
 
 	function Send($body){
-		$this->handler->Send($this,$body);
+		return $this->handler->Send($this,$body);
 	}
 }

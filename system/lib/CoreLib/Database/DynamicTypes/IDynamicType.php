@@ -1,6 +1,8 @@
 <?php
 namespace Database\DynamicTypes;
 
+use Database\Model\ITable;
+
 interface IDynamicType {
 	public function setValue($value);
 	function __toString();

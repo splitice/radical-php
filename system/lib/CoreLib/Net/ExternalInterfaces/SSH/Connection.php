@@ -29,7 +29,9 @@ class Connection {
 	}
 	
 	function Close(){
-		$this->exec($this->ssh, 'exit');
+		if(!$this->inSFTP){
+			$this->exec($this->ssh, 'exit');
+		}
 		$this->ssh = null;
 	}
 	function __destruct(){

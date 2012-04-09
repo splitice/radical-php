@@ -15,8 +15,7 @@ abstract class IndividualBase extends \Web\PageHandler\PageBase {
 		$headers->Add('Content-Type',static::MIME_TYPE);
 	}
 	protected function getPath(){
-		$path = realpath(__DIR__.DS.'..'.DS.'..'.DS.'..'.DS.'..'.DS.'..'.DS.'..'.DS.static::EXTENSION.DS.$this->name);
-		return $path;
+		return static::EXTENSION.DS.$this->name;
 	}
 	function GET(){
 		$this->sendHeaders();

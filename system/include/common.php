@@ -1,6 +1,10 @@
 <?php
 define ( 'DS', DIRECTORY_SEPARATOR );
-$BASEPATH = $_SERVER['DOCUMENT_ROOT'] . DS;
+if($_SERVER['DOCUMENT_ROOT']){
+	$BASEPATH = $_SERVER['DOCUMENT_ROOT'] . DS;
+}else{
+	$BASEPATH = $_SERVER['PWD'] . DS;
+}
 
 //Check PHP Version
 if (version_compare (PHP_VERSION, '5.3.3') < 0)
