@@ -2,7 +2,7 @@
 
 namespace Net\Mail\Handler;
 use Net\Mail\Message;
-class SMTP extends Internal {
+class SMTP implements IMailHandler {
   public $server;
   public $port;
   public $username;

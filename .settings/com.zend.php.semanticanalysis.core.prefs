@@ -1,0 +1,16 @@
+#Mon Apr 09 13:43:22 EST 2012
+assignment_has_no_effect=warning
+assignment_in_condition=ignore
+bad_class_variable_decl=error
+bad_escape_sequence=warning
+duplicate_element=error
+duplicate_element_in_file_hierarchy=error
+eclipse.preferences.version=1
+enable_semantic_analysis=enabled
+undefined_field=ignore
+undefined_function=ignore
+undefined_local_variable=ignore
+undefined_method=ignore
+undefined_type=warning
+unimplemented_methods=error
+visibility_reduce=error

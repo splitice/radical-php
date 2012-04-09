@@ -2,7 +2,7 @@
 //Class Autoloader
 class AutoLoader {
 	const BOOTSTRAP_FILE = 'bootstrap.php';
-	static $projectDirs = array('system','app');
+	static $projectDirs = array('app','system');
 	
 	static $baseDir;
 	

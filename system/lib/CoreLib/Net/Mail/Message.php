@@ -1,5 +1,6 @@
 <?php
 namespace Net\Mail;
+use Net\Mail\Handler;
 
 class Message {
 	/**

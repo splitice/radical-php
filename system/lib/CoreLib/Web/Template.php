@@ -61,7 +61,6 @@ class Template extends PageHandler\PageBase {
 		//to fetch from we also have a variable extension
 		//@todo overriding order
 		$expr = $BASEPATH . '*' . DS . 'template' . DS . $output . DS . $name.'.*';
-		ob_flush();
 		foreach(glob($expr) as $path){
 			if(static::isSupported($path)){
 				return $path;

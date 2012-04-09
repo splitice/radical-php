@@ -39,6 +39,7 @@ abstract class CombineBase extends IndividualBase {
 		$headers = \Web\PageHandler::top()->headers;
 		//$headers->setCache('public, max-age='.(60*60*24*7));
 		//$headers->setExpires(strtotime('+1 week'));
+		$headers->setContentType(static::MIME_TYPE);
 		
 	}
 	function Optimize($code){

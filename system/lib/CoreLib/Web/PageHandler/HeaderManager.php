@@ -45,10 +45,14 @@ class HeaderManager {
 	function setContentLength($bytes){
 		$this->Add('Content-Length',$bytes);
 	}
+	function setContentType($mime){
+		$this->Add('Content-Type',$mime);
+	}
 	function Output(){
 		if(!$this->headers){
 			header($this->status_code.' A', true, $this->status_code);
 		}
+		header('Content-Type: text/plain',true);
 		foreach($this->headers as $k=>$v){
 			header($k.': '.$v,true,$this->status_code);
 		}
