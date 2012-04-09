@@ -66,7 +66,6 @@ class Template extends PageHandler\PageBase {
 				return $path;
 			}
 		}
-		
 	}
 	
 	static function Exists($name,$output='HTML'){
