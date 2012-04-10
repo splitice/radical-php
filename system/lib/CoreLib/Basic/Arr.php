@@ -466,6 +466,17 @@ class Arr {
 		return $result;
 	}
 	
+	/**
+	 * Form an associative array from a linear array.
+
+	This function walks through the provided array and constructs an associative array out of it. The keys of the
+	 resulting array will be the values of the input array. The values will be the same as the keys unless a 
+	 function is specified, in which case the output of the function is used for the values instead.
+
+	 * @param array $array linear array
+	 * @param callback $function a callback function to apply
+	 * @return array
+	 */
 	public static function map_assoc($array, $function = NULL) {
 		if (!isset($function)) {
 			$result = array();
