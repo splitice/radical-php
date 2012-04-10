@@ -465,6 +465,22 @@ class Arr {
 
 		return $result;
 	}
+	
+	public static function map_assoc($array, $function = NULL) {
+		if (!isset($function)) {
+			$result = array();
+			foreach ($array as $value) {
+				$result[$value] = $value;
+			}
+			return $result;
+		} elseif (function_exists($function)) {
+			$result = array();
+			foreach ($array as $value) {
+				$result[$value] = $function($value);
+			}
+			return $result;
+		}
+	}
 
 	/**
 	 * Overwrites an array with values from input arrays.
