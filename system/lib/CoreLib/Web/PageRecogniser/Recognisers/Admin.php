@@ -11,13 +11,10 @@ class Admin implements IPageRecognise {
 			$url->removeFirstPathElement();
 			$data = array();
 			
-			$class = $url->firstPathElement();
-			if($class){
-				$data['class']=$class;
-				$url->removeFirstPathElement();
+			$module = $url->firstPathElement();
+			if($module){
+				return new \Web\Pages\Admin($module,$url);
 			}
-			
-			return PageHandler::Objectify ( 'Admin', $data );
 		}
 	}
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Web\Admin\Database;
+namespace Web\Admin\Modules\Database;
 
 use Database\Model\Table\TableManagement;
 
