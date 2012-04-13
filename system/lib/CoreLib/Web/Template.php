@@ -82,6 +82,9 @@ class Template extends PageHandler\PageBase {
 			}
 		}
 	}
+	protected function _scope(){
+		return new Scope($this->vars, $this->handler);
+	}
 	function GET() {		
 		$adapter = $this->adapter();
 		if($adapter == null){
@@ -89,10 +92,9 @@ class Template extends PageHandler\PageBase {
 		}
 
 		if($adapter instanceof Templates\Adapter\ITemplateAdapter){
-			$scope = new Scope($this->vars, $this->handler);
 			PageHandler::Top()->headers->Add('Content-Type', 'text/html;charset=utf-8');
 			//$VAR,$HANDLER,$TEMPLATE_FILE
-			$adapter->Output($scope);
+			$adapter->Output($this->_scope());
 		}else{
 			throw new \Exception('Invalid Template Adapter');
 		}

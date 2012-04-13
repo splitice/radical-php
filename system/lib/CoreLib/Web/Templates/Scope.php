@@ -11,7 +11,7 @@ class Scope {
 	function __construct(array $vars,$handler){
 		$this->form = new FormBuilder();
 		$this->vars = $vars;
-		$this->handler;
+		$this->handler = $handler;
 	}
 	
 	function bind($var){
@@ -36,5 +36,14 @@ class Scope {
 	}
 	function u($object){
 		return $this->url($object);
+	}
+	
+	function incl($name,$container = 'HTML'){
+		$_ = $this;
+		$___path = \Web\Template::getPath($name,$container);
+		if(!$___path){
+			throw new \Exception('Couldnt find '.$name.' from '.$container.' to include.');
+		}
+		include($___path);
 	}
 }

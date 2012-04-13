@@ -157,9 +157,10 @@ abstract class Table extends \Core\Object implements ITable, \JsonSerializable {
 		//Construct dynamic types
 		foreach($dynamicTyping->map as $field=>$value){
 			$dT = $value['var'];
-			if((strpos($dT, '\\') === null) || ($dT{0} != '\\' && !class_exists($dT))){
+			if((strpos($dT, '\\') === false) || ($dT{0} != '\\' && !class_exists($dT))){
 				$dT = '\\Database\\DynamicTypes\\'.$dT;
 			}
+			
 			$this->$field = $dT::fromDatabaseModel($this->$field,$value['extra'],$this);
 		}
 	}

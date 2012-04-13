@@ -11,7 +11,7 @@ class FileNotFound extends PageHandler\HTMLPageBase {
 		$headers = \Web\PageHandler::$stack->top()->headers;
 		$headers->Status(404);
 
-		return new \Web\Template('error', array('error'=>$this));
+		return new \Web\Template('error', array('error'=>$this),'framework');
 	}
 	function getHeading(){
 		return $this->Title();
