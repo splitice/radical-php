@@ -1,5 +1,5 @@
 <?php
-namespace Database\Model\DynamicTyping;
+namespace Database\ORM\DynamicTyping;
 
 class Docblock extends \Debug\Docblock {
 	/**

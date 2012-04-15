@@ -8,4 +8,7 @@ abstract class HandlerBase extends \Core\Object implements ISessionHandler {
 			new $class($this);
 		}
 	}
+	function getPage(){
+		throw new \Exception('Session Handler Doesnt define a login handler');
+	}
 }

@@ -9,6 +9,8 @@ class FormInstance extends FormCommon implements IFormInstance {
 	protected $handler;
 	
 	function __construct(){
+		$this->form = new \HTML\Element('form',compact('action','method'),array());
+		
 		$args = func_get_args();
 		if(count($args) == 0) return;
 		
@@ -23,8 +25,6 @@ class FormInstance extends FormCommon implements IFormInstance {
 				}
 			}
 		}
-		//$action,$method = 'POST'
-		$this->form = new \HTML\Element('form',compact('action','method'),array());
 	}
 	
 	protected function _R($return){

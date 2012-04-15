@@ -8,6 +8,6 @@ class Varchar extends ZZ_Unknown implements IValidator {
 	const TYPE = 'varchar';
 	
 	function Validate($value){
-		return (strlen($value) <= $this->size);
+		return (strlen($value) <= $this->size) || $this->_Validate($value);
 	}
 }

@@ -1,6 +1,8 @@
 <?php
 namespace Database\Model;
 
+use Exceptions\ValidationException;
+
 use Database\DynamicTypes\IDynamicType;
 
 use Database\IToSQL;
@@ -83,6 +85,11 @@ abstract class Table extends \Core\Object implements ITable, \JsonSerializable {
 		//Get field name
 		$field = $this->orm->mappings[$field];
 		
+		//Validate
+		if(!$this->orm->validation->Validate($field, $value)){
+			throw new ValidationException('Couldnt set '.static::TABLE.'.'.$field.' to '.$value);
+		}
+		
 		//Set field
 		$vRef = &$this->$field;
 		if($vRef instanceof IDynamicType){
@@ -140,7 +147,6 @@ abstract class Table extends \Core\Object implements ITable, \JsonSerializable {
 		//Setup object with table specific data
 		$table = new TableReferenceInstance($this);
 		$this->orm = $table->getORM();
-		$dynamicTyping = new DynamicTyping\Instance($table);
 		
 		//Load data into table
 		if($in instanceof DBAL\Row || $prefix){
@@ -155,12 +161,8 @@ abstract class Table extends \Core\Object implements ITable, \JsonSerializable {
 		}
 		
 		//Construct dynamic types
-		foreach($dynamicTyping->map as $field=>$value){
-			$dT = $value['var'];
-			if((strpos($dT, '\\') === false) || ($dT{0} != '\\' && !class_exists($dT))){
-				$dT = '\\Database\\DynamicTypes\\'.$dT;
-			}
-			
+		foreach($this->orm->dynamicTyping as $field=>$value){
+			$dT = $value['var'];			
 			$this->$field = $dT::fromDatabaseModel($this->$field,$value['extra'],$this);
 		}
 	}
@@ -243,7 +245,7 @@ abstract class Table extends \Core\Object implements ITable, \JsonSerializable {
 			$actionPart{0} = strtolower($actionPart{0});
 			
 			//if we have the action part from the database
-			if(isset($this->$actionPart)){
+			if(isset($this->orm->reverseMappings[$actionPart])){
 				$relations = $this->orm->relations;
 				$dbName = $this->orm->reverseMappings[$actionPart];
 				if(isset($relations[$dbName]) && !is_object($this->$actionPart)){

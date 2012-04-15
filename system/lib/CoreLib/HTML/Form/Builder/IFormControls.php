@@ -4,8 +4,10 @@ namespace HTML\Form\Builder;
 interface IFormControls {
 	function textarea($name, $value);
 	function textbox($name, $value);
-	function text($name, $value);
-	function textinput($name, $value);
+	function number($name, $value = '');
+	function email($name, $value = '');
+	function text($name, $value = '');
+	function textinput($name, $value = '');
 	function radio($name, $value, $checked = null);
 	function radiobox($name, $value, $checked = null);
 	function check($name, $value, $checked = null);

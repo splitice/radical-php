@@ -57,8 +57,13 @@ class Model extends ModelData {
 				}
 			}
 		}
-		
-		$this->validation = new Validation($structure);
+
+		//Dnamic Typing data
+		$this->dynamicTyping = new DynamicTyping\Instance($table);
+		$this->dynamicTyping = $this->dynamicTyping->map;
+
+		//Validation
+		$this->validation = new Validation($structure,$this->dynamicTyping);
 		
 		parent::__construct();
 		

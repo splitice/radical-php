@@ -25,6 +25,6 @@ class Enum extends Internal\TypeBase implements IValidator {
 	}
 	
 	function Validate($value){
-		return in_array($value,$this->getOptions());
+		return in_array($value,$this->getOptions()) || $this->_Validate($value);
 	}
 }

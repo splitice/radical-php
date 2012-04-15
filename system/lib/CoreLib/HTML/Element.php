@@ -3,6 +3,7 @@ namespace HTML;
 
 class Element extends SingleTag {
 	public $inner;
+	protected $singleClose = true;
 	
 	function __construct($tag,$attributes = array(),$inner = null){
 		parent::__construct($tag,$attributes);
@@ -11,7 +12,7 @@ class Element extends SingleTag {
 	
 	function __toString(){
 		$ret = parent::__toString();
-		if(!$this->inner){
+		if(!$this->inner && $this->singleClose){
 			$ret = substr($ret,0,-1).'/>';
 		}
 		
@@ -23,8 +24,12 @@ class Element extends SingleTag {
 			}else{
 				$ret .= $this->inner;
 			}
-			$ret .= '</'.$this->tag.'>';
+			if($this->singleClose)
+				$ret .= '</'.$this->tag.'>';
 		}
+		
+		if(!$this->singleClose)
+			$ret .= '</'.$this->tag.'>';
 		return $ret;
 	}
 }

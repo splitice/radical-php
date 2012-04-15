@@ -46,4 +46,11 @@ class Scope {
 		}
 		include($___path);
 	}
+	
+	function odd($number,$echo){
+		if(($number % 2) == 1) return $echo;
+	}
+	function even($number,$echo){
+		if(($number % 2) == 0) return $echo;
+	}
 }

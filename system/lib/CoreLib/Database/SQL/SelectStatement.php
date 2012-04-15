@@ -1,6 +1,8 @@
 <?php
 namespace Database\SQL;
 
+use Database\SQL\Parts\Where;
+
 use Basic\Arr;
 
 use Database\SQL\Parse\CreateTable;
@@ -114,6 +116,13 @@ class SelectStatement extends Internal\StatementBase {
 		return $this;
 	}
 	function where_and($where){
+		if($this->where instanceof Where){
+			if((string)$this->where){
+				$this->where = array($this->where);
+			}else{
+				$this->where = array();
+			}
+		}
 		$this->where[] = $where;
 		$this->sql = null;
 		return $this;
@@ -237,7 +246,13 @@ class SelectStatement extends Internal\StatementBase {
 		//WHERE
 		if($this->where){
 			if(is_array($this->where)){
-				$sql .= ' WHERE '.implode(' AND ',$this->where);
+				$sql .= ' WHERE ';
+				foreach(array_values($this->where) as $k=>$w){
+					if($k){
+						$sql .= ' AND ';
+					}
+					$sql .= $w;
+				}
 			}else{
 				$where = (string)$this->where;
 				if($where)

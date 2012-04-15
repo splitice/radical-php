@@ -2,7 +2,7 @@
 namespace HTML\Form\Builder;
 use HTML\Form\Element;
 
-class FormCommon {
+class FormCommon implements IFormControls {
 	protected function _R($return){
 		return $return;
 	}
@@ -21,10 +21,16 @@ class FormCommon {
 		return $this->_R(new Element\TextArea($name, $value));
 	}
 	
-	function text($name, $value){
+	function number($name, $value = ''){
+		return $this->_R(new Element\TextInput($name, $value ,'number'));
+	}
+	function email($name, $value = ''){
+		return $this->_R(new Element\TextInput($name, $value ,'email'));
+	}
+	function text($name, $value = ''){
 		return $this->textinput($name, $value);
 	}
-	function textinput($name, $value){
+	function textinput($name, $value = ''){
 		return $this->_R(new Element\TextInput($name, $value));
 	}
 	

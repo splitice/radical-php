@@ -13,9 +13,9 @@ class Admin extends PageHandler\HTMLPageBase {
 	protected $module;
 	protected $url;
 	
-	function __construct($module,\Net\URL $url){
+	function __construct(\Net\URL\Path $url,$module){
 		$this->module = $module;
-		$this->url = $data;
+		$this->url = $url;
 	}
 	private function checkAdmin(){
 		if(\Web\Session::$data['user'] instanceof IUserAdmin){
@@ -25,7 +25,7 @@ class Admin extends PageHandler\HTMLPageBase {
 	}
 			
 	function GET(){
-		if(!$this->checkAdmin()) return Special\FileNotFound();
+		if(!$this->checkAdmin()) return new Admin\Login($this->url,$this->module);
 		
 		$class = '\\Web\\Admin\\'.$this->module;
 		if(!class_exists($class)){

@@ -20,7 +20,8 @@ class TableSet extends \Basic\ArrayLib\Object\IncompleteObject {
 	}
 	function Search($text,ISearchAdapter $adapter){
 		$sql = clone $this->sql;
-		$adapter->Filter($text, $sql);
+		$table = constant($this->tableClass.'::TABLE');//TODO: Cleanup
+		$adapter->Filter($text, $sql, $table);
 		return new static($sql,$this->tableClass);
 	}
 	function Filter(IStatement $merge){

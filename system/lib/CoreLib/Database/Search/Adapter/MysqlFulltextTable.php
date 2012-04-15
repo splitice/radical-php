@@ -53,11 +53,10 @@ class MysqlFulltextTable extends MysqlFulltext {
 		
 		\DB::Q($sql);
 	}
-	function Filter($text, SelectStatement $sql){
-		$from = $sql->from();
-		$table = TableReference::getByTableName($from);
+	function Filter($text, SelectStatement $sql, $table){
+		$table = TableReference::getByTableName($table);
 		if($table === null){
-			throw new \Exception('Couldnt find table model to search');
+			throw new \Exception('Couldnt find table model "'.$table.'" to search');
 		}
 		
 		$where = new WhereOR();

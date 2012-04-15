@@ -28,7 +28,7 @@ class MysqlFulltext implements ISearchAdapter {
 		$ft = new Fulltext($text, $this->fields, $this->isBoolean());
 		$sql->where_and($ft);
 	}
-	function Filter($text, SelectStatement $sql){
+	function Filter($text, SelectStatement $sql, $table){
 		return $this->_Filter($text, $sql);
 	}
 	function Search($text, TableReferenceInstance $table){

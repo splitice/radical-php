@@ -13,8 +13,9 @@ class Admin implements IPageRecognise {
 			
 			$module = $url->firstPathElement();
 			if($module){
-				return new \Web\Pages\Admin($module,$url);
+				return new \Web\Pages\Admin($url,$module);
 			}
+			return new \Web\Pages\Admin($url);
 		}
 	}
 }

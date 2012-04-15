@@ -19,6 +19,9 @@ abstract class CreateTableStatementBase {
 			}
 		}
 		$this->attributes = $aattributes;
+		if(is_object($type)){
+			$type->canNull(!$this->hasAttribute('NOT NULL'));
+		}
 	}
 	
 	/**

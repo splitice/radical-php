@@ -12,6 +12,7 @@ class ModelData {
 	public $id;
 	public $validation;
 	public $engine;
+	public $dynamicTyping;
 	
 	function __construct(){
 		$this->reverseMappings = array_flip($this->mappings);

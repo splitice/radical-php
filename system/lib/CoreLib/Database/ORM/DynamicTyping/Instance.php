@@ -1,5 +1,5 @@
 <?php
-namespace Database\Model\DynamicTyping;
+namespace Database\ORM\DynamicTyping;
 
 use Debug\Inspector;
 
@@ -11,24 +11,9 @@ class Instance {
 	
 	function __construct(TableReferenceInstance $table){
 		$class = $table->getClass();
-		$this->cache = \Cache\PooledCache::Get(__CLASS__, 'Memory');
 		$this->map = $this->getMap($class);
 	}
 	private function getMap($class){
-		$file = \Libraries::path($class);
-		$cacheKey = $class.'_'.filemtime($file);
-		$co = $this->cache->Get($cacheKey);
-		if($co !== null) {
-			if(!is_array($co)){
-				die(var_dump($co));
-			}
-			return $co;
-		}
-		$co = $this->_getMap($class);
-		$this->cache->Set($cacheKey,$co);
-		return $co;
-	}
-	private function _getMap($class){
 		$properties = Inspector::properties($class,array('public'=>false));
 		
 		//parse out fields
@@ -56,6 +41,11 @@ class Instance {
 		$var = explode(' ',$var);
 		$extra = array_slice($var,1);
 		$var = $var[0];
+		
+		//Prefix if not given
+		if((strpos($var, '\\') === false) || ($var{0} != '\\' && !class_exists($var))){
+			$var = '\\Database\\DynamicTypes\\'.$var;
+		}
 		
 		return compact('var','extra');
 	}

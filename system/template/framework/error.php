@@ -57,12 +57,18 @@
 			</div>
 		</div>
 	</div>
+	<?php 
+	if($_->vars['error'] instanceof ErrorHandling\Errors\Internal\ErrorException){
+	?>
 	<div class="alert-container">
 		<div class="alert-inner">
 			<div class="alert-heading">Backtrace</div>
 			<div class="alert-subheading"><?=nl2br($_->vars['error']->getTraceOutput(),true)?></div>
 		</div>
 	</div>
+	<?php 
+	}
+	?>
 	<div class="redirect">We are sorry for any inconvenience this has caused.</div>
 </body>
 </html>

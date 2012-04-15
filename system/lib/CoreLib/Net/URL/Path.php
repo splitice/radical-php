@@ -60,12 +60,15 @@ class Path {
 	/**
 	 * @return the $path
 	 */
-	public function getPath() {
+	public function getPath($asString = false) {
+		if($asString){
+			return '/'.implode('/',$this->path);
+		}
 		return $this->path;
 	}
 
 	function __toString(){
-		$url =  '/'.implode('/',$this->path);
+		$url =  $this->getPath(true);
 		if ($this->query) {
 			$url .= '?' . http_build_query($this->query);
 		}
