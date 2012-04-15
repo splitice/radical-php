@@ -1,5 +1,7 @@
 <?php
 namespace Database\Model;
+use Database\SQL\SelectStatement;
+
 use Database\ORM;
 
 class TableReferenceInstance extends \Core\Object {
@@ -73,6 +75,13 @@ class TableReferenceInstance extends \Core\Object {
 	function getPrefix(){
 		$class = $this->class;
 		return $class::TABLE_PREFIX;
+	}
+	
+	/**
+	 * @return \Database\SQL\SelectStatement
+	 */
+	function select($fields = '*'){
+		return new SelectStatement($this->getTable(),$fields);
 	}
 	
 	function __call($method,$arguments){

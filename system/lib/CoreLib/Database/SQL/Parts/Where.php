@@ -7,7 +7,7 @@ class Where extends Internal\PartBase {
 	const SEPPERATOR = 'AND';
 	private $parts = array();
 	
-	function __construct($parts){
+	function __construct($parts = array()){
 		$this->parts = $parts;
 	}
 	function Add($key,$part){
@@ -16,7 +16,7 @@ class Where extends Internal\PartBase {
 	function toSQL($where = false){
 		if(is_string($this->parts)){
 			$sql = '';
-			if($where)
+			if($where && count($this->parts))
 				$sql = 'WHERE ';
 			$sql .= $this->parts;
 			return $sql;

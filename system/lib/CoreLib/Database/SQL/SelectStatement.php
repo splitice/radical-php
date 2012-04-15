@@ -9,6 +9,7 @@ class SelectStatement extends Internal\StatementBase {
 	protected $where = array();
 	protected $order_by;
 	protected $limit;
+	protected $group;
 	
 	function __construct($table = null, $fields = '*'){
 		$this->table = $table;
@@ -43,8 +44,17 @@ class SelectStatement extends Internal\StatementBase {
 	function where_and($where){
 		$this->where[] = $where;
 		$this->sql = null;
+		return $this;
 	}
 	
+	function group($group){
+		$this->group = $group;
+		$this->sql = null;
+		return $this;
+	}
+	function group_by($group){
+		return $this->group($group);
+	}
 	function orderBy($order_by){
 		$this->order_by = $order_by;
 		$this->sql = null;
@@ -109,8 +119,18 @@ class SelectStatement extends Internal\StatementBase {
 			if(is_array($this->where)){
 				$sql .= ' WHERE '.implode(' AND ',$this->where);
 			}else{
-				$sql .= ' WHERE '.$this->where;
+				$where = (string)$this->where;
+				if($where)
+					$sql .= ' WHERE '.$where;
 			}
+		}
+		
+		if($this->group){
+			$group = $this->group;
+			if(is_array($group)){
+				$group = implode(',',$group);
+			}
+			$sql .= ' GROUP BY '.$group;
 		}
 		
 		if($this->order_by){

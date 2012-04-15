@@ -7,6 +7,11 @@ class TableReference extends \Core\Object {
 	}
 	
 	private static $_name = array();
+	
+	/**
+	 * @param string $tableClass
+	 * @return \Database\Model\TableReferenceInstance
+	 */
 	static function getByTableName($tableName){
 		if(!self::$_name){
 			foreach(static::getClasses() as $class){
@@ -29,6 +34,10 @@ class TableReference extends \Core\Object {
 		return $ret;
 	}
 	
+	/**
+	 * @param string $tableClass
+	 * @return \Database\Model\TableReferenceInstance
+	 */
 	static function getByTableClass($tableClass){
 		try {
 			return static::_create($tableClass);
