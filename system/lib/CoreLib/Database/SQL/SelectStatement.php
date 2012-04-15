@@ -1,25 +1,97 @@
 <?php
 namespace Database\SQL;
 
+use Basic\Arr;
+
+use Database\SQL\Parse\CreateTable;
+
+use Database\IToSQL;
+
 use Database\DBAL;
 
 class SelectStatement extends Internal\StatementBase {
-	protected $table;
+	protected $table = array();
 	protected $fields;
 	protected $where = array();
 	protected $order_by;
 	protected $limit;
 	protected $group;
+	protected $join = array('left'=>array(),'inner'=>array(),'right'=>array());
 	
 	function __construct($table = null, $fields = '*'){
-		$this->table = $table;
-		$this->fields = $fields;
+		$this->fields($fields);
+		$this->from($table);
+	}
+	
+	function getTableAlias($table){
+		foreach($this->table as $prefix=>$t){
+			if($t == $table){
+				return $prefix;
+			}
+		}
+	}
+	function left_join($table, $alias, $on = null){
+		return $this->join($table, $alias, $on, 'left');
+	}
+	function right_join($table, $alias, $on = null){
+		return $this->join($table, $alias, $on, 'right');
+	}
+	function inner_join($table, $alias, $on = null){
+		return $this->join($table, $alias, $on, 'inner');
+	}
+	function join($table, $alias, $on = null, $type = 'left'){
+		$this->sql = null;
+		$where = $on;
+		if(!is_string($where) && !($where instanceof IToSQL)){
+			if($where === null){
+				//Automatically detirmine linkage using foreign keys
+				$ct = CreateTable::fromTable($table);
+				foreach($ct->relations as $rk=>$relation){
+					$reference = $relation->getReference();
+					
+					//TODO: Check against other joins
+					if($rightAlias = $this->getTableAlias($reference->getTable())){
+						$where = array(array($alias,$relation->getField()),array($rightAlias,$reference->getColumn()));
+					}
+				}
+			}
+			if(is_array($where)){
+				//array('leftSide','rightSide');
+				//or array('leftSide','=','rightSide')
+				//WHERE
+				//leftSide = array('alias','field')
+				//or 'leftSide'
+				
+				if(count($where) == 2){
+					$where = array($where[0],'=',$where[1]);
+				}
+				
+				//Resolve out arrayed members
+				foreach($where as $k=>$v){
+					if(is_array($v)){
+						$where[$k] = $this->_encFieldRef($v[0],$v[1]);
+					}
+				}
+				
+				$where = implode(' ',$where);
+			}
+		}
+		
+		$this->join[$type][$alias] = compact('table','where');
+		return $this;
+	}
+	
+	function joins(){
+		return $this->join;
 	}
 	
 	function fields($fields = null){
 		if($fields === null){
 			return $this->fields;
 		}else{
+			if(is_string($fields)){
+				$fields = array($fields);
+			}
 			$this->fields = $fields;
 			$this->sql = null;
 		}
@@ -75,32 +147,67 @@ class SelectStatement extends Internal\StatementBase {
 		return $this;
 	}
 	
-	function from($table = null){
+	function from($table = null,$tablePrefix = null){
 		if($table === null){
 			return $this->table;
 		}else{
-			$this->table = $table;
+			if($tablePrefix === null){
+				if(is_array($table)){
+					if(Arr::is_assoc($table)){
+						foreach($table as $k=>$t){
+							$this->from($t,$k);
+						}
+					}else{
+						foreach($table as $t){
+							$this->from($t);
+						}
+					}
+					return;
+				}
+				$tablePrefix = $table;
+			}
+			
+			$this->table[$tablePrefix] = $table;
 			$this->sql = null;
 		}
 		return $this;
 	}
 	
-	function _enc1($a){
+	private function _enc1($a){
 		$sql = '';
-		if(is_array($a)){
-			$first = true;
-			foreach($a as $k=>$v){
-				if(!$first){
-					$sql .= ', ';
-				}
-				$first = false;
-				$sql .= '`'.$v.'`';
-				if(!is_numeric($k)){
-					$sql .= ' AS `'.$k.'`';
-				}
+		foreach($a as $k=>$v){
+			if($sql){
+				$sql .= ', ';
 			}
-		}else{
-			$sql .= $a;
+			$sql .= '`'.$v.'`';
+			if(!is_numeric($k) && $k != $v){
+				$sql .= ' AS `'.$k.'`';
+			}
+		}
+		return $sql;
+	}
+	private function _encFieldRef($alias,$field){
+		$sql = '';
+		if($alias){
+			$sql .= '`'.$alias.'`.';
+		}
+		$sql .= '`'.$field.'`';
+		return $sql;
+	}
+	private function _encFields($a){
+		$sql = '';
+		foreach($a as $k=>$v){
+			if($sql){
+				$sql .= ', ';
+			}
+			if(is_array($v)){
+				$sql .= $this->_encFieldRef($v[0],$v[1]);
+			}else{
+				$sql .= $v;
+			}
+			if(!is_numeric($k) && $k != $v){
+				$sql .= ' AS `'.$k.'`';
+			}
 		}
 		return $sql;
 	}
@@ -112,9 +219,22 @@ class SelectStatement extends Internal\StatementBase {
 		}
 		
 		//Build Query
-		$sql = 'SELECT '.$this->_enc1($this->fields);
+		$sql = 'SELECT '.$this->_encFields($this->fields);
 
+		//FROM
 		$sql .= ' FROM '.$this->_enc1($this->table);
+		
+		//JOIN
+		if($this->join){
+			foreach($this->join as $joinType=>$joins){
+				foreach($joins as $joinAlias => $join){
+					$sql .= ' '.strtoupper($joinType).' JOIN '.$join['table'].' AS '.$joinAlias;
+					$sql .= ' ON ('.$join['where'].')';
+				}
+			}
+		}
+		
+		//WHERE
 		if($this->where){
 			if(is_array($this->where)){
 				$sql .= ' WHERE '.implode(' AND ',$this->where);
@@ -125,6 +245,7 @@ class SelectStatement extends Internal\StatementBase {
 			}
 		}
 		
+		//GROUP BY
 		if($this->group){
 			$group = $this->group;
 			if(is_array($group)){
@@ -133,6 +254,7 @@ class SelectStatement extends Internal\StatementBase {
 			$sql .= ' GROUP BY '.$group;
 		}
 		
+		//ORDER BY
 		if($this->order_by){
 			$order = $this->order_by;
 			if(is_array($order)){
@@ -141,6 +263,7 @@ class SelectStatement extends Internal\StatementBase {
 			$sql .= ' ORDER BY '.$order;
 		}
 		
+		//LIMIT
 		if($this->limit){
 			$limit = $this->limit;
 			if(is_array($limit)){
@@ -149,6 +272,7 @@ class SelectStatement extends Internal\StatementBase {
 			$sql .= ' LIMIT '.$limit;
 		}
 		
+		//Cache and return
 		$this->sql = $sql;
 		return $sql;
 	}

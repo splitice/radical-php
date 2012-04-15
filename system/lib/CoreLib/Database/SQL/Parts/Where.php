@@ -8,10 +8,21 @@ class Where extends Internal\PartBase {
 	private $parts = array();
 	
 	function __construct($parts = array()){
-		$this->parts = $parts;
+		foreach($parts as $k=>$v){
+			if(is_array($v)){
+				foreach($v as $vk=>$vv){
+					$this->Add(array($k,$vk),$vv);
+				}
+			}else{
+				$this->Add($k,$v);
+			}
+		}
 	}
 	function Add($key,$part){
-		$this->parts[$key] = $part;
+		if(!is_array($key)){
+			$key = array('',$key);
+		}
+		$this->parts[$key[0]][$key[1]] = $part;
 	}
 	function toSQL($where = false){
 		if(is_string($this->parts)){
@@ -26,14 +37,20 @@ class Where extends Internal\PartBase {
 		$db = \DB::getInstance();
 	
 		$ret = array();
-		foreach($this->parts as $k=>$v){
-			$rr = '`'.$k.'`';
-			if($v instanceof IToSQL){
-				$rr .= $v->toSQL();
-			}else{
-				$rr .= '='.$db->Escape($v);
+		foreach($this->parts as $alias=>$p){
+			$rr = '';
+			if($alias){
+				$rr = '`'.$alias.'`.';
 			}
-			$ret[] = $rr;
+			foreach($p as $k=>$v){
+				$rr .= '`'.$k.'`';
+				if($v instanceof IToSQL){
+					$rr .= $v->toSQL();
+				}else{
+					$rr .= '='.$db->Escape($v);
+				}
+				$ret[] = $rr;
+			}
 		}
 		
 		//Build SQL
