@@ -8,7 +8,7 @@ class ShowCreateTable extends Internal\StatementBase {
 
 	function __construct($table){
 		if($table instanceof TableReferenceInstance){
-			$table = constant($table->getClass().'::TABLE');
+			$table = $table->getTable();
 		}
 		$this->table = $table;
 	}

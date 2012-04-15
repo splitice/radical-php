@@ -1,10 +1,12 @@
 <?php
 namespace Database\SQL;
 
+use Database\DBAL;
+
 class SelectStatement extends Internal\StatementBase {
 	protected $table;
 	protected $fields;
-	protected $where = '1';
+	protected $where = array();
 	protected $order_by;
 	protected $limit;
 	
@@ -13,19 +15,34 @@ class SelectStatement extends Internal\StatementBase {
 		$this->fields = $fields;
 	}
 	
-	function fields($fields){
-		$this->fields = $fields;
-		$this->sql = null;
+	function fields($fields = null){
+		if($fields === null){
+			return $this->fields;
+		}else{
+			$this->fields = $fields;
+			$this->sql = null;
+		}
 		return $this;
 	}
 	
-	function where($where){
-		if(is_array($where)){
-			$where = new \Database\SQL\Parts\Where($where);
+	function where($where = null){
+		if($where === null){
+			return $this->where;
+		}else{
+			if(is_string($where)){
+				$where = array($where);
+			}
+			if(is_array($where)){
+				$where = new \Database\SQL\Parts\Where($where);
+			}
+			$this->where = $where;
+			$this->sql = null;
 		}
-		$this->where = $where;
-		$this->sql = null;
 		return $this;
+	}
+	function where_and($where){
+		$this->where[] = $where;
+		$this->sql = null;
 	}
 	
 	function orderBy($order_by){
@@ -48,9 +65,13 @@ class SelectStatement extends Internal\StatementBase {
 		return $this;
 	}
 	
-	function from($table){
-		$this->table = $table;
-		$this->sql = null;
+	function from($table = null){
+		if($table === null){
+			return $this->table;
+		}else{
+			$this->table = $table;
+			$this->sql = null;
+		}
 		return $this;
 	}
 	
@@ -85,7 +106,11 @@ class SelectStatement extends Internal\StatementBase {
 
 		$sql .= ' FROM '.$this->_enc1($this->table);
 		if($this->where){
-			$sql .= ' WHERE '.$this->where;
+			if(is_array($this->where)){
+				$sql .= ' WHERE '.implode(' AND ',$this->where);
+			}else{
+				$sql .= ' WHERE '.$this->where;
+			}
 		}
 		
 		if($this->order_by){
@@ -106,5 +131,13 @@ class SelectStatement extends Internal\StatementBase {
 		
 		$this->sql = $sql;
 		return $sql;
+	}
+	function getCount(){
+		//Check for entry
+		$count = clone $this;
+		$count->fields('COUNT(*)');
+	
+		$res = \DB::Query($count);
+		return $res->Fetch(DBAL\Fetch::FIRST,new \Cast\Integer());
 	}
 }

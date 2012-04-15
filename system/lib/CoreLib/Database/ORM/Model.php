@@ -1,6 +1,8 @@
 <?php
 namespace Database\ORM;
 
+use Database\SQL\Parse\CreateTable\ColumnReference;
+
 use Database\Model\TableReference;
 
 use Database\Model\TableReferenceInstance;
@@ -8,11 +10,22 @@ use Database\Model\TableReferenceInstance;
 use Database\SQL\Parse\CreateTable;
 
 class Model extends ModelData {	
+	private function fieldReferences(CreateTable $structure){
+		$ret = array();
+		foreach($structure as $field=>$statement){
+			$ref = ModelReference::Find($field);
+			if($ref != $this->table){
+				$ret[$field] = new ColumnReference($ref->getTable(), $field);
+			}
+		}
+		return $ret;
+	}
 	function __construct(TableReferenceInstance $table){
 		$this->table = $table;
 		$this->tableInfo = $table->Info();
 		$structure = CreateTable::fromTable($table);
-
+		$this->engine = $structure->engine;
+		
 		if(isset($structure->indexes['PRIMARY'])){
 			$this->id = $structure->indexes['PRIMARY']->getKeys();
 		}
@@ -21,8 +34,14 @@ class Model extends ModelData {
 		$this->mappings = $this->getMappings($structure)->translationArray();
 		
 		//build relation array
-		foreach($structure->relations as $r){
-			$this->relations[$r->getField()] = $r->getReference();
+		if($this->engine == 'innodb'){
+			foreach($structure->relations as $r){
+				$this->relations[$r->getField()] = $r->getReference();
+			}
+		}elseif($this->engine == 'myisam'){
+			$this->relations = $this->fieldReferences($structure);
+		}else{
+			throw new \Exception('Unknown database engine type: '.$this->engine);
 		}
 		
 		//Work out reverse references

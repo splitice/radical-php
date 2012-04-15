@@ -1,5 +1,6 @@
 <?php
 namespace Database\Model\Table;
+use Database\Search\Adapter\ISearchAdapter;
 use Database\SQL\IStatement;
 use Database\SQL;
 use Database\DBAL;
@@ -17,7 +18,16 @@ class TableSet extends \Basic\ArrayLib\Object\IncompleteObject {
 		
 		TableCache::Add($this, $this->sql);
 	}
-	
+	function Search($text,ISearchAdapter $adapter){
+		$sql = clone $this->sql;
+		$adapter->Filter($text, $sql);
+		return new static($sql,$this->tableClass);
+	}
+	function Filter(IStatement $merge){
+		$sql = clone $this->sql;
+		$merge->mergeTo($sql);
+		return new static($sql,$this->tableClass);
+	}
 	function Delete(){
 		$sql = $this->sql->mergeTo(new SQL\DeleteStatement());
 		$sql->Execute();
@@ -51,12 +61,7 @@ class TableSet extends \Basic\ArrayLib\Object\IncompleteObject {
 			return count($this->data);
 		}
 		
-		//Check for entry
-		$count = clone $this->sql;
-		$count->fields('COUNT(*)');
-		
-		$res = \DB::Query($count);
-		$this->count = $res->Fetch(DBAL\Fetch::FIRST,new \Cast\Integer());
+		$this->count = $this->sql->getCount();
 			
 		return $this->count;
 	}

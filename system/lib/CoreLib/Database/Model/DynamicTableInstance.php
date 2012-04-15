@@ -6,160 +6,100 @@ use Database\SQL\ShowCreateTable;
 use Database\SQL\CreateTable;
 
 class DynamicTableInstance {
-	public $_tableName;
-	public $_tablePrefix;
-	private $class;
+	protected $_tableName;
+	protected $_tablePrefix;
+	protected $_tableId;
+	private $_data;
 	
-	protected $id = array();
-	protected $field = array();
+	function toSQL($in=null){
+		if(!$in) $in = get_object_vars($this);
 	
-	function __construct($tableName,$tablePrefix,$class = '\\Database\\DynamicTableInstance'){
-		$this->_tableName = $tableName;
-		$this->_tablePrefix = $tablePrefix;
-		$this->class = $class;
-	}
+		unset($in['_tableName'],$in['_tablePrefix'],$in['_tableId'],$in['_data'],$in['_extra']);
 	
-	/**
-	 * @return the $tableName
-	 */
-	public function getTableName() {
-		return $this->_tableName;
-	}
-
-	/**
-	 * @return the $tablePrefix
-	 */
-	public function getTablePrefix() {
-		return $this->_tablePrefix;
-	}
-
-	/**
-	 * @return the $tableId
-	 */
-	public function getTableId() {
-		$ids = array_keys($this->id);
-		if(count($ids) == 1){
-			return $ids[0];
-		}
-		return $ids;
-	}
-
-	/**
-	 * @return the $id
-	 */
-	public function getIds() {
-		return $this->id;
-	}
-
-	/**
-	 * @return the $field
-	 */
-	public function getFields() {
-		return $this->field;
-	}
-
-	function addId($name,$type){
-		unset($this->field[$name]);
-		$this->id[$name] = $type;
-	}
-	function addField($name,$type){
-		unset($this->id[$name]);
-		$this->field[$name] = $type;
+		return parent::toSQL($in);
 	}
 	
-	/* Dynamic Static methods */
-	/*function fromFields(array $fields){
-		$class = $this->class;
-		$r = $class::fromFields($fields);
-		if($r) $r->_Setup($this);
-		return $r;
-	}
-	function fromId($id){
-		$class = $this->class;
-		$r = $class::fromId($id);
-		if($r) $r->_Setup($this);
-		return $r;
-	}
-	function fromSQL($res){
-		$class = $this->class;
-		$r = $class::fromSQL($res);
-		if($r) $r->_Setup($this);
-		return $r;
-	}
-	function getAll($sql = ''){
-		$class = $this->class;
-		$ret = $class::getAll($sql);
-		foreach($ret as $r){
-			$r->_Setup($this);
-		}
-		return $ret;
-	}
-	function getSQL($sql = ''){
-		$class = $this->class;
-		$r = $class::getSQL($sql);
-		if($r) $r->_Setup($this);
-		return $r;
-	}
-	function getCount($sql=''){
-		$class = $this->class;
-		return $class::getCount($sql);
-	}*/
+	function toExport(){
+		$in = get_object_vars($this);
 	
-	function Exists(){
-		return \DB::TableExists($this->_tableName);
+		unset($in['_tableName'],$in['_tablePrefix'],$in['_tableId'],$in['_data'],$in['_extra']);
+	
+		return $in;
 	}
 	
-	function Create(){
-		$createTable = new CreateTable($this->_tableName);
-		foreach(array_merge($this->id,$this->field) as $name=>$type){
-			$createTable->addFeild($this->_tablePrefix.$name,$type);
-		}
-		
-		$idx = array();
-		foreach(array_keys($this->id) as $v){
-			$idx[] = $this->_tablePrefix.$v;
-		}
-		$createTable->addIndex('PRIMARY', $idx);
-		
-		$sql = $createTable->toSQL();
-		
-		\DB::Q($sql);
+	function __construct($data){
+		$this->_data = $data;
 	}
 	
-	function ValidateFields(){
-		$table = \Database\SQL\Parse\CreateTable::fromTable($this->_tableName);
-		$data = $table->asArray();
-		
-		foreach(array_merge($this->id,$this->field) as $name=>$type){
-			$k = $this->_tablePrefix.$name;
-			if(!isset($data[$k])){
-				return false;
+	function getId(){
+		$a = $this->_tableId;
+		if(is_array($a)){
+			$ret = array();
+			foreach($this->_tableId as $v){
+				$ret[$v] = $this->$v;
 			}
-			unset($data[$k]);
+			return $ret;
 		}
-			
-		if($data){
-			return false;
-		}
-		
-		return true;
+		return $this->$a;
 	}
 	
-	function EnsureExists($drop = false){
-		//Check if we need to do anything
-		if($this->Exists()){
-			if($this->ValidateFields()){
-				return true;
-			}else{
-				if($drop){
-					\DB::Q('DROP TABLE '.$this->_tableName);
-				}
+	private static function _obj(){
+		foreach(debug_backtrace(true) as $o){
+			if(isset($o['object']) && ($o['object'] instanceof DynamicTableReference || $o['object'] instanceof DynamicTableReference)){
+				return $o['object'];
 			}
 		}
-		
-		//Create
-		$this->Create();
-		
-		return false;
+		throw new \Exception('Couldnt find DyanmicTable data');
+	}
+	public static $__tablePrefix;
+	static function _tablePrefix(){
+		if(static::$__tablePrefix) return static::$__tablePrefix;
+		return (static::$__tablePrefix = static::_obj()->_tablePrefix);
+	}
+	public static $__tableId;
+	static function _tableId(){
+		if(static::$__tableId) return static::$__tableId;
+		$t = static::_obj();
+		if($t instanceof DynamicTableReference){
+			return (static::$__tableId = $t->_tableId);
+		}else{
+			return (static::$__tableId = 'id');
+		}
+	}
+	public static $__tableName;
+	static function _tableName(){
+		if(static::$__tableName) return static::$__tableName;
+		return (static::$__tableName = static::_obj()->_tableName);
+	}
+	
+	function _Setup(DynamicTableReference $table){
+		$this->_tableName = $table->getTableName();
+		$this->_tableId = $table->getTableId();
+		$this->_tablePrefix = $table->getTablePrefix();
+	
+		if(isset($this->_data)){
+			//Create struct
+			foreach(array_merge($table->getIds(),$table->getFields()) as $id=>$type){
+				$id = self::_translateName($id,false);
+				$this->$id = null;
+			}
+				
+			//Run the constructor with temp data
+			parent::__construct($this->_data);
+				
+			//Clear Temp
+			unset($this->_data);
+		}
+	}
+	
+	function _get($var){
+		$var{0} = strtolower($var{0});
+		return $this->$var;
+	}
+	
+	function __call($method,$arguments){
+		if(substr_compare($method, 'get', 0, 3) === 0){
+			return $this->_get(substr($method,3));
+		}
 	}
 }

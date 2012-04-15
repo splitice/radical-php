@@ -1,11 +1,21 @@
 <?php
 namespace Database\ORM;
 
+use Database\SQL\Parse\CreateTable\ColumnReference;
+
+use Database\SQL\Parse\CreateTable;
+
 class Mappings {
+	/**
+	 * @var Model
+	 */
 	private $model;
+	/**
+	 * @var \Database\SQL\Parse\CreateTable
+	 */
 	private $structure;
 	
-	function __construct(Model $model,$structure){
+	function __construct(Model $model,CreateTable $structure){
 		$this->model = $model;
 		$this->structure = $structure;
 	}
@@ -20,6 +30,28 @@ class Mappings {
 		}
 		return null;
 	}
+	private function isReference($databaseField){
+		$structure = $this->structure;
+		if($structure->engine == 'innodb'){
+
+			$relation = $structure[$databaseField]->getRelation();
+			if(!$relation) return false;
+			
+			$reference = $relation->getReference();
+			//Get related mapping object and translate to Objective from that
+			if(!$reference){
+				throw new \Exception('Couldnt parse relation reference');
+			}
+			
+			return $reference;
+		}
+		
+		$ref = ModelReference::Find($databaseField);
+		if($ref == $this->model->table){
+			return false;
+		}
+		return new ColumnReference($ref->getTable(), $databaseField);
+	}
 	function translateToObjective($databaseField,$prefixed = true){
 		//strip the prefix if requested
 		if($prefixed){
@@ -31,15 +63,11 @@ class Mappings {
 			}
 			
 			//Check if is reference
-			if($relation = $structure[$databaseField]->getRelation()){
-				//Get related mapping object and translate to Objective from that
-				$relation = $relation->getReference();
-				if(!$relation){
-					throw new \Exception('Couldnt parse relation reference');
-				}
-				
+			if($relation = $this->isReference($databaseField)){				
 				$rTableRef = $relation->getTableReference();
-				
+				if(!$rTableRef){
+					die(var_dump($relation));
+				}
 				$rInfo = $rTableRef->Info();
 				
 				$translated = rtrim($rInfo['prefix'],'_');

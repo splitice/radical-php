@@ -11,6 +11,7 @@ class ModelData {
 	public $depends = array();
 	public $id;
 	public $validation;
+	public $engine;
 	
 	function __construct(){
 		$this->reverseMappings = array_flip($this->mappings);

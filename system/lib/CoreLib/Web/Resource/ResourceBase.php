@@ -13,6 +13,6 @@ abstract class ResourceBase {
 	}
 	protected static abstract function _HTML($path);
 	static function HTML($name){
-		return static::_HTML($name.'.0.'.static::PATH);
+		return static::_HTML('/'.$name.'.0.'.static::PATH);
 	}
 }

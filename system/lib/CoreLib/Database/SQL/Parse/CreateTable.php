@@ -7,8 +7,14 @@ use Basic\ArrayLib\Object\CollectionObject;
 class CreateTable extends CollectionObject {
 	public $indexes;
 	public $relations;
+	public $engine = 'innodb';
 	
 	function __construct($sql){
+		if(preg_match('#ENGINE=([a-zA-Z]+)#', $sql, $m)){
+			$this->engine = strtolower($m[1]);
+		}
+		
+		//Extract Main part
 		preg_match('#^(?:[^\(]+)\((.+)\)([^\)]+)$#s', $sql, $matches);
 		$sql = trim($matches[1]);
 		

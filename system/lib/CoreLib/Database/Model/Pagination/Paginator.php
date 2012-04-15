@@ -1,6 +1,8 @@
 <?php
 namespace Database\Model\Pagination;
 
+use Database\Model\Table\TableSet;
+
 use Database\Model\TableReferenceInstance;
 
 use Net\URL\Pagination\IPaginator;
@@ -14,7 +16,7 @@ use Database\Model\TableReference;
  * A paginated data set
  */
 class Paginator implements \IteratorAggregate {
-	private $table;
+	private $source;
 	private $page;
 	private $perPage;
 	private $set;
@@ -30,15 +32,21 @@ class Paginator implements \IteratorAggregate {
 		$sql = clone $this->sql;
 		$sql->limit(($this->page-1)*$this->perPage, $this->perPage);
 		
-		return $this->table->getAll($sql);
+		return $this->source->Filter($sql);
 	}
-	function __construct(TableReferenceInstance $table,$page = 1, $perPage = 30){
-		$this->table = $table;
+	function __construct($source,$page = 1, $perPage = 30){
+		if($source instanceof TableReferenceInstance){
+			$source = $source->getAll();
+		}elseif(!($source instanceof  TableSet)){
+			throw new \Exception('Invalid Source passed to paginator');
+		}
+		
+		$this->source = $source;
 		$this->page = $page;
 		$this->perPage = $perPage;
 		$this->sql = new SQL\SelectStatement();
 		$this->set = $this->_get();
-		$this->totalRows = $this->table->getAll()->getCount();
+		$this->totalRows = $this->source->getCount();
 	}
 	
 	public function getIterator() {

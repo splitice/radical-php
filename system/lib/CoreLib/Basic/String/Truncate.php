@@ -22,17 +22,20 @@ class Truncate {
 			
 			if ($is_html) {
 				// Remove scraps of HTML entities from the end of a strings
-				$value = preg_replace ( '/(?:<(?!.+>)|&(?!.+;)).*$/us', '', $value );
+				$regex = '/(?:<(?!.+>)|&(?!.+;)).*$/s';
+				$value2 = preg_replace ( $regex.'u', '', $value );
+				if(preg_last_error() == 4){
+					$value = preg_replace ( $regex, '', $value );
+				}else{
+					$value = $value2;
+				}
 			}
-			
 			$value = rtrim ( $value );
 			
-			if ($is_html) {
-				$value .= '...';
-			}
+			$value .= '...';
 		}
-		if (! empty ( $alter ['html'] )) {
-			$value = _filter_htmlcorrector ( $value );
+		if ($is_html) {
+			$value = self::_filter_htmlcorrector ( $value );
 		}
 		
 		return $value;

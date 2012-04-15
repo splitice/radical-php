@@ -6,6 +6,8 @@ class CreateTable extends Internal\StatementBase {
 	protected $fields;
 	protected $indexes = array();
 	protected $ifNotExists = true;
+	protected $engine = 'innodb';
+	protected $select;
 	
 	function __construct($table,$fields = array(),$if_not_exists = true){
 		$this->table = $table;
@@ -13,11 +15,20 @@ class CreateTable extends Internal\StatementBase {
 		$this->ifNotExists = $if_not_exists;
 	}
 	
-	function addFeild($name,$type){
+	function fields(){
+		return $this->fields;
+	}
+	function addField($name,$type){
 		$this->fields[$name] = $type;
 	}
 	function addIndex($name,array $idx){
+		if($name == 'FULLTEXT'){
+			$this->engine = 'myisam';
+		}
 		$this->indexes[$name] = $idx;
+	}
+	function select(SelectStatement $select){
+		$this->select = $select;
 	}
 	
 	function toSQL(){
@@ -39,8 +50,12 @@ class CreateTable extends Internal\StatementBase {
 		//Indexes
 		if($this->indexes){
 			foreach($this->indexes as $name=>$field){
-				if(strtoupper($name) == 'PRIMARY'){
+				if($name == 'PRIMARY'){
 					$sql .= 'PRIMARY KEY('.implode(',',$field).'),';
+				}elseif($name == 'FULLTEXT'){
+					$sql .= 'FULLTEXT('.implode(',',$field).'),';
+				}else{
+					$sql .= 'INDEX('.implode(',',$field).'),';
 				}
 			}
 			$sql = substr($sql,0,-1);
@@ -50,6 +65,16 @@ class CreateTable extends Internal\StatementBase {
 		
 		//End
 		$sql .= ')';
+		
+		//Table Options
+		if($this->engine){
+			$sql .= ' ENGINE='.$this->engine;
+		}
+		
+		//Select
+		if($this->select){
+			$sql .= ' '.$this->select;
+		}
 		
 		return $sql;
 	}

@@ -349,13 +349,23 @@ class Arr {
 
 		return $array;
 	}
+	
+	public static function map($callback, $array)
+	{
+		if(is_object($array)){
+			if($array instanceof \Iterator || $array instanceof \IteratorAggregate){
+				$array = iterator_to_array($array);
+			}
+		}
+		return array_map($callback,$array);
+	}
 
 	/**
 	 * Recursive version of [array_map](http://php.net/array_map), applies the
 	 * same callback to all elements in an array, including sub-arrays.
 	 *
 	 *     // Apply "strip_tags" to every element in the array
-	 *     $array = Arr::map('strip_tags', $array);
+	 *     $array = Arr::map_recursive('strip_tags', $array);
 	 *
 	 * [!!] Unlike `array_map`, this method requires a callback and will only map
 	 * a single array.
@@ -365,7 +375,7 @@ class Arr {
 	 * @param   array   array of keys to apply to
 	 * @return  array
 	 */
-	public static function map($callback, $array, $keys = NULL)
+	public static function map_recursive($callback, $array, $keys = NULL)
 	{
 		foreach ($array as $key => $val)
 		{

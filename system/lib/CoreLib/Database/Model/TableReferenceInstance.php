@@ -66,6 +66,15 @@ class TableReferenceInstance extends \Core\Object {
 		return $info;
 	}
 	
+	function getTable(){
+		$class = $this->class;
+		return $class::TABLE;
+	}
+	function getPrefix(){
+		$class = $this->class;
+		return $class::TABLE_PREFIX;
+	}
+	
 	function __call($method,$arguments){
 		return call_user_func_array(array($this->class,$method), $arguments);
 	}

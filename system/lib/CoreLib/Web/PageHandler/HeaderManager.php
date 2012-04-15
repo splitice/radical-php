@@ -52,7 +52,7 @@ class HeaderManager {
 		if(!$this->headers){
 			header($this->status_code.' A', true, $this->status_code);
 		}
-		header('Content-Type: text/plain',true);
+		
 		foreach($this->headers as $k=>$v){
 			header($k.': '.$v,true,$this->status_code);
 		}

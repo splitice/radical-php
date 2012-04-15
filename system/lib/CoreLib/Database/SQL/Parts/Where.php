@@ -4,6 +4,7 @@ namespace Database\SQL\Parts;
 use Database\IToSQL;
 
 class Where extends Internal\PartBase {
+	const SEPPERATOR = 'AND';
 	private $parts = array();
 	
 	function __construct($parts){
@@ -39,7 +40,7 @@ class Where extends Internal\PartBase {
 		$sql = '';
 		if($where)
 			$sql = 'WHERE ';
-		$sql .= implode(' AND ',$ret);
+		$sql .= implode(' '.static::SEPPERATOR.' ',$ret);
 		
 		return $sql;
 	}
