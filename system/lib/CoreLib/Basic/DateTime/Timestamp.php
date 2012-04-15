@@ -9,6 +9,14 @@ class Timestamp extends StandardObject {
 	function __construct($timestamp){
 		$this->timestamp = $timestamp;
 	}
+	function add($ammount){
+		$ts = strtotime('+'.$ammount,$this->timestamp);
+		return new static($ts);
+	}
+	function sub($ammount){
+		$ts = strtotime('-'.$ammount,$this->timestamp);
+		return new static($ts);
+	}
 	function toFormat($format){
 		return date($format,$this->timestamp);
 	}
