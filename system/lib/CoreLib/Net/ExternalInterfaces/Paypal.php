@@ -214,7 +214,6 @@ class Paypal {
 	}
 	
 	function log_ipn_results($success) {
-		
 		if (! $this->ipn_log)
 			return; // is logging turned off?
 		
