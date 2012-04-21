@@ -1,5 +1,5 @@
 <?php
-namespace Web\Session\Extra\Interfaces;
+namespace Web\Session\Extra;
 
 use Web\Session\Handler\Internal\ISessionHandler;
 

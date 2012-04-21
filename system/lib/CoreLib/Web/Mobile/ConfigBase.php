@@ -2,6 +2,7 @@
 namespace Web\Mobile;
 
 abstract class ConfigBase extends \Core\Object {
+	static $IS_WEBAPP = false;
 	static $HIDE_CHROME = false;
 	static $LOADSCREEN = null;//string or array of MODEL=>screen
 	static $ICON = null;//string or array of SIZE=>icon or SIZE=>aray('src'=>icon,'precomposed'=>true)

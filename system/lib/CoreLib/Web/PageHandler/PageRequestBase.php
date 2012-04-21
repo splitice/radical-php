@@ -13,7 +13,7 @@ abstract class PageRequestBase {
 	
 	protected $page;
 	
-	function __construct(IPage $page){
+	function __construct(IPage $page = null){
 		$this->page = $page;
 		$this->headers = new HeaderManager();
 	}

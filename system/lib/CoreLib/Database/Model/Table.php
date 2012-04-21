@@ -329,7 +329,7 @@ abstract class Table extends \Core\Object implements ITable, \JsonSerializable {
 		
 		//Build SQL
 		$where = new \Database\SQL\Parts\Where($prefixedFields);
-		
+
 		$sql = static::_select()
 					->where($where);
 

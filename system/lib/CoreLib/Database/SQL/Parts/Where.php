@@ -43,13 +43,13 @@ class Where extends Internal\PartBase {
 				$rr = '`'.$alias.'`.';
 			}
 			foreach($p as $k=>$v){
-				$rr .= '`'.$k.'`';
+				$rri = $rr. '`'.$k.'`';
 				if($v instanceof IToSQL){
-					$rr .= $v->toSQL();
+					$rri .= $v->toSQL();
 				}else{
-					$rr .= '='.$db->Escape($v);
+					$rri .= '='.$db->Escape($v);
 				}
-				$ret[] = $rr;
+				$ret[] = $rri;
 			}
 		}
 		

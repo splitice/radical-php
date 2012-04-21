@@ -10,6 +10,10 @@ class Http implements IAuthenticator {
 		$headers->Add('WWW-Authenticate','Basic realm="Site Login"');
 		echo 'Text to send if user hits Cancel button';
 	}
+	function AuthenticationError($msg){
+		die('Login Failed: '.$msg);
+		//@todo complete
+	}
 	function Init(ISessionHandler $handler){
 		if(isset($_SERVER['PHP_AUTH_USER']) && $_SERVER['PHP_AUTH_PW']){
 			$username = $_SERVER['PHP_AUTH_USER'];
@@ -18,7 +22,7 @@ class Http implements IAuthenticator {
 			$success = $handler->Login($username,$password);
 			
 			if(!$success){
-				
+				return $this->AuthenticationError();
 			}
 		}
 	}
