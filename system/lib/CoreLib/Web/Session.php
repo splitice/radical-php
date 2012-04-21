@@ -1,7 +1,13 @@
 <?php
 namespace Web;
 
-use Web\Session\Handler\Internal\ISessionHandler;
+use Web\Session\Storage\Internal;
+
+use Web\Session\Authenticator;
+use Web\Session\Authentication\Source\ISessionSource;
+use Web\Session\Authentication\IAuthenticator;
+use Web\Session\Extra\ISessionExtra;
+use Web\Session\Storage\ISessionStorage;
 
 class Session extends \Core\Object {
 	static $__dependencies = array(
@@ -11,7 +17,16 @@ class Session extends \Core\Object {
 	
 	const DEFAULT_IP = '::1';
 	
+	/**
+	 * @var Web\Session\Storage\ISessionStorage
+	 */
 	public static $data;
+	/**
+	 * @var Web\Session\Authenticator
+	 */
+	
+	public static $auth;
+	private static $extras = array();
 	
 	static function IP(){
 		if(\Server::isCLI()){
@@ -26,33 +41,25 @@ class Session extends \Core\Object {
 		return new \Net\IP(static::DEFAULT_IP);
 	}
 	
-	static function Init(ISessionHandler $handler = null){
-		if($handler) {
-			static::$data = $handler;
-		}	
-	}
-	/*static function LoadsJS($file){
-		$ver = \PageHandler\JS\Combine::jsVersion();
-		if(!self::$page){
-			$hash = \DB::BIN(md5($_SERVER['REQUEST_URI']));
-			$res = \DB::Q('SELECT page_id FROM page WHERE page_urlhash='.\DB::E($hash));
-			self::$page = \DB::Fetch($res,\DB::FETCH_FIRST);
-			if(!self::$page){
-				\DB::Insert('page',array('page_urlhash'=>$hash));
-				self::$page = \DB::InsertId();
+	static function Init(){
+		//Create the session authentication controller and internal data storage
+		if(!static::$auth){
+			static::$auth = new Authenticator();
+			static::$data = new Internal();
+		}
+		
+		//Initialize supplied modules
+		foreach(func_get_args() as $arg){
+			if($arg instanceof ISessionStorage){
+				static::$data = $arg;
+			}elseif($arg instanceof ISessionExtra){
+				static::$extra[get_class($arg)] = $arg;
+			}elseif($arg instanceof IAuthenticator){
+				static::$auth->setAuthenticator($arg);
+			}elseif($arg instanceof ISessionSource){
+				static::$auth->setSource($arg);
 			}
-			\DB::Insert('page_load',array('session_id'=>self::$id,'page_id'=>self::$page));
 		}
-		
-		$res = \DB::Q('SELECT javascript_id FROM javascript WHERE javascript_version='.\DB::E($ver).' AND javascript_module='.\DB::E($file));
-		$js_id = (int)\DB::Fetch($res,\DB::FETCH_FIRST);
-		if(!$js_id){
-			$js_id = \PageHandler\JS\Individual::Insert($file);
-		}
-		
-		\DB::Insert('page_javascript',array('page_id'=>self::$page,'javascript_id'=>$js_id));
-		
-		return $js_id;
-	}*/
+	}
 	
 }

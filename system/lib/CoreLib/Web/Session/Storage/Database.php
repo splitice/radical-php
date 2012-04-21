@@ -1,9 +1,10 @@
 <?php
-namespace Web\Session\Handler;
+namespace Web\Session\Storage;
 
-use Web\Session\Handler\Internal\ISessionHandler;
+use Web\Session\ModuleBase;
 
-class Internal extends Internal\HandlerBase implements ISessionHandler {
+class Database extends ModuleBase implements ISessionStorage {
+	protected $id;
 	protected $data;
 	
 	function __construct(){
@@ -13,10 +14,13 @@ class Internal extends Internal\HandlerBase implements ISessionHandler {
 		parent::__construct();
 	}
 	
-	function getId(){
-		return session_id();
+	/**
+	 * @return the $id
+	 */
+	public function getId() {
+		return $this->id;
 	}
-	
+
 	public function offsetSet($offset, $value) {
 		$this->set($offset,$value);
 	}
@@ -24,10 +28,7 @@ class Internal extends Internal\HandlerBase implements ISessionHandler {
 		return isset($this->data[$offset]);
 	}
 	public function offsetUnset($offset) {
-		session_start();
-		unset($_SESSION[$offset]);
-		$this->data = $_SESSION;
-		session_write_close();
+		unset($this->data[$offset]);
 	}
 	public function offsetGet($offset) {
 		return isset($this->data[$offset]) ? $this->data[$offset] : null;
@@ -38,12 +39,11 @@ class Internal extends Internal\HandlerBase implements ISessionHandler {
 	}
 	function set($name,$data){
 		session_start();
-		if (is_null($name)) {
-			$_SESSION[] = $data;
-		}else{
+		if (is_null($offset)) {
 			$_SESSION[$name] = $data;
+		}else{
+			$_SESSION[] = $data;
 		}
-		$this->data = $_SESSION;
 		session_write_close();
 	}
 }

@@ -1,8 +1,10 @@
 <?php
 namespace Web\Session\Handler;
+use Web\Session\ModuleBase;
+
 use Web\Session;
 
-class DatabaseOnlineTrack extends Database {
+class DatabaseOnlineTrack extends ModuleBase {
 	function __construct(){
 		$IP = Session::IP();
 		

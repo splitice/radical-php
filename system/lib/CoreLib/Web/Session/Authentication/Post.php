@@ -1,9 +1,11 @@
 <?php
 namespace Web\Session\Authentication;
 
+use Web\Session\ModuleBase;
+
 use Web\Session\Handler\Internal\ISessionHandler;
 
-class Post implements IAuthenticator {
+class Post extends ModuleBase implements IAuthenticator {
 	const FIELD_USERNAME = 'username';
 	const FIELD_PASSWORD = 'password';
 	private $authenticate;

@@ -1,9 +1,11 @@
 <?php
 namespace Web\Session\Authentication;
 
+use Web\Session\ModuleBase;
+
 use Web\Session\Handler\Internal\ISessionHandler;
 
-class Http implements IAuthenticator {
+class Http extends ModuleBase implements IAuthenticator {
 	function Authenticate(){
 		$headers = \Web\PageHandler::$stack->top()->headers;
 		$headers->Status(401);
