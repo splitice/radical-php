@@ -24,7 +24,7 @@ class MultipleDatabase extends NullSource {
 			$data = $this->getFields($username,$password,$table);
 	
 			$res = $class::fromFields($data);
-	
+
 			if($res){
 				$password = $res->getSQLField(static::FIELD_PASSWORD);
 				if($password){

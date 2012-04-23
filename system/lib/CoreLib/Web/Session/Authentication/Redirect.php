@@ -2,7 +2,6 @@
 namespace Web\Session\Authentication;
 
 use Web\Pages\Special\Redirect;
-use Web\Session\Handler\Internal\ISessionHandler;
 
 class Redirect extends Post {
 	protected $redirectUrl;

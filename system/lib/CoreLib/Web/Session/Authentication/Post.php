@@ -2,8 +2,7 @@
 namespace Web\Session\Authentication;
 
 use Web\Session\ModuleBase;
-
-use Web\Session\Handler\Internal\ISessionHandler;
+use Web\Session\Authentication\Source\ISessionSource;
 
 class Post extends ModuleBase implements IAuthenticator {
 	const FIELD_USERNAME = 'username';
@@ -19,7 +18,7 @@ class Post extends ModuleBase implements IAuthenticator {
 	function AuthenticationError($msg){
 		
 	}
-	function Init(ISessionHandler $handler){
+	function Init(ISessionSource $handler){
 		if($this->authenticate && isset($_POST[static::FIELD_USERNAME]) && $_POST[static::FIELD_PASSWORD]){
 			$username = $_POST[static::FIELD_USERNAME];
 			$password = $_POST[static::FIELD_PASSWORD];

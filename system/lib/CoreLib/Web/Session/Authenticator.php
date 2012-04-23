@@ -1,6 +1,8 @@
 <?php
 namespace Web\Session;
 
+use Web\Session\User\IUserAdmin;
+
 use Web\Session\Authentication\Source\ISessionSource;
 use Web\Session\Authentication\IAuthenticator;
 
@@ -64,7 +66,7 @@ class Authenticator {
 	 */
 	private function _authenticator() {
 		if($this->authenticator === null){
-			throw new \Exception("No Authentor Provided");
+			throw new \Exception("No Authenticator Provided");
 		}
 		return $this->authenticator;
 	}
@@ -78,13 +80,21 @@ class Authenticator {
 	}
 	function LoggedInArea(){
 		if($this->isLoggedIn()) return true;
-		return $this->_authenticator()->Init();
+		$this->_authenticator()->Init($this->_source());
+		$this->_authenticator()->Authenticate();
 	}
 	function Authenticate(){
 		return $this->_authenticator()->Authenticate();
 	}
 	function isLoggedIn(){
 		return $this->_source()->isLoggedIn();
+	}
+	function isAdmin(){
+		$user = $this->getUser();
+		if($user instanceof IUserAdmin){
+			return $user->isAdmin();
+		}
+		return false;
 	}
 	function getUser(){
 		return \Web\Session::$data['user'];

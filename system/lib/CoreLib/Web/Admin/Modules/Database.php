@@ -1,28 +1,27 @@
 <?php
 namespace Web\Admin\Modules;
+use Web\Admin\AdminModuleBase;
 use Database\Model\TableReferenceInstance;
-
 use Web\Session\User\IUserAdmin;
 use Net\URL\Pagination\QueryMethod;
 use Web\Pages\Special\Redirect;
-use Image\Graph\Renderer\Base64String;
-use FGV\DB\Block;
-use Web\PageHandler;
 
-class Database extends PageHandler\HTMLPageBase {
+class Database extends AdminModuleBase {
 	protected $table;
 	protected $action = 'list';
 		
-	function __construct(\Net\URL $url){
-		$class = $url->getPath()->firstPathElement();
-		if($class) {
-			$model = \ClassLoader::getProjectSpace('DB\\'.$class);
-			if(!class_exists($model)){
-				throw new \Exception('Cant find database model of type '.$class);
+	function __construct(\Net\URL\Path $url = null){
+		if($url){
+			$class = $url->firstPathElement();
+			if($class) {
+				$model = \ClassLoader::getProjectSpace('DB\\'.$class);
+				if(!class_exists($model)){
+					throw new \Exception('Cant find database model of type '.$class);
+				}
+				
+				$this->table = new TableReferenceInstance($model);
+				$this->action = isset($_REQUEST['action'])?$_REQUEST['action']:'view';
 			}
-			
-			$this->table = new TableReferenceInstance($model);
-			$this->action = isset($_REQUEST['action'])?$_REQUEST['action']:'view';
 		}
 	}
 	function POST(){

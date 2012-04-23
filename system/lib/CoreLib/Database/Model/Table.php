@@ -159,10 +159,13 @@ abstract class Table extends \Core\Object implements ITable, \JsonSerializable {
 		}else{
 			throw new \Exception('Cant create table with this data');
 		}
-		
+		$this->_dynamicType();
+	}
+	
+	private function _dynamicType(){
 		//Construct dynamic types
 		foreach($this->orm->dynamicTyping as $field=>$value){
-			$dT = $value['var'];			
+			$dT = $value['var'];
 			$this->$field = $dT::fromDatabaseModel($this->$field,$value['extra'],$this);
 		}
 	}
@@ -218,9 +221,10 @@ abstract class Table extends \Core\Object implements ITable, \JsonSerializable {
 		//Recreate ORM
 		$table = new TableReferenceInstance($this);
 		$this->orm = $table->getORM();
-		
+
 		//Re-get data
 		$this->_handleResult($this->RefreshTableData()->toSQL());
+		$this->_dynamicType();
 	}
 	
 	function __toString(){

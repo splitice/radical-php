@@ -350,12 +350,30 @@ class Arr {
 		return $array;
 	}
 	
+	
+	/**
+	 * Can work like normal array_map except supports being passed array objects.
+	 * 
+	 * If the callback is an array where the first member is * then the callback 
+	 * is applied using the array value::callack[1]()
+	 * 
+	 * @param mixed $callback
+	 * @param array $array
+	 * @return array
+	 */
 	public static function map($callback, $array)
 	{
 		if(is_object($array)){
 			if($array instanceof \Iterator || $array instanceof \IteratorAggregate){
 				$array = iterator_to_array($array);
 			}
+		}
+		if(is_array($callback) && $callback[0] == '*'){
+			$c = $callback[1];
+			foreach($array as $k=>$v){
+				$array[$k] = $v::$c();
+			}
+			return $array;
 		}
 		return array_map($callback,$array);
 	}
@@ -619,6 +637,14 @@ class Arr {
 			}
 		}
 		return $flat;
+	}
+	
+	function where($callback,$array){
+		$ret = array();
+		foreach($array as $k=>$v){
+			if($callback($k,$v)) $ret[$k] = $v;
+		}
+		return $ret;
 	}
 
 } // End arr
