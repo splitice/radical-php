@@ -5,6 +5,7 @@ use Database\Model\TableReferenceInstance;
 use Web\Session\User\IUserAdmin;
 use Net\URL\Pagination\QueryMethod;
 use Web\Pages\Special\Redirect;
+use Web\Templates;
 
 class Database extends AdminModuleBase {
 	protected $table;
@@ -76,7 +77,7 @@ class Database extends AdminModuleBase {
 			$vars = array();
 			$vars['classes'] = $classes;
 				
-			return new \Web\Template('admin_table_list',$vars);
+			return new Templates\ContainerTemplate('admin_table_list',$vars,'admin');
 		}else{
 			switch($this->action){
 				case 'delete':
@@ -91,7 +92,7 @@ class Database extends AdminModuleBase {
 					$tm = new \HTML\Form\Builder\FormInstance($this->table);
 					$id = unserialize($_GET['id']);
 					$form = $tm->fromId($id);
-					return new \Web\Template('admin_edit_single',array('form'=>$form,'relations'=>$this->table->getTableManagement()->getRelations()));
+					return new Templates\ContainerTemplate('admin_edit_single',array('form'=>$form,'relations'=>$this->table->getTableManagement()->getRelations()));
 				case 'edit_all':
 					$tm = new \HTML\Form\Builder\Adapter\DatabaseTable($this->table);
 					$form = $tm->getAll();
@@ -111,7 +112,7 @@ class Database extends AdminModuleBase {
 					$tableManagement = $this->table->getTableManagement();
 					$vars['cols'] = $tableManagement->getColumns();
 					
-					return new \Web\Template('admin_table_view',$vars);
+					return new Templates\ContainerTemplate('admin_table_view',$vars,'admin');
 					break;
 			}
 		}

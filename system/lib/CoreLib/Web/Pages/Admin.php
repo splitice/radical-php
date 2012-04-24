@@ -2,15 +2,10 @@
 namespace Web\Pages;
 
 use Basic\Arr;
-
-use Web\Template;
-
-use Database\Model\TableReferenceInstance;
+use Web\Templates;
 use Web\Session\User\IUserAdmin;
 use Net\URL\Pagination\QueryMethod;
 use Web\Pages\Special\Redirect;
-use Image\Graph\Renderer\Base64String;
-use FGV\DB\Block;
 use Web\PageHandler;
 
 /**
@@ -66,7 +61,7 @@ class Admin extends PageHandler\HTMLPageBase {
 			$VARS['modules'] = Arr::map(array('*','createLink'), $modules);
 			
 			//Template to show
-			return new Template('index', $VARS,'admin');
+			return new Templates\ContainerTemplate('index', $VARS,'admin');
 		}else{
 			//Class path to the module
 			$class = static::CLASS_PATH.$this->module;

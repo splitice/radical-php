@@ -10,11 +10,13 @@ class Template extends PageHandler\PageBase {
 	protected $file;
 	protected $name = 'error';
 	protected $handler = false;
+	private $container;
 	
 	function __construct($name, $vars = array(), $container = 'HTML') {
 		$this->vars = $vars;
 		$this->name = $name;
 		$this->file = new \File\Instance(static::getPath($name,$container));
+		$this->container = $container;
 		if(!$this->file->Exists()){
 			throw new \Exception('Template '.$name.' in '.$container.' doesnt exist');
 		}
@@ -39,6 +41,11 @@ class Template extends PageHandler\PageBase {
 	static function adapters(){
 		return \ClassLoader::getNSExpression('Web\\Templates\\Adapter\\*');
 	}
+	
+	function containedBy($file = Templates\ContainerTemplate::DEFAULT_CONTAINER){
+		return new Templates\ContainerTemplate($this->name, $this->container, $this->vars, $file);
+	}
+	
 	static function isSupported($path){
 		if(!($path instanceof \File\Instance)){
 			$path = new \File\Instance($path);

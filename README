@@ -4,4 +4,4 @@ Currently pre-alpha, not recomended for public use unless you know what you are 
 
 Inspired by lithium, kohana and django. Currently looking for team members.
 
-New Layout branch, this is alot more like a real framework
+An example application using this framework can be found at https://github.com/splitice/radical-blog
