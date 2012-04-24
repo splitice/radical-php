@@ -5,6 +5,9 @@ use HTML\Form\Security\Key;
 use HTML\Form\Builder\FormInstance;
 
 class EventFormInstance extends FormInstance {
+	const EVENT_HANDLER = '__rp_eventA';
+	const EVENT_METHOD = '__rp_eventB';
+	
 	private $eventHandler;
 	private $eventMethod;
 	
@@ -16,17 +19,29 @@ class EventFormInstance extends FormInstance {
 		$this->eventMethod = $method;
 		
 		//Build security field
-		$securityField = new Key();
+		$securityField = new Key(array($this,'Execute'));
 		
 		//Event details
-		$this->hidden('__rp_eventA',$securityField->Store(serialize($handler)));
-		$this->hidden('__rp_eventB',base64_encode($securityField->Encrypt($this->eventMethod)));
+		$this->hidden(self::EVENT_HANDLER,$securityField->Store(serialize($handler)));
+		$this->hidden(self::EVENT_METHOD,base64_encode($securityField->Encrypt($this->eventMethod)));
 		
 		//Security event
 		$this->Add($securityField->getElement());
+		
+		//Ensure its post, security fields only work on post requests currently.
+		$this->method('post');
 	}
 	
-	function Execute($data){
+	function Execute($data = null){
+		//data from post
+		if($data === null){
+			$data = Key::getData();
+		}
+		
+		//Clean up event data
+		unset($data[self::EVENT_HANDLER],$data[self::EVENT_METHOD]);
+		
+		//execute event
 		return call_user_func(array($this->eventHandler,$this->eventMethod), $data);
 	}
 }

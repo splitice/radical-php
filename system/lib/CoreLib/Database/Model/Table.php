@@ -143,7 +143,7 @@ abstract class Table extends \Core\Object implements ITable, \JsonSerializable {
 	
 	public $orm;
 	protected $_store = array();
-	function __construct($in,$prefix = false){
+	function __construct($in = array(),$prefix = false){
 		//Setup object with table specific data
 		$table = new TableReferenceInstance($this);
 		$this->orm = $table->getORM();
@@ -282,13 +282,14 @@ abstract class Table extends \Core\Object implements ITable, \JsonSerializable {
 				}
 			}
 		}elseif(0 === substr_compare($m,'set',0,3)){
-			$v = substr($m,3);
-			$v{0} = strtolower($v{0});
-			if(isset($this->$v)){
+			$actionPart = substr($m,3);
+			$actionPart{0} = strtolower($actionPart{0});
+			if(isset($this->orm->reverseMappings[$actionPart])){
 				if(!isset($a[0])){
 					throw new \BadMethodCallException('set{X}(value) called without argument');
 				}
-				$this->$v = $a[0];
+				$this->$actionPart = $a[0];
+				return $this;
 			}
 		}
 		throw new \BadMethodCallException('Not a valid function: '.$m);

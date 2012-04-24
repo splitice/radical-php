@@ -6,7 +6,9 @@ use Basic\ArrayLib\Object\CollectionObject;
 
 class KeyStorage extends CollectionObject {
 	function Add(Key $key){
-		return parent::Add($key->getId(),$key);
+		$ret = parent::Add($key->getId(),$key);
+		Session::$data['form_security'] = $this;
+		return $ret;
 	}
 	
 	static function AddKey(Key $key){
@@ -17,9 +19,10 @@ class KeyStorage extends CollectionObject {
 	}
 	
 	/**
+	 * @param string $key the id of the key to get
 	 * @return HTML\Form\Security\Key
 	 */
-	static function GetKey(){
+	static function GetKey($key){
 		if(!isset(Session::$data['form_security'])){
 			throw new \Exception('No security keys in session');
 		}

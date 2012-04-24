@@ -13,7 +13,7 @@ class DateTime extends \Basic\DateTime\DateTime implements IDynamicType {
 		$this->timestamp = $value;
 	}
 
-	function __construct($value,$extra){
+	function __construct($value,$extra = null){
 		$this->extra = $extra;
 		parent::__construct($value);
 	}

@@ -6,16 +6,19 @@ use HTML\Form\Element\HiddenInput;
 use Basic\Cryptography\Blowfish;
 
 class Key {
+	const FIELD_NAME = '__rp_security_code';
+	
 	private $key;
 	private $id;
 	private $storage = array();
 	public $expires = -1;
 	
-	function __construct($ttl = -1){
-		KeyStorage::AddKey($this);
+	function __construct($callback = null,$ttl = -1){
 		$this->id = \Basic\String\Random::GenerateBase64(8);
 		$this->key = \Basic\String\Random::GenerateBytes(32);
+		$this->callback = $callback;
 		if($ttl > 0) $this->expires = $ttl + time();
+		KeyStorage::AddKey($this);
 	}
 	function getId(){
 		return $this->id;
@@ -34,6 +37,19 @@ class Key {
 		return Blowfish::Decode($data, $this->key);
 	}
 	function getElement(){
-		return new HiddenInput('__rp_security_code', $this->id);
+		return new HiddenInput(self::FIELD_NAME, $this->id);
+	}
+	static function fromRequest(){
+		if(isset($_POST[self::FIELD_NAME])) return $_POST[self::FIELD_NAME];
+	}
+	static function getData(){
+		$data = $_POST;
+		unset($data[self::FIELD_NAME]);
+		return $data;
+	}
+	function Callback(){
+		if($this->callback){
+			return call_user_func($this->callback);
+		}
 	}
 }
