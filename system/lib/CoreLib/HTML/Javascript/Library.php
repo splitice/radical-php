@@ -20,7 +20,7 @@ class Library extends Tag\Script {
 		foreach($libs as $l){
 			$ll = strtolower(array_pop(explode('\\',$l)));
 			if($ll == $library){
-				return new $l($library,$version);
+				return new $l($version);
 			}
 		}
 	}

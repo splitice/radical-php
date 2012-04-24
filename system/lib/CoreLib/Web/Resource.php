@@ -73,7 +73,7 @@ class Resource {
 				//Is it a CDN hosted library?
 				$extLib = \HTML\Javascript\Library::Find($script->name,$script->version);
 				if($extLib instanceof IJavascriptLibrary){
-					$paths[$script->getModule()] = (string)$extLib;
+					$paths[$script->getModule()] = substr((string)$extLib,0,-3);
 				}
 			}
 			return new RequireJS($scripts,$paths);

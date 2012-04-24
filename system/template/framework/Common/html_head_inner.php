@@ -24,6 +24,9 @@ Web\Mobile\HTML::Output();
 ?>
 
 <?php 
+if(\Web\Resource\Javascript::Exists('main')){
+	echo \Web\Resource\Javascript::HTML('main');
+}
 if(\Web\Resource\CSS::Exists('main')){
 	echo \Web\Resource\CSS::HTML('main');
 }elseif(\Web\Resource\CSS::Exists('print')){
