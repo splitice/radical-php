@@ -17,8 +17,8 @@ class RequireJS extends Script {
 		if(is_array($module)){
 			foreach($module as $m){
 				$this->addModule($m);
-				return;
 			}
+			return;
 		}
 		
 		//Do form module
