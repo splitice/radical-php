@@ -94,4 +94,23 @@ class Random {
 		$result = static::GenerateBytes($bytes);
 		return strtr(rtrim(base64_encode($result), '='), '+', '.');
 	}
+	
+	/**
+	 * Generates random bytes for use in UUIDs and password salts, using
+	 * (when available) a cryptographically strong random number generator.
+	 *
+	 * {{{
+	 * $str = Basic\String\Random::GenerateHex(8); // 64 bits
+	 * echo $str; // hex+
+	 * }}}
+	 *
+	 * Base64-encodes the resulting random string per the following:
+	 *
+	 * @param integer $bytes The number of random bytes to generate.
+	 * @return string Returns a hex encoded string of random bytes.
+	 */
+	static function GenerateHex($bytes){
+		$result = static::GenerateBytes($bytes);
+		return bin2hex($result);
+	}
 }

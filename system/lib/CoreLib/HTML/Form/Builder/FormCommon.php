@@ -14,11 +14,20 @@ class FormCommon implements IFormControls {
 		return '</form>';
 	}
 	
+	function label($name, Element\Internal\FormElementBase $element,$before = true){
+		if($before) $before = $element;
+		return $this->_R(new Element\Label($name, $element),$before);
+	}
+	
 	function textarea($name, $value){
 		return $this->textbox($name, $value);
 	}
 	function textbox($name, $value){
 		return $this->_R(new Element\TextArea($name, $value));
+	}
+	
+	function hidden($name, $value = ''){
+		return $this->_R(new Element\HiddenInput($name, $value));
 	}
 	
 	function number($name, $value = ''){

@@ -27,7 +27,16 @@ class FormInstance extends FormCommon implements IFormInstance {
 		}
 	}
 	
-	protected function _R($return){
+	protected function _R($return,$before = false){
+		if($before){
+			foreach($this->form->inner as $k=>$v){
+				if(!$before || $v == $before){
+					$this->form->inner[$k] = $return;
+					$return = $v;
+					$before = false;
+				}
+			}
+		}
 		$this->form->inner[] = $return;
 		return parent::_R($return);
 	}

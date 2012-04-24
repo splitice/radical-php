@@ -4,6 +4,7 @@ namespace HTML\Form\Builder;
 interface IFormControls {
 	function textarea($name, $value);
 	function textbox($name, $value);
+	function hidden($name, $value = '');
 	function number($name, $value = '');
 	function email($name, $value = '');
 	function text($name, $value = '');
