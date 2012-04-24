@@ -1,7 +1,10 @@
 <?php
 namespace Database\DynamicTypes;
 
-class Password extends String {
+class Password extends String implements INullable {
+	function isNull(){
+		return ($this->value === null);
+	}
 	function getAlgo(){
 		$algo = 'Raw';
 		if($this->extra){

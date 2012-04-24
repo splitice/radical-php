@@ -3,7 +3,10 @@ namespace Database\DynamicTypes;
 
 use Database\Model\ITable;
 
-class Stub extends String {
+class Stub extends String implements INullable {
+	function isNull(){
+		return ($this->value === null);
+	}
 	function getField(){
 		$field = '*title';
 		if($this->extra){

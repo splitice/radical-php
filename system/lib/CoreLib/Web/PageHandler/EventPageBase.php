@@ -23,7 +23,6 @@ abstract class EventPageBase extends HTMLPageBase {
 					throw new \Exception('Form submission invalid');
 				}
 			}
-			die('test');
 		}
 		
 		return parent::Execute($method);
