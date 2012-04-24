@@ -12,4 +12,16 @@ class Library extends Tag\Script {
 		}
 		$this->attributes['src'] = new $class($version);
 	}
+	
+	
+	static function Find($library,$version = null){
+		$library = strtolower($library);
+		$libs = \ClassLoader::getNSExpression('HTML\\Javascript\\Libraries\\*');
+		foreach($libs as $l){
+			$ll = strtolower(array_pop(explode('\\',$l)));
+			if($ll == $library){
+				return new $l($library,$version);
+			}
+		}
+	}
 }

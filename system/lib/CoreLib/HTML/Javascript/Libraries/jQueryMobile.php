@@ -2,7 +2,7 @@
 namespace HTML\Javascript\Libraries;
 use HTML\Shared;
 
-class jQueryMobile extends Shared\LibraryBase {
+class jQueryMobile extends Shared\LibraryBase implements IJavascriptLibrary {
 	const URL = 'http://code.jquery.com/mobile/%(version)s/jquery.mobile-%(version)s.min.js';
 	
 	function __construct($version = 1){

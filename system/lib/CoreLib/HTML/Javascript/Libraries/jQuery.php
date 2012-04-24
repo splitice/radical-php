@@ -2,7 +2,7 @@
 namespace HTML\Javascript\Libraries;
 use HTML\Shared;
 
-class jQuery extends Shared\LibraryBase {
+class jQuery extends Shared\LibraryBase implements IJavascriptLibrary {
 	const URL = 'http://ajax.googleapis.com/ajax/libs/jquery/%(version)s/jquery.min.js';
 	
 	function __construct($version = 1){

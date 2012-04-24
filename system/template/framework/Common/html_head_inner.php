@@ -17,9 +17,9 @@ Web\Mobile\HTML::Output();
 	echo '<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>';
 	echo '<script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>';
 }else{*/
-	echo '<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />';
-	echo '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>';
-	echo '<script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>';
+//	echo '<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />';
+//	echo '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>';
+//	echo '<script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>';
 //}
 ?>
 
