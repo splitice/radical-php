@@ -13,7 +13,15 @@ use Image\Graph\Renderer\Base64String;
 use FGV\DB\Block;
 use Web\PageHandler;
 
+/**
+ * The admin controller
+ * 
+ * @author SplitIce
+ *
+ */
 class Admin extends PageHandler\HTMLPageBase {
+	const CLASS_PATH = '\\Web\\Admin\\Modules\\';
+	
 	protected $module;
 	protected $url;
 	
@@ -21,28 +29,47 @@ class Admin extends PageHandler\HTMLPageBase {
 		$this->module = $module;
 		$this->url = $url;
 	}
+	
+	/**
+	 * Ensure the user has permissions to access the admin panel.
+	 * Can possibly result in the login action being executed.
+	 * 
+	 * @throws \Exception
+	 * @return boolean
+	 */
 	private function checkAdmin(){
+		//This is a logged in area, ensure the user is logged in
 		\Web\Session::$auth->LoggedInArea();
 		if(\Web\Session::$auth->isAdmin()){
+			//if is an admin do nothing
 			return false;
 		}
+		
+		//This user isnt an admin cant go any further
 		throw new \Exception('Not an admin');
-		return false;
 	}
 			
 	function GET(){
 		$page = $this->checkAdmin();
 		if($page) return $page;
 		
+		//If no module specified then we are listing modules to load
 		if($this->module === null){
 			$VARS = array();
+			
+			//Get admin modules
 			$modules = Arr::where(function($k,$v){
-				return class_exists($v);
-			},\ClassLoader::getNSExpression('\\Web\\Admin\\Modules\\*'));
+				return class_exists($v);//is valid class
+			},\ClassLoader::getNSExpression(static::CLASS_PATH.'*'));
+			
+			//Create links to modules
 			$VARS['modules'] = Arr::map(array('*','createLink'), $modules);
+			
+			//Template to show
 			return new Template('index', $VARS,'admin');
 		}else{
-			$class = '\\Web\\Admin\\Modules\\'.$this->module;
+			//Class path to the module
+			$class = static::CLASS_PATH.$this->module;
 			if(!class_exists($class)){
 				throw new \Exception('Couldnt find admin module');
 			}

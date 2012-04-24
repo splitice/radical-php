@@ -12,6 +12,9 @@ abstract class AdminModuleBase extends PageHandler\HTMLPageBase implements Modul
 		$c = substr($c,strlen('Web\\Admin\\Modules\\'));
 		return $c;
 	}
+	function getSubmodules(){
+		return array();
+	}
 	function toURL(){
 		return '/admin/'.$this->getModuleName();
 	}

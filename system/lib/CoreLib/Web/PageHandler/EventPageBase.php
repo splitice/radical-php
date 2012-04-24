@@ -7,6 +7,12 @@ use HTML\Form\Security\Key;
 
 abstract class EventPageBase extends HTMLPageBase {
 	protected $eventKey;
+	/** 
+	 * Intercept Execute calls and check for POST events
+	 * If there is a post event submission do it.
+	 * 
+	 * @see Web\PageHandler.PageBase::Execute()
+	 */
 	function Execute($method = 'GET'){
 		//Check for an event
 		if($method == 'POST'){
@@ -25,6 +31,7 @@ abstract class EventPageBase extends HTMLPageBase {
 			}
 		}
 		
+		//Normal execution
 		return parent::Execute($method);
 	}
 }
