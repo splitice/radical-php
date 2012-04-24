@@ -1,8 +1,6 @@
 <?php
 namespace Web\Session\Authentication;
 
-use Web\Pages\Special\Redirect;
-
 class Redirect extends Post {
 	protected $redirectUrl;
 	function __construct($redirectUrl){
@@ -14,7 +12,7 @@ class Redirect extends Post {
 		}
 		
 		//Redirect
-		$page = new Redirect($this->redirectUrl);
+		$page = new \Web\Pages\Special\Redirect($this->redirectUrl);
 		$page->GET();
 		
 		//Bye

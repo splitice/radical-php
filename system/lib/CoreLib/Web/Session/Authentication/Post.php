@@ -15,7 +15,7 @@ class Post extends ModuleBase implements IAuthenticator {
 	function Authenticate(){
 		//Return an example form that could be used for login
 	}
-	function AuthenticationError($msg){
+	function AuthenticationError($msg = 'Username or Password Invalid'){
 		
 	}
 	function Init(ISessionSource $handler){

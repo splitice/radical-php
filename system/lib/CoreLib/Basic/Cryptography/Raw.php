@@ -7,7 +7,7 @@ class Raw extends HashBase implements HashTypes\ITwoWayEncryption, HashTypes\IOn
 	static function Hash($text){
 		return $text;
 	}
-	static function Decode($text){
+	static function Decode($text,$key = null){
 		return $text;
 	}
 }

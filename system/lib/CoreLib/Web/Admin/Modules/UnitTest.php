@@ -1,8 +1,9 @@
 <?php
-namespace Web\Pages;
-use Web\PageHandler;
+namespace Web\Admin\Modules;
 
-class UnitTest extends PageHandler\HTMLPageBase {	
+use Web\Admin\AdminModuleBase;
+
+class UnitTest extends AdminModuleBase {	
 	function GET(){
 		$testResults = \Debug\Test\Controller::RunUnitTests();
 		

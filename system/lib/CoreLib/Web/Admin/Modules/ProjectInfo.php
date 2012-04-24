@@ -1,8 +1,9 @@
 <?php
-namespace Web\Pages;
+namespace Web\Admin\Modules;
+use Web\Admin\AdminModuleBase;
 use Web\PageHandler;
 
-class ProjectInfo extends PageHandler\HTMLPageBase {	
+class ProjectInfo extends AdminModuleBase {	
 	protected function getInfo($path){
 		$ret = array('files'=>0,'lines'=>0);
 		foreach(\Folder::getIterator($path) as $file){

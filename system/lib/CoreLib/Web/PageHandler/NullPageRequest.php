@@ -1,4 +1,4 @@
-SplStack<?php
+<?php
 namespace Web\PageHandler;
 use Web\PageHandler as PH;
 

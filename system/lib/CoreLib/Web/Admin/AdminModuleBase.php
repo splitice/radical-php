@@ -4,7 +4,6 @@ namespace Web\Admin;
 use Web\PageHandler;
 
 abstract class AdminModuleBase extends PageHandler\HTMLPageBase implements Modules\IAdminModule {
-	abstract function __construct(\Net\URL\Path $url = null);
 	function getName(){
 		return $this->getModuleName();
 	}
