@@ -34,13 +34,13 @@ class TableReferenceInstance extends \Core\Object {
 		$class[$count-1] = 'Management';
 		$class = implode('\\',$class);
 		
-		//If it doesnt exist, use default
-		if(!class_exists($class)){
-			$class = '\\Database\\TableManagement';
+		//If it exist, return instance of class
+		if(class_exists($class)){
+			return new $class($this);
 		}
 		
-		//Return instance
-		return new $class($this);
+		//Else return instance of default table manager
+		return new Table\TableManagement($this);
 	}
 	
 	function getORM(){
