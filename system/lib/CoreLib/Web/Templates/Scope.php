@@ -1,6 +1,10 @@
 <?php
 namespace Web\Templates;
 
+use Web\PageHandler\IPage;
+
+use Web\PageHandler\SubRequest;
+
 use HTML\Form\Builder\FormBuilder;
 
 class Scope {
@@ -45,6 +49,15 @@ class Scope {
 			throw new \Exception('Couldnt find '.$name.' from '.$container.' to include.');
 		}
 		include($___path);
+	}
+	
+	function subrequest(IPage $page){
+		$sub = new SubRequest($page);
+		$sub = $sub->Execute('GET');
+		return $sub;
+	}
+	function sub(IPage $page){
+		return $this->subrequest($page);
 	}
 	
 	function odd($number,$echo){

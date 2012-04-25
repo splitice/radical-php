@@ -8,9 +8,9 @@ class ContainerTemplate extends \Web\Template {
 	protected $body;
 	private $container;
 	
-	function __construct($name, $vars = array(), $container = 'HTML', $body = self::DEFAULT_CONTAINER){
-		parent::__construct($body,$vars,$container);
-		$this->body = $name;
+	function __construct($body, $vars = array(), $container = 'HTML', $name = self::DEFAULT_CONTAINER){
+		parent::__construct($name,$vars,$container);
+		$this->body = $body;
 		$this->container = $container;
 	}
 	

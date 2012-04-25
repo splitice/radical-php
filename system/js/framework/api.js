@@ -12,7 +12,7 @@ define(["jquery"],
 				this.api.Request(this.args);
 			}
 		}
-		return function (module,method){
+		var API = function (module,method){
 			if (this.constructor != API){
 				return new API(module,method);
 			}
@@ -71,5 +71,6 @@ define(["jquery"],
 			
 			return true;
 		};
+		return API;
     }
 );

@@ -11,7 +11,7 @@ class Resource {
 		if($dirs === null){
 			$dirs = static::$default_dirs;
 		}
-		$this->dirs = array_reverse($dirs);
+		$this->dirs = $dirs;
 	}
 	
 	private $fullPath;
@@ -20,7 +20,7 @@ class Resource {
 		
 		global $BASEPATH;
 		
-		foreach($this->dirs as $dir){
+		foreach(array_reverse($this->dirs) as $dir){
 			$file = $BASEPATH.$dir.DS.$this->path;
 			if(file_exists($file)){
 				$this->fullPath = $file;

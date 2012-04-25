@@ -1,7 +1,6 @@
 <?php
 namespace Web\Pages;
 
-use Basic\Arr;
 use Web\Templates;
 use Web\Session\User\IUserAdmin;
 use Net\URL\Pagination\QueryMethod;
@@ -50,18 +49,7 @@ class Admin extends PageHandler\HTMLPageBase {
 		
 		//If no module specified then we are listing modules to load
 		if($this->module === null){
-			$VARS = array();
-			
-			//Get admin modules
-			$modules = Arr::where(function($k,$v){
-				return class_exists($v);//is valid class
-			},\ClassLoader::getNSExpression(static::CLASS_PATH.'*'));
-			
-			//Create links to modules
-			$VARS['modules'] = Arr::map(array('*','createLink'), $modules);
-			
-			//Template to show
-			return new Templates\ContainerTemplate('index', $VARS,'admin');
+			return new Templates\ContainerTemplate('index', array(),'admin');
 		}else{
 			//Class path to the module
 			$class = static::CLASS_PATH.$this->module;

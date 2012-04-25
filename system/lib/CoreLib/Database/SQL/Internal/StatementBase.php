@@ -21,7 +21,9 @@ abstract class StatementBase implements IStatement {
 		$a = get_object_vars($this);
 		foreach($a as $k=>$v){
 			if(isset($in[$k])){
-				$this->$k = $in[$k];
+				if($in[$k]){
+					$this->$k = $in[$k];
+				}
 			}
 		}
 		//$this->sql = null;

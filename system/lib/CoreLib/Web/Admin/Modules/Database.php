@@ -65,19 +65,23 @@ class Database extends AdminModuleBase {
 		}
 		return $this->GET();
 	}
+	private static function extractName($name){
+		$prefix = \ClassLoader::getProjectSpace('DB\\');
+		return substr($name,strlen($prefix));
+	}
 	function GET(){
 		if($this->action == 'list'){
-			$classes = \ClassLoader::getNSExpression(\ClassLoader::getProjectSpace('DB\\*'));
-			$prefix = \ClassLoader::getProjectSpace('DB\\');
-			foreach($classes as $k=>$v){
-				$classes[$k] = substr($v,strlen($prefix));
+			$classes = array();
+			foreach(\ClassLoader::getNSExpression(\ClassLoader::getProjectSpace('DB\\*')) as $k=>$v){
+				$name = self::extractName($v);
+				$classes[$name] = self::toURL().'/'.$name;
 			}
 				
 			
 			$vars = array();
 			$vars['classes'] = $classes;
 				
-			return new Templates\ContainerTemplate('admin_table_list',$vars,'admin');
+			return new Templates\ContainerTemplate('Database/admin_table_list',$vars,'admin');
 		}else{
 			switch($this->action){
 				case 'delete':
@@ -92,7 +96,8 @@ class Database extends AdminModuleBase {
 					$tm = new \HTML\Form\Builder\FormInstance($this->table);
 					$id = unserialize($_GET['id']);
 					$form = $tm->fromId($id);
-					return new Templates\ContainerTemplate('admin_edit_single',array('form'=>$form,'relations'=>$this->table->getTableManagement()->getRelations()));
+					$vars = array('form'=>$form,'relations'=>$this->table->getTableManagement()->getRelations());
+					return new Templates\ContainerTemplate('Database/admin_edit_single',$vars,'admin');
 				case 'edit_all':
 					$tm = new \HTML\Form\Builder\Adapter\DatabaseTable($this->table);
 					$form = $tm->getAll();
@@ -100,21 +105,29 @@ class Database extends AdminModuleBase {
 					break;
 				case 'view':
 					$vars = array();
-					$class = $this->table->getClass();
 					$per_page = 30;
-					$vars['count']  = ceil($class::getAll()->getCount()/$per_page);
+					$vars['count']  = ceil($this->table->getAll()->getCount()/$per_page);
 					
 					$pagination = new \Net\URL\Pagination\QueryMethod();
 					$vars['pagination'] = $pagination;
 					
-					$vars['data'] = $class::getAll($pagination->getLimit($per_page));
+					$vars['data'] = $this->table->getAll($pagination->getLimit($per_page));
+
 					//Get Columns
 					$tableManagement = $this->table->getTableManagement();
 					$vars['cols'] = $tableManagement->getColumns();
 					
-					return new Templates\ContainerTemplate('admin_table_view',$vars,'admin');
+					return new Templates\ContainerTemplate('Database/admin_table_view',$vars,'admin');
 					break;
 			}
 		}
+	}
+	
+	function toURL(){
+		$url = rtrim(parent::toURL(),'/');
+		if($this->table){
+			$url .= '/'.self::extractName($this->table->getClass());
+		}
+		return $url;
 	}
 }

@@ -31,3 +31,7 @@ if(I)return j=j||d.onScriptLoad,p=c&&c.config&&c.config.xhtml?document.createEle
 "loaded")p.onreadystatechange=null,p.attachEvent("onreadystatechange",j),o(p)}:p.attachEvent("onreadystatechange",j)):p.addEventListener("load",j,!1),p.src=a,o||d.addScriptToDom(p),p;else da&&(importScripts(a),c.completeLoad(l));return null};if(I){o=document.getElementsByTagName("script");for(B=o.length-1;B>-1&&(w=o[B]);B--){if(!v)v=w.parentNode;if(F=w.getAttribute("data-main")){if(!u.baseUrl)o=F.split("/"),w=o.pop(),o=o.length?o.join("/")+"/":"./",u.baseUrl=o,F=w.replace(ba,"");u.deps=u.deps?u.deps.concat(F):
 [F];break}}}d.checkReadyState=function(){var a=y.contexts,c;for(c in a)if(!(c in L)&&a[c].waitCount)return;d.resourcesReady(!0)};d.resourcesReady=function(a){var c,l;d.resourcesDone=a;if(d.resourcesDone)for(l in a=y.contexts,a)if(!(l in L)&&(c=a[l],c.jQueryIncremented))V(c.jQuery,!1),c.jQueryIncremented=!1};d.pageLoaded=function(){if(document.readyState!=="complete")document.readyState="complete"};if(I&&document.addEventListener&&!document.readyState)document.readyState="loading",window.addEventListener("load",
 d.pageLoaded,!1);d(u);if(d.isAsync&&typeof setTimeout!=="undefined")z=y.contexts[u.context||"_"],z.requireWait=!0,setTimeout(function(){z.requireWait=!1;z.scriptCount||z.resume();d.checkReadyState()},0)}})();
+
+require.config({
+    baseUrl: "/js/"
+});

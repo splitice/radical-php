@@ -17,10 +17,15 @@ abstract class IndividualBase extends \Web\PageHandler\PageBase {
 	protected function getPath(){
 		return static::EXTENSION.DS.$this->name;
 	}
+	private function getFile(){
+		//TODO: Override
+		global $BASEPATH;
+		$expr = $BASEPATH.'*'.DS.$this->getPath();
+		return array_pop(glob($expr));
+	}
 	function GET(){
 		$this->sendHeaders();
-		
-		$ret = file_get_contents($this->getPath());
+		$ret = file_get_contents($this->getFile());
 		
 		echo $ret;
 		//return new \PageHandler\GZIP($ret);

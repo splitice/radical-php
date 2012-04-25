@@ -3,8 +3,6 @@ namespace Web;
 
 use Web\Templates\Scope;
 
-use Core\Resource;
-
 class Template extends PageHandler\PageBase {
 	protected $vars = array();
 	protected $file;
@@ -58,7 +56,7 @@ class Template extends PageHandler\PageBase {
 					return true;
 				}
 			}
-		}
+		}	
 		return false;
 	}
 	static function getPath($name,$output = 'HTML'){
