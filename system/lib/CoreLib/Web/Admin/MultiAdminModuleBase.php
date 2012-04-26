@@ -21,6 +21,16 @@ abstract class MultiAdminModuleBase extends AdminModuleBase {
 		}
 		return $modules;
 	}
+	function GET($data = array()){
+		$method = 'action'.$this->submodule;
+		if(method_exists($this,$method)){
+			return $this->$method($data);
+		}
+		throw new \Exception('Admin submodule '.$this->submodule.' doesnt exist');
+	}
+	function POST(){
+		return $this->GET($data);
+	}
 	function __toString(){
 		if($this->submodule === null) return parent::__toString();
 		return $this->submodule;
