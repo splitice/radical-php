@@ -111,6 +111,11 @@ class Connection {
 	}
 	
 	function Query($sql){
+		$sql = trim($sql);
+		if(!$sql){
+			throw new \Exception('Empty Query');
+		}
+		
 		return $this->Connect()->query ( $sql );
 	}
 	

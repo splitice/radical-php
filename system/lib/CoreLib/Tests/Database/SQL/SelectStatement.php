@@ -12,10 +12,14 @@ class SelectStatement extends Unit implements IUnitTest {
 		$select->where('ab=cd');
 		$this->assertEqual('SELECT * FROM table WHERE ab=cd', $select->toSQL(),'WHERE test');
 		
-		$select->orderBy('ef DESC');
+		$select->order_by('ef DESC');
 		$this->assertEqual('SELECT * FROM table WHERE ab=cd ORDER BY ef DESC', $select->toSQL(),'ORDER BY test');
 		
 		$select->limit(10, 1);
 		$this->assertEqual('SELECT * FROM table WHERE ab=cd ORDER BY ef DESC LIMIT 10,1', $select->toSQL(),'LIMIT test');
+	}
+	
+	function test2Where(){
+		
 	}
 }

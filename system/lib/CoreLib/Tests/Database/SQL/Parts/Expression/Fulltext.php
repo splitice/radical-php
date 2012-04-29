@@ -1,7 +1,10 @@
 <?php
-namespace Database\SQL\Parts;
+namespace Tests\Database\SQL\Parts\Expression;
 
-class Fulltext extends Internal\PartBase {
+use Debug\Test\IUnitTest;
+use Debug\Test\Unit;
+
+class Fulltext extends Unit implements IUnitTest {
 	protected $text;
 	protected $fields;
 	protected $boolean;

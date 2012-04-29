@@ -12,12 +12,11 @@ use Database\Model\TableReference;
  * @author SplitIce
  * A paginated data set
  */
-class Paginator implements IDatabasePaginator {
+class AlphaPaginator implements IDatabasePaginator {
 	private $source;
 	private $page;
-	private $perPage;
 	private $set;
-	private $totalRows;
+	private $field;
 	
 	public $url;
 	public $sql;
@@ -27,23 +26,21 @@ class Paginator implements IDatabasePaginator {
 	 */
 	private function _get(){
 		$sql = clone $this->sql;
-		$sql->limit(($this->page-1)*$this->perPage, $this->perPage);
-		
+		$sql->where_and(array($this->field,'LIKE',$this->page.'%'));
+		die(var_dump((string)$sql));
 		return $this->source->Filter($sql);
 	}
-	function __construct($source,$page = 1, $perPage = 30){
+	function __construct($source,$field){
 		if($source instanceof TableReferenceInstance){
 			$source = $source->getAll();
-		}elseif(!($source instanceof  TableSet)){
+		}elseif(!($source instanceof TableSet)){
 			throw new \Exception('Invalid Source passed to paginator');
 		}
 		
 		$this->source = $source;
-		$this->page = $page;
-		$this->perPage = $perPage;
+		$this->field = $field;
 		$this->sql = new SQL\SelectStatement();
 		$this->set = $this->_get();
-		$this->totalRows = $this->source->getCount();
 	}
 	
 	public function getIterator() {

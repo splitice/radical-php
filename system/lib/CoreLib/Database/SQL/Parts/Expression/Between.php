@@ -1,9 +1,8 @@
 <?php
-namespace Database\SQL\Parts;
-
-use Database\IToSQL;
+namespace Database\SQL\Parts\Expression;
 
 use Database\DBAL\Adapter\Connection;
+use Database\SQL\Parts\Internal;
 
 class Between extends Internal\PartBase {
 	private $a;

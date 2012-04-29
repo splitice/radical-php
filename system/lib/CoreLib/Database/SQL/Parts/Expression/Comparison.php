@@ -1,0 +1,19 @@
+<?php
+namespace Database\SQL\Parts\Expression;
+
+use Database\SQL\Parts\Internal;
+
+class Comparison extends Internal\PartBase {
+	private $a;
+	private $b;
+	private $operation;
+	
+	function __construct($a,$b,$operation = '='){
+		$this->a = $a;
+		$this->b = $b;
+		$this->operation = $operation;
+	}
+	function toSQL(){
+		return $this->a.' '.$this->operation.' '.\DB::E($this->b);
+	}
+}

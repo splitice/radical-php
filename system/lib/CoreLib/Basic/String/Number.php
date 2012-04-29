@@ -25,4 +25,13 @@ class Number extends \Core\Object {
 		}
 		return ($num . " " . $readable [$index]);
 	}
+	static function is($number){
+		if(is_int($number)){
+			return true;
+		}
+		if((int)$number == $number){
+			return true;
+		}
+		return false;
+	}
 }
