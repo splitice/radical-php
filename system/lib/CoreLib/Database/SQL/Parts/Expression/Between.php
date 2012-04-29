@@ -4,7 +4,7 @@ namespace Database\SQL\Parts\Expression;
 use Database\DBAL\Adapter\Connection;
 use Database\SQL\Parts\Internal;
 
-class Between extends Internal\PartBase {
+class Between extends Internal\PartBase implements IComparison {
 	private $a;
 	private $b;
 	

@@ -1,6 +1,8 @@
 <?php
 namespace Database\SQL\Parts\Internal;
 
+use Database\SQL\Parts\Expression\IComparison;
+
 use Database\SQL\Parts\Expression\Comparison;
 
 use Database\IToSQL;
@@ -49,11 +51,13 @@ abstract class FilterPartBase extends ArrayPartBase {
 			}else{
 				throw new \Exception('Unknown format for add');
 			}
-		}elseif(is_numeric($k) && ((int)$k == (float)$k)){
-			throw new \Exception('Cant set based on exact offset');
 		}else{
 			//Assosiative simple syntax
-			$this->data[] = WhereAND::fromAssign($k,$v);
+			$op = '=';
+			if($v instanceof IComparison){
+				$op = '';
+			}
+			$this->data[] = WhereAND::fromAssign($k,$v,$op);
 		}
 	}
 	function toSQL(){

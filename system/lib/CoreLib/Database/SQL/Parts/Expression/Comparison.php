@@ -3,7 +3,7 @@ namespace Database\SQL\Parts\Expression;
 
 use Database\SQL\Parts\Internal;
 
-class Comparison extends Internal\PartBase {
+class Comparison extends Internal\PartBase implements IComparison {
 	private $a;
 	private $b;
 	private $operation;

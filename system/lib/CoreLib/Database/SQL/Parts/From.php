@@ -191,21 +191,7 @@ class From extends Internal\MergePartBase {
 	 */
 	function order_by($order_by = null){
 		if($order_by === null) return $this->order_by;
-		
-		if($order_by instanceof OrderBy){
-			$this->order_by = $order_by;
-		}elseif(is_array($order_by)){
-			if(count($order_by) == 2){
-				$this->order_by = new OrderBy($order_by[0],$order_by[1]);
-			}else{
-				throw new \Exception('Invalid Order By call array');
-			}
-		}elseif(func_get_arg(1) !== false){
-			$args = func_get_args();
-			return $this->order_by($args);
-		}else{
-			throw new \Exception('Invalid order by call');
-		}
+		$this->order_by = new OrderBy($order_by);
 		
 		return $this;
 	}

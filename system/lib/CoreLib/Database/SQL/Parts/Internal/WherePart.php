@@ -18,7 +18,7 @@ abstract class WherePart extends PartBase {
 		return $ret;
 	}
 	
-	static function fromAssign($a,$b){
-		return new static(new Comparison($a, $b));
+	static function fromAssign($a,$b,$op = '='){
+		return new static(new Comparison($a, $b,$op));
 	}
 }

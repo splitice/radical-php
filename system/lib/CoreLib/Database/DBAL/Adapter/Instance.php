@@ -178,8 +178,10 @@ class Instance extends Connection {
 			throw new \BadMethodCallException('cant escape an array');
 		}
 		if (is_object ( $str )) {
-			if(method_exists($str, 'toEscaped')){
+			if(method_exists($str, 'toEscaped')){//depreciated
 				return $str->toEscaped();
+			}elseif($str instanceof IToSQL){
+				return $str->toSQL();
 			}else{
 				throw new \BadMethodCallException('cant escape this object, non escapable');
 			}

@@ -23,4 +23,8 @@ abstract class DateTimeShared extends Timestamp implements IToSQL {
 	function toSQL() {
 		return $this->toFormat ( static::DATABASE_FORMAT );
 	}
+	
+	function toEscaped(){
+		return \DB::E($this->toSQL());
+	}
 }

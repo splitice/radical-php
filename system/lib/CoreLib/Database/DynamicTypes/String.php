@@ -21,6 +21,9 @@ class String implements IDynamicType {
 	function __toString(){
 		return (string)$this->value;
 	}
+	function toSQL(){
+		return $this->value;
+	}
 	static function fromDatabaseModel($value,array $extra,ITable $model){
 		//DEVELOPER NOTE
 		//$model should never be passed onto the object unless its by weakref

@@ -1,11 +1,10 @@
 <?php
 namespace Database\SQL\Parts\Internal;
 
-use Basic\ArrayLib\Object\ArrayObject;
-
+use Basic\ArrayLib\Object\CollectionObject;
 use Database\IToSQL;
 
-abstract class ArrayPartBase extends ArrayObject implements IToSQL {
+abstract class ArrayPartBase extends CollectionObject implements IToSQL {
 	function __construct($data = null){
 		parent::__construct();
 		if($data !== null) $this->_Set(null,$data);
