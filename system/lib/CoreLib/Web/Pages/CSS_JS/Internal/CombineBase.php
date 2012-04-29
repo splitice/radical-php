@@ -30,6 +30,9 @@ abstract class CombineBase extends IndividualBase {
 		
 		return '/'.$name.'.'.$version.'.'.static::EXTENSION;
 	}
+	protected function getPath(){
+		return static::EXTENSION.DS.parent::getPath();
+	}
 	private function getFiles($expr = '*'){
 		$path = new \Core\Resource($this->getPath());
 		return $path->getFiles($expr);

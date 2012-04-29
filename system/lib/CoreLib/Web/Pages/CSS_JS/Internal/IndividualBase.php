@@ -15,7 +15,7 @@ abstract class IndividualBase extends \Web\PageHandler\PageBase {
 		$headers->Add('Content-Type',static::MIME_TYPE);
 	}
 	protected function getPath(){
-		return static::EXTENSION.DS.$this->name;
+		return $this->name;
 	}
 	private function getFile(){
 		//TODO: Override
@@ -25,7 +25,8 @@ abstract class IndividualBase extends \Web\PageHandler\PageBase {
 	}
 	function GET(){
 		$this->sendHeaders();
-		$ret = file_get_contents($this->getFile());
+		$file = $this->getFile();
+		$ret = file_get_contents($file);
 		
 		echo $ret;
 		//return new \PageHandler\GZIP($ret);
