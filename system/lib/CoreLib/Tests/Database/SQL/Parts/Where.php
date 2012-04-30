@@ -37,6 +37,7 @@ class Where extends Unit implements IUnitTest {
 		$where = new $class($assoc);
 		$this->assertEqual(static::PART_NAME.' user_id=1 AND post_id=2', (string)$where,'Associative array test 5');
 		
+		$assoc = array('user_id'=>'test');
 		$assoc['bet'] = new Between(1, 3);
 		$where = new $class($assoc);
 		$this->assertEqual(static::PART_NAME.' user_id=1 AND post_id=2 AND bet BETWEEN 1 AND 3', (string)$where,'Associative array test 6');

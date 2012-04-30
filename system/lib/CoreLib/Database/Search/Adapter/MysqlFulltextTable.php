@@ -1,12 +1,9 @@
 <?php
 namespace Database\Search\Adapter;
 
-use Database\SQL\Parts\In;
-
+use Database\SQL\Parts\Expression\In;
 use Database\SQL\Parts\WhereOR;
-
 use Database\SQL\Parts\Where;
-
 use Database\Model\DynamicTableReference;
 use Database\Model\TableReference;
 use Database\Model\TableReferenceInstance;

@@ -3,7 +3,7 @@ namespace Database\Search\Adapter;
 
 use Database\Model\TableReferenceInstance;
 use Database\SQL\SelectStatement;
-use Database\SQL\Parts\Fulltext;
+use Database\SQL\Parts\Expression\Fulltext;
 
 class MysqlFulltext implements ISearchAdapter {
 	const MODE_STANDARD = 0;

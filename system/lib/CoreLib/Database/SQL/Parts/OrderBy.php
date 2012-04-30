@@ -36,9 +36,6 @@ class OrderBy extends Internal\ArrayPartBase {
 				}else{
 					throw new \Exception('Invalid Order By call array');
 				}
-			}elseif(func_get_arg(1) !== false){
-				$args = func_get_args();
-				return $this->order_by($args);
 			}else{
 				throw new \Exception('Invalid order by call');
 			}
