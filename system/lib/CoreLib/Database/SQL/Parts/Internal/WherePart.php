@@ -1,6 +1,8 @@
 <?php
 namespace Database\SQL\Parts\Internal;
 
+use Database\SQL\Parts\Expression\TableExpression;
+
 use Database\SQL\Parts\Expression\Comparison;
 
 abstract class WherePart extends PartBase {
@@ -19,6 +21,9 @@ abstract class WherePart extends PartBase {
 	}
 	
 	static function fromAssign($a,$b,$op = '='){
+		if(is_array($a)){
+			$a = new TableExpression($a[1],$a[0]);
+		}
 		return new static(new Comparison($a, $b,$op));
 	}
 }

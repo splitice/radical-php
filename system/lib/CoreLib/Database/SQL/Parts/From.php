@@ -11,6 +11,14 @@ namespace Database\SQL\Parts;
     [LIMIT {[offset,] row_count | row_count OFFSET offset}]
  */
 
+use Database\SQL\Parts\Expression\TableExpression;
+
+use Database\SQL\Parts\Alias\TableAlias;
+
+use Basic\String\Number;
+
+use Database\SQL\Parse\CreateTable;
+use Database\IToSQL;
 use Basic\Arr;
 
 class From extends Internal\MergePartBase {
@@ -48,6 +56,18 @@ class From extends Internal\MergePartBase {
 				$this->table($table);
 			}
 		}
+	}
+	
+	protected function getTableAlias($table){
+		foreach($this->tables as $ta=>$ttable){
+			if($table == $ttable){
+				if(Number::is($ta)){
+					return $table;
+				}
+				return $ta;
+			}
+		}
+		return $table;
 	}
 	
 	function table($table = null,$tablePrefix = null){
@@ -118,7 +138,7 @@ class From extends Internal\MergePartBase {
 				//Resolve out arrayed members
 				foreach($where as $k=>$v){
 					if(is_array($v)){
-						$where[$k] = $this->_encFieldRef($v[0],$v[1]);
+						$where[$k] = new TableExpression($v[1],$v[0]);
 					}
 				}
 	
@@ -126,7 +146,8 @@ class From extends Internal\MergePartBase {
 			}
 		}
 	
-		$this->join[$type][$alias] = compact('table','where');
+		$class = '\\Database\\SQL\\Parts\\Join\\'.ucfirst($type).'Join';
+		$this->joins[$alias] = new $class($table.' '.$alias,$where);
 		return $this;
 	}
 	
@@ -164,9 +185,9 @@ class From extends Internal\MergePartBase {
 		if($group === null) return $this->group_by;
 		
 		if($group instanceof GroupBy){
-			$this->group = $group;
+			$this->group_by = $group;
 		}else{
-			$this->group = new GroupBy($group);
+			$this->group_by = new GroupBy($group);
 		}
 		
 		return $this;
@@ -239,11 +260,14 @@ class From extends Internal\MergePartBase {
 		
 		//Joins
 		if($this->joins){
-			$ret .= implode(' ',$this->joins);
+			$ret .= ' '.implode(' ',$this->joins);
 		}
 		
 		//WHERE
 		if($this->where){
+			if(strpos((string)$this->where,'Array')) {
+				die(var_dump($this->joins));
+			}
 			$ret .= ' '.$this->where;
 		}
 		

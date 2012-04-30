@@ -29,7 +29,7 @@ class Number extends \Core\Object {
 		if(is_int($number)){
 			return true;
 		}
-		if((int)$number == $number){
+		if(is_numeric($number) && (int)$number == $number){
 			return true;
 		}
 		return false;

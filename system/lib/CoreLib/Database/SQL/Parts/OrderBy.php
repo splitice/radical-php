@@ -4,7 +4,7 @@ namespace Database\SQL\Parts;
 use Basic\Arr;
 
 class OrderBy extends Internal\ArrayPartBase {
-	function _Add($k,$order_by){
+	function _Set($k,$order_by){
 		if($k === null || \Basic\String\Number::is($k)){
 			if(is_string($order_by)){
 				$this->data[] = $order_by;
@@ -23,7 +23,7 @@ class OrderBy extends Internal\ArrayPartBase {
 							if(count($o) == 2){
 								$this->_Add($o[0], $o[1]);
 							}else{
-								throw new \Excetion('Unknown array format');
+								throw new \Exception('Unknown array format');
 							}
 						}else{
 							//Add(array(expr1,expr2))

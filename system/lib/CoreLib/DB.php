@@ -1,4 +1,6 @@
 <?php
+use Database\SQL\SelectStatement;
+
 use Database\DBAL\Adapter;
 use Database\DBAL;
 use Database\DBAL\Handler;
@@ -239,5 +241,10 @@ class DB extends Adapter\SQLUtils {
 	}
 	static function TransactionCommit(){
 		return static::__callStatic(__FUNCTION__, func_get_args());
+	}
+	
+	/* Sql Builders */
+	static function select($table = null, $fields = '*'){
+		return new SelectStatement($table,$fields);
 	}
 }

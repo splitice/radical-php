@@ -1,6 +1,8 @@
 <?php
 namespace Database\SQL;
 
+use Basic\String\Number;
+
 use Database\SQL\Parts\From;
 
 use Database\SQL\Parts\Where;
@@ -129,7 +131,12 @@ class SelectStatement extends Internal\StatementBase {
 	}
 	
 	function toSQL(){
-		$ret = 'SELECT '.implode(', ',$this->fields).' '.$this->from;
+		$fields = $this->fields;
+		array_walk($fields, function ($value,$key) use(&$fields){
+			if(!Number::is($key))
+				$fields[$key] = ($value.' AS '.$key);
+		});
+		$ret = 'SELECT '.implode(', ',$fields).' '.$this->from;
 		return $ret;
 	}
 }

@@ -1,6 +1,8 @@
 <?php
 namespace Web\Templates;
 
+use Web\Widget;
+
 use Web\PageHandler\IPage;
 
 use Web\PageHandler\SubRequest;
@@ -58,6 +60,10 @@ class Scope {
 	}
 	function sub(IPage $page){
 		return $this->subrequest($page);
+	}
+	
+	function widget($name,$variables = array()){
+		return Widget::Load($name, $variables);
 	}
 	
 	function odd($number,$echo){
