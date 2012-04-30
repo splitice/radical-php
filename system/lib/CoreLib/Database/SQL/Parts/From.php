@@ -156,27 +156,22 @@ class From extends Internal\MergePartBase {
 	
 	function where($where = null){
 		if($where === null){
+			if($this->where === null) $this->where = new Where();
 			return $this->where;
 		}else{
 			if(is_string($where)){
 				$where = array($where);
 			}
 			if(is_array($where)){
-				$where = new \Database\SQL\Parts\Where($where);
+				$where = new Where($where);
 			}
 			$this->where = $where;
 		}
 		return $this;
 	}
-	function where_and($where){
-		if($this->where instanceof Where){
-			if((string)$this->where){
-				$this->where = array($this->where);
-			}else{
-				$this->where = array();
-			}
-		}
-		$this->where[] = $where;
+	function where_and($and){
+		$where = $this->where();
+		$where[] = new WhereAND($and);
 		return $this;
 	}
 	

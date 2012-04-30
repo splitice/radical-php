@@ -1,6 +1,8 @@
 <?php
 namespace Database\SQL\Parts\Internal;
 
+use Basic\String\Number;
+
 use Database\SQL\Parts\Expression\IComparison;
 
 use Database\SQL\Parts\Expression\Comparison;
@@ -15,7 +17,7 @@ abstract class FilterPartBase extends ArrayPartBase {
 	const PART_NAME = '*INVALID*';
 	
 	function _Set($k,$v){
-		if($k === null){			
+		if($k === null || Number::is($k) ){			
 			if($v instanceof IToSQL){
 				//Add(WhereAnd | WhereOr) -> Append
 				//Add(Statement) -> WhereAnd -> Append

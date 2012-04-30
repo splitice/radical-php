@@ -1,6 +1,8 @@
 <?php
 namespace Database\Search\Adapter;
 
+use Database\SQL\Parts\Expression\Comparison;
+
 use Database\SQL\Parts\Expression\In;
 use Database\SQL\Parts\WhereOR;
 use Database\SQL\Parts\Where;
@@ -76,7 +78,8 @@ class MysqlFulltextTable extends MysqlFulltext {
 		if($useWhere){
 			$sql->where_and($where);
 		}else{
-			$in = new In($k,$i);
+			$in = new In($i);
+			$in = new Comparison($k, $in, '');
 			$sql->where_and($in);
 		}
 	}
