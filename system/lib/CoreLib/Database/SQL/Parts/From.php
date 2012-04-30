@@ -252,10 +252,6 @@ class From extends Internal\MergePartBase {
 		if(is_array($this->tables)){
 			$ret .= implode(', ',$this->tables);
 		}
-		if(!implode(', ',$this->tables)){
-			debug_print_backtrace();
-			die(var_dump($this->tables));
-		}
 		
 		//Joins
 		if($this->joins){
@@ -264,9 +260,6 @@ class From extends Internal\MergePartBase {
 		
 		//WHERE
 		if($this->where){
-			if(strpos((string)$this->where,'Array')) {
-				die(var_dump($this->joins));
-			}
 			$ret .= ' '.$this->where;
 		}
 		
