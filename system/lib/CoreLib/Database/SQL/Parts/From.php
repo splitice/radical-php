@@ -67,7 +67,6 @@ class From extends Internal\MergePartBase {
 				return $ta;
 			}
 		}
-		return $table;
 	}
 	
 	function table($table = null,$tablePrefix = null){
