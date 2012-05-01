@@ -1,6 +1,7 @@
 <?php
 namespace Database\SQL\Parts\Expression;
 
+use Database\IToSQL;
 use Database\DBAL\Adapter\Connection;
 use Database\SQL\Parts\Internal;
 

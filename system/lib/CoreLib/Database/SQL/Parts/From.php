@@ -12,11 +12,8 @@ namespace Database\SQL\Parts;
  */
 
 use Database\SQL\Parts\Expression\TableExpression;
-
 use Database\SQL\Parts\Alias\TableAlias;
-
 use Basic\String\Number;
-
 use Database\SQL\Parse\CreateTable;
 use Database\IToSQL;
 use Basic\Arr;
