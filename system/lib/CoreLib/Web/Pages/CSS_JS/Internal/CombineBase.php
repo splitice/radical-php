@@ -38,12 +38,7 @@ abstract class CombineBase extends IndividualBase {
 		return $path->getFiles($expr);
 	}
 	protected function sendHeaders(){
-		parent::sendHeaders();
-		$headers = \Web\PageHandler::top()->headers;
-		//$headers->setCache('public, max-age='.(60*60*24*7));
-		//$headers->setExpires(strtotime('+1 week'));
-		$headers->setContentType(static::MIME_TYPE);
-		
+		parent::sendHeaders($this->getFiles());
 	}
 	function Optimize($code){
 		return $code;

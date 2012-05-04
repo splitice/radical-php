@@ -13,4 +13,7 @@ class ContainerScope extends Scope {
 	function body(){
 		return $this->incl($this->body,$this->container);
 	}
+	function bodyName(){
+		return $this->body;
+	}
 }

@@ -8,7 +8,7 @@ class FormInstance extends FormCommon implements IFormInstance {
 	protected $form;
 	protected $handler;
 	
-	function __construct(){
+	function __construct($action = null, $method = 'POST'){
 		$this->form = new \HTML\Element('form',compact('action','method'),array());
 		
 		$args = func_get_args();

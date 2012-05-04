@@ -5,6 +5,7 @@ class Redirect extends Post {
 	protected $redirectUrl;
 	function __construct($redirectUrl){
 		$this->redirectUrl = $redirectUrl;
+		parent::__construct(false);
 	}
 	function Authenticate(){
 		if(\Net\Url::fromRequest() == $this->redirectUrl){
@@ -13,9 +14,9 @@ class Redirect extends Post {
 		
 		//Redirect
 		$page = new \Web\Pages\Special\Redirect($this->redirectUrl);
-		$page->GET();
+		$page->Execute('GET');
 		
 		//Bye
-		exit;
+		die('Redirecting');
 	}
 }

@@ -11,6 +11,7 @@ class Post extends ModuleBase implements IAuthenticator {
 	
 	function __construct($isAuthenticationPage = true){
 		$this->authenticate = $isAuthenticationPage;
+		parent::__construct();
 	}
 	function Authenticate(){
 		//Return an example form that could be used for login

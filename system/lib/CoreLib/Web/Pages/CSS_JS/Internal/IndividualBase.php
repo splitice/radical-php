@@ -10,9 +10,19 @@ abstract class IndividualBase extends \Web\PageHandler\PageBase {
 	function __construct($data){
 		$this->name = $data['name'];
 	}
-	protected function sendHeaders(){
-		$headers = \Web\PageHandler::top()->headers;
+	protected function sendHeaders($file){
+		if(!is_array($file)){
+			$file = array($file);
+		}
+		
+		$headers = \Web\PageHandler::current()->headers;
 		$headers->Add('Content-Type',static::MIME_TYPE);
+		$headers->setCache(60*60*24);
+		$headers->Add('Pragma','cache');
+		
+		$filemtime = max(array_map('filemtime',$file));
+		//die(var_dump($file));
+		$headers->setLastModified($filemtime);
 	}
 	protected function getPath(){
 		return $this->name;
@@ -24,8 +34,8 @@ abstract class IndividualBase extends \Web\PageHandler\PageBase {
 		return array_pop(glob($expr));
 	}
 	function GET(){
-		$this->sendHeaders();
 		$file = $this->getFile();
+		$this->sendHeaders($file);
 		$ret = file_get_contents($file);
 		
 		echo $ret;

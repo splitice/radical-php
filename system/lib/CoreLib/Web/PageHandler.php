@@ -23,6 +23,10 @@ class PageHandler extends \Core\Object {
 		return call_user_func_array(array(static::$stack,$method),$arguments);
 	}
 	
+	/**
+	 * @param bool $notExistsCreate
+	 * @return \Web\PageHandler\NullPageRequest
+	 */
 	static function current($notExistsCreate = false){
 		$ret = static::$stack->top();
 		if($notExistsCreate && !$ret){
