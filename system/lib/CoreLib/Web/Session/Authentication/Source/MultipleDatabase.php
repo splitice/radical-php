@@ -17,7 +17,7 @@ class MultipleDatabase extends NullSource {
 		return array(static::FIELD_USERNAME=>$username);
 	}
 
-	function Login($username,$password){
+	function Login($username,$inPassword){
 		foreach($this->tables as $table){
 			$class = $table->getClass();
 	
@@ -29,7 +29,7 @@ class MultipleDatabase extends NullSource {
 				$password = $res->getSQLField(static::FIELD_PASSWORD);
 				if($password){
 					if($password instanceof Password){
-						if($password->Compare($password)){
+						if($password->Compare($inPassword)){
 							if($res){
 								\Web\Session::$data['user'] = $res;
 								return true;
