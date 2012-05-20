@@ -1,8 +1,8 @@
 <?php
 namespace Exceptions;
-class FileNotExists extends \Exception {
+class FileNotExists extends FileException {
 	function __construct($file){
-		return parent::__construct($file .' does not exist');
+		parent::__construct($file);
+		$this->message = 'File "'. $file .'" does not exist';
 	}
 }
-?>
