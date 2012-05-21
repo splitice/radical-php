@@ -3,5 +3,5 @@ namespace Net\ExternalInterfaces\ContentAPI\Interfaces;
 
 interface IFromURL {
 	static function RecogniseURL($url);
-	static function FromURL($url);
+	static function fromURL($url);
 }
