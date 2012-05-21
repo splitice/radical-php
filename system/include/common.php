@@ -2,8 +2,10 @@
 define ( 'DS', DIRECTORY_SEPARATOR );
 if($_SERVER['DOCUMENT_ROOT']){
 	$BASEPATH = $_SERVER['DOCUMENT_ROOT'] . DS;
-}else{
-	$BASEPATH = $_SERVER['PWD'] . DS;
+}elseif(php_sapi_name() == 'cli' && isset($argv)){
+	$BASEPATH = dirname(dirname(dirname($argv[0]))) . DS;
+}else{	
+	$BASEPATH = realpath(__DIR__ . DS . '..') . DS;
 }
 
 //Check PHP Version
