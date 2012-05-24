@@ -1,8 +1,8 @@
 <?php
-
 namespace CLI\Threading\Utilities\Memory;
+use CLI\Threading\Utilities\Native;
 
-class PersistantMemory extends SHMPersistant {
+class PersistantMemory extends Native\SharedMemory {
 	const SHM_VARLIST = 0;
 	const SHM_DATA = 1;
 	protected $nameToKey = array ();

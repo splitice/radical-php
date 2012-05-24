@@ -15,7 +15,7 @@ abstract class ActiveObject {
 	}
 	abstract function Work();
 	static function Start() {
-		$rc = new ReflectionClass ( get_called_class () );
+		$rc = new \ReflectionClass ( get_called_class () );
 		$object = $rc->newInstanceArgs ( func_get_args () );
 		return $object->Run ();
 	}

@@ -1,6 +1,7 @@
 <?php
-
 namespace CLI\Threading\Utilities\Locking;
+
+use CLI\Threading\Utilities\Concurrency\Mutex;
 
 class ThreadLock {
 	private $mutex;

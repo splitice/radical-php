@@ -1,6 +1,7 @@
 <?php
-
 namespace CLI\Threading\Utilities\Socket;
+
+use CLI\Threading\Internal\ThreadReference;
 
 class BiDirectionalPair {
 	private $sockets;

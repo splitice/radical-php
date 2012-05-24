@@ -1,6 +1,9 @@
 <?php
 namespace CLI\Threading;
 
+use CLI\Threading\Utilities\Concurrency\Channel;
+use CLI\Threading\Utilities\Socket;
+
 // TODO: No, not ready yet.
 class ThreadPool {
 	private $number;
@@ -10,8 +13,8 @@ class ThreadPool {
 	private $channel;
 	function __construct($number) {
 		$this->threads = $number;
-		$this->communication = new ReadWriteSocketPair ();
-		$this->channel = new ThreadChannel ();
+		$this->communication = new Socket\ReadWritePair ();
+		$this->channel = new Channel ();
 	}
 	function Add(ActiveObject $thread) {
 		while ( count ( $this->running ) >= $this->number ) {

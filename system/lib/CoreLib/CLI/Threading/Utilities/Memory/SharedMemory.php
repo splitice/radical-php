@@ -1,6 +1,7 @@
 <?php
-
 namespace CLI\Threading\Utilities\Memory;
+
+use CLI\Threading\Utilities\Concurrency\Mutex;
 
 class SharedMemory extends PersistantMemory {
 	const SHM_REFCOUNT = 1;

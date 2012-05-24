@@ -10,7 +10,7 @@ class QueuePulse {
 	function __construct() {
 		$this->queue = msg_get_queue ( static::$count ++ );
 		if (! $this->queue) {
-			throw new Exception ( "Couldnt create message queue" );
+			throw new \Exception ( "Couldnt create message queue" );
 		}
 	}
 	function Pulse() {

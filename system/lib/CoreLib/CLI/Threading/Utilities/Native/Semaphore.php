@@ -2,6 +2,9 @@
 
 namespace CLI\Threading\Utilities\Native;
 
+use CLI\Threading\Internal\SemaphoreHelpers;
+use CLI\Threading\Internal\ThreadReference;
+
 class Semaphore extends SemaphoreHelpers {
 	private $sem;
 	function __construct($key = null, $max = 10) {

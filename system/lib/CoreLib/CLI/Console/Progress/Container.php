@@ -1,8 +1,7 @@
 <?php
 namespace CLI\Console\Progress;
 
-use CLI\Thread;
-
+use CLI\Threading\Thread;
 use CLI\Console\Details;
 
 class Container extends \Core\Object {
@@ -65,6 +64,7 @@ class Container extends \Core\Object {
 				}
 				$code .= ');';
 				
+				//TODO: Update
 				$msg = new \CLI\Threading\Messages\EvalMessage($code);
 				$msg->Send($parent);
 				

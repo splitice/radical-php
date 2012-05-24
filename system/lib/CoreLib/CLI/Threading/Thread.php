@@ -57,6 +57,18 @@ class Thread {
 		}
 		return false;
 	}
+	function setName(){
+		$this->name = $name;
+		if(function_exists('setproctitle')){
+			global $_SCRIPT_NAME;
+			if(!isset($_SCRIPT_NAME)){
+				return false;
+			}
+			setproctitle($_SCRIPT_NAME . ' ['.$name.']');
+			return true;
+		}
+		return false;
+	}
 	static function current() {
 		self::_init ();
 		return self::$current;

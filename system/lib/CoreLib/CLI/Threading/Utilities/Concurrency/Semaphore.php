@@ -2,6 +2,10 @@
 
 namespace CLI\Threading\Utilities\Concurrency;
 
+use CLI\Threading\Internal\SemaphoreHelpers;
+use CLI\Threading\Utilities\Atomic\AtomicVariable;
+use CLI\Threading\Utilities\Pulse;
+
 class Semaphore extends SemaphoreHelpers {
 	const BUISY_WAIT_INT = 1;
 	private $tickets;
@@ -12,7 +16,7 @@ class Semaphore extends SemaphoreHelpers {
 		$this->tickets = new AtomicVariable ( $id, $tickets );
 		
 		if ($pulseAdapter === null) {
-			$pulseAdapter = new ThreadPulse ();
+			$pulseAdapter = new Pulse\QueuePulse ();
 		}
 		$this->message = $pulseAdapter;
 		
@@ -23,12 +27,7 @@ class Semaphore extends SemaphoreHelpers {
 	}
 	function Acquire($tickets = 1) {
 		$cont = true;
-		/*
-		 * Buisy Wait while($cont){ $this->tickets->update(function($value)
-		 * use($tickets,&$cont){ if($value >= $tickets){ $value -= $tickets;
-		 * $cont = false; } return $value; }); if($cont)
-		 * Sleep(self::BUISY_WAIT_INT); }
-		 */
+
 		while ( true ) {
 			$this->message->Wait ();
 			$this->tickets->update ( function ($value) use($tickets, &$cont) {

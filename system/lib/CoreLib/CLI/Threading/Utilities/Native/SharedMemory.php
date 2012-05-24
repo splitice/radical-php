@@ -1,5 +1,4 @@
 <?php
-
 namespace CLI\Threading\Utilities\Native;
 
 abstract class SharedMemory {
@@ -14,7 +13,7 @@ abstract class SharedMemory {
 		$this->id = shm_attach ( $this->key );
 		
 		if (! $this->id)
-			throw new Exception ( 'Unable to create shared memory segment' );
+			throw new \Exception ( 'Unable to create shared memory segment' );
 	}
 	function __sleep() {
 		shm_detach ( $this->id );

@@ -1,6 +1,9 @@
 <?php
 namespace CLI\Threading\Internal;
 
+use CLI\Threading\Thread;
+use CLI\Threading\Utilities\Atomic\AtomicClass;
+
 class ThreadReference extends AtomicClass {
 	protected $refs;
 	function __construct($refs = 1) {
