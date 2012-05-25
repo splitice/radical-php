@@ -147,7 +147,7 @@ class pChart {
 	 * Text format related vars
 	 */
 	var $FontName = NULL;
-	var $FontSize = NULL;
+	var $FontSize = 10;
 	var $DateFormat = "d/m/Y";
 	
 	/*
@@ -164,7 +164,7 @@ class pChart {
 	/*
 	 * Set antialias quality : 0 is maximum, 100 minimum
 	 */
-	var $AntialiasQuality = 0;
+	var $AntialiasQuality = 30;
 	
 	/*
 	 * Shadow settings
@@ -3606,23 +3606,28 @@ class pChart {
 			$this->drawDottedLine ( $X1, $Y1, $X2, $Y2, $this->LineDotSize, $R, $G, $B, $GraphFunction );
 			return (0);
 		}
+		
+		//Validity check
 		if ($R < 0) {
 			$R = 0;
-		}
-		if ($R > 255) {
+		}else if ($R > 255) {
 			$R = 255;
 		}
 		if ($G < 0) {
 			$G = 0;
-		}
-		if ($G > 255) {
+		}else if ($G > 255) {
 			$G = 255;
 		}
 		if ($B < 0) {
 			$B = 0;
-		}
-		if ($B > 255) {
+		}else if ($B > 255) {
 			$B = 255;
+		}
+		
+		if($X1 == $X2 || $Y1 == $Y2){
+			$color = $this->AllocateColor($this->Picture, $R, $G, $B);
+			imageline($this->Picture, $X1, $Y1, $X2, $Y2, $color);
+			return;
 		}
 		
 		$Distance = sqrt ( ($X2 - $X1) * ($X2 - $X1) + ($Y2 - $Y1) * ($Y2 - $Y1) );
@@ -3750,39 +3755,43 @@ class pChart {
 	function drawAlphaPixel($X, $Y, $Alpha, $R, $G, $B) {
 		if ($R < 0) {
 			$R = 0;
-		}
-		if ($R > 255) {
+		}else if ($R > 255) {
 			$R = 255;
 		}
 		if ($G < 0) {
 			$G = 0;
-		}
-		if ($G > 255) {
+		}else if ($G > 255) {
 			$G = 255;
 		}
 		if ($B < 0) {
 			$B = 0;
-		}
-		if ($B > 255) {
+		}else if ($B > 255) {
 			$B = 255;
-		}
+		}	
+		
 		
 		if ($X < 0 || $Y < 0 || $X >= $this->XSize || $Y >= $this->YSize)
 			return (- 1);
 		
-		$RGB2 = imagecolorat ( $this->Picture, $X, $Y );
-		$R2 = ($RGB2 >> 16) & 0xFF;
-		$G2 = ($RGB2 >> 8) & 0xFF;
-		$B2 = $RGB2 & 0xFF;
-		
 		$iAlpha = (100 - $Alpha) / 100;
-		$Alpha = $Alpha / 100;
 		
-		$Ra = floor ( $R * $Alpha + $R2 * $iAlpha );
-		$Ga = floor ( $G * $Alpha + $G2 * $iAlpha );
-		$Ba = floor ( $B * $Alpha + $B2 * $iAlpha );
+		if($iAlpha){
+			$RGB2 = imagecolorat ( $this->Picture, $X, $Y );
+			$R2 = ($RGB2 >> 16) & 0xFF;
+			$G2 = ($RGB2 >> 8) & 0xFF;
+			$B2 = $RGB2 & 0xFF;
+			
+			$Alpha = $Alpha / 100;
+			
+			$Ra = floor ( $R * $Alpha + $R2 * $iAlpha );
+			$Ga = floor ( $G * $Alpha + $G2 * $iAlpha );
+			$Ba = floor ( $B * $Alpha + $B2 * $iAlpha );
+			
+			$C_Aliased = $this->AllocateColor ( $this->Picture, $Ra, $Ga, $Ba );
+		}else{
+			$C_Aliased = $this->AllocateColor ( $this->Picture, $R, $G, $B );
+		}
 		
-		$C_Aliased = $this->AllocateColor ( $this->Picture, $Ra, $Ga, $Ba );
 		imagesetpixel ( $this->Picture, $X, $Y, $C_Aliased );
 	}
 	
@@ -3795,20 +3804,17 @@ class pChart {
 		$B = $B + $Factor;
 		if ($R < 0) {
 			$R = 0;
-		}
-		if ($R > 255) {
+		}else if ($R > 255) {
 			$R = 255;
 		}
 		if ($G < 0) {
 			$G = 0;
-		}
-		if ($G > 255) {
+		}else if ($G > 255) {
 			$G = 255;
 		}
 		if ($B < 0) {
 			$B = 0;
-		}
-		if ($B > 255) {
+		}else if ($B > 255) {
 			$B = 255;
 		}
 		
@@ -4180,7 +4186,11 @@ class pChart {
 	 * Convert TS to a date format string
 	 */
 	function ToDate($Value) {
-		return (date ( $this->DateFormat, $Value ));
+		$f = $this->DateFormat;
+		if(is_callable($f)){
+			return $f($Value);
+		}
+		return (date ( $f, $Value ));
 	}
 	
 	/*

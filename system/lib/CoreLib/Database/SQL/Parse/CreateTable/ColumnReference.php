@@ -14,11 +14,8 @@ class ColumnReference{
 	}
 	
 	function getTableClass(){
-		foreach(\ClassLoader::getNSExpression(\ClassLoader::getProjectSpace('DB\\*')) as $class){
-			if($class::TABLE == $this->table){
-				return $class;
-			}
-		}
+		$i = $this->getTableReference();
+		return $i->getClass();
 	}
 	
 	function getTableReference(){
