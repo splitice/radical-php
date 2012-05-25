@@ -2,18 +2,18 @@
 namespace Database\Model;
 
 use Exceptions\ValidationException;
-
 use Database\DynamicTypes\IDynamicType;
-
 use Database\IToSQL;
 use Database\ORM;
 use Database\DBAL;
 use Database\SQL;
 
-abstract class Table extends \Core\Object implements ITable, \JsonSerializable {	
+abstract class Table implements ITable, \JsonSerializable {	
 	static function _idString($id){
-		if(is_array($id) || is_object($id)) {
+		if(is_object($id)){
 			$id = (array)$id;
+		}
+		if(is_array($id)) {
 			ksort($id);
 			$id = implode('|',$id);
 		}
@@ -26,10 +26,11 @@ abstract class Table extends \Core\Object implements ITable, \JsonSerializable {
 	protected $_id;
 	function getId(){
 		//Check if already done
-		if($this->_id){
+		if($this->_id !== null){
 			return $this->_id;
 		}
-	
+		
+		//Build ID Array
 		$id = array();
 		foreach($this->orm->id as $key){
 			//Get object mapped name
@@ -48,7 +49,7 @@ abstract class Table extends \Core\Object implements ITable, \JsonSerializable {
 		}
 		
 		//Make string if there is only one
-		if(count($id) == 1){
+		if(count($id) === 1){
 			$id = $id[$key];
 		}
 	
@@ -145,7 +146,7 @@ abstract class Table extends \Core\Object implements ITable, \JsonSerializable {
 	protected $_store = array();
 	function __construct($in = array(),$prefix = false){
 		//Setup object with table specific data
-		$table = new TableReferenceInstance($this);
+		$table = TableReference::getByTableClass($this);
 		$this->orm = $table->getORM();
 		
 		//Load data into table
@@ -224,7 +225,7 @@ abstract class Table extends \Core\Object implements ITable, \JsonSerializable {
 	public function __wakeup()
 	{
 		//Recreate ORM
-		$table = new TableReferenceInstance($this);
+		$table = TableReference::getByTableClass($this);
 		$this->orm = $table->getORM();
 
 		//Re-get data
@@ -326,7 +327,7 @@ abstract class Table extends \Core\Object implements ITable, \JsonSerializable {
 		return new SQL\SelectStatement(static::TABLE);
 	}
 	private static function _fromFields(array $fields){
-		$orm = ORM\Manager::getModel(new TableReferenceInstance(get_called_class()));
+		$orm = ORM\Manager::getModel(TableReference::getByTableClass(get_called_class()));
 
 		//prefix
 		$prefixedFields = array();
@@ -362,7 +363,7 @@ abstract class Table extends \Core\Object implements ITable, \JsonSerializable {
 			return $ret;
 		}
 		
-		$orm = ORM\Manager::getModel(new TableReferenceInstance(get_called_class()));
+		$orm = ORM\Manager::getModel(TableReference::getByTableClass(get_called_class()));
 		
 		//Base SQL
 		$sql = static::_select();

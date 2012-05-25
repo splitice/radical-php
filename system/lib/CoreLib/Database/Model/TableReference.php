@@ -22,9 +22,27 @@ class TableReference extends \Core\Object {
 			return static::_create(self::$_name[$tableName]);
 		}
 	}
+	private static $ins = array();
 	protected static function _create($class){
+		//Class Reference ID
+		if($class instanceof Table){
+			$class = get_class($class);
+		}
+		
+		//Check instance cache
+		if(isset(static::$ins[$class])){
+			return static::$ins[$class];
+		}
+		
+		//Create table instance
 		$c = get_called_class().'Instance';
-		return new $c($class);
+		$c = new $c($class);
+		
+		//We have a in memory cache
+		static::$ins[$class] = $c;
+		
+		//Return instance
+		return $c;
 	}
 	static function getAll(){
 		$ret = array();

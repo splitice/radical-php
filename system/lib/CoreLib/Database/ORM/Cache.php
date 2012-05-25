@@ -7,7 +7,7 @@ class Cache {
 	static $data = array();
 	
 	static function Get($table){
-		if($table instanceof TableReferenceInstance){
+		if(is_object($table) && $table instanceof TableReferenceInstance){
 			$table = $table->getClass();
 		}
 		if(isset(self::$data[$table])){

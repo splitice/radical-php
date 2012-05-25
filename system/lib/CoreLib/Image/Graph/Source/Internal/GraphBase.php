@@ -8,7 +8,7 @@ abstract class GraphBase implements IGraphSource {
 	public $schema;
 	
 	function __construct($format = 'number',$title = null){
-		$this->schema = new \Image\Graph\Schema\Graph($data);
+		$this->schema = new \Image\Graph\Schema\Graph();
 		$this->schema->title = $title;
 		$this->schema->axis['X']->format = $format;
 	}
