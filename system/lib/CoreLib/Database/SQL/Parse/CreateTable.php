@@ -48,7 +48,7 @@ class CreateTable extends CollectionObject {
 		$table = new \Database\SQL\ShowCreateTable($table);
 		try {
 			$res = \DB::Q($table->toSQL());
-			$data = \DB::Fetch($res,DBAL\Fetch::NUM);
+			$data = $res->Fetch(DBAL\Fetch::NUM);
 		}catch(\Exception $ex){
 			throw new \Exception('Couldnt get Create Table (permissions?) for '.$table,null,$ex);
 		}
