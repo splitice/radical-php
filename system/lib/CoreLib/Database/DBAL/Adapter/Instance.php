@@ -158,7 +158,7 @@ class Instance extends Connection {
 	function TableExists($table){
 		$sql = 'show tables like '.\DB::E($table);
 		$res = \DB::Q($sql);
-		if(\DB::Fetch($res)) return true;
+		if($res->Fetch()) return true;
 		return false;
 	}
 	
