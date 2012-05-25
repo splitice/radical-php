@@ -54,7 +54,8 @@ class AAAA_Debug implements IPageRecognise {
 					$r = $http->Execute();
 					
 					//Execute WebGrind
-					return new \Web\Pages\Debug\Profile(basename((string)$r));
+					$filename = /*'cachegrind.out.5503';//*/basename((string)$r);
+					return new \Web\Pages\Debug\Profile($filename);
 					break;
 					
 				case 'sql':

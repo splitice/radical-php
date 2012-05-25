@@ -142,9 +142,9 @@ class Profile extends PageHandler\HTMLPageBase {
 				} else {
 					$message = 'No file to view';
 				}
-				return new WebGrind\Template('fileviewer',$this->filename);
+				return new WebGrind\Handler('fileviewer',$this->filename);
 			default:
-				return new WebGrind\Template('index',$this->filename);
+				return new WebGrind\Handler('index',$this->filename);
 		}
 	}
 }

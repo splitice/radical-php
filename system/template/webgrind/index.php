@@ -1,5 +1,5 @@
 <?php 
-	include(__DIR__.'/header.phtml');
+	$_->incl('header','webgrind');
 ?>
 	<title>webgrind</title>
 	<script type="text/javascript" charset="utf-8">
@@ -41,13 +41,13 @@
 					
 					var breakdown_sum = data.breakdown['internal']+data.breakdown['user']+data.breakdown['class']+data.breakdown['include'];
                     $("#breakdown").html(
-                        '<img src="<?=$this->path('img/gradient_left.png')?>" height="20" width="10">'+
-                        '<img src="<?=$this->path('img/gradient_blue.png')?>" height="20" width="'+Math.floor(data.breakdown['internal']/breakdown_sum*300)+'">'+
-                        '<img src="<?=$this->path('img/gradient_grey.png')?>" height="20" width="'+Math.floor(data.breakdown['include']/breakdown_sum*300)+'">'+
-                        '<img src="<?=$this->path('img/gradient_green.png')?>" height="20" width="'+Math.floor(data.breakdown['class']/breakdown_sum*300)+'">'+
-                        '<img src="<?=$this->path('img/gradient_orange.png')?>" height="20" width="'+Math.floor(data.breakdown['user']/breakdown_sum*300)+'">'+
-                        '<img src="<?=$this->path('img/gradient_right.png')?>" height="20" width="10">'+
-                        '<div title="internal functions, include/require, class methods and procedural functions." style="background:url(img/gradient_markers.png);position:relative;top:-20px;left:10px;width:301px;height:19px"></div>'
+                        '<img src="<?=$_->u('/system/images/webgrind/gradient_left.png')?>" height="20" width="10">'+
+                        '<img src="<?=$_->u('/system/images/webgrind/gradient_blue.png')?>" height="20" width="'+Math.floor(data.breakdown['internal']/breakdown_sum*300)+'">'+
+                        '<img src="<?=$_->u('/system/images/webgrind/gradient_grey.png')?>" height="20" width="'+Math.floor(data.breakdown['include']/breakdown_sum*300)+'">'+
+                        '<img src="<?=$_->u('/system/images/webgrind/gradient_green.png')?>" height="20" width="'+Math.floor(data.breakdown['class']/breakdown_sum*300)+'">'+
+                        '<img src="<?=$_->u('/system/images/webgrind/gradient_orange.png')?>" height="20" width="'+Math.floor(data.breakdown['user']/breakdown_sum*300)+'">'+
+                        '<img src="<?=$_->u('/system/images/webgrind/gradient_right.png')?>" height="20" width="10">'+
+                        '<div title="internal functions, include/require, class methods and procedural functions." style="background:url(/system/images/webgrind/gradient_markers.png);position:relative;top:-20px;left:10px;width:301px;height:19px"></div>'
                     );
 					
 					$("#hello_message").hide();
@@ -113,11 +113,11 @@
 		function callTableRow(nr,data){
 			return '<tr> \
 						<td>'
-						+($("#callinfo_area_"+data.functionNr).length ? '<img src="img/right.gif">&nbsp;&nbsp;<a href="javascript:openCallInfo('+data.functionNr+')">'+data.callerFunctionName+'</a>' : '<img src="img/blank.gif">&nbsp;&nbsp;'+data.callerFunctionName)
+						+($("#callinfo_area_"+data.functionNr).length ? '<img src="/system/images/webgrind/right.gif">&nbsp;&nbsp;<a href="javascript:openCallInfo('+data.functionNr+')">'+data.callerFunctionName+'</a>' : '<img src="/system/images/webgrind/blank.gif">&nbsp;&nbsp;'+data.callerFunctionName)
 						+ ' @ '+data.line+'</td> \
 						<td class="nr">'+data.callCount+'</td> \
 						<td class="nr">'+data.summedCallCost+'</td> \
-						<td><a title="Open file and show line" href="'+sprintf(fileUrlFormat,data.file,data.line)+'" target="_blank"><img src="img/file_line.png" alt="O"></a></td> \
+						<td><a title="Open file and show line" href="'+sprintf(fileUrlFormat,data.file,data.line)+'" target="_blank"><img src="/system/images/webgrind/file_line.png" alt="O"></a></td> \
 					</tr>';
 			
 		}
@@ -130,9 +130,9 @@
 			$("#callinfo_area_"+functionNr).toggle();
 			current = $("#fold_marker_"+functionNr).get(0).src;
 			if(current.substr(current.lastIndexOf('/')+1) == 'right.gif')
-				$("#fold_marker_"+functionNr).get(0).src = 'img/down.gif';
+				$("#fold_marker_"+functionNr).get(0).src = '/system/images/webgrind/down.gif';
 			else
-				$("#fold_marker_"+functionNr).get(0).src = 'img/right.gif';
+				$("#fold_marker_"+functionNr).get(0).src = '/system/images/webgrind/right.gif';
 		}
 		
 		function openCallInfo(functionNr) {
@@ -144,14 +144,14 @@
 		}
 		
 		function functionTableRow(data){
-			openLink = (data.file=='php:internal')?'':'<a title="Open file" href="'+sprintf(fileUrlFormat,data.file,-1)+'" target="_blank"><img src="img/file.png" alt="O"></a>';
+			openLink = (data.file=='php:internal')?'':'<a title="Open file" href="'+sprintf(fileUrlFormat,data.file,-1)+'" target="_blank"><img src="/system/images/webgrind/file.png" alt="O"></a>';
 			return '<tr> \
 			            <td> \
-			                <img src="img/call_'+data.kind+'.png" title="'+data.humanKind+'"> \
+			                <img src="/system/images/webgrind/call_'+data.kind+'.png" title="'+data.humanKind+'"> \
 			            </td> \
 						<td> \
 							<a href="javascript:toggleCallInfo('+data.nr+')"> \
-								<img id="fold_marker_'+data.nr+'" src="img/right.gif">&nbsp;&nbsp;'+data.functionName+' \
+								<img id="fold_marker_'+data.nr+'" src="/system/images/webgrind/right.gif">&nbsp;&nbsp;'+data.functionName+' \
 							</a> \
 							<div class="callinfo_area" id="callinfo_area_'+data.nr+'"></div> \
 						</td> \
@@ -220,7 +220,7 @@
             	</div>
             	<div style="float:right;">
             		<label style="margin:0 5px">of</label>
-            		<input id="dataFile" name="dataFile" style="width:200px" value="<?=$this->filename?>" disabled="disabled">
+            		<input id="dataFile" name="dataFile" style="width:200px" value="<?=$_->vars['filename']?>" disabled="disabled">
             	</div>
             	<div style="float:right">
             		<label style="margin:0 5px">Show</label>

@@ -35,7 +35,9 @@ class ClassLoader extends Autoloader {
 			}
 		}
 	
-		return array_keys($ret);
+		$ret = array_keys($ret);
+		sort($ret);
+		return $ret;
 	}
 	
 	static function getAllClass(){

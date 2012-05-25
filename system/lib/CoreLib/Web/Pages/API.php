@@ -54,7 +54,7 @@ class API extends PageBase {
 					echo ');';
 					$headers->Add('Content-Type','text/javascript');
 				}else{
-					$headers->Add('Content-Type','text/json');
+					$headers->Add('Content-Type','application/json');
 				}
 				break;
 				
