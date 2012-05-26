@@ -22,6 +22,7 @@ class TableCache {
 		}else{
 			throw new \Exception('Couldnt add the object to TableCache, object is an instance of '.get_class($object));
 		}
+		return $object;
 	}
 	static function Get($key){
 		self::Init();

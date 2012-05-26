@@ -138,7 +138,7 @@ class pChart {
 	/*
 	 * Set antialias quality : 0 is maximum, 100 minimum
 	 */
-	var $AntialiasQuality = 30;
+	var $AntialiasQuality = 0;
 	
 	/*
 	 * Shadow settings
@@ -3488,26 +3488,32 @@ class pChart {
 		}
 	}
 	
+	private static $alphaCache = array();
 	/*
 	 * Draw an alpha pixel
 	 */
 	function drawAlphaPixel($X, $Y, $Alpha, $R, $G, $B) {
 		if ($X < 0 || $Y < 0 || $X >= $this->XSize || $Y >= $this->YSize)
-			return (- 1);
+			return;
 		
-		if ($Alpha != 100) {
-			self::validateRGB ( $R, $G, $B ); // AllocateColor will do a check anyway
-			
+		if ($Alpha != 100) {			
 			$RGB2 = imagecolorat ( $this->Picture, $X, $Y );
 			
-			$Alpha = $Alpha / 100;
-			$iAlpha = 1 - $Alpha;
-			
-			$Ra = ( int ) ($R * $Alpha + (($RGB2 >> 16) & 0xFF) * $iAlpha);
-			$Ga = ( int ) ($G * $Alpha + (($RGB2 >> 8) & 0xFF) * $iAlpha);
-			$Ba = ( int ) ($B * $Alpha + ($RGB2 & 0xFF) * $iAlpha);
-			
-			$C_Aliased = self::AllocateColor ( $this->Picture, $Ra, $Ga, $Ba );
+			$k = $RGB2 . pack('CCCC',$R,$G,$B,$Alpha);
+			if(isset(self::$alphaCache[$k])){
+				$C_Aliased = self::$alphaCache[$k];
+			}else{
+				$Alpha = $Alpha / 100;
+				$iAlpha = 1 - $Alpha;
+				
+				self::validateRGB ( $R, $G, $B ); // AllocateColor will do a check anyway
+				
+				$R = ( int ) ($R * $Alpha + (($RGB2 >> 16) & 0xFF) * $iAlpha);
+				$G = ( int ) ($G * $Alpha + (($RGB2 >> 8) & 0xFF) * $iAlpha);
+				$B = ( int ) ($B * $Alpha + ($RGB2 & 0xFF) * $iAlpha);
+				
+				self::$alphaCache[$k] = $C_Aliased = self::AllocateColor ( $this->Picture, $R, $G, $B );
+			}
 		} else {
 			$C_Aliased = self::AllocateColor ( $this->Picture, $R, $G, $B );
 		}
@@ -3606,7 +3612,6 @@ class pChart {
 			}
 		}
 		
-		$Plot = "";
 		$Xi = ( int ) $X;
 		$Yi = ( int ) $Y;
 		
@@ -3617,24 +3622,27 @@ class pChart {
 			} else
 				$this->drawAlphaPixel ( $X, $Y, $Alpha, $R, $G, $B );
 		} else {
-			$Alpha1 = (((1 - ($X - ( int ) ($X))) * (1 - ($Y - ( int ) ($Y))) * 100) / 100) * $Alpha;
-			if ($Alpha1 > $this->AntialiasQuality) {
-				$this->drawAlphaPixel ( $Xi, $Yi, $Alpha1, $R, $G, $B );
+			$xD = $X - $Xi;
+			$yD = $Y - $Yi;
+			
+			$pixel_alpha = (1 - $xD) * (1 - $yD) * $Alpha;
+			if ($pixel_alpha > $this->AntialiasQuality) {
+				$this->drawAlphaPixel ( $Xi, $Yi, $pixel_alpha, $R, $G, $B );
 			}
 			
-			$Alpha2 = ((($X - ( int ) ($X)) * (1 - ($Y - ( int ) ($Y))) * 100) / 100) * $Alpha;
-			if ($Alpha2 > $this->AntialiasQuality) {
-				$this->drawAlphaPixel ( $Xi + 1, $Yi, $Alpha2, $R, $G, $B );
+			$pixel_alpha = $xD * (1 - $yD) * $Alpha;
+			if ($pixel_alpha > $this->AntialiasQuality) {
+				$this->drawAlphaPixel ( $Xi + 1, $Yi, $pixel_alpha, $R, $G, $B );
 			}
 			
-			$Alpha3 = (((1 - ($X - ( int ) ($X))) * ($Y - ( int ) ($Y)) * 100) / 100) * $Alpha;
-			if ($Alpha3 > $this->AntialiasQuality) {
-				$this->drawAlphaPixel ( $Xi, $Yi + 1, $Alpha3, $R, $G, $B );
+			$pixel_alpha = (1 - $Xi) * $yD * $Alpha;
+			if ($pixel_alpha > $this->AntialiasQuality) {
+				$this->drawAlphaPixel ( $Xi, $Yi + 1, $pixel_alpha, $R, $G, $B );
 			}
 			
-			$Alpha4 = ((($X - ( int ) ($X)) * ($Y - ( int ) ($Y)) * 100) / 100) * $Alpha;
-			if ($Alpha4 > $this->AntialiasQuality) {
-				$this->drawAlphaPixel ( $Xi + 1, $Yi + 1, $Alpha4, $R, $G, $B );
+			$pixel_alpha = $xD * $yD * $Alpha;
+			if ($pixel_alpha > $this->AntialiasQuality) {
+				$this->drawAlphaPixel ( $Xi + 1, $Yi + 1, $pixel_alpha, $R, $G, $B );
 			}
 		}
 	}

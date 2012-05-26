@@ -43,14 +43,14 @@ class TableSet extends \Basic\ArrayLib\Object\IncompleteObject {
 		$res = \DB::Query($this->sql);
 		
 		//Table'ify
-		$r = $res->FetchCallback(array($this->tableClass,'fromSQL'));
-			
-		//Set already existing objects to stored references, if they exist, else store them as Id'ed
-		foreach($r as $k=>$v){
-			TableCache::Add($v);
-		}
-			
-		return $r;
+		$tableClass = $this->tableClass;
+		return $res->FetchCallback(function($obj) use($tableClass){
+			return TableCache::Add($tableClass::fromSQL($obj));
+		});
+	}
+	
+	public function count(){
+		return $this->getCount();
 	}
 	
 	private $count;
@@ -59,7 +59,7 @@ class TableSet extends \Basic\ArrayLib\Object\IncompleteObject {
 			return $this->count;
 		}
 		if($this->data){
-			return count($this->data);
+			return ($this->count = count($this->data));
 		}
 		
 		$this->count = $this->sql->getCount();

@@ -30,17 +30,16 @@ abstract class Table implements ITable, \JsonSerializable {
 			return $this->_id;
 		}
 		
+		$orm = $this->orm;
+		
 		//Build ID Array
 		$id = array();
-		foreach($this->orm->id as $key){
-			//Get object mapped name
-			$mapped = $this->orm->mappings[$key];
-			
-			//Get value of field
-			$value = $this->$mapped;
+		foreach($orm->id as $key){
+			//Use the object mapped name to get the field value
+			$value = $this->{$orm->mappings[$key]};
 			
 			//if is referenced link then resolve to field value
-			if(is_object($value) && $this->orm->relations[$key]){
+			if(is_object($value) && $orm->relations[$key]){
 				$value = $value->getSQLField($key);
 			}
 			
@@ -262,6 +261,9 @@ abstract class Table implements ITable, \JsonSerializable {
 					$class = $relations[$dbName]->getTableClass();
 					if(isset($a[0]) && $a[0] == 'id'){
 						$ret = &$this->$actionPart;
+						if(is_object($ret)){
+							$ret = $this->getId();
+						}
 					}else{
 						$this->$actionPart = $class::fromId($this->$actionPart);
 					}
@@ -272,9 +274,7 @@ abstract class Table implements ITable, \JsonSerializable {
 					$ret = &$this->$actionPart;
 				}
 				return ($this->_methodCache[$k] = $ret);
-			}/*elseif(isset($this->orm->depends[$fullClassName])){
-				return ($this->_methodCache[$k] = $fullClassName::getAll());
-			}*/elseif($actionPart{strlen($actionPart)-1} == 's'){//Get related objects (foward)
+			}elseif($actionPart{strlen($actionPart)-1} == 's'){//Get related objects (foward)
 				//Remove the pluralising s from the end
 				$className = substr($className,0,-1);
 				
