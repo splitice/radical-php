@@ -30,6 +30,8 @@ class pChart {
 	const ALIGN_BOTTOM_CENTER = 8;
 	const ALIGN_BOTTOM_RIGHT = 9;
 	
+	const PI = 3.1418;
+	
 	/*
 	 * Palettes definition
 	 */
@@ -2336,10 +2338,10 @@ class pChart {
 				
 				for($i = 0; $i <= $Points; $i ++) {
 					$Angle = - 90 + $i * 360 / $Points;
-					$X1 = cos ( $Angle * 3.1418 / 180 ) * $TRadius + $XCenter;
-					$Y1 = sin ( $Angle * 3.1418 / 180 ) * $TRadius + $YCenter;
-					$X2 = cos ( $Angle * 3.1418 / 180 ) * ($TRadius + $RadiusScale) + $XCenter;
-					$Y2 = sin ( $Angle * 3.1418 / 180 ) * ($TRadius + $RadiusScale) + $YCenter;
+					$X1 = cos ( $Angle * self::PI / 180 ) * $TRadius + $XCenter;
+					$Y1 = sin ( $Angle * self::PI / 180 ) * $TRadius + $YCenter;
+					$X2 = cos ( $Angle * self::PI / 180 ) * ($TRadius + $RadiusScale) + $XCenter;
+					$Y2 = sin ( $Angle * self::PI / 180 ) * ($TRadius + $RadiusScale) + $YCenter;
 					
 					if ($t % 2 == 1 && $LastX1 != - 1) {
 						$Plots = "";
@@ -2373,8 +2375,8 @@ class pChart {
 			
 			for($i = 0; $i <= $Points; $i ++) {
 				$Angle = - 90 + $i * 360 / $Points;
-				$X = cos ( $Angle * 3.1418 / 180 ) * $TRadius + $XCenter;
-				$Y = sin ( $Angle * 3.1418 / 180 ) * $TRadius + $YCenter;
+				$X = cos ( $Angle * self::PI / 180 ) * $TRadius + $XCenter;
+				$Y = sin ( $Angle * self::PI / 180 ) * $TRadius + $YCenter;
 				
 				if ($LastX != - 1)
 					$this->drawDottedLine ( $LastX, $LastY, $X, $Y, 4, $S_R, $S_G, $S_B );
@@ -2389,8 +2391,8 @@ class pChart {
 		 */
 		for($i = 0; $i <= $Points; $i ++) {
 			$Angle = - 90 + $i * 360 / $Points;
-			$X = cos ( $Angle * 3.1418 / 180 ) * $Radius + $XCenter;
-			$Y = sin ( $Angle * 3.1418 / 180 ) * $Radius + $YCenter;
+			$X = cos ( $Angle * self::PI / 180 ) * $Radius + $XCenter;
+			$Y = sin ( $Angle * self::PI / 180 ) * $Radius + $YCenter;
 			
 			$this->drawLine ( $XCenter, $YCenter, $X, $Y, $A_R, $A_G, $A_B );
 			
@@ -2428,8 +2430,8 @@ class pChart {
 			$Angle = - 90 + 360 / $Points;
 			$X1 = $XCenter;
 			$Y1 = $YCenter - $TRadius;
-			$X2 = cos ( $Angle * 3.1418 / 180 ) * $TRadius + $XCenter;
-			$Y2 = sin ( $Angle * 3.1418 / 180 ) * $TRadius + $YCenter;
+			$X2 = cos ( $Angle * self::PI / 180 ) * $TRadius + $XCenter;
+			$Y2 = sin ( $Angle * self::PI / 180 ) * $TRadius + $YCenter;
 			
 			$XPos = (int) ( ($X2 - $X1) / 2 ) + $X1;
 			$YPos = (int) ( ($Y2 - $Y1) / 2 ) + $Y1;
@@ -2491,8 +2493,8 @@ class pChart {
 					$Value = $Data [$Key] [$ColName];
 					$Strength = ($Radius / $MaxValue) * $Value;
 					
-					$XPos = cos ( $Angle * 3.1418 / 180 ) * $Strength + $XCenter;
-					$YPos = sin ( $Angle * 3.1418 / 180 ) * $Strength + $YCenter;
+					$XPos = cos ( $Angle * self::PI / 180 ) * $Strength + $XCenter;
+					$YPos = sin ( $Angle * self::PI / 180 ) * $Strength + $YCenter;
 					
 					if ($XLast != - 1)
 						$this->drawLine ( $XLast, $YLast, $XPos, $YPos, $this->Palette [$ColorID] ["R"], $this->Palette [$ColorID] ["G"], $this->Palette [$ColorID] ["B"] );
@@ -2558,8 +2560,8 @@ class pChart {
 					}
 					$Strength = ($Radius / $MaxValue) * $Value;
 					
-					$XPos = cos ( $Angle * 3.1418 / 180 ) * $Strength + $XCenter;
-					$YPos = sin ( $Angle * 3.1418 / 180 ) * $Strength + $YCenter;
+					$XPos = cos ( $Angle * self::PI / 180 ) * $Strength + $XCenter;
+					$YPos = sin ( $Angle * self::PI / 180 ) * $Strength + $YCenter;
 					
 					$Plots [] = $XPos;
 					$Plots [] = $YPos;
@@ -2657,12 +2659,12 @@ class pChart {
 				$TextWidth = $Position [2] - $Position [0];
 				$TextHeight = abs ( $Position [1] ) + abs ( $Position [3] );
 				
-				$TX = cos ( ($TAngle) * 3.1418 / 180 ) * ($Radius + 10) + $XPos;
+				$TX = cos ( ($TAngle) * self::PI / 180 ) * ($Radius + 10) + $XPos;
 				
 				if ($TAngle > 0 && $TAngle < 180)
-					$TY = sin ( ($TAngle) * 3.1418 / 180 ) * ($Radius + 10) + $YPos + 4;
+					$TY = sin ( ($TAngle) * self::PI / 180 ) * ($Radius + 10) + $YPos + 4;
 				else
-					$TY = sin ( ($TAngle) * 3.1418 / 180 ) * ($Radius + 4) + $YPos - ($TextHeight / 2);
+					$TY = sin ( ($TAngle) * self::PI / 180 ) * ($Radius + 4) + $YPos - ($TextHeight / 2);
 				
 				if ($TAngle > 90 && $TAngle < 270)
 					$TX = $TX - $TextWidth;
@@ -2675,8 +2677,8 @@ class pChart {
 			 * Process pie slices
 			 */
 			for($iAngle = $Angle; $iAngle <= $Angle + $Value * $SpliceRatio; $iAngle = $iAngle + .5) {
-				$TopX = cos ( $iAngle * 3.1418 / 180 ) * $Radius + $XPos;
-				$TopY = sin ( $iAngle * 3.1418 / 180 ) * $Radius + $YPos;
+				$TopX = cos ( $iAngle * self::PI / 180 ) * $Radius + $XPos;
+				$TopY = sin ( $iAngle * self::PI / 180 ) * $Radius + $YPos;
 				
 				$TopPlots [$Key] [] = $TopX;
 				$TopPlots [$Key] [] = $TopY;
@@ -2769,8 +2771,8 @@ class pChart {
 		$Angle = 0;
 		$TopPlots = "";
 		foreach ( $iValues as $Key => $Value ) {
-			$XOffset = cos ( ($Angle + ($Value / 2 * $SpliceRatio)) * 3.1418 / 180 ) * $SpliceDistance;
-			$YOffset = sin ( ($Angle + ($Value / 2 * $SpliceRatio)) * 3.1418 / 180 ) * $SpliceDistance;
+			$XOffset = cos ( ($Angle + ($Value / 2 * $SpliceRatio)) * self::PI / 180 ) * $SpliceDistance;
+			$YOffset = sin ( ($Angle + ($Value / 2 * $SpliceRatio)) * self::PI / 180 ) * $SpliceDistance;
 			
 			$TopPlots [$Key] [] = round ( $XPos + $XOffset );
 			$TopPlots [$Key] [] = round ( $YPos + $YOffset );
@@ -2807,12 +2809,12 @@ class pChart {
 				$TextWidth = $Position [2] - $Position [0];
 				$TextHeight = abs ( $Position [1] ) + abs ( $Position [3] );
 				
-				$TX = cos ( ($TAngle) * 3.1418 / 180 ) * ($Radius + 10 + $SpliceDistance) + $XPos;
+				$TX = cos ( $TAngle * self::PI / 180 ) * ($Radius + 10 + $SpliceDistance) + $XPos;
 				
 				if ($TAngle > 0 && $TAngle < 180)
-					$TY = sin ( ($TAngle) * 3.1418 / 180 ) * ($Radius + 10 + $SpliceDistance) + $YPos + 4;
+					$TY = sin ( $TAngle * self::PI / 180 ) * ($Radius + 10 + $SpliceDistance) + $YPos + 4;
 				else
-					$TY = sin ( ($TAngle) * 3.1418 / 180 ) * ($Radius + $SpliceDistance + 4) + $YPos - ($TextHeight / 2);
+					$TY = sin ( $TAngle * self::PI / 180 ) * ($Radius + $SpliceDistance + 4) + $YPos - ($TextHeight / 2);
 				
 				if ($TAngle > 90 && $TAngle < 270)
 					$TX = $TX - $TextWidth;
@@ -2832,8 +2834,8 @@ class pChart {
 			$XLineLast = "";
 			$YLineLast = "";
 			for($iAngle = $Angle; $iAngle <= $Angle + $Value * $SpliceRatio; $iAngle = $iAngle + .5) {
-				$PosX = cos ( $iAngle * 3.1418 / 180 ) * $Radius + $XPos + $XOffset;
-				$PosY = sin ( $iAngle * 3.1418 / 180 ) * $Radius + $YPos + $YOffset;
+				$PosX = cos ( $iAngle * self::PI / 180 ) * $Radius + $XPos + $XOffset;
+				$PosY = sin ( $iAngle * self::PI / 180 ) * $Radius + $YPos + $YOffset;
 				
 				$TopPlots [$Key] [] = round ( $PosX );
 				$TopPlots [$Key] [] = round ( $PosY );
@@ -2925,10 +2927,10 @@ class pChart {
 		$CDev = 5;
 		$TopPlots = $BotPlots = $aTopPlots = $aBotPlots = array ();
 		foreach ( $iValues as $Key => $Value ) {
-			$XCenterPos = cos ( ($Angle - $CDev + ($Value * $SpliceRatio + $SpliceDistanceRatio) / 2) * 3.1418 / 180 ) * $SpliceDistance + $XPos;
-			$YCenterPos = sin ( ($Angle - $CDev + ($Value * $SpliceRatio + $SpliceDistanceRatio) / 2) * 3.1418 / 180 ) * $SpliceDistance + $YPos;
-			$XCenterPos2 = cos ( ($Angle + $CDev + ($Value * $SpliceRatio + $SpliceDistanceRatio) / 2) * 3.1418 / 180 ) * $SpliceDistance + $XPos;
-			$YCenterPos2 = sin ( ($Angle + $CDev + ($Value * $SpliceRatio + $SpliceDistanceRatio) / 2) * 3.1418 / 180 ) * $SpliceDistance + $YPos;
+			$XCenterPos = cos ( ($Angle - $CDev + ($Value * $SpliceRatio + $SpliceDistanceRatio) / 2) * self::PI / 180 ) * $SpliceDistance + $XPos;
+			$YCenterPos = sin ( ($Angle - $CDev + ($Value * $SpliceRatio + $SpliceDistanceRatio) / 2) * self::PI / 180 ) * $SpliceDistance + $YPos;
+			$XCenterPos2 = cos ( ($Angle + $CDev + ($Value * $SpliceRatio + $SpliceDistanceRatio) / 2) * self::PI / 180 ) * $SpliceDistance + $XPos;
+			$YCenterPos2 = sin ( ($Angle + $CDev + ($Value * $SpliceRatio + $SpliceDistanceRatio) / 2) * self::PI / 180 ) * $SpliceDistance + $YPos;
 			
 			$TopPlots [$Key] [] = round ( $XCenterPos );
 			$BotPlots [$Key] [] = round ( $XCenterPos );
@@ -2956,12 +2958,12 @@ class pChart {
 				$TextWidth = $Position [2] - $Position [0];
 				$TextHeight = abs ( $Position [1] ) + abs ( $Position [3] );
 				
-				$TX = cos ( ($TAngle) * 3.1418 / 180 ) * ($Radius + 10) + $XPos;
+				$TX = cos ( ($TAngle) * self::PI / 180 ) * ($Radius + 10) + $XPos;
 				
 				if ($TAngle > 0 && $TAngle < 180)
-					$TY = sin ( ($TAngle) * 3.1418 / 180 ) * ($SkewHeight + 10) + $YPos + $SpliceHeight + 4;
+					$TY = sin ( ($TAngle) * self::PI / 180 ) * ($SkewHeight + 10) + $YPos + $SpliceHeight + 4;
 				else
-					$TY = sin ( ($TAngle) * 3.1418 / 180 ) * ($SkewHeight + 4) + $YPos - ($TextHeight / 2);
+					$TY = sin ( ($TAngle) * self::PI / 180 ) * ($SkewHeight + 4) + $YPos - ($TextHeight / 2);
 				
 				if ($TAngle > 90 && $TAngle < 270)
 					$TX = $TX - $TextWidth;
@@ -2974,8 +2976,8 @@ class pChart {
 			 * Process pie slices
 			 */
 			for($iAngle = $Angle; $iAngle <= $Angle + $Value * $SpliceRatio; $iAngle = $iAngle + .5) {
-				$TopX = cos ( $iAngle * 3.1418 / 180 ) * $Radius + $XPos;
-				$TopY = sin ( $iAngle * 3.1418 / 180 ) * $SkewHeight + $YPos;
+				$TopX = cos ( $iAngle * self::PI / 180 ) * $Radius + $XPos;
+				$TopY = sin ( $iAngle * self::PI / 180 ) * $SkewHeight + $YPos;
 				
 				$TopPlots [$Key] [] = round ( $TopX );
 				$BotPlots [$Key] [] = round ( $TopX );
@@ -3223,23 +3225,23 @@ class pChart {
 		
 		$C_Rectangle = self::AllocateColor ( $this->Picture, $R, $G, $B );
 		
-		$Step = 90 / ((3.1418 * $Radius) / 2);
+		$Step = 90 / ((self::PI * $Radius) / 2);
 		
 		for($i = 0; $i <= 90; $i = $i + $Step) {
-			$X = cos ( ($i + 180) * 3.1418 / 180 ) * $Radius + $X1 + $Radius;
-			$Y = sin ( ($i + 180) * 3.1418 / 180 ) * $Radius + $Y1 + $Radius;
+			$X = cos ( ($i + 180) * self::PI / 180 ) * $Radius + $X1 + $Radius;
+			$Y = sin ( ($i + 180) * self::PI / 180 ) * $Radius + $Y1 + $Radius;
 			$this->drawAntialiasPixel ( $X, $Y, $R, $G, $B );
 			
-			$X = cos ( ($i - 90) * 3.1418 / 180 ) * $Radius + $X2 - $Radius;
-			$Y = sin ( ($i - 90) * 3.1418 / 180 ) * $Radius + $Y1 + $Radius;
+			$X = cos ( ($i - 90) * self::PI / 180 ) * $Radius + $X2 - $Radius;
+			$Y = sin ( ($i - 90) * self::PI / 180 ) * $Radius + $Y1 + $Radius;
 			$this->drawAntialiasPixel ( $X, $Y, $R, $G, $B );
 			
-			$X = cos ( ($i) * 3.1418 / 180 ) * $Radius + $X2 - $Radius;
-			$Y = sin ( ($i) * 3.1418 / 180 ) * $Radius + $Y2 - $Radius;
+			$X = cos ( ($i) * self::PI / 180 ) * $Radius + $X2 - $Radius;
+			$Y = sin ( ($i) * self::PI / 180 ) * $Radius + $Y2 - $Radius;
 			$this->drawAntialiasPixel ( $X, $Y, $R, $G, $B );
 			
-			$X = cos ( ($i + 90) * 3.1418 / 180 ) * $Radius + $X1 + $Radius;
-			$Y = sin ( ($i + 90) * 3.1418 / 180 ) * $Radius + $Y2 - $Radius;
+			$X = cos ( ($i + 90) * self::PI / 180 ) * $Radius + $X1 + $Radius;
+			$Y = sin ( ($i + 90) * self::PI / 180 ) * $Radius + $Y2 - $Radius;
 			$this->drawAntialiasPixel ( $X, $Y, $R, $G, $B );
 		}
 		
@@ -3260,20 +3262,20 @@ class pChart {
 	function drawFilledRoundedRectangle($X1, $Y1, $X2, $Y2, $Radius, $R, $G, $B) {
 		$C_Rectangle = self::AllocateColor ( $this->Picture, $R, $G, $B );
 		
-		$Step = 90 / ((3.1418 * $Radius) / 2);
+		$Step = 90 / ((self::PI * $Radius) / 2);
 		
 		for($i = 0; $i <= 90; $i = $i + $Step) {
-			$Xi1 = cos ( ($i + 180) * 3.1418 / 180 ) * $Radius + $X1 + $Radius;
-			$Yi1 = sin ( ($i + 180) * 3.1418 / 180 ) * $Radius + $Y1 + $Radius;
+			$Xi1 = cos ( ($i + 180) * self::PI / 180 ) * $Radius + $X1 + $Radius;
+			$Yi1 = sin ( ($i + 180) * self::PI / 180 ) * $Radius + $Y1 + $Radius;
 			
-			$Xi2 = cos ( ($i - 90) * 3.1418 / 180 ) * $Radius + $X2 - $Radius;
-			$Yi2 = sin ( ($i - 90) * 3.1418 / 180 ) * $Radius + $Y1 + $Radius;
+			$Xi2 = cos ( ($i - 90) * self::PI / 180 ) * $Radius + $X2 - $Radius;
+			$Yi2 = sin ( ($i - 90) * self::PI / 180 ) * $Radius + $Y1 + $Radius;
 			
-			$Xi3 = cos ( ($i) * 3.1418 / 180 ) * $Radius + $X2 - $Radius;
-			$Yi3 = sin ( ($i) * 3.1418 / 180 ) * $Radius + $Y2 - $Radius;
+			$Xi3 = cos ( ($i) * self::PI / 180 ) * $Radius + $X2 - $Radius;
+			$Yi3 = sin ( ($i) * self::PI / 180 ) * $Radius + $Y2 - $Radius;
 			
-			$Xi4 = cos ( ($i + 90) * 3.1418 / 180 ) * $Radius + $X1 + $Radius;
-			$Yi4 = sin ( ($i + 90) * 3.1418 / 180 ) * $Radius + $Y2 - $Radius;
+			$Xi4 = cos ( ($i + 90) * self::PI / 180 ) * $Radius + $X1 + $Radius;
+			$Yi4 = sin ( ($i + 90) * self::PI / 180 ) * $Radius + $Y2 - $Radius;
 			
 			imageline ( $this->Picture, $Xi1, $Yi1, $X1 + $Radius, $Yi1, $C_Rectangle );
 			imageline ( $this->Picture, $X2 - $Radius, $Yi2, $Xi2, $Yi2, $C_Rectangle );
@@ -3308,11 +3310,12 @@ class pChart {
 		}
 		
 		$C_Circle = self::AllocateColor ( $this->Picture, $R, $G, $B );
-		$Step = 360 / (2 * 3.1418 * max ( $Width, $Height ));
+		$Step = 360 / (2 * self::PI * max ( $Width, $Height ));
+		$piRad = self::PI / 180;
 		
 		for($i = 0; $i <= 360; $i = $i + $Step) {
-			$X = cos ( $i * 3.1418 / 180 ) * $Height + $Xc;
-			$Y = sin ( $i * 3.1418 / 180 ) * $Width + $Yc;
+			$X = cos ( $i * $piRad ) * $Height + $Xc;
+			$Y = sin ( $i * $piRad ) * $Width + $Yc;
 			$this->drawAntialiasPixel ( $X, $Y, $R, $G, $B );
 		}
 	}
@@ -3326,20 +3329,26 @@ class pChart {
 		}
 		
 		$C_Circle = self::AllocateColor ( $this->Picture, $R, $G, $B );
-		$Step = 360 / (2 * 3.1418 * max ( $Width, $Height ));
+		$mWH = max ( $Width, $Height );
+		$Step = 360 / (2 * self::PI * $mWH);
+		$yRadius = $Yc - $mWH;
+		$piRad = self::PI / 180;
 		
 		for($i = 90; $i <= 270; $i = $i + $Step) {
-			$X1 = cos ( $i * 3.1418 / 180 ) * $Height + $Xc;
-			$Y1 = sin ( $i * 3.1418 / 180 ) * $Width + $Yc;
-			$X2 = cos ( (180 - $i) * 3.1418 / 180 ) * $Height + $Xc;
-			$Y2 = sin ( (180 - $i) * 3.1418 / 180 ) * $Width + $Yc;
+			$X1 = cos ( $i * $piRad ) * $Height + $Xc;
+			$Y1 = sin ( $i * $piRad ) * $Width + $Yc;
+			$X2 = cos ( (180 - $i) * $piRad ) * $Height + $Xc;
+			$Y2 = sin ( (180 - $i) * $piRad ) * $Width + $Yc;
 			
 			$this->drawAntialiasPixel ( $X1 - 1, $Y1 - 1, $R, $G, $B );
 			$this->drawAntialiasPixel ( $X2 - 1, $Y2 - 1, $R, $G, $B );
 			
-			if (($Y1 - 1) > $Yc - max ( $Width, $Height ))
-				imageline ( $this->Picture, $X1, $Y1 - 1, $X2 - 1, $Y2 - 1, $C_Circle );
+			//if (($Y1 - 1) > $yRadius)
+			//	imageline ( $this->Picture, $X1, $Y1 - 1, $X2 - 1, $Y2 - 1, $C_Circle );
 		}
+	
+		//Instead of drawing lines use GDs elipse to fill the center
+		imagefilledellipse($this->Picture, (int)$Xc - 1, (int)$Yc - 1, $Width + 2, $Height + 2, $C_Circle);
 	}
 	
 	/*
