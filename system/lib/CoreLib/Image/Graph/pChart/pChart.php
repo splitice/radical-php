@@ -3957,7 +3957,7 @@ class pChart {
 			$DataDescription ["Position"] = "Name";
 		}
 		
-		if ($DescriptionRequired) {
+		if ($DescriptionRequired && isset($DataDescription ["Values"])) {
 			if (! isset ( $DataDescription ["Description"] )) {
 				$DataDescription ["Description"] = array();
 				$this->Errors [] = "[Warning] " . $FunctionName . " - Series descriptions are not set.";
