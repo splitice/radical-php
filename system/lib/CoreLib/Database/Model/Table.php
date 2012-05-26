@@ -238,14 +238,7 @@ abstract class Table implements ITable, \JsonSerializable {
 		return $id;
 	}
 	
-	private $_methodCache = array();
 	function __call($m,$a){
-		//Key for caching
-		$k = implode('|',$a+array($m));
-		
-		if(isset($this->_methodCache[$k])){
-			return $this->_methodCache[$k];
-		}
 		if(0 === substr_compare($m,'get',0,3)){//if starts with is get*
 			//get the action part
 			$actionPart = substr($m,3);
@@ -268,12 +261,12 @@ abstract class Table implements ITable, \JsonSerializable {
 						$this->$actionPart = $class::fromId($this->$actionPart);
 					}
 				}
-				if(isset($a[0]) && $a[0] == 'id'){
-					$ret = &$this->$actionPart->getId();
+				if(isset($a[0]) && $a[0] == 'id' && is_object($this->$actionPart)){
+					$ret = $this->$actionPart->getId();
 				}else{
 					$ret = &$this->$actionPart;
 				}
-				return ($this->_methodCache[$k] = $ret);
+				return $ret;
 			}elseif($actionPart{strlen($actionPart)-1} == 's'){//Get related objects (foward)
 				//Remove the pluralising s from the end
 				$className = substr($className,0,-1);

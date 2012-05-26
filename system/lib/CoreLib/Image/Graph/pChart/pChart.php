@@ -34,42 +34,42 @@ class pChart {
 	 * Palettes definition
 	 */
 	var $Palette = array (
-			"0" => array (
+			array (
 					"R" => 188,
 					"G" => 224,
 					"B" => 46 
 			),
-			"1" => array (
+			array (
 					"R" => 224,
 					"G" => 100,
 					"B" => 46 
 			),
-			"2" => array (
+			array (
 					"R" => 224,
 					"G" => 214,
 					"B" => 46 
 			),
-			"3" => array (
+			array (
 					"R" => 46,
 					"G" => 151,
 					"B" => 224 
 			),
-			"4" => array (
+			array (
 					"R" => 176,
 					"G" => 46,
 					"B" => 224 
 			),
-			"5" => array (
+			array (
 					"R" => 224,
 					"G" => 46,
 					"B" => 117 
 			),
-			"6" => array (
+			array (
 					"R" => 92,
 					"G" => 224,
 					"B" => 46 
 			),
-			"7" => array (
+			array (
 					"R" => 224,
 					"G" => 176,
 					"B" => 46 
@@ -138,7 +138,7 @@ class pChart {
 	/*
 	 * Set antialias quality : 0 is maximum, 100 minimum
 	 */
-	var $AntialiasQuality = 0;
+	var $AntialiasQuality = 20;
 	
 	/*
 	 * Shadow settings
@@ -3499,20 +3499,27 @@ class pChart {
 		if ($Alpha != 100) {			
 			$RGB2 = imagecolorat ( $this->Picture, $X, $Y );
 			
+			//Calculate a unique cache key
+			//Optimization for heavy graph pages
+			//And its cheap
 			$k = $RGB2 . pack('CCCC',$R,$G,$B,$Alpha);
+			
+			//Check the alpha cache for a cached value
 			if(isset(self::$alphaCache[$k])){
 				$C_Aliased = self::$alphaCache[$k];
 			}else{
+				//Alpha float and inverse
 				$Alpha = $Alpha / 100;
 				$iAlpha = 1 - $Alpha;
 				
-				self::validateRGB ( $R, $G, $B ); // AllocateColor will do a check anyway
-				
-				$R = ( int ) ($R * $Alpha + (($RGB2 >> 16) & 0xFF) * $iAlpha);
-				$G = ( int ) ($G * $Alpha + (($RGB2 >> 8) & 0xFF) * $iAlpha);
+				//Calculate new colour
 				$B = ( int ) ($B * $Alpha + ($RGB2 & 0xFF) * $iAlpha);
+				$G = ( int ) ($G * $Alpha + (($RGB2 >>= 8) & 0xFF) * $iAlpha);
+				$R = ( int ) ($R * $Alpha + (($RGB2 >>= 8) & 0xFF) * $iAlpha);
 				
-				self::$alphaCache[$k] = $C_Aliased = self::AllocateColor ( $this->Picture, $R, $G, $B );
+				//Allocate and store colour
+				$C_Aliased = self::AllocateColor ( $this->Picture, $R, $G, $B );
+				self::$alphaCache[$k] = $C_Aliased;
 			}
 		} else {
 			$C_Aliased = self::AllocateColor ( $this->Picture, $R, $G, $B );
@@ -3533,7 +3540,7 @@ class pChart {
 		
 		self::validateRGB ( $R, $G, $B );
 		
-		return (imagecolorallocate ( $Picture, $R, $G, $B ));
+		return imagecolorallocate ( $Picture, $R, $G, $B );
 	}
 	
 	/*
