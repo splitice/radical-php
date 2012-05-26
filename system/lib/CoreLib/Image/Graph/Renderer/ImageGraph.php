@@ -1,7 +1,6 @@
 <?php
 namespace Image\Graph\Renderer;
 use Image\Graph\Source\Internal\GraphBase;
-
 use CLI\PHP\Extension;
 use Image\Graph\pChart\pChart;
 use Image\Graph\pChart\pData;
@@ -49,7 +48,7 @@ abstract class ImageGraph {
 		}
 		
 		if($data)
-			$pChart->drawScale($data,$dataSet->GetDataDescription(),SCALE_NORMAL,150,150,150,TRUE,0,2);
+			$pChart->drawScale($data,$dataSet->GetDataDescription(),pChart::SCALE_NORMAL,150,150,150,TRUE,0,2);
 		$pChart->drawGrid(4,TRUE,230,230,230,50);
 		
 		// Draw the 0 line
