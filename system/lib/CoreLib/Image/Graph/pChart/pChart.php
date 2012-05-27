@@ -2933,11 +2933,13 @@ class pChart {
 		$Angle = 0;
 		$CDev = 5;
 		$TopPlots = $BotPlots = $aTopPlots = $aBotPlots = array ();
+		$piRad = self::PI / 180;
 		foreach ( $iValues as $Key => $Value ) {
-			$XCenterPos = cos ( ($Angle - $CDev + ($Value * $SpliceRatio + $SpliceDistanceRatio) / 2) * self::PI / 180 ) * $SpliceDistance + $XPos;
-			$YCenterPos = sin ( ($Angle - $CDev + ($Value * $SpliceRatio + $SpliceDistanceRatio) / 2) * self::PI / 180 ) * $SpliceDistance + $YPos;
-			$XCenterPos2 = cos ( ($Angle + $CDev + ($Value * $SpliceRatio + $SpliceDistanceRatio) / 2) * self::PI / 180 ) * $SpliceDistance + $XPos;
-			$YCenterPos2 = sin ( ($Angle + $CDev + ($Value * $SpliceRatio + $SpliceDistanceRatio) / 2) * self::PI / 180 ) * $SpliceDistance + $YPos;
+			$calc = $CDev + ($Value * $SpliceRatio + $SpliceDistanceRatio) / 2;
+			$XCenterPos = cos ( ($Angle - $calc) *  $piRad) * $SpliceDistance + $XPos;
+			$YCenterPos = sin ( ($Angle - $calc) * $piRad ) * $SpliceDistance + $YPos;
+			$XCenterPos2 = cos ( ($Angle + $calc) * $piRad ) * $SpliceDistance + $XPos;
+			$YCenterPos2 = sin ( ($Angle + $calc) * $piRad ) * $SpliceDistance + $YPos;
 			
 			$TopPlots [$Key] [] = round ( $XCenterPos );
 			$BotPlots [$Key] [] = round ( $XCenterPos );
@@ -3227,35 +3229,50 @@ class pChart {
 	/*
 	 * This function create a rectangle with rounded corners and antialias
 	 */
-	function drawRoundedRectangle($X1, $Y1, $X2, $Y2, $Radius, $R, $G, $B) {
-		self::validateRGB ( $R, $G, $B );
-		
+	function drawRoundedRectangle($X1, $Y1, $X2, $Y2, $Radius, $R, $G, $B, $filled = false) {
 		$C_Rectangle = self::AllocateColor ( $this->Picture, $R, $G, $B );
 		
 		$Step = 90 / ((self::PI * $Radius) / 2);
+		$piRad = self::PI / 180;
+		$xNr = $X2 - $Radius;
+		$xPr = $X1 + $Radius;
 		
 		for($i = 0; $i <= 90; $i = $i + $Step) {
-			$X = cos ( ($i + 180) * self::PI / 180 ) * $Radius + $X1 + $Radius;
-			$Y = sin ( ($i + 180) * self::PI / 180 ) * $Radius + $Y1 + $Radius;
-			$this->drawAntialiasPixel ( $X, $Y, $R, $G, $B );
+			$Xi1 = cos ( ($i + 180) *  $piRad) * $Radius + $xPr;
+			$Yi1 = sin ( ($i + 180) * $piRad ) * $Radius + $Y1 + $Radius;
 			
-			$X = cos ( ($i - 90) * self::PI / 180 ) * $Radius + $X2 - $Radius;
-			$Y = sin ( ($i - 90) * self::PI / 180 ) * $Radius + $Y1 + $Radius;
-			$this->drawAntialiasPixel ( $X, $Y, $R, $G, $B );
+			$Xi2 = cos ( ($i - 90) * $piRad) * $Radius + $xNr;
+			$Yi2 = sin ( ($i - 90) * $piRad ) * $Radius + $Y1 + $Radius;
 			
-			$X = cos ( ($i) * self::PI / 180 ) * $Radius + $X2 - $Radius;
-			$Y = sin ( ($i) * self::PI / 180 ) * $Radius + $Y2 - $Radius;
-			$this->drawAntialiasPixel ( $X, $Y, $R, $G, $B );
+			$Xi3 = cos ( $i * $piRad ) * $Radius + $X2 - $Radius;
+			$Yi3 = sin ( $i * $piRad ) * $Radius + $Y2 - $Radius;
 			
-			$X = cos ( ($i + 90) * self::PI / 180 ) * $Radius + $X1 + $Radius;
-			$Y = sin ( ($i + 90) * self::PI / 180 ) * $Radius + $Y2 - $Radius;
-			$this->drawAntialiasPixel ( $X, $Y, $R, $G, $B );
+			$Xi3 = cos ( ($i + 90) * $piRad ) * $Radius + $xPr;
+			$Yi3 = sin ( ($i + 90) * $piRad ) * $Radius + $Y2 - $Radius;
+			
+			if($filled){
+				imageline ( $this->Picture, $Xi1, $Yi1, $xPr, $Yi1, $C_Rectangle );
+				imageline ( $this->Picture, $xNr, $Yi2, $Xi2, $Yi2, $C_Rectangle );
+				imageline ( $this->Picture, $xNr, $Yi3, $Xi3, $Yi3, $C_Rectangle );
+				imageline ( $this->Picture, $Xi4, $Yi4, $xPr, $Yi4, $C_Rectangle );
+			}
+			
+			$this->drawAntialiasPixel ( $Xi1, $Yi1, $R, $G, $B );
+			$this->drawAntialiasPixel ( $Xi2, $Yi2, $R, $G, $B );
+			$this->drawAntialiasPixel ( $Xi3, $Yi3, $R, $G, $B );
+			$this->drawAntialiasPixel ( $Xi3, $Yi3, $R, $G, $B );
 		}
 		
-		$X1 = $X1 - .2;
-		$Y1 = $Y1 - .2;
-		$X2 = $X2 + .2;
-		$Y2 = $Y2 + .2;
+		if($filled){
+			imagefilledrectangle ( $this->Picture, $X1, $Y1 + $Radius, $X2, $Y2 - $Radius, $C_Rectangle );
+			imagefilledrectangle ( $this->Picture, $X1 + $Radius, $Y1, $X2 - $Radius, $Y2, $C_Rectangle );
+		}
+		
+		$X1 -= .2;
+		$Y1 -= .2;
+		$X2 += .2;
+		$Y2 += .2;
+		
 		$this->drawLine ( $X1 + $Radius, $Y1, $X2 - $Radius, $Y1, $R, $G, $B );
 		$this->drawLine ( $X2, $Y1 + $Radius, $X2, $Y2 - $Radius, $R, $G, $B );
 		$this->drawLine ( $X2 - $Radius, $Y2, $X1 + $Radius, $Y2, $R, $G, $B );
@@ -3267,45 +3284,7 @@ class pChart {
 	 * antialias
 	 */
 	function drawFilledRoundedRectangle($X1, $Y1, $X2, $Y2, $Radius, $R, $G, $B) {
-		$C_Rectangle = self::AllocateColor ( $this->Picture, $R, $G, $B );
-		
-		$Step = 90 / ((self::PI * $Radius) / 2);
-		
-		for($i = 0; $i <= 90; $i = $i + $Step) {
-			$Xi1 = cos ( ($i + 180) * self::PI / 180 ) * $Radius + $X1 + $Radius;
-			$Yi1 = sin ( ($i + 180) * self::PI / 180 ) * $Radius + $Y1 + $Radius;
-			
-			$Xi2 = cos ( ($i - 90) * self::PI / 180 ) * $Radius + $X2 - $Radius;
-			$Yi2 = sin ( ($i - 90) * self::PI / 180 ) * $Radius + $Y1 + $Radius;
-			
-			$Xi3 = cos ( ($i) * self::PI / 180 ) * $Radius + $X2 - $Radius;
-			$Yi3 = sin ( ($i) * self::PI / 180 ) * $Radius + $Y2 - $Radius;
-			
-			$Xi4 = cos ( ($i + 90) * self::PI / 180 ) * $Radius + $X1 + $Radius;
-			$Yi4 = sin ( ($i + 90) * self::PI / 180 ) * $Radius + $Y2 - $Radius;
-			
-			imageline ( $this->Picture, $Xi1, $Yi1, $X1 + $Radius, $Yi1, $C_Rectangle );
-			imageline ( $this->Picture, $X2 - $Radius, $Yi2, $Xi2, $Yi2, $C_Rectangle );
-			imageline ( $this->Picture, $X2 - $Radius, $Yi3, $Xi3, $Yi3, $C_Rectangle );
-			imageline ( $this->Picture, $Xi4, $Yi4, $X1 + $Radius, $Yi4, $C_Rectangle );
-			
-			$this->drawAntialiasPixel ( $Xi1, $Yi1, $R, $G, $B );
-			$this->drawAntialiasPixel ( $Xi2, $Yi2, $R, $G, $B );
-			$this->drawAntialiasPixel ( $Xi3, $Yi3, $R, $G, $B );
-			$this->drawAntialiasPixel ( $Xi4, $Yi4, $R, $G, $B );
-		}
-		
-		imagefilledrectangle ( $this->Picture, $X1, $Y1 + $Radius, $X2, $Y2 - $Radius, $C_Rectangle );
-		imagefilledrectangle ( $this->Picture, $X1 + $Radius, $Y1, $X2 - $Radius, $Y2, $C_Rectangle );
-		
-		$X1 = $X1 - .2;
-		$Y1 = $Y1 - .2;
-		$X2 = $X2 + .2;
-		$Y2 = $Y2 + .2;
-		$this->drawLine ( $X1 + $Radius, $Y1, $X2 - $Radius, $Y1, $R, $G, $B );
-		$this->drawLine ( $X2, $Y1 + $Radius, $X2, $Y2 - $Radius, $R, $G, $B );
-		$this->drawLine ( $X2 - $Radius, $Y2, $X1 + $Radius, $Y2, $R, $G, $B );
-		$this->drawLine ( $X1, $Y2 - $Radius, $X1, $Y1 + $Radius, $R, $G, $B );
+		return $this->drawRoundedRectangle($X1, $Y1, $X2, $Y2, $Radius, $R, $G, $B, true);
 	}
 	
 	/*
@@ -3424,7 +3403,7 @@ class pChart {
 	 * This function create a line with antialias
 	 */
 	function drawDottedLine($X1, $Y1, $X2, $Y2, $DotSize, $R, $G, $B, $GraphFunction = FALSE) {
-		$Distance = sqrt ( ($X2 - $X1) * ($X2 - $X1) + ($Y2 - $Y1) * ($Y2 - $Y1) );
+		$Distance = self::distanceBetweenPoints($X1, $Y1, $X2, $Y2);
 		
 		$XStep = ($X2 - $X1) / $Distance;
 		$YStep = ($Y2 - $Y1) / $Distance;
@@ -3478,21 +3457,23 @@ class pChart {
 	 * Generic loader function for external pictures
 	 */
 	function drawFromPicture($PicType, $FileName, $X, $Y, $Alpha = 100) {
-		if (file_exists ( $FileName )) {
-			$Infos = getimagesize ( $FileName );
-			$Width = $Infos [0];
-			$Height = $Infos [1];
-			if ($PicType == 1) {
-				$Raster = imagecreatefrompng ( $FileName );
-			}
-			if ($PicType == 2) {
-				$Raster = imagecreatefromgif ( $FileName );
-			}
-			if ($PicType == 3) {
-				$Raster = imagecreatefromjpeg ( $FileName );
+		if(file_exists($FileName)){
+			switch($PicType){
+				case 1:
+					$Raster = imagecreatefrompng ( $FileName );
+					break;
+				case 2:
+					$Raster = imagecreatefromgif ( $FileName );
+					break;
+				case 3:
+					$Raster = imagecreatefromjpeg ( $FileName );
+					break;
+				default:
+					$Data = file_get_contents($FileName);
+					$Raster = imagecreatefromstring($FileName);
 			}
 			
-			imagecopymerge ( $this->Picture, $Raster, $X, $Y, 0, 0, $Width, $Height, $Alpha );
+			imagecopymerge ( $this->Picture, $Raster, $X, $Y, 0, 0, imagesx($Raster), imagesy($Raster), $Alpha );
 			imagedestroy ( $Raster );
 		}
 	}
@@ -3514,7 +3495,7 @@ class pChart {
 		}
 	}
 	
-	private static $alphaCache = array();
+	private $alphaCache = array();
 	/*
 	 * Draw an alpha pixel
 	 */
@@ -3534,8 +3515,8 @@ class pChart {
 				$k = $RGB2 . pack('CCCC',$R,$G,$B,$Alpha);
 				
 				//Check the alpha cache for a cached value
-				if(isset(self::$alphaCache[$k])){
-					$C_Aliased = self::$alphaCache[$k];
+				if(isset($this->alphaCache[$k])){
+					$C_Aliased = $this->alphaCache[$k];
 				}else{
 					//Alpha float and inverse
 					$Alpha = $Alpha / 100;
@@ -3548,7 +3529,7 @@ class pChart {
 					
 					//Allocate and store colour
 					$C_Aliased = self::AllocateColor ( $this->Picture, $R, $G, $B );
-					self::$alphaCache[$k] = $C_Aliased;
+					$this->alphaCache[$k] = $C_Aliased;
 				}
 			}
 		} else {
@@ -3586,6 +3567,7 @@ class pChart {
 		
 		imagecopy ( $Resampled, $this->Picture, $Size, $Size, 0, 0, $this->XSize, $this->YSize );
 		imagedestroy ( $this->Picture );
+		$this->alphaCache = array();
 		
 		$this->XSize = $Width;
 		$this->YSize = $Height;
@@ -3750,38 +3732,6 @@ class pChart {
 	}
 	
 	/*
-	 * Print all error messages on the CLI or graphically
-	 */
-	function printErrors($Mode = "CLI") {
-		if (count ( $this->Errors ) == 0)
-			return (0);
-		
-		if ($Mode == "CLI") {
-			foreach ( $this->Errors as $key => $Value )
-				echo $Value . "\r\n";
-		} elseif ($Mode == "GD") {
-			$this->setLineStyle ( $Width = 1 );
-			$MaxWidth = 0;
-			foreach ( $this->Errors as $key => $Value ) {
-				$Position = imageftbbox ( $this->ErrorFontSize, 0, $this->ErrorFontName, $Value );
-				$TextWidth = $Position [2] - $Position [0];
-				if ($TextWidth > $MaxWidth) {
-					$MaxWidth = $TextWidth;
-				}
-			}
-			$this->drawFilledRoundedRectangle ( $this->XSize - ($MaxWidth + 20), $this->YSize - (20 + (($this->ErrorFontSize + 4) * count ( $this->Errors ))), $this->XSize - 10, $this->YSize - 10, 6, 233, 185, 185 );
-			$this->drawRoundedRectangle ( $this->XSize - ($MaxWidth + 20), $this->YSize - (20 + (($this->ErrorFontSize + 4) * count ( $this->Errors ))), $this->XSize - 10, $this->YSize - 10, 6, 193, 145, 145 );
-			
-			$C_TextColor = self::AllocateColor ( $this->Picture, 133, 85, 85 );
-			$YPos = $this->YSize - (18 + (count ( $this->Errors ) - 1) * ($this->ErrorFontSize + 4));
-			foreach ( $this->Errors as $key => $Value ) {
-				imagettftext ( $this->Picture, $this->ErrorFontSize, 0, $this->XSize - ($MaxWidth + 15), $YPos, $C_TextColor, $this->ErrorFontName, $Value );
-				$YPos = $YPos + ($this->ErrorFontSize + 4);
-			}
-		}
-	}
-	
-	/*
 	 * Activate the image map creation process
 	 */
 	function setImageMap($Mode = TRUE, $GraphID = "MyGraph") {
@@ -3797,57 +3747,6 @@ class pChart {
 			$this->ImageMap [] = round ( $X1 ) . "," . round ( $Y1 ) . "," . round ( $X2 ) . "," . round ( $Y2 ) . "," . $SerieName . "," . $Value;
 			$this->MapFunction = $CallerFunction;
 		}
-	}
-	
-	/*
-	 * Load and cleanup the image map from disk
-	 */
-	function getImageMap($MapName, $Flush = TRUE) {
-		/*
-		 * Strip HTML query strings
-		 */
-		$Values = $this->tmpFolder . $MapName;
-		$Value = split ( '\?', $Values );
-		$FileName = $Value [0];
-		
-		if (file_exists ( $FileName )) {
-			$Handle = fopen ( $FileName, "r" );
-			$MapContent = fread ( $Handle, filesize ( $FileName ) );
-			fclose ( $Handle );
-			echo $MapContent;
-			
-			if ($Flush)
-				unlink ( $FileName );
-			
-			exit ();
-		} else {
-			header ( "HTTP/1.0 404 Not Found" );
-			exit ();
-		}
-	}
-	
-	/*
-	 * Save the image map to the disk
-	 */
-	function SaveImageMap() {
-		if (! $this->BuildMap) {
-			return (- 1);
-		}
-		
-		if ($this->ImageMap == NULL) {
-			$this->Errors [] = "[Warning] SaveImageMap - Image map is empty.";
-			return (- 1);
-		}
-		
-		$Handle = fopen ( $this->tmpFolder . $this->MapID, 'w' );
-		if (! $Handle) {
-			$this->Errors [] = "[Warning] SaveImageMap - Cannot save the image map.";
-			return (- 1);
-		} else {
-			foreach ( $this->ImageMap as $Key => $Value )
-				fwrite ( $Handle, htmlentities ( $Value ) . "\r" );
-		}
-		fclose ( $Handle );
 	}
 	
 	/*
