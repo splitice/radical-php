@@ -1175,14 +1175,16 @@ class pChart {
 	function drawTitle($XPos, $YPos, $Value, $R, $G, $B, $XPos2 = -1, $YPos2 = -1, $Shadow = FALSE) {
 		$C_TextColor = self::AllocateColor ( $this->Picture, $R, $G, $B );
 		
-		if ($XPos2 != - 1) {
+		if ($XPos2 != - 1 || $YPos2 != - 1) {
 			$Position = imageftbbox ( $this->FontSize, 0, $this->FontName, $Value );
+		}
+		
+		if ($XPos2 != - 1) {
 			$TextWidth = $Position [2] - $Position [0];
 			$XPos = (int) ( ($XPos2 - $XPos - $TextWidth) / 2 ) + $XPos;
 		}
 		
 		if ($YPos2 != - 1) {
-			$Position = imageftbbox ( $this->FontSize, 0, $this->FontName, $Value );
 			$TextHeight = $Position [5] - $Position [3];
 			$YPos = (int) ( ($YPos2 - $YPos - $TextHeight) / 2 ) + $YPos;
 		}
