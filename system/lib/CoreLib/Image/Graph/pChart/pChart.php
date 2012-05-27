@@ -1,6 +1,8 @@
 <?php
 
 namespace Image\Graph\pChart;
+use Basic\DateTime\Timestamp;
+
 /*
  * Origional Library pChart by Jean-Damien licenced under the GNU GPL Licence.
  * Modified by SplitIce for inclusion in radical PHP under the MIT licence.
@@ -3370,6 +3372,14 @@ class pChart {
 		$this->drawFilledCircle ( $Xc, $Yc, $Height, $R, $G, $B, $Width );
 	}
 	
+	private static function distanceBetweenPoints($X1, $Y1, $X2, $Y2){
+		return sqrt ( ($X2 - $X1) * ($X2 - $X1) + ($Y2 - $Y1) * ($Y2 - $Y1) );
+	}
+	
+	private static function isDistanceBetweenPoints($X1, $Y1, $X2, $Y2){
+		return ((int)$X2 != (int)$X1 && (int)$Y1 != (int)$Y2);
+	}
+	
 	/*
 	 * This function create a line with antialias
 	 */
@@ -3385,11 +3395,15 @@ class pChart {
 			return;
 		}
 		
-		$Distance = sqrt ( ($X2 - $X1) * ($X2 - $X1) + ($Y2 - $Y1) * ($Y2 - $Y1) );
+		$Distance = self::distanceBetweenPoints ( ($X2 - $X1) * ($X2 - $X1) + ($Y2 - $Y1) * ($Y2 - $Y1) );
 		if ($Distance == 0)
-			return (- 1);
+			return false;
 		$XStep = ($X2 - $X1) / $Distance;
 		$YStep = ($Y2 - $Y1) / $Distance;
+		
+		$EndOffset = ($this->LineWidth / 2);
+		$StartOffset = - $EndOffset;
+		
 		
 		for($i = 0; $i <= $Distance; $i ++) {
 			$X = $i * $XStep + $X1;
@@ -3399,8 +3413,6 @@ class pChart {
 				if ($this->LineWidth == 1)
 					$this->drawAntialiasPixel ( $X, $Y, $R, $G, $B );
 				else {
-					$StartOffset = - ($this->LineWidth / 2);
-					$EndOffset = ($this->LineWidth / 2);
 					for($j = $StartOffset; $j <= $EndOffset; $j ++)
 						$this->drawAntialiasPixel ( $X + $j, $Y + $j, $R, $G, $B );
 				}
@@ -3842,21 +3854,11 @@ class pChart {
 	 * Convert seconds to a time format string
 	 */
 	function ToTime($Value) {
-		$Hour = (int) ( $Value / 3600 );
-		$Minute = (int) ( ($Value - $Hour * 3600) / 60 );
-		$Second = (int) ( $Value - $Hour * 3600 - $Minute * 60 );
-		
-		if (strlen ( $Hour ) == 1) {
-			$Hour = "0" . $Hour;
-		}
-		if (strlen ( $Minute ) == 1) {
-			$Minute = "0" . $Minute;
-		}
-		if (strlen ( $Second ) == 1) {
-			$Second = "0" . $Second;
+		if(!($Value instanceof Timestamp)){
+			$Value = new Timestamp($Value);
 		}
 		
-		return ($Hour . ":" . $Minute . ":" . $Second);
+		return $Value->toFormat('H:i:s');
 	}
 	
 	/*
@@ -3925,15 +3927,13 @@ class pChart {
 		if (is_callable ( $f )) {
 			return $f ( $Value );
 		}
-		return (date ( $f, $Value ));
+		return date ( $f, $Value );
 	}
 	
 	/*
 	 * Check if a number is a full integer (for scaling)
 	 */
 	private static function isRealInt($Value) {
-		if ($Value == (int) ( $Value ))
-			return (TRUE);
-		return (FALSE);
+		return ($Value == (int) ( $Value ));
 	}
 }
