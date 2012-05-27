@@ -4,6 +4,7 @@ namespace CLI\Threading;
 class Thread {
 	private static function _init() {
 		if (! self::$init) {
+			self::$init = true;
 			self::$current = new Thread ( getmypid () );
 		}
 	}
@@ -23,9 +24,9 @@ class Thread {
 	}
 	function __construct($pid = null) {
 		self::_init ();
-		
+
 		// What am I?
-		if ($pid == null) {
+		if ($pid === null) {
 			$parent = self::$self;
 			
 			// Thread
@@ -72,5 +73,9 @@ class Thread {
 	static function current() {
 		self::_init ();
 		return self::$current;
+	}
+	
+	function Sleep($time){
+		Sleep($time);
 	}
 }

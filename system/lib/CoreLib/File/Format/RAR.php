@@ -113,7 +113,7 @@ class RAR {
 		$e = new \CLI\Process\Execute ($cmd);
 		$process = $e->Run();
 		do {
-			\CLI\Thread::$self->Sleep(1);
+			\CLI\Threading\Thread::current()->Sleep(1);
 		}while($process->isRunning());
 		
 		//Clear temp files
@@ -148,7 +148,7 @@ class RAR {
 		$process = $e->Run();
 		
 		do {
-			\CLI\Thread::$self->Sleep(1);
+			\CLI\Threading\Thread::current()->Sleep(1);
 		}while($process->isRunning());
 	}
 }

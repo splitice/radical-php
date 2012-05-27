@@ -67,7 +67,7 @@ class Connection {
 	function isConnected() {
 		$ret = false;
 		if($this->_connectHit >= ($t = time())){
-			if($this->_connectCache == \CLI\Thread::$self){
+			if($this->_connectCache == \CLI\Threading\Thread::current()){
 				$ret = true;
 			}
 		}
@@ -75,7 +75,7 @@ class Connection {
 			$ret = ($this->mysqli && $this->mysqli->ping());
 		}
 		if($ret){
-			$this->_connectCache = \CLI\Thread::$self;
+			$this->_connectCache = \CLI\Threading\Thread::current();
 			$this->_connectHit = $t+30;//Persume we can hold a connection for 30s
 		}
 		if(memory_get_usage()>(1024*1024*500)){

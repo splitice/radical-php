@@ -5,7 +5,7 @@ use ErrorHandling\IToCode;
 use ErrorHandling\Errors\Internal\ErrorBase;
 use ErrorHandling\Errors\Internal\ErrorException;
 use CLI\Console\Colors;
-use CLI\Thread;
+use CLI\Threading\Thread;
 use ErrorHandling\Errors;
 
 class OutputErrorHandler extends Internal\ErrorHandlerBase {
@@ -39,7 +39,7 @@ class OutputErrorHandler extends Internal\ErrorHandlerBase {
 			$output = sprintf(static::CLI_START,$code,$message);
 			
 			//If Threaded include ThreadID
-			$T = Thread::$self;
+			$T = Thread::current();
 			if($T){//If threading
 				if($T->parent || count($T->children)){
 					$output = '['.$c->getColoredString('#'.$T->getId(),'cyan').']'.$output;
