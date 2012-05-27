@@ -32,6 +32,8 @@ class pChart {
 	
 	const PI = 3.1418;
 	
+	const USE_GD_ALPHA = true;
+	
 	/*
 	 * Palettes definition
 	 */
@@ -1644,6 +1646,8 @@ class pChart {
 				if ($SerieName == "" || $SerieName == $ColName) {
 					$XPos = $this->GArea_X1 + $this->GAreaXOffset;
 					$XLast = - 1;
+					$lw = $this->LineWidth;
+					$this->LineWidth = 2;
 					foreach ( $Data as $Key => $Values ) {
 						if (isset ( $Data [$Key] [$ColName] )) {
 							$Value = $Data [$Key] [$ColName];
@@ -1664,6 +1668,7 @@ class pChart {
 						}
 						$XPos += $this->DivisionWidth;
 					}
+					$this->LineWidth = $lw;
 				}
 			}
 		}
@@ -3505,30 +3510,34 @@ class pChart {
 		if ($X < 0 || $Y < 0 || $X >= $this->XSize || $Y >= $this->YSize)
 			return;
 		
-		if ($Alpha != 100) {			
-			$RGB2 = imagecolorat ( $this->Picture, $X, $Y );
-			
-			//Calculate a unique cache key
-			//Optimization for heavy graph pages
-			//And its cheap
-			$k = $RGB2 . pack('CCCC',$R,$G,$B,$Alpha);
-			
-			//Check the alpha cache for a cached value
-			if(isset(self::$alphaCache[$k])){
-				$C_Aliased = self::$alphaCache[$k];
+		if ($Alpha != 100) {
+			if(static::USE_GD_ALPHA){
+				$C_Aliased = imagecolorallocatealpha($this->Picture, $R, $G, $B, (1 - ($Alpha / 100)) * 127);
 			}else{
-				//Alpha float and inverse
-				$Alpha = $Alpha / 100;
-				$iAlpha = 1 - $Alpha;
+				$RGB2 = imagecolorat ( $this->Picture, $X, $Y );
 				
-				//Calculate new colour
-				$B = ( int ) ($B * $Alpha + ($RGB2 & 0xFF) * $iAlpha);
-				$G = ( int ) ($G * $Alpha + (($RGB2 >>= 8) & 0xFF) * $iAlpha);
-				$R = ( int ) ($R * $Alpha + (($RGB2 >>= 8) & 0xFF) * $iAlpha);
+				//Calculate a unique cache key
+				//Optimization for heavy graph pages
+				//And its cheap
+				$k = $RGB2 . pack('CCCC',$R,$G,$B,$Alpha);
 				
-				//Allocate and store colour
-				$C_Aliased = self::AllocateColor ( $this->Picture, $R, $G, $B );
-				self::$alphaCache[$k] = $C_Aliased;
+				//Check the alpha cache for a cached value
+				if(isset(self::$alphaCache[$k])){
+					$C_Aliased = self::$alphaCache[$k];
+				}else{
+					//Alpha float and inverse
+					$Alpha = $Alpha / 100;
+					$iAlpha = 1 - $Alpha;
+					
+					//Calculate new colour
+					$B = ( int ) ($B * $Alpha + ($RGB2 & 0xFF) * $iAlpha);
+					$G = ( int ) ($G * $Alpha + (($RGB2 >>= 8) & 0xFF) * $iAlpha);
+					$R = ( int ) ($R * $Alpha + (($RGB2 >>= 8) & 0xFF) * $iAlpha);
+					
+					//Allocate and store colour
+					$C_Aliased = self::AllocateColor ( $this->Picture, $R, $G, $B );
+					self::$alphaCache[$k] = $C_Aliased;
+				}
 			}
 		} else {
 			$C_Aliased = self::AllocateColor ( $this->Picture, $R, $G, $B );
@@ -3638,25 +3647,37 @@ class pChart {
 			} else
 				$this->drawAlphaPixel ( $X, $Y, $Alpha, $R, $G, $B );
 		} else {
+			//2xAA
+			//[ ] [ ]
+			//[ ] [ ]
+			
+			//Common elements of the AA calculation
 			$xD = $X - $Xi;
 			$yD = $Y - $Yi;
+			$iY = (1 - $yD) * $Alpha;
+			$yD *= $Alpha;
 			
-			$pixel_alpha = (1 - $xD) * (1 - $yD) * $Alpha;
+			
+			//Top left
+			$pixel_alpha = (1 - $xD) * $iY;
 			if ($pixel_alpha > $this->AntialiasQuality) {
 				$this->drawAlphaPixel ( $Xi, $Yi, $pixel_alpha, $R, $G, $B );
 			}
 			
-			$pixel_alpha = $xD * (1 - $yD) * $Alpha;
+			//Top right
+			$pixel_alpha = $xD * $iY;
 			if ($pixel_alpha > $this->AntialiasQuality) {
 				$this->drawAlphaPixel ( $Xi + 1, $Yi, $pixel_alpha, $R, $G, $B );
 			}
 			
-			$pixel_alpha = (1 - $Xi) * $yD * $Alpha;
+			//Bottom left
+			$pixel_alpha = (1 - $Xi) * $yD;
 			if ($pixel_alpha > $this->AntialiasQuality) {
 				$this->drawAlphaPixel ( $Xi, $Yi + 1, $pixel_alpha, $R, $G, $B );
 			}
 			
-			$pixel_alpha = $xD * $yD * $Alpha;
+			//Bottom right
+			$pixel_alpha = $xD * $yD;
 			if ($pixel_alpha > $this->AntialiasQuality) {
 				$this->drawAlphaPixel ( $Xi + 1, $Yi + 1, $pixel_alpha, $R, $G, $B );
 			}
