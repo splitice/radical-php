@@ -24,7 +24,7 @@ class TableCache {
 			throw new \Exception('Couldnt add the object to TableCache, object is an instance of '.get_class($object));
 		}
 		if(self::$cache->count() > self::MAX_ENTRIES){
-			self::$cache->gc();
+			self::$cache->gc(true);
 		}
 		return $object;
 	}

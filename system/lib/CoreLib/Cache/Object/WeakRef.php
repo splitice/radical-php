@@ -40,9 +40,15 @@ class WeakRef {
 	function count(){
 		return count($this->data);
 	}
-	function gc(){
-		foreach($this->data as $k=>$v){
-			if(!$v->valid ()){
+	function gc($force = false){
+		if($this->weakrefSupport){
+			foreach($this->data as $k=>$v){
+				if(!$v->valid ()){
+					unset($this->data[$k]);
+				}
+			}
+		}elseif($force){
+			foreach($this->data as $k=>$v){
 				unset($this->data[$k]);
 			}
 		}
