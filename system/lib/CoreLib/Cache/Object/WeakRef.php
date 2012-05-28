@@ -37,6 +37,16 @@ class WeakRef {
 		}
 		$this->data[$key] = $value;
 	}
+	function count(){
+		return count($this->data);
+	}
+	function gc(){
+		foreach($this->data as $k=>$v){
+			if(!$v->valid ()){
+				unset($this->data[$k]);
+			}
+		}
+	}
 	function Delete($key){
 		if(isset($this->data[$key])){
 			unset($this->data[$key]);

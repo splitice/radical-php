@@ -3,6 +3,7 @@ namespace Database\Model\Table;
 use Database\Model\Table;
 
 class TableCache {
+	const MAX_ENTRIES = 500;
 	static $cache;
 	
 	private static function Init(){
@@ -21,6 +22,9 @@ class TableCache {
 			self::_Add($object->getIdKey(),$object);
 		}else{
 			throw new \Exception('Couldnt add the object to TableCache, object is an instance of '.get_class($object));
+		}
+		if(self::$cache->count() > self::MAX_ENTRIES){
+			self::$cache->gc();
 		}
 		return $object;
 	}
