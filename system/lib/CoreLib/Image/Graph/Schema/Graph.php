@@ -14,7 +14,7 @@ class Graph extends Internal\SchemaBase {
 	public $box;
 	public $legend;
 	public $symbol = 'circle';
-	public $type;
+	public $type = 'line';
 	
 	function __construct($data = array(),$type = 'line'){
 		$this->data = new Dataset($data);
