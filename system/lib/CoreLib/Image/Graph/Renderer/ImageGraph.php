@@ -25,7 +25,7 @@ abstract class ImageGraph {
 		
 		$data = $graph->data->asArray();
 		if($graph->type == 'pie'){
-			$data = array_values($data);
+			$data = array(array_values($data),array_keys($data));
 		}
 		
 		foreach($data as $name=>$series){
@@ -43,7 +43,6 @@ abstract class ImageGraph {
 			if(count($data) == 2){
 				$dataSet->SetAbsciseLabelSerie('s1');
 			}else{
-				die(var_dump($data));
 				throw new \Exception('Pie graph must have two series');
 			}
 		}
@@ -91,8 +90,8 @@ abstract class ImageGraph {
 			$pChart->drawPlotGraph($data,$dataSet->GetDataDescription(),3,2,255,255,255);
 		}elseif($graph->type == 'pie'){
 			try {
-				$radius = min($graph->box->width/2, $graph->box->height/2) - self::BORDER;
-				$pChart->drawPieGraph($data, $dataSet->GetDataDescription(), $graph->box->width/2, $graph->box->height/2, $radius);
+				$radius = max($graph->box->width/2, $graph->box->height/2) - (self::BORDER);
+				$pChart->drawPieGraph($data, $dataSet->GetDataDescription(), $graph->box->width/2, $graph->box->height/2, $radius, pChart::PIE_PERCENTAGE);
 			}catch(\Exception $ex){
 				die(var_dump($ex->getMessage()));
 			}
@@ -100,7 +99,11 @@ abstract class ImageGraph {
 		
 		// Finish the graph
 		$pChart->setFontProperties("tahoma.ttf",8);
-		$pChart->drawLegend(75,35,$dataSet->GetDataDescription(),255,255,255);
+		if($this->type == 'line'){
+			$pChart->drawLegend(75,35,$dataSet->GetDataDescription(),255,255,255);
+		}else{
+			$pChart->drawPieLegend(20,35,$dataSet->GetData(),$dataSet->GetDataDescription(),250,250,250);
+		}
 
 		return $pChart;
 	}

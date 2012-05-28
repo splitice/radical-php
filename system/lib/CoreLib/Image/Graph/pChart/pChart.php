@@ -2898,7 +2898,6 @@ class pChart {
 		$rPieSum = 0;
 		foreach ( $DataDescription ["Values"] as $Key2 => $ColName ) {
 			if ($ColName != $DataDescription ["Position"]) {
-				//echo(var_dump($DataDescription ["Position"]));
 				$Series ++;
 				foreach ( $Data as $Key => $Values )
 					if (isset ( $Data [$Key] [$ColName] )) {
@@ -2906,7 +2905,7 @@ class pChart {
 							$iValues [] = 0;
 							$rValues [] = 0;
 							$iLabels [] = $Data [$Key] [$DataDescription ["Position"]];
-						} 						// Removed : $PieSum++; $rValues[] = 1;
+						}
 						else {
 							$PieSum += $Data [$Key] [$ColName];
 							$iValues [] = $Data [$Key] [$ColName];
