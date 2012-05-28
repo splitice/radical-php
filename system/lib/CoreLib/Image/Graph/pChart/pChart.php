@@ -2898,6 +2898,7 @@ class pChart {
 		$rPieSum = 0;
 		foreach ( $DataDescription ["Values"] as $Key2 => $ColName ) {
 			if ($ColName != $DataDescription ["Position"]) {
+				//echo(var_dump($DataDescription ["Position"]));
 				$Series ++;
 				foreach ( $Data as $Key => $Values )
 					if (isset ( $Data [$Key] [$ColName] )) {
@@ -3584,17 +3585,14 @@ class pChart {
 	/*
 	 * Render the current picture to a file
 	 */
-	function Render($FileName) {
-		if ($this->ErrorReporting)
-			$this->printErrors ( $this->ErrorInterface );
-			
-			/*
+	function Render($FileName = null) {
+		/*
 		 * Save image map if requested
 		 */
 		if ($this->BuildMap)
 			$this->SaveImageMap ();
-		
-		imagepng ( $this->Picture, $FileName );
+
+		return imagepng ( $this->Picture, $FileName );
 	}
 	
 	/*

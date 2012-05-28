@@ -6,6 +6,8 @@ use Image\Graph\Renderer\IRenderable;
 class RawRender extends ImageGraph implements IRenderable {
 	function Output(\Image\Graph\Schema\Graph $schema){
 		$pChart = $this->_buildChart($schema);
-		$pChart->Render(null);
+		if(!$pChart->Render(null)){
+			throw new \Exception('Failed to render image: '.error_get_last());
+		}
 	}
 }
