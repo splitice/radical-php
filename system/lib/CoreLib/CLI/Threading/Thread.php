@@ -12,6 +12,8 @@ class Thread {
 	private static $current;
 	private static $refs = array ();
 	public $children = array ();
+	public $parent;
+	
 	private static function _ref($new) {
 		foreach ( self::$refs as $r ) {
 			$r->incr ();

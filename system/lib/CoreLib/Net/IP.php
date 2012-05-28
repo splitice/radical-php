@@ -39,4 +39,8 @@ class IP {
 	function __toString(){
 		return $this->ip;
 	}
+	
+	function toEscaped(){
+		return \DB::E($this->ip);
+	}
 }

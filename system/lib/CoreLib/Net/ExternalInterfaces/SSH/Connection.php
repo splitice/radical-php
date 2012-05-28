@@ -11,31 +11,32 @@ class Connection {
 	
 	//SFTP
 	private $sftp;
-	public $inSFTP;
 	
 	//Authentication SubClass
 	public $authenticate;
 	
-	function __construct($host,$port){
+	function __construct($host,$port,$methods = array()){
 		//Store details
 		$this->host = $host;
 		$this->port = $port;
 		
 		//Connect Resource
-		$this->ssh = ssh2_connect($host,$port,array(),array('disconnect'=>array($this,'onDisconnect')));
+		$this->ssh = ssh2_connect($host,$port,$methods,array('disconnect'=>array($this,'onDisconnect')));
 		
 		//Setup Auth
 		$this->authenticate = new Authenticate($this->ssh);
 	}
 	
 	function Close(){
-		if(!$this->inSFTP){
-			$this->exec($this->ssh, 'exit');
-		}
+		$this->exec('exit');
 		$this->ssh = null;
 	}
 	function __destruct(){
-		$this->Close();
+		try {
+			$this->Close();
+		}catch(\Exception $ex){
+			//I will except live with it
+		}
 	}
 	
 	function getResource(){
@@ -47,10 +48,11 @@ class Connection {
 	}
 	
 	function Execute($command, $pty = null, array $env = array(), $width = 80, $height = 25, $width_height_type = SSH2_TERM_UNIT_CHARS){
-		if($this->inSFTP){
-			throw new Exceptions\SFTPInProgressException('can not execute command');
-		}
 		$stream = ssh2_exec($this->ssh,$command,$env,$width,$height,$width_height_type);
+		
+		if(false === $stream){
+			throw new \Exception('Couldnt execute command, no stream returned');
+		}
 		
 		stream_set_blocking($stream, true);
 		
