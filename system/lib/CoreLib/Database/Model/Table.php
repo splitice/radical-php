@@ -179,16 +179,14 @@ abstract class Table implements ITable, \JsonSerializable {
 	function toSQL($in = null){
 		$ret = array();
 		foreach($this->orm->mappings as $k=>$mapped){
-			if(isset($this->$mapped)){
-				$v = $this->$mapped;
-				if(is_object($v) && isset($this->orm->relations[$k])){
-					$v = $v->getSQLField($k);
-				}
-				if(is_object($v) && $v instanceof IDynamicType){
-					$v = (string)$v;
-				}
-				$ret[$k] = $v;
+			$v = $this->$mapped;
+			if(is_object($v) && isset($this->orm->relations[$k])){
+				$v = $v->getSQLField($k);
 			}
+			if(is_object($v) && $v instanceof IDynamicType){
+				$v = (string)$v;
+			}
+			$ret[$k] = $v;
 		}
 		return $ret;
 	}
