@@ -36,8 +36,23 @@ class Scope {
 	
 	function url($object){
 		if(is_object($object)){
-			return $object->toURL();
+			$object = $object->toURL();
 		}
+		if(!is_string($object)){
+			throw new \Exception('Unknown type to URLify: '.gettype($object));
+		}
+		
+		//Check for a full 'schemed' URL
+		$first_part = substr($object,0,6);
+		if($first_part == 'http:/' || $first_part == 'ftp://' || $first_part == 'https:'){
+			return $object;//URL is full
+		}
+		
+		//Is relative? Make siterooted
+		if($first_part{0} != '/'){
+			return \Server::getSiteRoot().$first_part;
+		}
+		
 		return $object;
 	}
 	function u($object){
