@@ -18,5 +18,8 @@ class Start extends Internal\StandardCommand {
 			$cmd = 'screen -dmS '.escapeshellarg($_SCRIPT_NAME).' php5 '.escapeshellarg($script);
 			exec($cmd);
 		}
+		
+		//Write PID
+		
 	}
 }

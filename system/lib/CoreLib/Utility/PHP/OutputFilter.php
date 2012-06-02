@@ -1,7 +1,7 @@
 <?php
 namespace Output;
 
-class Filter {
+class OutputFilter {
 	private $function;
 	function __construct($function){
 		$this->function = $function;
@@ -12,13 +12,13 @@ class Filter {
 	}
 	
 	static $filters = array();
-	static function Register(Filter $filter){
+	static function Register(OutputFilter $filter){
 		if(!static::$filters){
 			ob_start(array(get_called_class(),'obFilter'));
 		}
 		static::$filters[] = $filter;
 	}
-	static function deRegister(Filter $filter){
+	static function deRegister(OutputFilter $filter){
 		foreach(static::$filters as $k=>$f){
 			if($f == $filter){
 				unset(static::$filters[$k]);
