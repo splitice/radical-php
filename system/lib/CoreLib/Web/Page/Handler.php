@@ -3,7 +3,7 @@ namespace Web;
 
 use Web\PageHandler\NullPageRequest;
 
-class PageHandler extends \Core\Object {
+class Handler extends \Core\Object {
 	static $__dependencies = array('interface.Web.PageHandler.IPage','interface.Web.PageHandler.IPage');
 	
 	/**
