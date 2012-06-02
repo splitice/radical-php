@@ -1,6 +1,6 @@
 <?php
 namespace ErrorHandling\Errors\Internal;
-use Web\Pages;
+use Web\Page\Controller;
 use ErrorHandling\IErrorException;
 
 abstract class ErrorException extends \Exception implements IErrorException {

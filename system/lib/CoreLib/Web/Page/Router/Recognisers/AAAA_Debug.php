@@ -1,6 +1,10 @@
 <?php
 namespace Web\Page\Router\Recognisers;
+
+use Web\Page\Router\Recognise;
 use Web\Page\Router\IPageRecognise;
+use Utility\Net\HTTP;
+use Web\Page\Controller;
 
 class AAAA_Debug implements IPageRecognise {
 	private static $enable = true;
@@ -8,7 +12,7 @@ class AAAA_Debug implements IPageRecognise {
 	private static function _call(\Net\URL $url){
 		//Execute origional page
 		ob_start();
-		$handler = \Web\PageRecogniser\Recognise::fromURL($url);
+		$handler = Recognise::fromURL($url);
 		if($handler){
 			$handler->Execute($_SERVER['REQUEST_METHOD']);
 		}
@@ -37,7 +41,7 @@ class AAAA_Debug implements IPageRecognise {
 			//Debug Wrapper
 			switch($mode){
 				case 'webgrind':
-					return new \Web\Pages\Debug\Profile((string)$_GET['dataFile']);
+					return new Controller\Debug\Profile((string)$_GET['dataFile']);
 					break;
 				
 				case 'profile':
@@ -49,13 +53,13 @@ class AAAA_Debug implements IPageRecognise {
 					$new_url->setHost($_SERVER['SERVER_ADDR']);
 					
 					//Execute debug request
-					$http = new \HTTP\Fetch((string)$new_url);
+					$http = new HTTP\Fetch((string)$new_url);
 					$http->setHeader('Host',$host);
 					$r = $http->Execute();
 					
 					//Execute WebGrind
 					$filename = /*'cachegrind.out.5503';//*/basename((string)$r);
-					return new \Web\Pages\Debug\Profile($filename);
+					return new Controller\Debug\Profile($filename);
 					break;
 					
 				case 'sql':

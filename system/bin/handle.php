@@ -5,6 +5,6 @@ new ErrorHandling\Handlers\OutputErrorHandler();
 
 $handler = Web\PageRecogniser\Recognise::fromRequest();
 if(!$handler){
-	$handler = new \Web\Pages\Special\FileNotFound();
+	$handler = new \Web\Page\Controller\Special\FileNotFound();
 }
 $handler->Execute($_SERVER['REQUEST_METHOD']);

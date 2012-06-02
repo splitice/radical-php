@@ -13,7 +13,7 @@ class Redirect extends Post {
 		}
 		
 		//Redirect
-		$page = new \Web\Pages\Special\Redirect($this->redirectUrl);
+		$page = new \Web\Page\Controller\Special\Redirect($this->redirectUrl);
 		$page->Execute('GET');
 		
 		//Bye

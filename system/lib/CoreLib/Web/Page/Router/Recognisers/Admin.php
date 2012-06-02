@@ -1,7 +1,7 @@
 <?php
 namespace Web\Page\Router\Recognisers;
 use Web\Page\Router\IPageRecognise;
-use Web\Pages;
+use Web\Page\Controller;
 use Web\Page\Handler;
 
 class Admin implements IPageRecognise {
@@ -13,9 +13,9 @@ class Admin implements IPageRecognise {
 			
 			$module = $url->firstPathElement();
 			if($module){
-				return new \Web\Pages\Admin($url,$module);
+				return new \Web\Page\Controller\Admin($url,$module);
 			}
-			return new \Web\Pages\Admin($url);
+			return new \Web\Page\Controller\Admin($url);
 		}
 	}
 }

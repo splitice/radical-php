@@ -1,6 +1,6 @@
 <?php
 namespace Web\Page\Controller\CSS_JS\CSS;
-use Web\Pages\CSS_JS\Internal\CombineBase;
+use Web\Page\Controller\CSS_JS\Internal\CombineBase;
 
 class Combine extends CombineBase {
 	const EXTENSION = 'css';

@@ -1,10 +1,12 @@
 <?php
 namespace Web\Page\Controller;
+
+use Web\Page\Handler\HTMLPageBase;
 use Utility\Image\Graph\Source\IGraphSource;
 use Web\Page\Handler;
 use Utility\Image\Graph\Renderer;
 
-abstract class PaypalBase extends Page\Handler\HTMLPageBase {
+abstract class PaypalBase extends HTMLPageBase {
 	private $action = 'process';
 	
 	abstract function getPaypalAccount();

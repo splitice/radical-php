@@ -2,7 +2,7 @@
 namespace Web\Page\Router\Recognisers\Templates;
 use Basic\String\Format;
 use Web\PageRecogniser\IPageRecognise;
-use Web\Pages;
+use Web\Page\Controller;
 use Web\Page\Handler;
 
 class Standard implements IPageRecognise {

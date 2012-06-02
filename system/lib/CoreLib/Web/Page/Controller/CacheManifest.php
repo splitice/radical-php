@@ -1,8 +1,10 @@
 <?php
 namespace Web\Page\Controller;
+
+use Web\Page\Handler\HTMLPageBase;
 use Web\Page\Handler;
 
-class CacheManifest extends Page\Handler\HTMLPageBase {	
+class CacheManifest extends HTMLPageBase {	
 	function getFiles($path){
 		foreach(glob($path.'/*') as $v){
 			if(is_dir($v)){
@@ -21,8 +23,8 @@ class CacheManifest extends Page\Handler\HTMLPageBase {
 		}
 		
 		//Add combined files
-		$files[] = ltrim(\Web\Pages\CSS_JS\CSS\Combine::Link('main'),'/');
-		$files[] = ltrim(\Web\Pages\CSS_JS\JS\Combine::Link('main'),'/');
+		$files[] = ltrim(CSS_JS\CSS\Combine::Link('main'),'/');
+		$files[] = ltrim(CSS_JS\JS\Combine::Link('main'),'/');
 		
 		return $files;
 	}

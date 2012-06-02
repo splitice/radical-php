@@ -4,7 +4,7 @@ use Web\Admin\AdminModuleBase;
 use Model\Database\Model\TableReferenceInstance;
 use Web\Session\User\IUserAdmin;
 use Net\URL\Pagination\QueryMethod;
-use Web\Pages\Special\Redirect;
+use Web\Page\Controller\Special\Redirect;
 use Web\Templates;
 
 class Database extends AdminModuleBase {

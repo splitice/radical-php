@@ -1,9 +1,11 @@
 <?php
 namespace Web\Page\Controller\Debug;
+
+use Web\Page\Handler\HTMLPageBase;
 use Web\Page\Handler;
 use Debug\WebGrind;
 
-class Profile extends Page\Handler\HTMLPageBase {
+class Profile extends HTMLPageBase {
 	protected $filename;
 	
 	function __construct($filename){

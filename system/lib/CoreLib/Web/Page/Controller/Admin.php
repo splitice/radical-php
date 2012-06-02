@@ -1,10 +1,11 @@
 <?php
 namespace Web\Page\Controller;
 
+use Web\Page\Handler\HTMLPageBase;
 use Web\Templates;
 use Web\Session\User\IUserAdmin;
 use Net\URL\Pagination\QueryMethod;
-use Web\Pages\Special\Redirect;
+use Web\Page\Controller\Special\Redirect;
 use Web\Page\Handler;
 
 /**
@@ -13,7 +14,7 @@ use Web\Page\Handler;
  * @author SplitIce
  *
  */
-class Admin extends Page\Handler\HTMLPageBase {
+class Admin extends HTMLPageBase {
 	const CLASS_PATH = '\\Web\\Admin\\Modules\\';
 	
 	protected $module;

@@ -2,7 +2,7 @@
 namespace Web\Page\Router\Recognisers;
 
 use Web\Page\Router\IPageRecognise;
-use Web\Pages;
+use Web\Page;
 use Web\Page\Handler;
 
 class Paypal implements IPageRecognise {

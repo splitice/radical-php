@@ -1,8 +1,9 @@
 <?php
 namespace Web\Page\Controller\Special;
+
 use Web\Page\Handler;
 
-class Redirect extends Page\Handler\PageBase {
+class Redirect extends Handler\PageBase {
 	protected $url;
 	
 	function __construct($url){

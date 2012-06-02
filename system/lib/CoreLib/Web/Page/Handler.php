@@ -4,7 +4,7 @@ namespace Web\Page;
 use Web\Page\Handler\NullPageRequest;
 
 class Handler extends \Core\Object {
-	static $__dependencies = array('interface.Web.Page\Handler.IPage','interface.Web.Page\Handler.IPage');
+	static $__dependencies = array('interface.Web.Page.Handler.IPage','interface.Web.Page.Handler.IPage');
 	
 	/**
 	 * A stack of Page\Handlers, used for preserving state (headers etc) during subrequests.
@@ -36,7 +36,7 @@ class Handler extends \Core\Object {
 	}
 	
 	static function Objectify($object,$data = null){
-		$class = '\\Web\\Pages\\'.$object;
+		$class = '\\Web\\Page\\Controller\\'.$object;
 		return new $class($data);
 	}
 }

@@ -2,7 +2,7 @@
 namespace Web\Page\Router\Recognisers;
 
 use Web\Page\Router\IPageRecognise;
-use Web\Pages;
+use Web\Page\Controller;
 use Web\Page\Handler;
 
 class API implements IPageRecognise {

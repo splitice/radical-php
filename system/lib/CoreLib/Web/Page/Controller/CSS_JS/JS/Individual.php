@@ -1,6 +1,6 @@
 <?php
 namespace Web\Page\Controller\CSS_JS\JS;
-use Web\Pages\CSS_JS\Internal\IndividualBase;
+use Web\Page\Controller\CSS_JS\Internal\IndividualBase;
 
 class Individual extends IndividualBase {
 	const MIME_TYPE = 'text/javascript';

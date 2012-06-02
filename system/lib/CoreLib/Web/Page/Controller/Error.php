@@ -1,11 +1,13 @@
 <?php
 namespace Web\Page\Controller;
-use Web\Template;
 
+use Web\Page\Router\Recognise;
+use Web\Page\Handler\HTMLPageBase;
+use Web\Template;
 use Web\Page\Handler;
 use ErrorHandling\Errors\Internal\ErrorException;
 
-class Error extends Page\Handler\HTMLPageBase {
+class Error extends HTMLPageBase {
 	private $error;
 	
 	function __construct(ErrorException $error){
@@ -21,7 +23,7 @@ class Error extends Page\Handler\HTMLPageBase {
 	}
 	
 	static function fromURL(\Net\URL $url){
-		$page = \Web\PageRecogniser\Recognise::fromURL($url);
+		$page = Recognise::fromURL($url);
 		return new static($page);
 	}
 }

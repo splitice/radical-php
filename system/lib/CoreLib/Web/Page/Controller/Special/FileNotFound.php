@@ -1,8 +1,10 @@
 <?php
 namespace Web\Page\Controller\Special;
+
+use Web\Page\Handler\HTMLPageBase;
 use Web\Page\Handler;
 
-class FileNotFound extends Page\Handler\HTMLPageBase {
+class FileNotFound extends HTMLPageBase {
 	function Title(){
 		return parent::Title('404 - File Not Found');
 	}

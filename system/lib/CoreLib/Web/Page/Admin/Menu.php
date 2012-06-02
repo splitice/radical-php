@@ -1,7 +1,7 @@
 <?php
 namespace Web\Page\Admin;
 
-use Web\Pages\Admin;
+use Web\Page\Controller\Admin;
 
 use Basic\Arr;
 use Web\Template;

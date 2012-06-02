@@ -1,6 +1,8 @@
 <?php
 namespace Web\Page\Controller\CSS_JS\JS;
-use Web\Pages\CSS_JS\Internal\CombineBase;
+
+use Web\Page\Controller\CSS_JS\Internal\CombineBase;
+use Web\Optimiser;
 
 class Combine extends CombineBase {
 	const EXTENSION = 'js';
@@ -8,6 +10,6 @@ class Combine extends CombineBase {
 	
 	function Optimize($code){
 		return $code;
-		return \HTML\Optimiser\Javascript\JSMin::minify($ret);
+		return Optimiser\Javascript\JSMin::minify($ret);
 	}
 }
