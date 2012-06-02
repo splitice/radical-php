@@ -11,6 +11,9 @@ class Server {
 		return (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN');
 	}
 	static function getSiteRoot(){
-		return '/';
+		global $_SITEROOT;
+		if(!isset($_SITEROOT))
+			return '/';
+		return $_SITEROOT;
 	}
 }
