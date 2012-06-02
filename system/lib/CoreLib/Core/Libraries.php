@@ -1,29 +1,26 @@
 <?php
-use \Basic\ArrayLib\Object\SortedCollectionObject;
-
-//psudeo Class
-class ClassLoader extends Autoloader {
+class Libraries {
+	static function path($path){
+		return Autoloader::resolve($path);
+	}
+	static function toClass($path){
+		return str_replace(DIRECTORY_SEPARATOR, '\\', $path);
+	}
+	static function getProjectSpace($v){
+		global $_PROJECT;
+		return '\\'.$_PROJECT.'\\'.ltrim($v,'\\');
+	}
 	static function toPath($class,$full = false){
 		if($full){
 			return AutoLoader::resolve($class);
 		}
 		return str_replace('\\', DIRECTORY_SEPARATOR, $class);
 	}
-	
-	static function toClass($path){
-		return str_replace(DIRECTORY_SEPARATOR, '\\', $path);
-	}
-	
-	static function getProjectSpace($v){
-		global $_PROJECT;
-		return '\\'.$_PROJECT.'\\'.ltrim($v,'\\');
-	}
-	
 	static function getNSExpression($expr){
 		$ret = array();
 	
 		$path_expr = static::toPath($expr).'.php';
-
+	
 		$paths = parent::$pathCache;
 		foreach($paths as $p){
 			foreach(glob($p.$path_expr) as $file){
@@ -58,30 +55,6 @@ class ClassLoader extends Autoloader {
 			}
 		}
 		return array_unique($classes);
-	}
-	
-	static function getVars(){
-		$vars = new SortedCollectionObject(function($a,$b){
-			$a = strlen($a);
-			$b = strlen($b);
-			
-			if($a == $b) return 0;
-			if($a > $b) return -1;
-			return 1;
-		});
-		//$vars['projectDir'] = AutoLoader::$;
-		$vars['baseDir'] = AutoLoader::$baseDir;
-		
-		return $vars;
-	}
-	
-	static function pathVariblize($path){
-		//Prepare
-		$vars = static::getVars();
-		$path = realpath($path);
-
-		$path = new File\Instance($path);
-		return $path->compact($vars);
 	}
 	
 	static function getLibraries(){

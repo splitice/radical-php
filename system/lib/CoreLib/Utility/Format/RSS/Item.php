@@ -2,9 +2,11 @@
 namespace Net\ExternalInterfaces\RSS;
 
 class Item extends \Net\ExternalInterfaces\Internal\DownloadableItem {
-	var $title;
-	var $description;
-	var $document;
+	private $channel;
+	protected $title;
+	protected $description;
+	protected $link;
+	protected $pubDate;
 	
 	function isEmpty(){
 		if(!$this->title || !$this->link){

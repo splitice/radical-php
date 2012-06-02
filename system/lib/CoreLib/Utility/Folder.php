@@ -1,12 +1,12 @@
 <?php
 class Folder {
-	static function ListDir($expr, $recursive = false) {
+	static function ListDir($path, $recursive = false) {
 		if ($recursive) {
-			if(is_file($expr)){
-				return array($expr);
+			if(is_file($path)){
+				return array($path);
 			}
 			
-			$items = glob ( $expr . '/*' );
+			$items = glob ( $path . '/*' );
 			
 			for($i = 0; $i < count ( $items ); $i ++) {
 				if (is_dir ( $items [$i] )) {
@@ -25,11 +25,11 @@ class Folder {
 			
 			return $items;
 		} else {
-			return glob ( $expr );
+			return glob ( $path.'/*' );
 		}
 	}
 	
-	static function SaneCreate($a) {
+	static function CreatePath($a) {
 		if (is_array ( $a )) {
 			foreach ( $a as $v ) {
 				self::SaneCreate ( $v );
@@ -37,8 +37,8 @@ class Folder {
 			return true;
 		}
 		$path = '';
-		foreach ( explode ( '/', $a ) as $v ) {
-			$path .= '/' . $v;
+		foreach ( explode ( DIRECTORY_SEPARATOR, $a ) as $v ) {
+			$path .= DIRECTORY_SEPARATOR . $v;
 			self::Create($path);
 		}
 	}
