@@ -1,5 +1,5 @@
 <?php
-namespace Image\Upload;
+namespace Utility\Image\Upload;
 
 use Basic\Structs\LoginDetails;
 

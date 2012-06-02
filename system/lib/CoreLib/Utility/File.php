@@ -1,4 +1,6 @@
 <?php
+namespace Utility;
+
 class File {
 	function __construct($file){
 		throw new \Exception('Static now, depreciated interface');

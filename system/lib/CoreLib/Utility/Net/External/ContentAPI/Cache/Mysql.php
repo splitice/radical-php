@@ -1,5 +1,5 @@
 <?php
-namespace Net\ExternalInterfaces\ContentAPI\Cache;
+namespace Net\External\ContentAPI\Cache;
 
 use Model\Database\Model\DynamicTableReference;
 

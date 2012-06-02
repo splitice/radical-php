@@ -1,5 +1,5 @@
 <?php
-namespace PHPLinq\Provider;
+namespace Utility\Linq\Provider;
 use PHPLinq\Expression;
 use PHPLinq\OrderByExpression;
 use PHPLinq\Initiator;

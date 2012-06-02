@@ -1,5 +1,5 @@
 <?php
-namespace Image;
+namespace Utility\Image;
 class AdultImageDetection
 {                              #R  G  B
     const colorA = 7944996;     #79 3B 24

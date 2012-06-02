@@ -1,5 +1,5 @@
 <?php
-namespace Image\Graph\Schema;
+namespace Utility\Image\Graph\Schema;
 
 use Basic\ArrayLib\Object\CollectionObject;
 

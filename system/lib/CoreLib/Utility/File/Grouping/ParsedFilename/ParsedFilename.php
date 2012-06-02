@@ -1,5 +1,5 @@
 <?php
-namespace File\Format\Grouping\ParsedFilename;
+namespace Utility\File\Format\Grouping\ParsedFilename;
 
 abstract class ParsedFilename {
 	protected $fullPath;

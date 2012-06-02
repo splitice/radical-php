@@ -1,7 +1,7 @@
 <?php
-namespace HTTP;
+namespace Utility\HTTP;
 
-use HTTP\Curl\CurlBase;
+use Utility\Net\HTTP\Curl\CurlBase;
 
 class Curl extends CurlBase {
 	private $ch;

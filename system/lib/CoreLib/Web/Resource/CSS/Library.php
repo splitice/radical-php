@@ -1,6 +1,6 @@
 <?php
 namespace Web\Resource\CSS;
-use HTML\Tag;
+use Utility\HTML\Tag;
 
 class Library extends Tag\Link {
 	static $__dependencies = array('interface.HTML.CSS.ICSSLibrary');

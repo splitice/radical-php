@@ -1,4 +1,4 @@
 <?php
-namespace Video\Metadata;
+namespace Utility\Video\Metadata;
 
 class WMA extends WMV {}

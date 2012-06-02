@@ -1,5 +1,5 @@
 <?php
-namespace HTTP\Curl;
+namespace Utility\Net\HTTP\Curl;
 
 class Response {
 	private $response;

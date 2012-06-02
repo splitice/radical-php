@@ -1,5 +1,5 @@
 <?php
-namespace Image\Filters;
+namespace Utility\Image\Filters;
 
 class Resize extends Internal\FilterBase implements Interfaces\IExternalFilter {
 	protected $width;

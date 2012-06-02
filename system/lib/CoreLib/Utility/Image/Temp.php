@@ -1,5 +1,5 @@
 <?php
-namespace Image;
+namespace Utility\Image;
 
 class Temp extends \Image\File {
 	static function getTempName(){

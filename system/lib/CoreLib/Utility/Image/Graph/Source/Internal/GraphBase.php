@@ -1,5 +1,5 @@
 <?php
-namespace Image\Graph\Source\Internal;
+namespace Utility\Image\Graph\Source\Internal;
 use Image\Graph\Source\IGraphSource;
 
 use Image\Graph\Renderer\IRenderable;

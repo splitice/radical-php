@@ -1,6 +1,6 @@
 <?php
 
-namespace Image\Graph\pChart;
+namespace Utility\Image\Graph\pChart;
 use Basic\DateTime\Timestamp;
 
 /*

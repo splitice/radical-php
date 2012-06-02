@@ -1,5 +1,5 @@
 <?php
-namespace Image\Filters;
+namespace Utility\Image\Filters;
 
 class CropSquare extends Internal\FilterBase implements Interfaces\IExternalFilter {
 	/**

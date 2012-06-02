@@ -1,5 +1,5 @@
 <?php
-namespace Image\Watermark;
+namespace Utility\Image\Watermark;
 
 class WatermarkScaled extends Watermark {
 	private $height;

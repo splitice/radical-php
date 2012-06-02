@@ -1,5 +1,5 @@
 <?php
-namespace Image\Watermark;
+namespace Utility\Image\Watermark;
 
 class Watermark implements IWatermark {
 	protected $watermark;

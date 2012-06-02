@@ -1,5 +1,5 @@
 <?php
-namespace File\Format\Grouping;
+namespace Utility\File\Format\Grouping;
 
 class FilenameParse {
 	static function parse($filename){

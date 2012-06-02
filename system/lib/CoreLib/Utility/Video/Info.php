@@ -1,5 +1,5 @@
 <?php
-namespace Video;
+namespace Utility\Video;
 
 class Info {
 	function __construct($video){

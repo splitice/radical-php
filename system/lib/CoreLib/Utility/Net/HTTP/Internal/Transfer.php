@@ -1,5 +1,5 @@
 <?php
-namespace HTTP\Internal;
+namespace Utility\HTTP\Internal;
 
 class Transfer extends FetchBase {
 	private $id;

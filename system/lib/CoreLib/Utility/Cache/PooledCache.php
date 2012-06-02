@@ -1,5 +1,5 @@
 <?php
-namespace Cache;
+namespace Utility\Cache;
 
 class PooledCache {
 	protected static $cache = array();

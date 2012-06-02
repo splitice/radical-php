@@ -1,5 +1,5 @@
 <?php
-namespace Image\Upload;
+namespace Utility\Image\Upload;
 
 class PixHost extends _BASE implements IUploadHost {
 	static $ch = array();

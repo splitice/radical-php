@@ -1,5 +1,5 @@
 <?php
-namespace HTTP;
+namespace Utility\HTTP;
 
 abstract class StaticBase {
 	static function Fetch($url){

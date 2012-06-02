@@ -1,6 +1,8 @@
 <?php
 namespace Web\Resource;
-use HTML\Tag;
+use Core\Libraries;
+
+use Utility\HTML\Tag;
 
 class Library extends Tag\Script {
 	static $__dependencies = array('interface.HTML.Javascript.IJavascriptLibrary');
@@ -16,7 +18,7 @@ class Library extends Tag\Script {
 	
 	static function Find($library,$version = null){
 		$library = strtolower($library);
-		$libs = \ClassLoader::getNSExpression('HTML\\Javascript\\Libraries\\*');
+		$libs = Libraries::getNSExpression('HTML\\Javascript\\Libraries\\*');
 		foreach($libs as $l){
 			$ll = strtolower(array_pop(explode('\\',$l)));
 			if($ll == $library){

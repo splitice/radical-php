@@ -1,5 +1,5 @@
 <?php
-namespace Image\Filters;
+namespace Utility\Image\Filters;
 
 class OptiCropSquare extends Internal\FilterBase implements Interfaces\IExternalFilter {
 	private $gamma = 0.3;

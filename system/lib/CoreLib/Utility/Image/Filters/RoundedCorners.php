@@ -1,5 +1,5 @@
 <?php
-namespace Image\Filters;
+namespace Utility\Image\Filters;
 
 class RoundedCorners extends Internal\FilterBase implements Interfaces\IExternalFilter {
 	protected $radius;

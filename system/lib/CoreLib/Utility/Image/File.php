@@ -1,5 +1,5 @@
 <?php
-namespace Image;
+namespace Utility\Image;
 
 class File extends \File {
 	const TYPE_SAFE = 1;

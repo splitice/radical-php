@@ -1,5 +1,5 @@
 <?php
-namespace Image\Filters\Interfaces;
+namespace Utility\Image\Filters\Interfaces;
 
 interface IExternalFilter {
 	function toData();

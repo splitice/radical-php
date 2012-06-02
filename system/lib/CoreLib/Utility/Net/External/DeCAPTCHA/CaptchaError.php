@@ -1,4 +1,4 @@
 <?php
-namespace Net\ExternalInterfaces\DeCAPTCHA;
+namespace Net\External\DeCAPTCHA;
 
 class CaptchaError extends \Exception {}

@@ -1,5 +1,5 @@
 <?php
-namespace Net\ExternalInterfaces\ContentAPI\Modules\Internal;
+namespace Net\External\ContentAPI\Modules\Internal;
 use \Net\ExternalInterfaces\ContentAPI\Interfaces;
 use \Basic\ArrayLib\Object\ArrayObject;
 

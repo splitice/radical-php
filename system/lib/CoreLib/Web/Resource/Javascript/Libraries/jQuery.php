@@ -1,6 +1,6 @@
 <?php
 namespace Web\Resource\Libraries;
-use HTML\Shared;
+use Web\Resource\Shared;
 
 class jQuery extends Shared\LibraryBase implements IJavascriptLibrary {
 	const URL = 'http://ajax.googleapis.com/ajax/libs/jquery/%(version)s/jquery.min.js';

@@ -1,5 +1,5 @@
 <?php
-namespace PHPLinq;
+namespace Utility\Linq;
 
 /**
  * PHPLinq

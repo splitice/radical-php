@@ -1,5 +1,5 @@
 <?php
-namespace Image\Filters\Internal;
+namespace Utility\Image\Filters\Internal;
 
 abstract class FilterBase {
 	function Execute($gd){

@@ -1,5 +1,5 @@
 <?php
-namespace Net\ExternalInterfaces;
+namespace Net\External;
 class DeCAPTCHA {
 	private static function Status($e){
 		

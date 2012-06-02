@@ -1,5 +1,5 @@
 <?php
-namespace Cache\Object\Internal;
+namespace Utility\Cache\Object\Internal;
 
 abstract class FileCacheBase extends CacheBase {
 	private $cachePath;

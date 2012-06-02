@@ -1,5 +1,5 @@
 <?php
-namespace Net\ExternalInterfaces\rTorrent;
+namespace Net\External\rTorrent;
 class Torrent extends _CORE {
 	var $hash;
 	var $host;

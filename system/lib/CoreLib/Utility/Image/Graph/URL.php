@@ -1,5 +1,5 @@
 <?php
-namespace Image\Graph;
+namespace Utility\Image\Graph;
 
 use Web\Interfaces\IToURL;
 

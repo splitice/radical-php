@@ -1,5 +1,5 @@
 <?php
-namespace Cache\Object;
+namespace Utility\Cache\Object;
 
 /**
  * Persistant Memory Cache System

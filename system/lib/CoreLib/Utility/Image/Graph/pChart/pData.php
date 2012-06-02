@@ -1,5 +1,5 @@
 <?php
-namespace Image\Graph\pChart;
+namespace Utility\Image\Graph\pChart;
 /*
  * pData - Simplifying data population for pChart Copyright (C) 2008 Jean-Damien
  * POGOLOTTI Version 1.13 last updated on 08/17/08 http://pchart.sourceforge.net

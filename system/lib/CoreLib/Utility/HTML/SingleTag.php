@@ -1,5 +1,5 @@
 <?php
-namespace HTML;
+namespace Utility\HTML;
 
 class SingleTag extends \Core\Object {
 	protected $tag;

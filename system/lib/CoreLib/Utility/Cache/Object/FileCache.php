@@ -1,5 +1,5 @@
 <?php
-namespace Cache\Object;
+namespace Utility\Cache\Object;
 
 class FileCache extends Internal\FileCacheBase implements ICache {
 	const PATH = 'main';

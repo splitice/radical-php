@@ -1,5 +1,5 @@
 <?php
-namespace Image\Filters;
+namespace Utility\Image\Filters;
 
 class ImageJoin extends Internal\FilterBase implements Interfaces\IInternalFilter {
 	protected $type;

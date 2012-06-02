@@ -1,5 +1,5 @@
 <?php
-namespace Image\Graph\Schema;
+namespace Utility\Image\Graph\Schema;
 
 class Axis extends Internal\SchemaBase {
 	public $format = 'number';

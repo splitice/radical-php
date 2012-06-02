@@ -1,5 +1,5 @@
 <?php
-namespace Net\ExternalInterfaces\ContentAPI\Internal;
+namespace Net\External\ContentAPI\Internal;
 
 abstract class ConfigBase extends \Core\Object {
 	const CACHE = null;

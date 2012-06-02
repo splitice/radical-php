@@ -1,5 +1,5 @@
 <?php
-namespace Image\Interfaces;
+namespace Utility\Image\Interfaces;
 
 interface IFetch {
 	function Fetch();

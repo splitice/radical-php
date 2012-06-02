@@ -1,5 +1,5 @@
 <?php
-namespace HTML;
+namespace Utility\HTML;
 
 class Page {
 	protected $dom;

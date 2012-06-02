@@ -1,4 +1,6 @@
 <?php
+namespace Utility;
+
 class Folder {
 	static function ListDir($path, $recursive = false) {
 		if ($recursive) {

@@ -1,5 +1,5 @@
 <?php
-namespace Video\Metadata\Internal;
+namespace Utility\Video\Metadata\Internal;
 
 abstract class MetadataBase {
 	function supports($k){

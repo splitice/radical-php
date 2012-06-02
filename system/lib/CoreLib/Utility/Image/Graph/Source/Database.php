@@ -1,5 +1,5 @@
 <?php
-namespace Image\Graph\Source;
+namespace Utility\Image\Graph\Source;
 use Model\Database\DBAL\Fetch;
 use Model\Database\DBAL\Result;
 use Graph\pChart\pData;

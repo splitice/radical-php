@@ -1,5 +1,5 @@
 <?php
-namespace Cache;
+namespace Utility\Cache;
 
 class GlobalCache extends PooledCache {
 	const POOL_NAME = 'global';

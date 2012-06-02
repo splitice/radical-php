@@ -1,5 +1,5 @@
 <?php
-namespace Video\Metadata;
+namespace Utility\Video\Metadata;
 
 class WMV extends Internal\MetadataBase implements IMetaData {
 	protected $supports = array('title','author','copyright','comment');

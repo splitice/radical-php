@@ -1,5 +1,5 @@
 <?php
-namespace Image\Graph\Renderer;
+namespace Utility\Image\Graph\Renderer;
 use Image\Graph\Source\Internal\GraphBase;
 use CLI\PHP\Extension;
 use Image\Graph\pChart\pChart;

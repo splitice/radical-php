@@ -1,5 +1,5 @@
 <?php
-namespace CLI\PHP;
+namespace Utility\PHP;
 
 class Extension {
 	private $name;

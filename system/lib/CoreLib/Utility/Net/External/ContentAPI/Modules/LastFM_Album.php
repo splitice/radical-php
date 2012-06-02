@@ -1,5 +1,5 @@
 <?php
-namespace Net\ExternalInterfaces\ContentAPI\Modules;
+namespace Net\External\ContentAPI\Modules;
 use \Net\ExternalInterfaces\ContentAPI\Interfaces;
 
 class LastFM_Album extends Internal\ModuleBase implements Interfaces\IFromURL {

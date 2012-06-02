@@ -1,7 +1,9 @@
 <?php
-namespace HTML\Tag;
+namespace Utility\HTML\Tag;
 
-class Link extends \HTML\Element {
+use Utility\HTML\Element;
+
+class Link extends Element {
 	function __construct($href,$rel='stylesheet',$media=null){
 		parent::__construct('link',array('rel'=>$rel,'href'=>$href,'media'=>$media));
 	}

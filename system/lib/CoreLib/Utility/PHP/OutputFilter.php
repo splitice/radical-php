@@ -1,5 +1,5 @@
 <?php
-namespace Output;
+namespace Utility\PHP;
 
 class OutputFilter {
 	private $function;

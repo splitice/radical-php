@@ -1,5 +1,5 @@
 <?php
-namespace File\Format;
+namespace Utility\File\Format;
 class XML {
 	static function Repair($str){
 		// Specify configuration

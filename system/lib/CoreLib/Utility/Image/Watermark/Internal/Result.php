@@ -1,5 +1,5 @@
 <?php
-namespace Image\Watermark\Internal;
+namespace Utility\Image\Watermark\Internal;
 
 class Result {
 	function __construct($image){

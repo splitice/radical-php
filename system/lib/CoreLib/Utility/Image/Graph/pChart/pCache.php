@@ -1,5 +1,5 @@
 <?php
-namespace Image\Graph\pChart;
+namespace Utility\Image\Graph\pChart;
  /*
      pCache - Faster renderding using data cache
      Copyright (C) 2008 Jean-Damien POGOLOTTI

@@ -1,4 +1,6 @@
 <?php
+namespace Utility;
+
 /**
  * PHPLinq
  *
@@ -33,6 +35,6 @@ class Linq {
 	 * @return PHPLinq_Initiator
 	 */
 	static function from($name){
-		return new PHPLinq\Initiator($name);
+		return new Linq\Initiator($name);
 	}
 }

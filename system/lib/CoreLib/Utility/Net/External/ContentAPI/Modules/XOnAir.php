@@ -1,5 +1,5 @@
 <?php
-namespace Net\ExternalInterfaces\ContentAPI\Modules;
+namespace Net\External\ContentAPI\Modules;
 class XOnAir extends Internal\ModuleBase implements \Net\ExternalInterfaces\ContentAPI\Interfaces\IFromURL {
 	const URL_RULE = '#xonair\.com\/detail\.cfm\?(?:.*)id=([0-9]+)#i';
 	const URL = 'http://www.xonair.com';

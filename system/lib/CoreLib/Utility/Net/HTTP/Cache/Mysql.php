@@ -1,5 +1,5 @@
 <?php
-namespace HTTP\Cache;
+namespace Utility\HTTP\Cache;
 
 use Model\Database\Model\DynamicTableReference;
 use Model\Database\Model\DynamicTableInstance;
@@ -24,7 +24,7 @@ class Mysql extends DynamicTableInstance {
 				unset($data[$k]);
 			}
 		}
-		return new \HTTP\Curl\Response($info, $data['response']);
+		return new \Utility\Net\HTTP\Curl\Response($info, $data['response']);
 	}
 	
 	static private function getTable(){
@@ -71,7 +71,7 @@ class Mysql extends DynamicTableInstance {
 			return $data;
 		}
 	}
-	static function Set(\HTTP\Curl\Response $data,$url,$ttl = 0){
+	static function Set(\Utility\Net\HTTP\Curl\Response $data,$url,$ttl = 0){
 		$table = static::getTable();
 		
 		$data = $data->toSQL();

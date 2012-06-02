@@ -1,5 +1,5 @@
 <?php
-namespace Image\Graph\Schema\Internal;
+namespace Utility\Image\Graph\Schema\Internal;
 
 abstract class SchemaBase implements \JsonSerializable {
 	function jsonSerialize(){

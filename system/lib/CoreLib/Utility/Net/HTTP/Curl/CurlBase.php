@@ -1,5 +1,5 @@
 <?php
-namespace HTTP\Curl;
+namespace Utility\Net\HTTP\Curl;
 use Basic\ArrayLib\Object\CollectionObject;
 
 abstract class CurlBase extends CollectionObject {

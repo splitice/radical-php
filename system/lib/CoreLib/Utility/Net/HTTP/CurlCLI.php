@@ -1,7 +1,7 @@
 <?php
 namespace HTTP;
 
-use HTTP\Curl\CurlBase;
+use Utility\Net\HTTP\Curl\CurlBase;
 
 class CurlCLI extends CurlBase {
 	public $cookieManager;

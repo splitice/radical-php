@@ -1,5 +1,5 @@
 <?php
-namespace PHPLinq\Adapter;
+namespace Utility\Linq\Adapter;
 
 /**
  * PHPLinq

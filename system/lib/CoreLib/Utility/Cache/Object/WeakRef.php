@@ -1,5 +1,5 @@
 <?php
-namespace Cache\Object;
+namespace Utility\Cache\Object;
 
 class WeakRef {
 	private $data = array();

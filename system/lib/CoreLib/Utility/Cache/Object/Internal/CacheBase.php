@@ -1,5 +1,5 @@
 <?php
-namespace Cache\Object\Internal;
+namespace Utility\Cache\Object\Internal;
 
 /**
  * Base class for all caches

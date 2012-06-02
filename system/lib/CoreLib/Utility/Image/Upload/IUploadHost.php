@@ -1,5 +1,5 @@
 <?php
-namespace Image\Upload;
+namespace Utility\Image\Upload;
 
 interface IUploadHost {
 	static function Login($username = null,$password = null);

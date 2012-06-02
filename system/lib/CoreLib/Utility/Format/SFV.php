@@ -1,5 +1,5 @@
 <?php
-namespace File\Format;
+namespace Utility\File\Format;
 
 class SFV extends \File\Instance {
 	private $entries = array();

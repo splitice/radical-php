@@ -1,5 +1,5 @@
 <?php
-namespace Net\ExternalInterfaces;
+namespace Net\External;
 class SABnzbd {
 	private $data;
 	

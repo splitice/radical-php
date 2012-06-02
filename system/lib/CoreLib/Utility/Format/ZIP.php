@@ -1,5 +1,5 @@
 <?php
-namespace File\Format;
+namespace Utility\File\Format;
 
 class ZIP extends \File\Instance {
 	function __construct($filename, $create = false){

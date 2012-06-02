@@ -1,4 +1,4 @@
 <?php
-namespace Image\Upload;
+namespace Utility\Image\Upload;
 class UploadException extends \Exception { }
 ?>

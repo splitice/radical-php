@@ -1,7 +1,7 @@
 <?php
-namespace HTTP;
+namespace Utility\HTTP;
 
-class Fetch extends Internal\FetchBase {	
+class Fetch {	
 	public $curl;
 	private $headers = array();
 	

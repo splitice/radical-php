@@ -1,5 +1,5 @@
 <?php
-namespace File\Format;
+namespace Utility\File\Format;
 
 class RAR {
 	private $src;

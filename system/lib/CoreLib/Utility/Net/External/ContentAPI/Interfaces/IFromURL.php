@@ -1,5 +1,5 @@
 <?php
-namespace Net\ExternalInterfaces\ContentAPI\Interfaces;
+namespace Net\External\ContentAPI\Interfaces;
 
 interface IFromURL {
 	static function RecogniseURL($url);

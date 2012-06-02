@@ -1,7 +1,9 @@
 <?php
-namespace HTML\Tag;
+namespace Utility\HTML\Tag;
 
-class Meta extends \HTML\Element {
+use Utility\HTML\Element;
+
+class Meta extends Element {
 	function __construct($name,$content){
 		parent::__construct('meta',array('name'=>$name,'content'=>$content));
 	}

@@ -1,5 +1,5 @@
 <?php
-namespace HTTP;
+namespace Utility\HTTP;
 
 class CachedFetch extends Fetch {
 	public $cache;

@@ -1,5 +1,5 @@
 <?php
-namespace Cache;
+namespace Utility\Cache;
 
 class FunctionCache extends GlobalCache {
 	const POOL_NAME = 'function';
