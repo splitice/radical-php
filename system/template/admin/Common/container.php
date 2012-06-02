@@ -46,7 +46,7 @@
 
 	<div class="clear">&nbsp;</div>
 
-	<?=$_->subrequest(new \Web\Admin\Menu());?>
+	<?=$_->subrequest(new \Web\Page\Admin\Menu());?>
 
 	<div class="clear"></div>
 

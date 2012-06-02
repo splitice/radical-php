@@ -1,6 +1,8 @@
 <?php
 namespace CLI\Console\Progress;
 
+use Utility\PHP\OutputFilter;
+
 use CLI\Threading\Thread;
 use CLI\Console\Details;
 
@@ -12,7 +14,7 @@ class Container extends \Core\Object {
 	function __construct(){
 		static::$instance = $this;
 		
-		$this->filter = new \Output\Filter(array($this,'outputBuffer'));
+		$this->filter = new OutputFilter(array($this,'outputBuffer'));
 	}
 	
 	static function getInstance(){
@@ -35,7 +37,7 @@ class Container extends \Core\Object {
 		if(ob_get_level()) ob_flush();
 		
 		//Remove Output Buffering
-		\Output\Filter::deRegister($this->filter);
+		OutputFilter::deRegister($this->filter);
 		
 		//Remove instance
 		static::$instance = null;
@@ -129,13 +131,13 @@ class Container extends \Core\Object {
 			$bars = $this->_Render();
 
 			//End Output Buffering
-			\Output\Filter::deRegister($this->filter);
+			OutputFilter::deRegister($this->filter);
 			
 			//Output Bars
 			echo $this->eraseLine(),$bars;
 			
 			//Re-install Output buffering
-			\Output\Filter::Register($this->filter);
+			OutputFilter::Register($this->filter);
 		}
 	}
 	

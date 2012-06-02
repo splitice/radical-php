@@ -1,5 +1,5 @@
 <?php
-use Web\Interfaces\IToURL;
+use Web\IToURL;
 
 function oneof($object, $class){
 	if(is_object($object)) return $object instanceof $class;

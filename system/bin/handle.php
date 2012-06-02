@@ -3,7 +3,7 @@ include(__DIR__.'/../include/common.php');
 
 new ErrorHandling\Handlers\OutputErrorHandler();
 
-$handler = Web\PageRecogniser\Recognise::fromRequest();
+$handler = Web\Page\Router\Recognise::fromRequest();
 if(!$handler){
 	$handler = new \Web\Page\Controller\Special\FileNotFound();
 }

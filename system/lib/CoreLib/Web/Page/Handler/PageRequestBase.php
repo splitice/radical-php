@@ -1,5 +1,9 @@
 <?php
 namespace Web\Page\Handler;
+use Web\Page\Handler\Exceptions\PageHandlerException;
+
+use Utility\Net\External\ContentAPI\Recognise;
+
 use Web\Page\Handler as PH;
 
 abstract class PageRequestBase {
@@ -43,7 +47,7 @@ abstract class PageRequestBase {
 				PH::Pop();
 				ob_end_flush();
 				$this->headers->Clear();
-				throw new Exceptions\Page\HandlerException('Max request depth of '.static::MAX_REQUEST_DEPTH.' exceeded.');
+				throw new PageHandlerException('Max request depth of '.static::MAX_REQUEST_DEPTH.' exceeded.');
 			}
 		}
 	
@@ -52,11 +56,11 @@ abstract class PageRequestBase {
 			PH::Pop();
 			ob_end_flush();
 			$this->headers->Clear();
-			throw new Exceptions\Page\HandlerException('Invalid or unknown method '.$method);
+			throw new PageHandlerException('Invalid or unknown method '.$method);
 		}
 	}
 	
 	static function fromURL(\Net\URL $url){
-		return \Web\PageRecogniser\Recognise::fromURL($url);
+		return Recognise::fromURL($url);
 	}
 }
