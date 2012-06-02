@@ -1,8 +1,7 @@
 <?php
 namespace Web\Form\Builder\Adapter;
 
-use Web\Form\Element\Form;
-
+use Web\Form\Element;
 use Model\Database\Model\Table;
 use Web\Form\Builder\Internal;
 use Model\Database\Model\TableReferenceInstance;
@@ -56,7 +55,7 @@ class DatabaseTable implements IAdapter {
 		
 			$r->attributes['name'] = $name.$idStr;
 		
-			$formRow[] = new \HTML\Form\Element\Label($colname, $r);
+			$formRow[] = new Element\Label($colname, $r);
 			$formRow[] = $r;
 		}
 		

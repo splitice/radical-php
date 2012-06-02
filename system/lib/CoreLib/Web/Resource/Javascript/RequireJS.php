@@ -1,7 +1,7 @@
 <?php
 namespace Web\Resource\Javascript;
 
-use HTML\Tag\Script;
+use Utility\HTML\Tag\Script;
 
 class RequireJS extends Script {
 	protected $modules = array();

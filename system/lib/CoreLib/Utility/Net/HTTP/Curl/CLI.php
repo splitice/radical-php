@@ -1,9 +1,10 @@
 <?php
-namespace HTTP;
+namespace Utility\Net\HTTP\Curl;
 
 use Utility\Net\HTTP\Curl\CurlBase;
+use Utility\System;
 
-class CurlCLI extends CurlBase {
+class CLI extends CurlBase {
 	public $cookieManager;
 	public $outputFile;
 	
@@ -76,10 +77,10 @@ class CurlCLI extends CurlBase {
 	function Execute($data = null){
 		$cmd = $this->buildCall();
 		
-		$process = new \CLI\Process\Execute($cmd);
+		$process = new System\Execute($cmd);
 		$running = $process->Run();
-		$error = $running->ReadAll(\CLI\Process\Process::STDERR);
-		$out = $running->ReadAll(\CLI\Process\Process::STDOUT);
+		$error = $running->ReadAll(System\Process::STDERR);
+		$out = $running->ReadAll(System\Process::STDOUT);
 		$out = explode("\n",$out);
 		
 		$info = array();
@@ -90,13 +91,13 @@ class CurlCLI extends CurlBase {
 		
 		if(preg_match('#curl: \([\d]+\)(.+)#',$error,$m)){
 			$this->error = trim($m[1]);
-			throw new Curl\Exception($this->error,$this);
+			throw new Exception($this->error,$this);
 		}
 		
 		$response = file_get_contents($this->outputFile);
 		unlink($this->outputFile);
 		
-		return new Curl\Response($info,$response);
+		return new Response($info,$response);
 	}
 	
 	private $error;

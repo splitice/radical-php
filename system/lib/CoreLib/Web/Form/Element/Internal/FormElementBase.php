@@ -1,7 +1,7 @@
 <?php
 namespace Web\Form\Element\Internal;
 
-use HTML\Element;
+use Utility\HTML\Element;
 
 abstract class FormElementBase extends Element {	
 	function __construct($tag,$name){

@@ -1,6 +1,9 @@
 <?php
 namespace Web\Mobile;
 
+use Utility\HTML\Tag\Meta;
+use Utility\HTML\Tag\Link;
+
 class HTML extends Config {
 	static function Build(){
 		$ret = array();
@@ -14,21 +17,21 @@ class HTML extends Config {
 					static::$VIEWPORT = array(static::$VIEWPORT);
 				}
 				foreach(static::$VIEWPORT as $v){
-					$ret[] = new \HTML\Tag\Meta('viewport', $v);
+					$ret[] = new Meta('viewport', $v);
 				}
 			}
 		
 			//Hide Chrome
 			if(static::$HIDE_CHROME){
-				$ret[] = new \HTML\Tag\Meta('apple-mobile-web-app-capable', 'yes');
+				$ret[] = new Meta('apple-mobile-web-app-capable', 'yes');
 			}else{
-				$ret[] = new \HTML\Tag\Meta('apple-mobile-web-app-capable', 'no');
+				$ret[] = new Meta('apple-mobile-web-app-capable', 'no');
 			}
 			
 			//Web App Icon
 			if(static::$ICON){
 				if(is_string(static::$ICON)){
-					$ret[] = new \HTML\Tag\Link('apple-touch-icon', static::$ICON);
+					$ret[] = new Link('apple-touch-icon', static::$ICON);
 				}elseif(is_array(static::$ICON)){
 					foreach(static::$ICON as $size=>$icon){
 						$name = 'apple-touch-icon';
@@ -42,7 +45,7 @@ class HTML extends Config {
 								continue;
 							}
 						}
-						$link = new \HTML\Tag\Link($icon,$name);
+						$link = new Link($icon,$name);
 						if($size != '57x57'){
 							$link->attributes['sizes'] = $size;
 						}
@@ -69,7 +72,7 @@ class HTML extends Config {
 					
 					if($loadScreen){
 						//TODO: Rotate and Resize
-						$ret[] = new \HTML\Tag\Link('apple-touch-startup-image', $loadScreen, $media);
+						$ret[] = new Link('apple-touch-startup-image', $loadScreen, $media);
 					}
 				}
 			}

@@ -1,6 +1,8 @@
 <?php
 namespace Web\Resource;
 
+use Utility\HTML\Tag;
+
 class CSS extends ResourceBase {
 	const PATH = 'css';
 	
@@ -10,6 +12,6 @@ class CSS extends ResourceBase {
 		return $ret;
 	}
 	protected static function _HTML($path){
-		return new \HTML\Tag\Link($path);
+		return new Tag\Link($path);
 	}
 }

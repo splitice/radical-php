@@ -5,7 +5,7 @@ use Web\Template;
 use Web\Page\Handler;
 use ErrorHandling\Errors\Internal\ErrorException;
 
-class Error extends PageHandler\HTMLPageBase {
+class Error extends Page\Handler\HTMLPageBase {
 	private $error;
 	
 	function __construct(ErrorException $error){

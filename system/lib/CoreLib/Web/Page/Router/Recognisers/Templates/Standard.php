@@ -3,7 +3,7 @@ namespace Web\Page\Router\Recognisers\Templates;
 use Basic\String\Format;
 use \Web\PageRecogniser\IPageRecognise;
 use \Web\Pages;
-use \Web\PageHandler;
+use \Web\Page\Handler;
 
 class Standard implements IPageRecognise {
 	static $match = array();

@@ -6,7 +6,7 @@ use Web\Session\Authentication\Source\ISessionSource;
 
 class Http extends ModuleBase implements IAuthenticator {
 	function Authenticate(){
-		$headers = \Web\PageHandler::$stack->top()->headers;
+		$headers = \Web\Page\Handler::$stack->top()->headers;
 		$headers->Status(401);
 		$headers->Add('WWW-Authenticate','Basic realm="Site Login"');
 		$headers->Output();

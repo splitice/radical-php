@@ -1,6 +1,7 @@
 <?php
 namespace Web\Resource\CSS\Libraries;
-use HTML\Shared;
+
+use Web\Resource\Shared;
 
 class jQueryMobile extends Shared\LibraryBase {
 	const URL = 'http://code.jquery.com/mobile/%(version)s/jquery.mobile-%(version)s.min.css';

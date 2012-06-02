@@ -20,7 +20,7 @@ abstract class PageRequestBase {
 	
 	
 	function Execute($method){
-		//Add to PageHandler Stack
+		//Add to Page\Handler Stack
 		PH::Push($this);
 	
 		//Setup output buffering
@@ -43,7 +43,7 @@ abstract class PageRequestBase {
 				PH::Pop();
 				ob_end_flush();
 				$this->headers->Clear();
-				throw new Exceptions\PageHandlerException('Max request depth of '.static::MAX_REQUEST_DEPTH.' exceeded.');
+				throw new Exceptions\Page\HandlerException('Max request depth of '.static::MAX_REQUEST_DEPTH.' exceeded.');
 			}
 		}
 	
@@ -52,7 +52,7 @@ abstract class PageRequestBase {
 			PH::Pop();
 			ob_end_flush();
 			$this->headers->Clear();
-			throw new Exceptions\PageHandlerException('Invalid or unknown method '.$method);
+			throw new Exceptions\Page\HandlerException('Invalid or unknown method '.$method);
 		}
 	}
 	

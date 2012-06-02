@@ -10,7 +10,7 @@ class CacheManifest implements IPageRecognise {
 		if($url->firstPathElement() == 'cache.manifest'){
 			$url->removeFirstPathElement();
 			
-			return PageHandler::Objectify ( 'CacheManifest', $data );
+			return Page\Handler::Objectify ( 'CacheManifest', $data );
 		}
 	}
 }

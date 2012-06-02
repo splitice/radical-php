@@ -1,7 +1,8 @@
 <?php
-namespace Utility\HTTP\Internal;
+namespace Utility\Net\HTTP\Internal;
+use Utility\Net\HTTP;
 
-class Transfer extends FetchBase {
+class Transfer {
 	private $id;
 	private $curl;
 	private $callback;
@@ -9,7 +10,7 @@ class Transfer extends FetchBase {
 	private $time;
 	private $obj;
 	
-	function __construct(\HTTP\Fetch $obj,\HTTP\Multi $parent,$callback=null,$id=null){
+	function __construct(HTTP\Fetch $obj,HTTP\Multi $parent,$callback=null,$id=null){
 		$this->obj = $obj;
 		$this->callback = $callback;
 		$this->parent = $parent;

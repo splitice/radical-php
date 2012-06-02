@@ -4,7 +4,7 @@ use Utility\Image\Graph\Source\IGraphSource;
 use Web\Page\Handler;
 use Utility\Image\Graph\Renderer;
 
-abstract class PaypalBase extends PageHandler\HTMLPageBase {
+abstract class PaypalBase extends Page\Handler\HTMLPageBase {
 	private $action = 'process';
 	
 	abstract function getPaypalAccount();

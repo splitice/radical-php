@@ -3,7 +3,7 @@ namespace Web;
 
 use Web\Templates\Scope;
 
-class Template extends PageHandler\PageBase {
+class Template extends Page\Handler\PageBase {
 	protected $vars = array();
 	protected $file;
 	protected $name = 'error';

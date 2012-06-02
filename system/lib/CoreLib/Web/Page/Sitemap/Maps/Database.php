@@ -1,8 +1,9 @@
 <?php
 namespace Web\Page\Sitemap\Maps;
+
 use Model\Database\Model\TableReferenceInstance;
-use Web\Sitemap\Internal\SitemapContainer;
-use Web\Sitemap\Internal\Url;
+use Utility\Format\Sitemap\SitemapContainer;
+use Utility\Format\Sitemap\Url;
 
 class Database extends Internal\MapBase {
 	/**

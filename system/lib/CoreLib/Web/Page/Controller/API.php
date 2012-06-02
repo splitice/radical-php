@@ -42,7 +42,7 @@ class API extends PageBase {
 			}
 		}
 		
-		$headers = \Web\PageHandler::$stack->top()->headers;
+		$headers = \Web\Page\Handler::$stack->top()->headers;
 		
 		switch($this->type){
 			case 'json':

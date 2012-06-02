@@ -3,7 +3,7 @@ namespace Web\Page\Controller\Debug;
 use Web\Page\Handler;
 use Debug\WebGrind;
 
-class Profile extends PageHandler\HTMLPageBase {
+class Profile extends Page\Handler\HTMLPageBase {
 	protected $filename;
 	
 	function __construct($filename){

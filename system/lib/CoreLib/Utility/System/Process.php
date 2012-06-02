@@ -1,5 +1,5 @@
 <?php
-namespace Utility\Systen;
+namespace Utility\System;
 use \Basic\Stream;
 
 class Process {

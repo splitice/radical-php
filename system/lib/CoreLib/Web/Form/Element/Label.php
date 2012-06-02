@@ -1,7 +1,7 @@
 <?php
 namespace Web\Form\Element;
 
-use HTML\Element;
+use Utility\HTML\Element;
 
 class Label extends Element {
 	protected $name;

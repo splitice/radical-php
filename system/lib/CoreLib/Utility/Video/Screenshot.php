@@ -1,6 +1,8 @@
 <?php
 namespace Utility\Video;
 
+use Utility\System;
+
 class Screenshot {
 	const TYPE_LARGE = 1;
 	const TYPE_COMBINED = 2;
@@ -91,7 +93,7 @@ class Screenshot {
 		
 		//echo "Executing: ",$cmd,"\r\n";
 		//Execute
-		$e = new \CLI\Process\Execute ($cmd);
+		$e = new System\Execute ($cmd);
 		$process = $e->Run();
 		do {
 			\CLI\Threading\Thread::current()->Sleep(1);

@@ -1,6 +1,7 @@
 <?php
 namespace Web\Form\Element\Select;
-use HTML\Element;
+
+use Utility\HTML\Element;
 
 class Option extends Element {
 	function __construct($value,$text = null,$selected = false){

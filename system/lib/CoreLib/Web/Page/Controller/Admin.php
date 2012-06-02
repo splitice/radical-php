@@ -13,7 +13,7 @@ use Web\Page\Handler;
  * @author SplitIce
  *
  */
-class Admin extends PageHandler\HTMLPageBase {
+class Admin extends Page\Handler\HTMLPageBase {
 	const CLASS_PATH = '\\Web\\Admin\\Modules\\';
 	
 	protected $module;

@@ -1,6 +1,8 @@
 <?php
 namespace Utility\Net\HTTP\Curl;
 
+use Utility\Cache\Object\WeakRef;
+
 class CookieManager {
 	private $file;
 	public $deleteOnDone = true;
@@ -36,7 +38,7 @@ class CookieManager {
 		
 		//Setup instance cache if it isnt already
 		if(!self::$_cache){
-			self::$_cache = new \Cache\Object\WeakRef();
+			self::$_cache = new WeakRef();
 		}
 		
 		//Check Cache

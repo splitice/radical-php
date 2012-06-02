@@ -58,7 +58,7 @@ abstract class CombineBase extends IndividualBase {
 				//die(var_dump($f));
 				$fn = basename($f);
 				//$url = \Net\URL::fromRequest('/'.static::EXTENSION.'/'.$this->name.'/'.$f);
-				//$data[$f] = \Web\PageHandler\SubRequest::fromURL($url)->Execute('GET');
+				//$data[$f] = \Web\Page\Handler\SubRequest::fromURL($url)->Execute('GET');
 				$data[$fn] = file_get_contents($f);
 			}
 			
@@ -76,9 +76,9 @@ abstract class CombineBase extends IndividualBase {
 		}
 		
 		echo $ret;
-		//return new \PageHandler\GZIP($ret);
+		//return new \Page\Handler\GZIP($ret);
 		
-		$headers = \Web\PageHandler::top()->headers;
+		$headers = \Web\Page\Handler::top()->headers;
 		$headers->setContentLength(strlen($ret));
 	}
 }

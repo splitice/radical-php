@@ -11,7 +11,7 @@ abstract class EventPageBase extends HTMLPageBase {
 	 * Intercept Execute calls and check for POST events
 	 * If there is a post event submission do it.
 	 * 
-	 * @see Web\PageHandler.PageBase::Execute()
+	 * @see Web\Page\Handler.PageBase::Execute()
 	 */
 	function Execute($method = 'GET'){
 		//Check for an event

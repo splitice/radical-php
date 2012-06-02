@@ -4,10 +4,10 @@ namespace Web\Page;
 use Web\Page\Handler\NullPageRequest;
 
 class Handler extends \Core\Object {
-	static $__dependencies = array('interface.Web.PageHandler.IPage','interface.Web.PageHandler.IPage');
+	static $__dependencies = array('interface.Web.Page\Handler.IPage','interface.Web.Page\Handler.IPage');
 	
 	/**
-	 * A stack of PageHandlers, used for preserving state (headers etc) during subrequests.
+	 * A stack of Page\Handlers, used for preserving state (headers etc) during subrequests.
 	 * 
 	 * @var SplStack
 	 */
@@ -25,7 +25,7 @@ class Handler extends \Core\Object {
 	
 	/**
 	 * @param bool $notExistsCreate
-	 * @return \Web\PageHandler\NullPageRequest
+	 * @return \Web\Page\Handler\NullPageRequest
 	 */
 	static function current($notExistsCreate = false){
 		$ret = static::$stack->top();

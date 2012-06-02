@@ -2,13 +2,13 @@
 namespace Web\Page\Controller\Special;
 use Web\Page\Handler;
 
-class FileNotFound extends PageHandler\HTMLPageBase {
+class FileNotFound extends Page\Handler\HTMLPageBase {
 	function Title(){
 		return parent::Title('404 - File Not Found');
 	}
 	
 	function GET() {
-		$headers = \Web\PageHandler::$stack->top()->headers;
+		$headers = \Web\Page\Handler::$stack->top()->headers;
 		$headers->Status(404);
 
 		return new \Web\Template('error', array('error'=>$this),'framework');

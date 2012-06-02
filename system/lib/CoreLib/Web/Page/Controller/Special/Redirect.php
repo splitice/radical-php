@@ -2,14 +2,14 @@
 namespace Web\Page\Controller\Special;
 use Web\Page\Handler;
 
-class Redirect extends PageHandler\PageBase {
+class Redirect extends Page\Handler\PageBase {
 	protected $url;
 	
 	function __construct($url){
 		$this->url = $url;
 	}
 	function GET(){
-		$headers = \Web\PageHandler::$stack->top()->headers;
+		$headers = \Web\Page\Handler::$stack->top()->headers;
 		$headers->Status(301);
 		$headers->Add('Location',$this->url);
 	}

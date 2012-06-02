@@ -2,7 +2,7 @@
 namespace Web\Page\Controller;
 use Web\Page\Handler;
 
-class CacheManifest extends PageHandler\HTMLPageBase {	
+class CacheManifest extends Page\Handler\HTMLPageBase {	
 	function getFiles($path){
 		foreach(glob($path.'/*') as $v){
 			if(is_dir($v)){
@@ -27,7 +27,7 @@ class CacheManifest extends PageHandler\HTMLPageBase {
 		return $files;
 	}
 	function GET(){
-		\Web\PageHandler::$stack->top()->headers->Add('Content-Type','text/cache-manifest');
+		\Web\Page\Handler::$stack->top()->headers->Add('Content-Type','text/cache-manifest');
 		echo "CACHE MANIFEST\r\n\r\n";
 		
 		echo "CACHE:\r\n";

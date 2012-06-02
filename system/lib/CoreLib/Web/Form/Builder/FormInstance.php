@@ -1,6 +1,8 @@
 <?php
 namespace Web\Form\Builder;
+
 use Web\Form\Element;
+use Utility\HTML\Element;
 
 class FormInstance extends FormCommon implements IFormInstance {
 	static $__dependencies = array('php.HTML.Form.Builder.Adapter');
@@ -9,7 +11,7 @@ class FormInstance extends FormCommon implements IFormInstance {
 	protected $handler;
 	
 	function __construct($action = null, $method = 'POST'){
-		$this->form = new \HTML\Element('form',compact('action','method'),array());
+		$this->form = new Element('form',compact('action','method'),array());
 		
 		$args = func_get_args();
 		if(count($args) == 0) return;
