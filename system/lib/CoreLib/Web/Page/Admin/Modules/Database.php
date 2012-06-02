@@ -7,6 +7,7 @@ use Web\Session\User\IUserAdmin;
 use Net\URL\Pagination\QueryMethod;
 use Web\Page\Controller\Special\Redirect;
 use Web\Templates;
+use Web\Form;
 
 class Database extends AdminModuleBase {
 	protected $table;
@@ -100,7 +101,7 @@ class Database extends AdminModuleBase {
 					$vars = array('form'=>$form,'relations'=>$this->table->getTableManagement()->getRelations());
 					return new Templates\ContainerTemplate('Database/admin_edit_single',$vars,'admin');
 				case 'edit_all':
-					$tm = new \HTML\Form\Builder\Adapter\DatabaseTable($this->table);
+					$tm = new Form\Builder\Adapter\DatabaseTable($this->table);
 					$form = $tm->getAll();
 					echo $form->toHTML();
 					break;

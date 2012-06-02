@@ -2,6 +2,7 @@
 namespace Web\Page\API\Module;
 
 use Model\Database\Model\TableReferenceInstance;
+use Model\Database;
 
 abstract class DatabaseAPI extends APIBase {
 	var $class;
@@ -11,7 +12,7 @@ abstract class DatabaseAPI extends APIBase {
 	function __construct($data,$type){
 		parent::__construct($data,$type);
 		$this->table = new TableReferenceInstance($this->class);
-		$this->api = new \Database\API($this->table);
+		$this->api = new Database\API($this->table);
 	}
 	abstract function Validate($method,$data);
 	abstract function ValidateSelect($ret);
