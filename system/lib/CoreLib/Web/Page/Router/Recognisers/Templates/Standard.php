@@ -1,5 +1,5 @@
 <?php
-namespace Web\PageRecogniser\Recognisers\Templates;
+namespace Web\Page\Router\Recognisers\Templates;
 use Basic\String\Format;
 use \Web\PageRecogniser\IPageRecognise;
 use \Web\Pages;

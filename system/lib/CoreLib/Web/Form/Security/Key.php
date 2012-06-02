@@ -1,7 +1,7 @@
 <?php
-namespace HTML\Form\Security;
+namespace Web\Form\Security;
 
-use HTML\Form\Element\HiddenInput;
+use Web\Form\Element\HiddenInput;
 
 use Basic\Cryptography\Blowfish;
 

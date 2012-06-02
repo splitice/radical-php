@@ -1,5 +1,5 @@
 <?php
-namespace HTML\Form\Element;
+namespace Web\Form\Element;
 
 class TextArea extends Internal\FormElementBase {
 	function __construct($name,$value){

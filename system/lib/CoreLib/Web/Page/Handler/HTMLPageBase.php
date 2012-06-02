@@ -1,5 +1,5 @@
 <?php
-namespace Web\PageHandler;
+namespace Web\Page\Handler;
 
 abstract class HTMLPageBase extends PageBase {
 	function Title($part = null){

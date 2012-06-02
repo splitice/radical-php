@@ -1,12 +1,12 @@
 <?php
-namespace HTML\Form\Builder\Adapter;
+namespace Web\Form\Builder\Adapter;
 
-use HTML\Form\Element\Form;
+use Web\Form\Element\Form;
 
 use Model\Database\Model\Table;
-use HTML\Form\Builder\Internal;
+use Web\Form\Builder\Internal;
 use Model\Database\Model\TableReferenceInstance;
-use HTML\Form\FormContainer;
+use Web\Form\FormContainer;
 
 class DatabaseTable implements IAdapter {
 	protected $table;

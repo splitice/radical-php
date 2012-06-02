@@ -1,5 +1,5 @@
 <?php
-namespace HTML\Form\Element;
+namespace Web\Form\Element;
 
 class HiddenInput extends Internal\InputElement {
 	function __construct($name,$value){

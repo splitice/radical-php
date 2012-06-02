@@ -1,7 +1,7 @@
 <?php
-namespace Web\Pages;
+namespace Web\Page\Controller;
 
-use Web\PageHandler\PageBase;
+use Web\Page\Handler\PageBase;
 
 class API extends PageBase {
 	protected $object;

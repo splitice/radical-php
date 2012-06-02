@@ -1,5 +1,5 @@
 <?php
-namespace Web\PageRecogniser;
+namespace Web\Page\Router;
 
 interface IPageRecognise {
 	static function Recognise(\Net\URL $url);

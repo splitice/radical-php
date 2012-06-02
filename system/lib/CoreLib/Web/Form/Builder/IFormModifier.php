@@ -1,5 +1,5 @@
 <?php
-namespace HTML\Form\Builder;
+namespace Web\Form\Builder;
 
 interface IFormModifier {
 	function action($action);

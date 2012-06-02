@@ -1,5 +1,5 @@
 <?php
-namespace Web\API;
+namespace Web\API\Module;
 
 class Session extends APIBase {
 	function getUserDetails(){

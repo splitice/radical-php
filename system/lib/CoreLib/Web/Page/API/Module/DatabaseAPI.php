@@ -1,5 +1,5 @@
 <?php
-namespace Web\API;
+namespace Web\API\Module;
 
 use Model\Database\Model\TableReferenceInstance;
 

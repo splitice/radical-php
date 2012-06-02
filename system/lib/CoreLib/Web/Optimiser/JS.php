@@ -1,6 +1,6 @@
 <?php
-namespace HTML\Optimiser;
-use HTML\Optimiser\Interfaces\IOptimiser;
+namespace Web\Optimiser;
+use Web\Optimiser\Interfaces\IOptimiser;
 
 class JS implements IOptimiser {
 	private static function GoogleMin($script){

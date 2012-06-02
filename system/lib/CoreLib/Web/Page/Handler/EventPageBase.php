@@ -1,9 +1,9 @@
 <?php
-namespace Web\PageHandler;
+namespace Web\Page\Handler;
 
-use HTML\Form\Security\KeyStorage;
+use Web\Form\Security\KeyStorage;
 
-use HTML\Form\Security\Key;
+use Web\Form\Security\Key;
 
 abstract class EventPageBase extends HTMLPageBase {
 	protected $eventKey;

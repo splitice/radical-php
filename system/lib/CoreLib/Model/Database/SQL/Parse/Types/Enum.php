@@ -2,7 +2,7 @@
 namespace Model\Database\SQL\Parse\Types;
 use Basic\Validation\IValidator;
 
-use HTML\Form\Element;
+use Web\Form\Element;
 
 class Enum extends Internal\TypeBase implements IValidator {
 	const TYPE = 'enum';

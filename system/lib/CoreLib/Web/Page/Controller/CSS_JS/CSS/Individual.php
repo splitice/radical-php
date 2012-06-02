@@ -1,5 +1,5 @@
 <?php
-namespace Web\Pages\CSS_JS\CSS;
+namespace Web\Page\Controller\CSS_JS\CSS;
 use Web\Pages\CSS_JS\Internal\IndividualBase;
 
 class Individual extends IndividualBase {

@@ -1,5 +1,5 @@
 <?php
-namespace Web\PageHandler;
+namespace Web\Page\Handler;
 
 class MetaManager extends \Basic\ArrayLib\Object\CollectionObject {
 	function __construct($data = array()){

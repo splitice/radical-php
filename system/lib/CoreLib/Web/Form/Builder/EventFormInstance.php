@@ -1,8 +1,8 @@
 <?php
-namespace HTML\Form\Builder;
-use HTML\Form\Security\Key;
+namespace Web\Form\Builder;
+use Web\Form\Security\Key;
 
-use HTML\Form\Builder\FormInstance;
+use Web\Form\Builder\FormInstance;
 
 class EventFormInstance extends FormInstance {
 	const EVENT_HANDLER = '__rp_eventA';

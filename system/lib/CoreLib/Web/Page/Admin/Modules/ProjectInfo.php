@@ -1,7 +1,7 @@
 <?php
 namespace Web\Admin\Modules;
 use Web\Admin\MultiAdminModuleBase;
-use Web\PageHandler;
+use Web\Page\Handler;
 
 class ProjectInfo extends MultiAdminModuleBase {	
 	protected function getInfo($path){

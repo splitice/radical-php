@@ -1,5 +1,5 @@
 <?php
-namespace HTML\Optimiser\Javascript;
+namespace Web\Optimiser\Javascript;
 
 
 class JSToken

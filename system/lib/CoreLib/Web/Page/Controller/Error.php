@@ -1,8 +1,8 @@
 <?php
-namespace Web\Pages;
+namespace Web\Page\Controller;
 use Web\Template;
 
-use Web\PageHandler;
+use Web\Page\Handler;
 use ErrorHandling\Errors\Internal\ErrorException;
 
 class Error extends PageHandler\HTMLPageBase {

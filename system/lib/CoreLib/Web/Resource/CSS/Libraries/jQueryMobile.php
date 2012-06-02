@@ -1,5 +1,5 @@
 <?php
-namespace HTML\CSS\Libraries;
+namespace Web\Resource\CSS\Libraries;
 use HTML\Shared;
 
 class jQueryMobile extends Shared\LibraryBase {

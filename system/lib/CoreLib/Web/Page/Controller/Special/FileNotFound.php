@@ -1,6 +1,6 @@
 <?php
-namespace Web\Pages\Special;
-use Web\PageHandler;
+namespace Web\Page\Controller\Special;
+use Web\Page\Handler;
 
 class FileNotFound extends PageHandler\HTMLPageBase {
 	function Title(){

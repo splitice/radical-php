@@ -1,5 +1,5 @@
 <?php
-namespace HTML\CSS\Libraries;
+namespace Web\Resource\CSS\Libraries;
 
 interface ICSSLibrary {
 	function __construct($version);

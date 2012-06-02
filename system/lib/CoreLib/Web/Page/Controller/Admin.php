@@ -1,11 +1,11 @@
 <?php
-namespace Web\Pages;
+namespace Web\Page\Controller;
 
 use Web\Templates;
 use Web\Session\User\IUserAdmin;
 use Net\URL\Pagination\QueryMethod;
 use Web\Pages\Special\Redirect;
-use Web\PageHandler;
+use Web\Page\Handler;
 
 /**
  * The admin controller

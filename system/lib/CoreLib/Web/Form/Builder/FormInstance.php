@@ -1,6 +1,6 @@
 <?php
-namespace HTML\Form\Builder;
-use HTML\Form\Element;
+namespace Web\Form\Builder;
+use Web\Form\Element;
 
 class FormInstance extends FormCommon implements IFormInstance {
 	static $__dependencies = array('php.HTML.Form.Builder.Adapter');

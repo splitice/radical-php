@@ -1,5 +1,5 @@
 <?php
-namespace HTML\Optimiser\Javascript;
+namespace Web\Optimiser\Javascript;
 /**
  * jsmin.php - extended PHP implementation of Douglas Crockford's JSMin.
  *

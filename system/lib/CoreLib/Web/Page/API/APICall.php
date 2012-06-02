@@ -1,5 +1,5 @@
 <?php
-namespace Web;
+namespace Web\API;
 
 class APICall {
 	protected $server;

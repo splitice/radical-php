@@ -1,5 +1,5 @@
 <?php
-namespace HTML\Form\Element\Internal;
+namespace Web\Form\Element\Internal;
 
 use HTML\Element;
 

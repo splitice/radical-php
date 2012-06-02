@@ -1,7 +1,7 @@
 <?php
-namespace Web;
+namespace Web\Page;
 
-use Web\PageHandler\NullPageRequest;
+use Web\Page\Handler\NullPageRequest;
 
 class Handler extends \Core\Object {
 	static $__dependencies = array('interface.Web.PageHandler.IPage','interface.Web.PageHandler.IPage');

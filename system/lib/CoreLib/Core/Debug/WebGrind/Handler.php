@@ -2,7 +2,7 @@
 namespace Debug\WebGrind;
 
 use Web\Template;
-use Web\PageHandler\PageBase;
+use Web\Page\Handler\PageBase;
 
 class Handler extends PageBase {
 	protected $template;

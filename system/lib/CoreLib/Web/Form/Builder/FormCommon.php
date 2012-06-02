@@ -1,6 +1,6 @@
 <?php
-namespace HTML\Form\Builder;
-use HTML\Form\Element;
+namespace Web\Form\Builder;
+use Web\Form\Element;
 
 class FormCommon implements IFormControls {
 	protected function _R($return){

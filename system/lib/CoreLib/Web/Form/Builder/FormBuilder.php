@@ -1,5 +1,5 @@
 <?php
-namespace HTML\Form\Builder;
+namespace Web\Form\Builder;
 
 class FormBuilder extends FormCommon implements IFormControls {
 	function form($form){

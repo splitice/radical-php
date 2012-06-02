@@ -1,6 +1,6 @@
 <?php
-namespace Web\Pages;
-use Web\PageHandler;
+namespace Web\Page\Controller;
+use Web\Page\Handler;
 
 class CacheManifest extends PageHandler\HTMLPageBase {	
 	function getFiles($path){

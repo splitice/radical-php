@@ -1,5 +1,5 @@
 <?php
-namespace HTML\CSS;
+namespace Web\Resource\CSS;
 use HTML\Tag;
 
 class Library extends Tag\Link {

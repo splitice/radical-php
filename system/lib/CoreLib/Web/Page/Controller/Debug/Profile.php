@@ -1,6 +1,6 @@
 <?php
-namespace Web\Pages\Debug;
-use Web\PageHandler;
+namespace Web\Page\Controller\Debug;
+use Web\Page\Handler;
 use Debug\WebGrind;
 
 class Profile extends PageHandler\HTMLPageBase {

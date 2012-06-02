@@ -1,5 +1,5 @@
 <?php
-namespace HTML\Form\Element\Select;
+namespace Web\Form\Element\Select;
 use HTML\Element;
 
 class Option extends Element {

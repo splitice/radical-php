@@ -1,6 +1,6 @@
 <?php
-namespace Web\PageHandler;
-use Web\PageHandler as PH;
+namespace Web\Page\Handler;
+use Web\Page\Handler as PH;
 
 class PageRequest extends PageRequestBase {	
 	function Execute($method){

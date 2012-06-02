@@ -1,5 +1,5 @@
 <?php
-namespace Web\Pages\CSS_JS\Internal;
+namespace Web\Page\Controller\CSS_JS\Internal;
 
 abstract class IndividualBase extends \Web\PageHandler\PageBase {
 	protected $name;

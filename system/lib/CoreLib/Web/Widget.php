@@ -1,7 +1,7 @@
 <?php
 namespace Web;
 
-use Web\PageHandler\SubRequest;
+use Web\Page\Handler\SubRequest;
 
 abstract class Widget {
 	protected $vars;

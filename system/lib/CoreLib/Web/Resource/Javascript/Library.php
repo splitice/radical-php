@@ -1,5 +1,5 @@
 <?php
-namespace HTML\Javascript;
+namespace Web\Resource;
 use HTML\Tag;
 
 class Library extends Tag\Script {

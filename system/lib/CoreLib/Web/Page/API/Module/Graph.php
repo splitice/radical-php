@@ -1,7 +1,7 @@
 <?php
-namespace Web\API;
+namespace Web\API\Module;
 use Image\Graph\Source\IGraphSource;
-use Web\PageHandler;
+use Web\Page\Handler;
 use Image\Graph\Renderer;
 
 class Graph extends APIBase {

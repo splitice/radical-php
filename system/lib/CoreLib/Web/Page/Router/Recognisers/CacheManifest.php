@@ -1,8 +1,8 @@
 <?php
-namespace Web\PageRecogniser\Recognisers;
+namespace Web\Page\Router\Recognisers;
 use \Web\PageRecogniser\IPageRecognise;
 use \Web\Pages;
-use Web\PageHandler;
+use Web\Page\Handler;
 
 class CacheManifest implements IPageRecognise {
 	static function Recognise(\Net\URL $url){

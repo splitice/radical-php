@@ -1,5 +1,5 @@
 <?php
-namespace HTML\Form\Element;
+namespace Web\Form\Element;
 
 class ResetButton extends Button {
 	function __construct($value = 'Reset'){

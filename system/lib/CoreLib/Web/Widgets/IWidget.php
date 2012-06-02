@@ -1,7 +1,7 @@
 <?php
 namespace Web\Widget;
 
-use Web\PageHandler\IPage;
+use Web\Page\Handler\IPage;
 
 interface IWidgets {
 	function __toString();

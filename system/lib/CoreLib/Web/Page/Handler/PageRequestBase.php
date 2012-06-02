@@ -1,6 +1,6 @@
 <?php
-namespace Web\PageHandler;
-use Web\PageHandler as PH;
+namespace Web\Page\Handler;
+use Web\Page\Handler as PH;
 
 abstract class PageRequestBase {
 	const MAX_REQUEST_DEPTH = 20;

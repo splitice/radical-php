@@ -1,5 +1,5 @@
 <?php
-namespace Web\PageRecogniser\Recognisers;
+namespace Web\Page\Router\Recognisers;
 use \Web\PageRecogniser\IPageRecognise;
 
 class AAAA_Debug implements IPageRecognise {

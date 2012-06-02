@@ -1,7 +1,7 @@
 <?php
-namespace Web\Admin;
+namespace Web\Page\Admin;
 
-use Web\PageHandler;
+use Web\Page\Handler;
 
 abstract class AdminModuleBase extends PageHandler\HTMLPageBase implements Modules\IAdminModule {
 	function getName(){

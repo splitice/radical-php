@@ -2,7 +2,7 @@
 namespace Model\Database\SQL\Parse\Types;
 use Basic\Validation\IValidator;
 
-use HTML\Form\Element;
+use Web\Form\Element;
 
 class Varchar extends ZZ_Unknown implements IValidator {
 	const TYPE = 'varchar';

@@ -1,5 +1,5 @@
 <?php
-namespace HTML\Form\Security;
+namespace Web\Form\Security;
 
 use Web\Session;
 use Basic\ArrayLib\Object\CollectionObject;

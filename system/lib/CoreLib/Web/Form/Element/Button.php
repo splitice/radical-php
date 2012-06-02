@@ -1,5 +1,5 @@
 <?php
-namespace HTML\Form\Element;
+namespace Web\Form\Element;
 
 class Button extends Internal\InputElement {
 	function __construct($value = '',$type = 'button'){

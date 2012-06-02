@@ -1,5 +1,5 @@
 <?php
-namespace Web\API;
+namespace Web\API\Module;
 
 class _Psudeo extends APIBase {
 	function Test(){

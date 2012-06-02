@@ -1,7 +1,7 @@
 <?php
-namespace HTML\Optimiser;
+namespace Web\Optimiser;
 
-use HTML\Optimiser\Interfaces\IOptimiser;
+use Web\Optimiser\Interfaces\IOptimiser;
 
 class HTML implements IOptimiser {
 	private static function process_data_jmr1($in) {

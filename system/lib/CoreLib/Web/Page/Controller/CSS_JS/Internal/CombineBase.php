@@ -1,5 +1,5 @@
 <?php
-namespace Web\Pages\CSS_JS\Internal;
+namespace Web\Page\Controller\CSS_JS\Internal;
 
 abstract class CombineBase extends IndividualBase {
 	protected $version;

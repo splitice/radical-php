@@ -1,8 +1,8 @@
 <?php
-namespace Web\Admin;
+namespace Web\Page\Admin;
 
 use Net\URL\Path;
-use Web\PageHandler;
+use Web\Page\Handler;
 
 abstract class MultiAdminModuleBase extends AdminModuleBase {
 	private $submodule;

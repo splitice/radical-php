@@ -1,5 +1,5 @@
 <?php
-namespace Web\Sitemap\Maps\Internal;
+namespace Web\Page\Sitemap\Maps\Internal;
 use Web\Sitemap\Internal;
 use Web\Sitemap\SitemapBase;
 

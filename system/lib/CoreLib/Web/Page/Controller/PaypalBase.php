@@ -1,7 +1,7 @@
 <?php
-namespace Web\Pages;
+namespace Web\Page\Controller;
 use Image\Graph\Source\IGraphSource;
-use Web\PageHandler;
+use Web\Page\Handler;
 use Image\Graph\Renderer;
 
 abstract class PaypalBase extends PageHandler\HTMLPageBase {

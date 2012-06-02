@@ -1,5 +1,5 @@
 <?php
-namespace Web\PageHandler;
+namespace Web\Page\Handler;
 
 class NullHeaderManager extends HeaderManager {
 	function Output(){	}

@@ -1,5 +1,5 @@
 <?php
-namespace Web\PageHandler;
+namespace Web\Page\Handler;
 
 class SubRequestResponse {
 	public $data;

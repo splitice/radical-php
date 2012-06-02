@@ -1,5 +1,5 @@
 <?php
-namespace Web\PageHandler;
+namespace Web\Page\Handler;
 use \ErrorHandling\Errors\Internal\ErrorException;
 use \ErrorHandling\Handler;
 

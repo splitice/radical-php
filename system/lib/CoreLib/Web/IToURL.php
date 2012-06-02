@@ -1,5 +1,5 @@
 <?php
-namespace Web\Interfaces;
+namespace Web;
 
 interface IToURL {
 	function toURL();

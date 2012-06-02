@@ -1,5 +1,5 @@
 <?php
-namespace Web\PageRecogniser;
+namespace Web\Page\Router;
 
 class Recognise extends \Core\Object {
 	static $__dependencies = array('interface.Web.PageRecogniser.IPageRecognise','interface.Web.API.IAPIModule');

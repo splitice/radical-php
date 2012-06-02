@@ -1,5 +1,5 @@
 <?php
-namespace Web\PageHandler;
+namespace Web\Page\Handler;
 
 class HeaderManager {
 	private $headers = array('Cache-Control'=>'no-cache');

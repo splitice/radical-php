@@ -1,6 +1,6 @@
 <?php
 namespace Model\Database\SQL\Parse\Types;
-use HTML\Form\Element;
+use Web\Form\Element;
 use Model\Database\SQL\Parse\CreateTable\ColumnReference;
 
 class ZZ_Unknown extends Internal\TypeBase {

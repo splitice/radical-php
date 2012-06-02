@@ -1,5 +1,5 @@
 <?php
-namespace HTML\Javascript\Libraries;
+namespace Web\Resource\Libraries;
 
 interface IJavascriptLibrary {
 	function __construct($version);

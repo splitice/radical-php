@@ -1,5 +1,5 @@
 <?php
-namespace HTML\Form\Element\Internal;
+namespace Web\Form\Element\Internal;
 
 abstract class InputElement extends FormElementBase {
 	function __construct($type,$name,$value){

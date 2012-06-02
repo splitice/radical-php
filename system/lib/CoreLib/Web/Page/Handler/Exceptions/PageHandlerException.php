@@ -1,5 +1,5 @@
 <?php
-namespace Web\PageHandler\Exceptions;
+namespace Web\Page\Handler\Exceptions;
 
 class PageHandlerException extends \Exception {
 	

@@ -1,5 +1,5 @@
 <?php
-namespace HTML\Form\Builder\Internal;
+namespace Web\Form\Builder\Internal;
 
 use Basic\ArrayLib\Object\CollectionObject;
 

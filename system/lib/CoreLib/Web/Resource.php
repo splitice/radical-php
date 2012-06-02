@@ -42,7 +42,7 @@ class Resource {
 	}
 	
 	function getLoadCSS(){
-		$library = new \HTML\CSS\Library($this->name);
+		$library = new Resource\CSS\Library($this->name);
 		return 'document.loadCss("'.addslashes($library->attributes['src']).'")';
 	}
 	

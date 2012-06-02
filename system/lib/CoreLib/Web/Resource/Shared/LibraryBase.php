@@ -1,5 +1,5 @@
 <?php
-namespace HTML\Shared;
+namespace Web\Resource\Shared;
 use Basic\String;
 
 abstract class LibraryBase extends \Core\Object {

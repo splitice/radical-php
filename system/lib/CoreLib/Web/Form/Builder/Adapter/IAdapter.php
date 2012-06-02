@@ -1,5 +1,5 @@
 <?php
-namespace HTML\Form\Builder\Adapter;
+namespace Web\Form\Builder\Adapter;
 
 interface IAdapter {
 	static function is($obj);

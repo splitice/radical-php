@@ -1,5 +1,5 @@
 <?php
-namespace HTML\Optimiser\CSS;
+namespace Web\Optimiser\CSS;
 
 /**
 * @package html

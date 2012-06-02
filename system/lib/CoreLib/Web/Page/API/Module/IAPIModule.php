@@ -1,5 +1,5 @@
 <?php
-namespace Web\API;
+namespace Web\API\Module;
 
 interface IAPIModule {
 	static function canType($type);

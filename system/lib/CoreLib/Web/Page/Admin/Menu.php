@@ -1,5 +1,5 @@
 <?php
-namespace Web\Admin;
+namespace Web\Page\Admin;
 
 use Web\Pages\Admin;
 
@@ -11,7 +11,7 @@ use Web\Template;
  * 
  * @author SplitIce
  */
-use Web\PageHandler\PageBase;
+use Web\Page\Handler\PageBase;
 
 class Menu extends PageBase {
 	function GET(){

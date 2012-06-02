@@ -3,11 +3,11 @@ namespace Web\Templates;
 
 use Web\Widget;
 
-use Web\PageHandler\IPage;
+use Web\Page\Handler\IPage;
 
-use Web\PageHandler\SubRequest;
+use Web\Page\Handler\SubRequest;
 
-use HTML\Form\Builder\FormBuilder;
+use Web\Form\Builder\FormBuilder;
 
 class Scope {
 	public $form;

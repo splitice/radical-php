@@ -1,6 +1,6 @@
 <?php
-namespace Web\PageHandler;
-use Web\PageHandler as PH;
+namespace Web\Page\Handler;
+use Web\Page\Handler as PH;
 
 class SubRequest extends PageRequestBase {
 	function __construct(IPage $page){

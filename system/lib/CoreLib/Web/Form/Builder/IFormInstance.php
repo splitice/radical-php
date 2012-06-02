@@ -1,5 +1,5 @@
 <?php
-namespace HTML\Form\Builder;
+namespace Web\Form\Builder;
 
 interface IFormInstance extends IFormControls, IFormModifier {
 	

@@ -1,5 +1,5 @@
 <?php
-namespace HTML\Form\Element;
+namespace Web\Form\Element;
 
 class SelectBox extends Internal\FormElementBase {
 	public function setValue($value) {
