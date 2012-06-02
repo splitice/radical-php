@@ -1,5 +1,5 @@
 <?php
-namespace Database\SQL\Parse\CreateTable\Internal;
+namespace Model\Database\SQL\Parse\CreateTable\Internal;
 
 abstract class CreateTableStatementBase {
 	protected $name;

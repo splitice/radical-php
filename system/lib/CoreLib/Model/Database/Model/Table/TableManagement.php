@@ -1,8 +1,8 @@
 <?php
-namespace Database\Model\Table;
-use Database\Model\TableReferenceInstance;
-use Database\SQL;
-use Database\DBAL\Fetch;
+namespace Model\Database\Model\Table;
+use Model\Database\Model\TableReferenceInstance;
+use Model\Database\SQL;
+use Model\Database\DBAL\Fetch;
 
 class TableManagement extends \Core\Object {
 	protected $table;

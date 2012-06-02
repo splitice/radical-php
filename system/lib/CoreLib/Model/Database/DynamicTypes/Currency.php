@@ -1,5 +1,5 @@
 <?php
-namespace Database\DynamicTypes;
+namespace Model\Database\DynamicTypes;
 
 class Currency extends Decimal {
 	function __toString(){

@@ -1,15 +1,15 @@
 <?php
-namespace Database\SQL\Parts\Internal;
+namespace Model\Database\SQL\Parts\Internal;
 
 use Basic\String\Number;
 
-use Database\SQL\Parts\Expression\IComparison;
+use Model\Database\SQL\Parts\Expression\IComparison;
 
-use Database\SQL\Parts\Expression\Comparison;
+use Model\Database\SQL\Parts\Expression\Comparison;
 
-use Database\IToSQL;
+use Model\Database\IToSQL;
 
-use Database\SQL\Parts\WhereAND;
+use Model\Database\SQL\Parts\WhereAND;
 
 use Basic\Arr;
 

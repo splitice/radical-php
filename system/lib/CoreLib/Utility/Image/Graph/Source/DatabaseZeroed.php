@@ -1,6 +1,6 @@
 <?php
 namespace Image\Graph\Source;
-use Database\DBAL\Result;
+use Model\Database\DBAL\Result;
 use Graph\pChart\pData;
 use Graph\pChart\pChart;
 

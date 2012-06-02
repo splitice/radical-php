@@ -1,5 +1,5 @@
 <?php
-namespace Net\ExternalInterfaces\Carrot2;
+namespace Model\Carrot2;
 
 /**
  * Represents the results of Carrot2 processing, contains document fetched from the 

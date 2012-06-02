@@ -1,5 +1,5 @@
 <?php
-namespace Net\ExternalInterfaces\Carrot2;
+namespace Model\Carrot2;
 
 /**
  * Represents a Carrot2 cluster.

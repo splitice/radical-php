@@ -1,7 +1,7 @@
 <?php
-namespace Database\SQL\Parts\Alias;
+namespace Model\Database\SQL\Parts\Alias;
 
-use Database\SQL\Parts\Internal;
+use Model\Database\SQL\Parts\Internal;
 
 class TableAlias extends Internal\AliasPartBase {
 	

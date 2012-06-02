@@ -1,5 +1,5 @@
 <?php
-namespace Database\Backup;
+namespace Model\Database\Backup;
 
 class BackupAll {
 	private $file;

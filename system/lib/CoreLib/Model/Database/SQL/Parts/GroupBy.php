@@ -1,7 +1,7 @@
 <?php
-namespace Database\SQL\Parts;
+namespace Model\Database\SQL\Parts;
 
-use Database\SQL\Parts\Expression\TableExpression;
+use Model\Database\SQL\Parts\Expression\TableExpression;
 
 use Basic\Arr;
 

@@ -1,9 +1,9 @@
 <?php
-namespace Database\SQL\Parts\Expression;
+namespace Model\Database\SQL\Parts\Expression;
 
-use Database\IToSQL;
-use Database\DBAL\Adapter\Connection;
-use Database\SQL\Parts\Internal;
+use Model\Database\IToSQL;
+use Model\Database\DBAL\Adapter\Connection;
+use Model\Database\SQL\Parts\Internal;
 
 class Between extends Internal\PartBase implements IComparison {
 	private $a;

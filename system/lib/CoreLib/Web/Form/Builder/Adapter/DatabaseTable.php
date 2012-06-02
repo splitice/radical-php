@@ -3,9 +3,9 @@ namespace HTML\Form\Builder\Adapter;
 
 use HTML\Form\Element\Form;
 
-use Database\Model\Table;
+use Model\Database\Model\Table;
 use HTML\Form\Builder\Internal;
-use Database\Model\TableReferenceInstance;
+use Model\Database\Model\TableReferenceInstance;
 use HTML\Form\FormContainer;
 
 class DatabaseTable implements IAdapter {

@@ -1,8 +1,8 @@
 <?php
-namespace Database\SQL\Parse\CreateTable;
+namespace Model\Database\SQL\Parse\CreateTable;
 
-use Database\Model\TableReferenceInstance;
-use Database\Model\TableReference;
+use Model\Database\Model\TableReferenceInstance;
+use Model\Database\Model\TableReference;
 
 class ColumnReference{
 	protected $table;

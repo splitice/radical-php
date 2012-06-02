@@ -1,7 +1,7 @@
 <?php
 namespace Web\Admin\Modules;
 use Web\Admin\AdminModuleBase;
-use Database\Model\TableReferenceInstance;
+use Model\Database\Model\TableReferenceInstance;
 use Web\Session\User\IUserAdmin;
 use Net\URL\Pagination\QueryMethod;
 use Web\Pages\Special\Redirect;

@@ -1,5 +1,5 @@
 <?php
-namespace Database\SQL\Parse\Types\Internal;
+namespace Model\Database\SQL\Parse\Types\Internal;
 
 abstract class TypeBase {
 	const TYPE = '';

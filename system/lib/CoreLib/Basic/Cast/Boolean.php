@@ -1,5 +1,5 @@
 <?php
-namespace Cast;
+namespace Basic\Cast;
 
 class Boolean extends Internal\CastBase implements ICast {
 	protected $yes;

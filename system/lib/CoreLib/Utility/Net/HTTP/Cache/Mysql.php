@@ -1,8 +1,8 @@
 <?php
 namespace HTTP\Cache;
 
-use Database\Model\DynamicTableReference;
-use Database\Model\DynamicTableInstance;
+use Model\Database\Model\DynamicTableReference;
+use Model\Database\Model\DynamicTableInstance;
 
 class Mysql extends DynamicTableInstance {
 	function __construct(){

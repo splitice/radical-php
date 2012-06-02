@@ -1,7 +1,7 @@
 <?php
-namespace Database\SQL\Parse\Types;
+namespace Model\Database\SQL\Parse\Types;
 use HTML\Form\Element;
-use Database\SQL\Parse\CreateTable\ColumnReference;
+use Model\Database\SQL\Parse\CreateTable\ColumnReference;
 
 class ZZ_Unknown extends Internal\TypeBase {
 	const MAX_RELATED = 100;

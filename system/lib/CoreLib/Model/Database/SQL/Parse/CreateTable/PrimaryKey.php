@@ -1,5 +1,5 @@
 <?php
-namespace Database\SQL\Parse\CreateTable;
+namespace Model\Database\SQL\Parse\CreateTable;
 
 class PrimaryKey extends IndexStatement {
 	function __construct($keys) {

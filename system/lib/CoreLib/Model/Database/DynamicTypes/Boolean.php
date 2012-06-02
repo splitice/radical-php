@@ -1,5 +1,5 @@
 <?php
-namespace Database\DynamicTypes;
+namespace Model\Database\DynamicTypes;
 
 class Boolean extends String {
 	function getTrueValue(){

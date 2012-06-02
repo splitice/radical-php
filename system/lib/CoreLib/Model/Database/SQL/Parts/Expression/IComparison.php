@@ -1,5 +1,5 @@
 <?php
-namespace Database\SQL\Parts\Expression;
+namespace Model\Database\SQL\Parts\Expression;
 
 interface IComparison {
 	

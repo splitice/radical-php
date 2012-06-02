@@ -1,5 +1,5 @@
 <?php
-namespace Database\SQL\Parts;
+namespace Model\Database\SQL\Parts;
 
 class Into extends Internal\PartBase {
 	private $table;

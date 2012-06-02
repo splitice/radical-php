@@ -1,12 +1,12 @@
 <?php
-namespace Basic\ArrayLib;
+namespace Basic\Arr;
 
 /**
  * Group a set based on the result of a callback function.
  * 
  * @author SplitIce
  */
-class Group extends \Core\Object {
+class Group {
 	private $set = array();
 	
 	function __construct($set){

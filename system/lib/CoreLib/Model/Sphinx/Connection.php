@@ -1,6 +1,6 @@
 <?php
-namespace Net\ExternalInterfaces\Sphinx;
-use Database\DBAL\Adapter;
+namespace Model\Sphinx;
+use Model\Database\DBAL\Adapter;
 
 class Connection extends Adapter\Connection {
 	const USERNAME = 'root';

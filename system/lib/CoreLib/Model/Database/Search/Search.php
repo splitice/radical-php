@@ -1,5 +1,5 @@
 <?php
-namespace Database\Search;
+namespace Model\Database\Search;
 
 class Search {
 	protected $adapter;

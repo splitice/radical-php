@@ -1,5 +1,5 @@
 <?php
-namespace Basic\ArrayLib\Object;
+namespace Basic\Arr\Object;
 
 class SortedCollectionObject extends CollectionObject {
 	private $function;

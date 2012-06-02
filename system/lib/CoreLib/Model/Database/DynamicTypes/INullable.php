@@ -1,5 +1,5 @@
 <?php
-namespace Database\DynamicTypes;
+namespace Model\Database\DynamicTypes;
 
 interface INullable {
 	function isNull();

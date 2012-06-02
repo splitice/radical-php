@@ -1,8 +1,8 @@
 <?php
-namespace Database\Model;
-use Database\SQL\SelectStatement;
+namespace Model\Database\Model;
+use Model\Database\SQL\SelectStatement;
 
-use Database\ORM;
+use Model\Database\ORM;
 
 class TableReferenceInstance extends \Core\Object {
 	protected $class;

@@ -1,7 +1,7 @@
 <?php
-namespace Database\ORM;
+namespace Model\Database\ORM;
 
-use Database\Model\TableReferenceInstance;
+use Model\Database\Model\TableReferenceInstance;
 
 class Manager {
 	static function getModel(TableReferenceInstance $table){

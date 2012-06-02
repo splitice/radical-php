@@ -1,7 +1,7 @@
 <?php
-namespace Database\SQL\Parts\Internal;
+namespace Model\Database\SQL\Parts\Internal;
 
-use Database\IToSQL;
+use Model\Database\IToSQL;
 
 abstract class PartBase implements IToSQL {
 	function __toString(){

@@ -1,7 +1,8 @@
 <?php
+namespace Core;
 class Libraries {
 	static function path($path){
-		return Autoloader::resolve($path);
+		return \Autoloader::resolve($path);
 	}
 	static function toClass($path){
 		return str_replace(DIRECTORY_SEPARATOR, '\\', $path);
@@ -12,7 +13,7 @@ class Libraries {
 	}
 	static function toPath($class,$full = false){
 		if($full){
-			return AutoLoader::resolve($class);
+			return self::path($class);
 		}
 		return str_replace('\\', DIRECTORY_SEPARATOR, $class);
 	}

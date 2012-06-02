@@ -1,9 +1,9 @@
 <?php
 namespace Net\URL\Pagination\Internal;
 
-use Database\SQL\SelectStatement;
+use Model\Database\SQL\SelectStatement;
 
-use Database\IToSQL;
+use Model\Database\IToSQL;
 
 use Net\URL\Pagination\Template\IPaginationTemplate;
 

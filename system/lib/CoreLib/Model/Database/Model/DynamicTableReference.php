@@ -1,7 +1,7 @@
 <?php
-namespace Database\Model;
+namespace Model\Database\Model;
 
-use Database\SQL\CreateTable;
+use Model\Database\SQL\CreateTable;
 
 class DynamicTableReference extends TableReferenceInstance {
 	public $_tableName;

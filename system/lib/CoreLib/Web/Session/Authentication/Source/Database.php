@@ -1,8 +1,8 @@
 <?php
 namespace Web\Session\Authentication\Source;
 
-use Database\DynamicTypes\Password;
-use Database\Model\TableReferenceInstance;
+use Model\Database\DynamicTypes\Password;
+use Model\Database\Model\TableReferenceInstance;
 
 class Database extends MultipleDatabase {
 	function __construct(TableReferenceInstance $table){

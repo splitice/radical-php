@@ -1,7 +1,7 @@
 <?php
-namespace Database\ORM;
+namespace Model\Database\ORM;
 
-use Database\Model\TableReference;
+use Model\Database\Model\TableReference;
 
 class ModelReference {
 	static function Find($field){

@@ -1,7 +1,7 @@
 <?php
 namespace Basic\DateTime;
 
-use Database\IToSQL;
+use Model\Database\IToSQL;
 
 abstract class DateTimeShared extends Timestamp implements IToSQL {
 	const DATABASE_FORMAT = "";

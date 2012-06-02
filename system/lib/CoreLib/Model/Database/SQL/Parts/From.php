@@ -1,5 +1,5 @@
 <?php
-namespace Database\SQL\Parts;
+namespace Model\Database\SQL\Parts;
 /*
 [FROM table_references
     [WHERE where_condition]
@@ -11,11 +11,11 @@ namespace Database\SQL\Parts;
     [LIMIT {[offset,] row_count | row_count OFFSET offset}]
  */
 
-use Database\SQL\Parts\Expression\TableExpression;
-use Database\SQL\Parts\Alias\TableAlias;
+use Model\Database\SQL\Parts\Expression\TableExpression;
+use Model\Database\SQL\Parts\Alias\TableAlias;
 use Basic\String\Number;
-use Database\SQL\Parse\CreateTable;
-use Database\IToSQL;
+use Model\Database\SQL\Parse\CreateTable;
+use Model\Database\IToSQL;
 use Basic\Arr;
 
 class From extends Internal\MergePartBase {

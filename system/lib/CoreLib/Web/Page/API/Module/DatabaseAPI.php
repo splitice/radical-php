@@ -1,7 +1,7 @@
 <?php
 namespace Web\API;
 
-use Database\Model\TableReferenceInstance;
+use Model\Database\Model\TableReferenceInstance;
 
 abstract class DatabaseAPI extends APIBase {
 	var $class;

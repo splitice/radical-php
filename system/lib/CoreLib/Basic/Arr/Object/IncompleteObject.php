@@ -1,5 +1,5 @@
 <?php
-namespace Basic\ArrayLib\Object;
+namespace Basic\Arr\Object;
 
 abstract class IncompleteObject implements \IteratorAggregate, \ArrayAccess, \Serializable, \Countable {
 	protected $data = null;

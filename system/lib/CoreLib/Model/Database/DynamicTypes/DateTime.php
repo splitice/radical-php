@@ -1,7 +1,7 @@
 <?php
-namespace Database\DynamicTypes;
+namespace Model\Database\DynamicTypes;
 
-use Database\Model\ITable;
+use Model\Database\Model\ITable;
 
 class DateTime extends \Basic\DateTime\DateTime implements IDynamicType {
 	protected $extra;

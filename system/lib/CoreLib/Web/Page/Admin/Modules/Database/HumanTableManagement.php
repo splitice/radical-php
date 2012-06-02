@@ -1,7 +1,7 @@
 <?php
 namespace Web\Admin\Modules\Database;
 
-use Database\Model\Table\TableManagement;
+use Model\Database\Model\Table\TableManagement;
 
 class HumanTableManagement extends TableManagement {
 	function RenameColumn($k){

@@ -1,12 +1,12 @@
 <?php
-namespace Database\Model\Pagination;
+namespace Model\Database\Model\Pagination;
 
-use Database\Model\Table\TableSet;
-use Database\Model\TableReferenceInstance;
+use Model\Database\Model\Table\TableSet;
+use Model\Database\Model\TableReferenceInstance;
 use Net\URL\Pagination\IPaginator;
 use Net\URL\Pagination\Template\IPaginationTemplate;
-use Database\SQL;
-use Database\Model\TableReference;
+use Model\Database\SQL;
+use Model\Database\Model\TableReference;
 
 /**
  * @author SplitIce

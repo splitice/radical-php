@@ -1,7 +1,7 @@
 <?php
-namespace Database\SQL\Internal;
+namespace Model\Database\SQL\Internal;
 
-use Database\SQL\IStatement;
+use Model\Database\SQL\IStatement;
 
 abstract class StatementBase extends MergeBase implements IStatement {
 	function Execute(){

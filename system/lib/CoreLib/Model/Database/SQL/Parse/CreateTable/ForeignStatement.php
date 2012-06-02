@@ -1,5 +1,5 @@
 <?php
-namespace Database\SQL\Parse\CreateTable;
+namespace Model\Database\SQL\Parse\CreateTable;
 
 class ForeignStatement extends Internal\CreateTableStatementBase {
 	const REFERENCE_REGEX = '#^REFERENCES\s+`([^`]+)`\s+\(`([^`]+)`\)#is';

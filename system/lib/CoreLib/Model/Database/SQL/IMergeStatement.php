@@ -1,5 +1,5 @@
 <?php
-namespace Database\SQL;
+namespace Model\Database\SQL;
 
 interface IMergeStatement {
 	function mergeTo(IStatement $mergeIn);

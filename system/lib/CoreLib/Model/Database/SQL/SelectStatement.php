@@ -1,19 +1,19 @@
 <?php
-namespace Database\SQL;
+namespace Model\Database\SQL;
 
 use Basic\String\Number;
 
-use Database\SQL\Parts\From;
+use Model\Database\SQL\Parts\From;
 
-use Database\SQL\Parts\Where;
+use Model\Database\SQL\Parts\Where;
 
 use Basic\Arr;
 
-use Database\SQL\Parse\CreateTable;
+use Model\Database\SQL\Parse\CreateTable;
 
-use Database\IToSQL;
+use Model\Database\IToSQL;
 
-use Database\DBAL;
+use Model\Database\DBAL;
 
 /*
 http://dev.mysql.com/doc/refman/5.5/en/select.html

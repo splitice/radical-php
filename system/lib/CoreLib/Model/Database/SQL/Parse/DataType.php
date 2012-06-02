@@ -1,5 +1,5 @@
 <?php
-namespace Database\SQL\Parse;
+namespace Model\Database\SQL\Parse;
 
 class DataType {
 	static function fromSQL($type,$size){

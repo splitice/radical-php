@@ -1,9 +1,9 @@
 <?php
-namespace Database\ORM;
+namespace Model\Database\ORM;
 
-use Database\SQL\Parse\CreateTable\ColumnReference;
+use Model\Database\SQL\Parse\CreateTable\ColumnReference;
 
-use Database\SQL\Parse\CreateTable;
+use Model\Database\SQL\Parse\CreateTable;
 
 class Mappings {
 	/**

@@ -1,5 +1,5 @@
 <?php
-namespace Database\Model\Pagination;
+namespace Model\Database\Model\Pagination;
 
 use Net\URL\Pagination\IPaginator;
 use Net\URL\Pagination\Template\IPaginationTemplate;

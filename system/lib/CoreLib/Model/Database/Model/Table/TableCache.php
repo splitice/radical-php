@@ -1,6 +1,6 @@
 <?php
-namespace Database\Model\Table;
-use Database\Model\Table;
+namespace Model\Database\Model\Table;
+use Model\Database\Model\Table;
 
 class TableCache {
 	const MAX_ENTRIES = 500;

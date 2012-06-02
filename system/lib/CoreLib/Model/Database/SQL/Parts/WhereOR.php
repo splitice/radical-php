@@ -1,7 +1,7 @@
 <?php
-namespace Database\SQL\Parts;
+namespace Model\Database\SQL\Parts;
 
-use Database\IToSQL;
+use Model\Database\IToSQL;
 
 class WhereOR extends Internal\WherePart {
 	const SEPPERATOR = 'OR';

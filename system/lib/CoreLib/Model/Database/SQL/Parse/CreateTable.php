@@ -1,6 +1,6 @@
 <?php
-namespace Database\SQL\Parse;
-use Database\DBAL;
+namespace Model\Database\SQL\Parse;
+use Model\Database\DBAL;
 
 use Basic\ArrayLib\Object\CollectionObject;
 

@@ -1,8 +1,10 @@
 <?php
-namespace Net\ExternalInterfaces\Carrot2;
+namespace Model\Carrot2;
+
+use Exceptions\ModelException;
 
 /**
  * Exception thrown when an unrecoverable error occurs in Carrot2 DCS.
  */
-class Exception extends \Exception {
+class Exception extends ModelException {
 }

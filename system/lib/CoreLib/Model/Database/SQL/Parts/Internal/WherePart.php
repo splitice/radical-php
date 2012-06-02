@@ -1,9 +1,9 @@
 <?php
-namespace Database\SQL\Parts\Internal;
+namespace Model\Database\SQL\Parts\Internal;
 
-use Database\SQL\Parts\Expression\TableExpression;
+use Model\Database\SQL\Parts\Expression\TableExpression;
 
-use Database\SQL\Parts\Expression\Comparison;
+use Model\Database\SQL\Parts\Expression\Comparison;
 
 abstract class WherePart extends PartBase {
 	const SEPPERATOR = 'AND';

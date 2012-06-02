@@ -1,7 +1,7 @@
 <?php
-namespace Database\SQL;
+namespace Model\Database\SQL;
 
-use Database\IToSQL;
+use Model\Database\IToSQL;
 
 interface IStatement extends IToSQL {
 	function mergeTo(IStatement $mergeIn);

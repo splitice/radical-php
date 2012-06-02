@@ -1,8 +1,8 @@
 <?php
-namespace Database\SQL\Internal;
+namespace Model\Database\SQL\Internal;
 
-use Database\SQL\IStatement;
-use Database\SQL\IMergeStatement;
+use Model\Database\SQL\IStatement;
+use Model\Database\SQL\IMergeStatement;
 
 abstract class MergeBase implements IMergeStatement {
 	function mergeTo(IStatement $mergeIn){

@@ -1,7 +1,7 @@
 <?php
-namespace Basic\ArrayLib\Internal;
+namespace Basic\Arr\Internal;
 
-abstract class ArrayBase extends \Core\Object {
+abstract class ArrayBase {
 	static function isArray($in){
 		if(is_array($in)){
 			return true;

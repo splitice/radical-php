@@ -1,7 +1,7 @@
 <?php
-namespace Database;
+namespace Model\Database;
 
-use Database\Model\TableReferenceInstance;
+use Model\Database\Model\TableReferenceInstance;
 
 class API {
 	protected $table;

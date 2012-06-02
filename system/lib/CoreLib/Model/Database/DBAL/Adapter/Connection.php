@@ -1,6 +1,6 @@
 <?php
-namespace Database\DBAL\Adapter;
-use Database\Exception;
+namespace Model\Database\DBAL\Adapter;
+use Model\Database\Exception;
 
 class Connection {
 	/**

@@ -1,9 +1,9 @@
 <?php
-use Database\SQL\SelectStatement;
-
-use Database\DBAL\Adapter;
-use Database\DBAL;
-use Database\DBAL\Handler;
+namespace Model;
+use Model\Database\SQL\SelectStatement;
+use Model\Database\DBAL\Adapter;
+use Model\Database\DBAL;
+use Model\Database\DBAL\Handler;
 
 /**
  * Database Interface Class

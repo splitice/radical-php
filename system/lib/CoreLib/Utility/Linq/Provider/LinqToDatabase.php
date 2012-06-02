@@ -3,7 +3,7 @@ namespace PHPLinq\Provider;
 use PHPLinq\Expression;
 use PHPLinq\OrderByExpression;
 use PHPLinq\Initiator;
-use Database\Model;
+use Model\Database\Model;
 
 /**
  * PHPLinq

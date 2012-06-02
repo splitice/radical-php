@@ -1,5 +1,5 @@
 <?php
-namespace Cast;
+namespace Basic\Cast;
 
 class Integer extends Internal\CastBase implements ICast {
 	function Cast($value){

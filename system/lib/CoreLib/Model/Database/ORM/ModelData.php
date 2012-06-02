@@ -1,5 +1,5 @@
 <?php
-namespace Database\ORM;
+namespace Model\Database\ORM;
 
 class ModelData {
 	public $table;

@@ -1,5 +1,5 @@
 <?php
-namespace Database\DynamicTypes;
+namespace Model\Database\DynamicTypes;
 
 class Password extends String implements INullable {
 	function isNull(){

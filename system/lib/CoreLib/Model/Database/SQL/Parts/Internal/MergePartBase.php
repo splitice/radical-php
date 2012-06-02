@@ -1,8 +1,8 @@
 <?php
-namespace Database\SQL\Parts\Internal;
+namespace Model\Database\SQL\Parts\Internal;
 
-use Database\SQL\Internal\MergeBase;
-use Database\IToSQL;
+use Model\Database\SQL\Internal\MergeBase;
+use Model\Database\IToSQL;
 
 abstract class MergePartBase extends MergeBase implements IToSQL {
 	function __toString(){

@@ -1,9 +1,9 @@
 <?php
-namespace Database\Model\Table;
-use Database\Search\Adapter\ISearchAdapter;
-use Database\SQL\IStatement;
-use Database\SQL;
-use Database\DBAL;
+namespace Model\Database\Model\Table;
+use Model\Database\Search\Adapter\ISearchAdapter;
+use Model\Database\SQL\IStatement;
+use Model\Database\SQL;
+use Model\Database\DBAL;
 
 class TableSet extends \Basic\ArrayLib\Object\IncompleteObject {
 	/**

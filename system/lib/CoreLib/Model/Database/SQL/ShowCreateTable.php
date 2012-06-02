@@ -1,7 +1,7 @@
 <?php
-namespace Database\SQL;
+namespace Model\Database\SQL;
 
-use Database\Model\TableReferenceInstance;
+use Model\Database\Model\TableReferenceInstance;
 
 class ShowCreateTable extends Internal\StatementBase {
 	protected $table;

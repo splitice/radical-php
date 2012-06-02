@@ -1,5 +1,5 @@
 <?php
-namespace Database\Exception;
+namespace Model\Database\Exception;
 use ErrorHandling\Errors\Internal\ErrorBase;
 
 abstract class DatabaseException extends ErrorBase {

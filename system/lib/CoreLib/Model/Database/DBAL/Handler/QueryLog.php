@@ -1,5 +1,5 @@
 <?php
-namespace Database\DBAL\Handler;
+namespace Model\Database\DBAL\Handler;
 
 class QueryLog {
 	private $queries = array();

@@ -1,9 +1,9 @@
 <?php
-namespace Database\Model;
+namespace Model\Database\Model;
 
-use Database\SQL\ShowCreateTable;
+use Model\Database\SQL\ShowCreateTable;
 
-use Database\SQL\CreateTable;
+use Model\Database\SQL\CreateTable;
 
 class DynamicTableInstance {
 	protected $_tableName;

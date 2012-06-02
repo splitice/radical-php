@@ -1,5 +1,5 @@
 <?php
-namespace Net\ExternalInterfaces\Sphinx;
+namespace Model\Sphinx;
 
 class Search extends \DB { 
 	static function Connect(Connection $connection) {

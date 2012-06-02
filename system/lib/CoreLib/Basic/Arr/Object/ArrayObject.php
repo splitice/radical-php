@@ -1,5 +1,5 @@
 <?php
-namespace Basic\ArrayLib\Object;
+namespace Basic\Arr\Object;
 
 class ArrayObject extends CollectionObject {
 	function Set($v){

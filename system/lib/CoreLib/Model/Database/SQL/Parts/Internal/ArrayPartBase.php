@@ -1,8 +1,8 @@
 <?php
-namespace Database\SQL\Parts\Internal;
+namespace Model\Database\SQL\Parts\Internal;
 
 use Basic\ArrayLib\Object\CollectionObject;
-use Database\IToSQL;
+use Model\Database\IToSQL;
 
 abstract class ArrayPartBase extends CollectionObject implements IToSQL {
 	function __construct($data = null){

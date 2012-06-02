@@ -1,5 +1,5 @@
 <?php
-namespace Database\Model\Table;
+namespace Model\Database\Model\Table;
 
 class Relations {
 	static $relations = array();

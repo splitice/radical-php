@@ -1,12 +1,12 @@
 <?php
-namespace Database\Model;
+namespace Model\Database\Model;
 
 use Exceptions\ValidationException;
-use Database\DynamicTypes\IDynamicType;
-use Database\IToSQL;
-use Database\ORM;
-use Database\DBAL;
-use Database\SQL;
+use Model\Database\DynamicTypes\IDynamicType;
+use Model\Database\IToSQL;
+use Model\Database\ORM;
+use Model\Database\DBAL;
+use Model\Database\SQL;
 
 abstract class Table implements ITable, \JsonSerializable {	
 	static function _idString($id){

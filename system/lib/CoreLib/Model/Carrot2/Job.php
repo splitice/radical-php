@@ -1,5 +1,5 @@
 <?php
-namespace Net\ExternalInterfaces\Carrot2;
+namespace Model\Carrot2;
 
 /**
  * Contains data for Carrot2 processing. Two kinds of jobs can be submitted:

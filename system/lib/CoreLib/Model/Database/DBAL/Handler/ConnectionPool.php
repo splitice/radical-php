@@ -1,6 +1,6 @@
 <?php
-namespace Database\DBAL\Handler;
-use Database\DBAL\Adapter\Connection;
+namespace Model\Database\DBAL\Handler;
+use Model\Database\DBAL\Adapter\Connection;
 
 class ConnectionPool {
 	public $pool = array();

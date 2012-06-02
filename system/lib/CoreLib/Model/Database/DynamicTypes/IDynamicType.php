@@ -1,8 +1,8 @@
 <?php
-namespace Database\DynamicTypes;
+namespace Model\Database\DynamicTypes;
 
-use Database\IToSQL;
-use Database\Model\ITable;
+use Model\Database\IToSQL;
+use Model\Database\Model\ITable;
 
 interface IDynamicType extends IToSQL {
 	public function setValue($value);

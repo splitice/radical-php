@@ -1,9 +1,9 @@
 <?php
-namespace Database\Search\Adapter;
+namespace Model\Database\Search\Adapter;
 
-use Database\Model\TableReferenceInstance;
-use Database\SQL\SelectStatement;
-use Database\SQL\Parts\Expression\Fulltext;
+use Model\Database\Model\TableReferenceInstance;
+use Model\Database\SQL\SelectStatement;
+use Model\Database\SQL\Parts\Expression\Fulltext;
 
 class MysqlFulltext implements ISearchAdapter {
 	const MODE_STANDARD = 0;

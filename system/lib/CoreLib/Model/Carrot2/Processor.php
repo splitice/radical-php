@@ -1,5 +1,5 @@
 <?php
-namespace Net\ExternalInterfaces\Carrot2;
+namespace Model\Carrot2;
 
 /**
  * Performs processing using Carrot2 Document Clustering Server. 

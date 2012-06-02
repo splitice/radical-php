@@ -1,5 +1,5 @@
 <?php
-namespace Database\DBAL;
+namespace Model\Database\DBAL;
 
 /* ENUM */
 abstract class Fetch {

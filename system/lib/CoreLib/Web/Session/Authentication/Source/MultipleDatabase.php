@@ -1,8 +1,8 @@
 <?php
 namespace Web\Session\Authentication\Source;
 
-use Database\DynamicTypes\Password;
-use Database\Model\TableReferenceInstance;
+use Model\Database\DynamicTypes\Password;
+use Model\Database\Model\TableReferenceInstance;
 
 class MultipleDatabase extends NullSource {
 	const FIELD_USERNAME = '*username';

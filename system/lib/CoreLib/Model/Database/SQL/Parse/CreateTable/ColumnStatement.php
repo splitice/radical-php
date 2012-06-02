@@ -1,6 +1,6 @@
 <?php
-namespace Database\SQL\Parse\CreateTable;
-use Database\SQL\Parse\DataType;
+namespace Model\Database\SQL\Parse\CreateTable;
+use Model\Database\SQL\Parse\DataType;
 
 class ColumnStatement extends Internal\CreateTableStatementBase {
 	protected $default;

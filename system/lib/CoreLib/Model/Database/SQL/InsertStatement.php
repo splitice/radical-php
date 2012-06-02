@@ -1,5 +1,5 @@
 <?php
-namespace Database\SQL;
+namespace Model\Database\SQL;
 
 /*
 http://dev.mysql.com/doc/refman/5.5/en/insert.html

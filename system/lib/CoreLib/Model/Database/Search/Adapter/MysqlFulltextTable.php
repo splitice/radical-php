@@ -1,15 +1,15 @@
 <?php
-namespace Database\Search\Adapter;
+namespace Model\Database\Search\Adapter;
 
-use Database\SQL\Parts\Expression\Comparison;
+use Model\Database\SQL\Parts\Expression\Comparison;
 
-use Database\SQL\Parts\Expression\In;
-use Database\SQL\Parts\WhereOR;
-use Database\SQL\Parts\Where;
-use Database\Model\DynamicTableReference;
-use Database\Model\TableReference;
-use Database\Model\TableReferenceInstance;
-use Database\SQL\SelectStatement;
+use Model\Database\SQL\Parts\Expression\In;
+use Model\Database\SQL\Parts\WhereOR;
+use Model\Database\SQL\Parts\Where;
+use Model\Database\Model\DynamicTableReference;
+use Model\Database\Model\TableReference;
+use Model\Database\Model\TableReferenceInstance;
+use Model\Database\SQL\SelectStatement;
 
 class MysqlFulltextTable extends MysqlFulltext {
 	private function _myisamName(TableReferenceInstance $table){

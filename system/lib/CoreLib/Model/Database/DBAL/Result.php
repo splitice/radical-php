@@ -1,5 +1,5 @@
 <?php
-namespace Database\DBAL;
+namespace Model\Database\DBAL;
 
 class Result {
 	private $result;

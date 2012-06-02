@@ -1,5 +1,5 @@
 <?php
-namespace Database\DBAL;
+namespace Model\Database\DBAL;
 
 class Set extends \Basic\ArrayLib\Object\ArrayObject {
 	function OrderBy($field,$order='ASC'){

@@ -1,10 +1,10 @@
 <?php
-namespace Database\DBAL\Adapter;
-use Database\IToSQL;
-use Database\SQL;
+namespace Model\Database\DBAL\Adapter;
+use Model\Database\IToSQL;
+use Model\Database\SQL;
 use Basic\Weakref\Callback as WeakrefCallback;
-use Database\DBAL;
-use Database\Exception;
+use Model\Database\DBAL;
+use Model\Database\Exception;
 
 class Instance extends Connection {
 	const QUERY_TIMEOUT = 30;

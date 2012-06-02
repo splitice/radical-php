@@ -1,7 +1,7 @@
 <?php
 namespace Image\Graph\Source;
-use Database\DBAL\Fetch;
-use Database\DBAL\Result;
+use Model\Database\DBAL\Fetch;
+use Model\Database\DBAL\Result;
 use Graph\pChart\pData;
 use Graph\pChart\pChart;
 

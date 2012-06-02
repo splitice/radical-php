@@ -1,5 +1,5 @@
 <?php
-namespace Database\SQL;
+namespace Model\Database\SQL;
 
 class CreateTable extends Internal\StatementBase {
 	protected $table;

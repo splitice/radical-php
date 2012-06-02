@@ -1,5 +1,5 @@
 <?php
-namespace Database\Model;
+namespace Model\Database\Model;
 
 interface ITable {
 	function toSQL($in = null);

@@ -1,5 +1,5 @@
 <?php
-namespace Database\DBAL;
+namespace Model\Database\DBAL;
 use \Basic\ArrayLib\Object\CollectionObject;
 
 class Row extends CollectionObject {

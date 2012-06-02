@@ -1,7 +1,7 @@
 <?php
-namespace Database\DynamicTypes;
+namespace Model\Database\DynamicTypes;
 
-use Database\Model\ITable;
+use Model\Database\Model\ITable;
 
 class Stub extends String implements INullable {
 	function isNull(){

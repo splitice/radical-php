@@ -1,5 +1,5 @@
 <?php
-namespace Database\DynamicTypes;
+namespace Model\Database\DynamicTypes;
 
 //TODO array based arithmatic
 //TODO gmp support (optional)

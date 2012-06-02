@@ -1,5 +1,5 @@
 <?php
-namespace Basic\ArrayLib\Object;
+namespace Basic\Arr\Object;
 
 class CollectionObject implements \IteratorAggregate, \ArrayAccess, \Serializable, \Countable {
 	protected $data = array();

@@ -1,5 +1,5 @@
 <?php
-namespace Database\Model;
+namespace Model\Database\Model;
 
 class TableReference extends \Core\Object {	
 	protected static function getClasses(){

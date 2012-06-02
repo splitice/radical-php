@@ -1,9 +1,9 @@
 <?php
-namespace Database\ORM\DynamicTyping;
+namespace Model\Database\ORM\DynamicTyping;
 
 use Debug\Inspector;
 
-use Database\Model\TableReferenceInstance;
+use Model\Database\Model\TableReferenceInstance;
 
 class Instance {
 	public $map = array();

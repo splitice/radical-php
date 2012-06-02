@@ -29,6 +29,6 @@ abstract class ClassInterface extends \Core\Object {
 		}
 	}
 	static function getAll(){
-		return \ClassLoader::getNSExpression(static::CLASS_BASE.'\\*');
+		return \Core\Libraries::getNSExpression(static::CLASS_BASE.'\\*');
 	}
 }

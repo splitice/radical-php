@@ -1,7 +1,7 @@
 <?php
 namespace HTTP\Curl;
 
-use Database\IToSQL;
+use Model\Database\IToSQL;
 
 class Info implements IToSQL {
 	public $url;

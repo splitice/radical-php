@@ -1,5 +1,5 @@
 <?php
-namespace Database\SQL\Parts\Internal;
+namespace Model\Database\SQL\Parts\Internal;
 
 abstract class AliasPartBase extends PartBase {
 	protected $alias;

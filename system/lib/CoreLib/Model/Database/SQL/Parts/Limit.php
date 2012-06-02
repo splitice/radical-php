@@ -1,5 +1,5 @@
 <?php
-namespace Database\SQL\Parts;
+namespace Model\Database\SQL\Parts;
 
 class Limit extends Internal\PartBase {
 	private $from;

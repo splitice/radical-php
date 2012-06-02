@@ -1,7 +1,7 @@
 <?php
 namespace Tests\Database\SQL\Parts;
 
-use Database\SQL\Parts\Expression\Between;
+use Model\Database\SQL\Parts\Expression\Between;
 
 use Debug\Test\IUnitTest;
 use Debug\Test\Unit;

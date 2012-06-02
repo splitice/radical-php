@@ -1,6 +1,6 @@
 <?php
 namespace Web\Sitemap\Maps;
-use Database\Model\TableReferenceInstance;
+use Model\Database\Model\TableReferenceInstance;
 use Web\Sitemap\Internal\SitemapContainer;
 use Web\Sitemap\Internal\Url;
 

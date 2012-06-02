@@ -1,5 +1,5 @@
 <?php
-namespace Database\Exception;
+namespace Model\Database\Exception;
 
 class FetchNotAResult extends FetchException {
 	function __construct() {

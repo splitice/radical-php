@@ -1,5 +1,5 @@
 <?php
-namespace Database\SQL\Parse\Types;
+namespace Model\Database\SQL\Parse\Types;
 use Basic\Validation\IValidator;
 
 use HTML\Form\Element;

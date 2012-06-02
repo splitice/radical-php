@@ -1,5 +1,5 @@
 <?php
-namespace Database\ORM;
+namespace Model\Database\ORM;
 
 use Basic\Validation\IValidator;
 

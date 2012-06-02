@@ -1,10 +1,10 @@
 <?php
 namespace Net\ExternalInterfaces\ContentAPI\Cache;
 
-use Database\Model\DynamicTableReference;
+use Model\Database\Model\DynamicTableReference;
 
-use Database\Model\DynamicTableInstance;
-use Database\DBAL;
+use Model\Database\Model\DynamicTableInstance;
+use Model\Database\DBAL;
 
 class Mysql extends DynamicTableInstance {
 	const CACHE_TIME = 360000;//~100 hours

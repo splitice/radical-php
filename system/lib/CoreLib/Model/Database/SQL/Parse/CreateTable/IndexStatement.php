@@ -1,5 +1,5 @@
 <?php
-namespace Database\SQL\Parse\CreateTable;
+namespace Model\Database\SQL\Parse\CreateTable;
 
 class IndexStatement extends Internal\CreateTableStatementBase {
 	protected $keys = array();

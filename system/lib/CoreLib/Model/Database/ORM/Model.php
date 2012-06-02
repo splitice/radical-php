@@ -1,13 +1,13 @@
 <?php
-namespace Database\ORM;
+namespace Model\Database\ORM;
 
-use Database\SQL\Parse\CreateTable\ColumnReference;
+use Model\Database\SQL\Parse\CreateTable\ColumnReference;
 
-use Database\Model\TableReference;
+use Model\Database\Model\TableReference;
 
-use Database\Model\TableReferenceInstance;
+use Model\Database\Model\TableReferenceInstance;
 
-use Database\SQL\Parse\CreateTable;
+use Model\Database\SQL\Parse\CreateTable;
 
 class Model extends ModelData {	
 	private function fieldReferences(CreateTable $structure){
