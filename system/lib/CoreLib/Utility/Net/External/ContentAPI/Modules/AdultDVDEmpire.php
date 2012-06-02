@@ -1,6 +1,6 @@
 <?php
 namespace Utility\Net\External\ContentAPI\Modules;
-class AdultDVDEmpire extends Internal\ModuleBase implements \Net\ExternalInterfaces\ContentAPI\Interfaces\IFromURL {
+class AdultDVDEmpire extends Internal\ModuleBase implements \Utility\Net\External\ContentAPI\Interfaces\IFromURL {
 	const URL_RULE = '#adultdvdempire\.com\/([0-9]+)\/#i';
 	const URL = 'http://www.adultdvdempire.com';
 	

@@ -1,6 +1,6 @@
 <?php
 namespace ErrorHandling\Handlers\Internal;
-use \ErrorHandling\Errors\Internal\ErrorBase;
+use ErrorHandling\Errors\Internal\ErrorBase;
 use ErrorHandling\Errors\Internal\ErrorException;
 
 abstract class ErrorHandlerBase extends \ErrorHandling\Handler {

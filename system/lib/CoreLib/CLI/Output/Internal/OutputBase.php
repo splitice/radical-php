@@ -1,7 +1,7 @@
 <?php
 namespace CLI\Output\Internal;
-use \CLI\Output\OutputHandler;
-use \CLI\Output;
+use CLI\Output\OutputHandler;
+use CLI\Output;
 
 abstract class OutputBase extends OutputHandler {
 	static function E(){

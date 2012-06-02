@@ -1,6 +1,6 @@
 <?php
 namespace Utility\System;
-use \Basic\Stream;
+use Basic\Stream;
 
 class Process {
 	const STDIN = 0;

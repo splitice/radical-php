@@ -1,6 +1,6 @@
 <?php
 namespace Utility\Net\External\ContentAPI\Modules;
-use \Net\ExternalInterfaces\ContentAPI\Interfaces;
+use Utility\Net\External\ContentAPI\Interfaces;
 
 class CDUniverse extends Internal\ModuleBase implements Interfaces\IFromURL {
 	const URL_RULE = '#cduniverse\.com\/productinfo\.asp\?(?:.*)pid=([0-9]+)#i';

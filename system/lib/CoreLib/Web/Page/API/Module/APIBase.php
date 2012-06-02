@@ -1,5 +1,5 @@
 <?php
-namespace Web\API\Module;
+namespace Web\Page\API\Module;
 
 abstract class APIBase extends \Core\Object implements IAPIModule {
 	protected $data;

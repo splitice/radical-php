@@ -1,6 +1,6 @@
 <?php
 namespace Utility\Net\External\ContentAPI\Modules\Internal;
-use \Net\ExternalInterfaces\ContentAPI\Interfaces;
+use Utility\Net\External\ContentAPI\Interfaces;
 
 abstract class ModuleBase {
 	const URL_RULE = '';
@@ -66,9 +66,9 @@ abstract class ModuleBase {
 	}
 	private function _Fetch(){
 		$module = $this->_moduleName();
-		$server = \Net\ExternalInterfaces\ContentAPI\Config::REMOTE;
+		$server = \Utility\Net\External\ContentAPI\Config::REMOTE;
 		if($server){
-			$remote = new \Net\ExternalInterfaces\ContentAPI\Remote($server, $module);
+			$remote = new \Utility\Net\External\ContentAPI\Remote($server, $module);
 			return $remote->Fetch($this->id);
 		}else{
 			return $this->Fetch();
@@ -84,7 +84,7 @@ abstract class ModuleBase {
 				return $ret;
 			}
 		}else{
-			$cache = \Net\ExternalInterfaces\ContentAPI\Config::getCache();
+			$cache = \Utility\Net\External\ContentAPI\Config::getCache();
 			if($cache){
 				$this->_cache = $cache::Get(get_called_class(),$this->id);
 			}

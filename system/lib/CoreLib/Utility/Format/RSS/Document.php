@@ -1,5 +1,5 @@
 <?php
-namespace Net\ExternalInterfaces\RSS;
+namespace Utility\Net\External\RSS;
 
 class Document {
 	private $title;

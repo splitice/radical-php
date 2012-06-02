@@ -1,5 +1,5 @@
 <?php
-namespace Net\ExternalInterfaces\RSS;
+namespace Utility\Net\External\RSS;
 
 use Utility\Net\External\DownloadableItem;
 

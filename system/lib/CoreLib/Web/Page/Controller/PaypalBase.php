@@ -8,13 +8,13 @@ abstract class PaypalBase extends Page\Handler\HTMLPageBase {
 	private $action = 'process';
 	
 	abstract function getPaypalAccount();
-	abstract function middleProcess(\Net\ExternalInterfaces\Paypal $p);
-	abstract function onSuccess(\Net\ExternalInterfaces\Paypal $p);
-	function onCancel(\Net\ExternalInterfaces\Paypal $p){
+	abstract function middleProcess(\Utility\Net\External\Paypal $p);
+	abstract function onSuccess(\Utility\Net\External\Paypal $p);
+	function onCancel(\Utility\Net\External\Paypal $p){
 		echo "<html><head><title>Canceled</title></head><body><h3>The order was canceled.</h3>";
 		echo "</body></html>";
 	}
-	abstract function onIPL(\Net\ExternalInterfaces\Paypal $p);
+	abstract function onIPL(\Utility\Net\External\Paypal $p);
 	
 	function __construct($data){		
 		// if there is not action variable, set the default action of 'process'
@@ -22,7 +22,7 @@ abstract class PaypalBase extends Page\Handler\HTMLPageBase {
 			$this->action = $data['action'];
 	}
 	function GET(){
-		$p = new \Net\ExternalInterfaces\Paypal (); // initiate an instance of the class
+		$p = new \Utility\Net\External\Paypal (); // initiate an instance of the class
 
 		$this_script = \Net\URL::fromRequest();
 		$this_script->getPath()->setQuery(array());

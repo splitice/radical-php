@@ -1,8 +1,9 @@
 <?php
 namespace Web\Page\Router\Recognisers;
-use \Web\PageRecogniser\IPageRecognise;
-use \Web\Pages;
-use \Web\Page\Handler;
+
+use Web\Page\Router\IPageRecognise;
+use Web\Pages;
+use Web\Page\Handler;
 
 class Paypal implements IPageRecognise {
 	static function Recognise(\Net\URL $url){

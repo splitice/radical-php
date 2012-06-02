@@ -1,6 +1,6 @@
 <?php
 namespace Utility\Net\External\ContentAPI\Modules;
-use \Net\ExternalInterfaces\ContentAPI\Interfaces;
+use Utility\Net\External\ContentAPI\Interfaces;
 
 class LastFM_Album extends Internal\ModuleBase implements Interfaces\IFromURL {
 	//http://www.last.fm/music/Cher/Believe

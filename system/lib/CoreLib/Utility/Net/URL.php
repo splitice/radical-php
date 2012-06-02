@@ -1,6 +1,6 @@
 <?php
 namespace Net;
-use \Basic\String\UTF8;
+use Basic\String\UTF8;
 
 class URL extends \Core\Object {
 	private $scheme;

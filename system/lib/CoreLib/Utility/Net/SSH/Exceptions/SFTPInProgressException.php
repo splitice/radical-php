@@ -1,5 +1,5 @@
 <?php
-namespace Utility\Net\ExternalInterfaces\SSH\Exceptions;
+namespace Utility\Utility\Net\External\SSH\Exceptions;
 
 class SFTPInProgressException extends \Exception {
 	function __construct($message){

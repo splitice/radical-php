@@ -1,6 +1,8 @@
 <?php
 namespace Utility\Net\External\ContentAPI;
 
+use Web\Page\API;
+
 class Remote {
 	protected $server;
 	protected $module;
@@ -12,7 +14,7 @@ class Remote {
 	function Fetch($id){
 		$query = array('module'=>$this->module,'id'=>$id);
 		
-		$api = new \Web\APICall($this->server);
+		$api = new API\APICall($this->server);
 		$data = $api->Call('External', 'getById', $query,'ps');
 		
 		return $data;

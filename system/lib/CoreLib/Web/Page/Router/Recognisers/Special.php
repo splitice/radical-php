@@ -1,7 +1,7 @@
 <?php
 namespace Web\Page\Router\Recognisers;
-use \Web\PageRecogniser\IPageRecognise;
-use \Web\Pages;
+use Web\PageRecogniser\IPageRecognise;
+use Web\Pages;
 use Web\Page\Handler;
 
 class Special implements IPageRecognise {

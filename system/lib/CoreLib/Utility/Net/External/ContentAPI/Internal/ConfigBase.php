@@ -7,7 +7,7 @@ abstract class ConfigBase extends \Core\Object {
 	
 	static function getCache(){
 		if(static::CACHE){
-			$cache = '\\Net\ExternalInterfaces\\ContentAPI\\Cache\\'.static::CACHE;
+			$cache = '\\Utility\Net\External\\ContentAPI\\Cache\\'.static::CACHE;
 			return $cache;
 		}
 	}

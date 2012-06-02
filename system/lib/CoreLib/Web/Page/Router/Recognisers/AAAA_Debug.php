@@ -1,6 +1,6 @@
 <?php
 namespace Web\Page\Router\Recognisers;
-use \Web\PageRecogniser\IPageRecognise;
+use Web\Page\Router\IPageRecognise;
 
 class AAAA_Debug implements IPageRecognise {
 	private static $enable = true;

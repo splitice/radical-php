@@ -1,6 +1,11 @@
 <?php
 namespace Utility\Net\External\ContentAPI\Modules;
-class IMDB extends Internal\ModuleBase implements \Net\ExternalInterfaces\ContentAPI\Interfaces\IFromURL {
+
+use Utility\Net\External\ContentAPI\Interfaces\IFromURL;
+use Utility\Net\HTTP;
+use Utility\HTML;
+
+class IMDB extends Internal\ModuleBase implements IFromURL {
 	const URL_RULE = '#imdb\.com\/title\/tt([0-9]+)#i';
 	const URL = 'http://www.imdb.com';
 	
@@ -25,10 +30,10 @@ class IMDB extends Internal\ModuleBase implements \Net\ExternalInterfaces\Conten
 	private function PARSE_SECONDARY_IMG() {
 		return array();
 		$url = $this->toURL() . '/mediaindex';
-		$request = new \HTTP\Fetch ( $url );
+		$request = new HTTP\Fetch ( $url );
 		$data = $request->Execute ();
 	
-		\HTML\Simple_HTML_DOM::LoadS ();
+		HTML\Simple_HTML_DOM::LoadS ();
 		$dom =\HTML\str_get_dom ( $data->getContent () );
 	
 		$ret = array ();
@@ -46,10 +51,10 @@ class IMDB extends Internal\ModuleBase implements \Net\ExternalInterfaces\Conten
 	
 	private function PARSE_TRIVIA(){
 		$url = $this->toURL() . '/trivia';
-		$request = new \HTTP\Fetch ( $url );
+		$request = new HTTP\Fetch ( $url );
 		$data = $request->Execute ();
 	
-		\HTML\Simple_HTML_DOM::LoadS ();
+		HTML\Simple_HTML_DOM::LoadS ();
 		$dom =\HTML\str_get_dom ( $data->getContent () );
 	
 		$ret = array ();
@@ -67,11 +72,11 @@ class IMDB extends Internal\ModuleBase implements \Net\ExternalInterfaces\Conten
 	
 	private function _fullDescription(){
 		$url = $this->toURL() . '/plotsummary';
-		$request = new \HTTP\Fetch ( $url );
+		$request = new HTTP\Fetch ( $url );
 		$data = $request->Execute ();
 	
-		\HTML\Simple_HTML_DOM::LoadS ();
-		$dom =\HTML\str_get_dom ( $data->getContent () );
+		HTML\Simple_HTML_DOM::LoadS ();
+		$dom = HTML\str_get_dom ( $data->getContent () );
 	
 		$plot = $dom->find('p.plotpar',0);
 		if(!$plot){
@@ -91,11 +96,11 @@ class IMDB extends Internal\ModuleBase implements \Net\ExternalInterfaces\Conten
 	
 	private function PARSE_AKA(){
 		$url = $this->toURL() . '/releaseinfo';
-		$request = new \HTTP\Fetch ( $url );
+		$request = new HTTP\Fetch ( $url );
 		$data = $request->Execute ();
 	
-		\HTML\Simple_HTML_DOM::LoadS ();
-		$dom =\HTML\str_get_dom ( $data->getContent () );
+		HTML\Simple_HTML_DOM::LoadS ();
+		$dom =HTML\str_get_dom ( $data->getContent () );
 	
 		$ret = array ();
 		$link = $dom->find('a[name=akas]',0);
@@ -136,10 +141,10 @@ class IMDB extends Internal\ModuleBase implements \Net\ExternalInterfaces\Conten
 	static function LookupId($imdbid) {
 		$ret = array();
 	
-		$request = new \HTTP\Fetch ( self::getUrl($imdbid) );
+		$request = new HTTP\Fetch ( self::getUrl($imdbid) );
 		$data = $request->Execute ();
 	
-		\HTML\Simple_HTML_DOM::LoadS ();
+		HTML\Simple_HTML_DOM::LoadS ();
 		$dom = \HTML\str_get_dom ( $data->getContent () );
 	
 		
@@ -158,8 +163,8 @@ class IMDB extends Internal\ModuleBase implements \Net\ExternalInterfaces\Conten
 		$ch = static::CH ( $url );
 		$data = curl_exec ( $ch );
 		
-		\HTML\Simple_HTML_DOM::LoadS ();
-		$dom = \HTML\str_get_dom ( $data );
+		HTML\Simple_HTML_DOM::LoadS ();
+		$dom = HTML\str_get_dom ( $data );
 		
 		//1st module
 		try {

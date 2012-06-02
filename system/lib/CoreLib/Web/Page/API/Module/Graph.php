@@ -1,5 +1,5 @@
 <?php
-namespace Web\API\Module;
+namespace Web\Page\API\Module;
 use Utility\Image\Graph\Source\IGraphSource;
 use Web\Page\Handler;
 use Utility\Image\Graph\Renderer;

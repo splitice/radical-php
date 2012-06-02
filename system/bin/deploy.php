@@ -45,7 +45,7 @@ foreach($_CONFIG_FILES as $c){
 	}
 }
 if(!isset($_DEPLOY)){
-	$_DEPLOY = \Net\ExternalInterfaces\SSH\Deployment::fromArray($_DEPLOY);
+	$_DEPLOY = \Utility\Net\External\SSH\Deployment::fromArray($_DEPLOY);
 	$live_path = $_DEPLOY->getPath().DIRECTORY_SEPARATOR;
 }else{
 	\CLI\Output\Error::Fatal('No deployment config provided.');
