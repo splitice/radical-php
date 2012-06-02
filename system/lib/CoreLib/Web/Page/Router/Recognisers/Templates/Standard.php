@@ -1,7 +1,8 @@
 <?php
 namespace Web\Page\Router\Recognisers\Templates;
+
 use Basic\String\Format;
-use Web\PageRecogniser\IPageRecognise;
+use Web\Page\Router\IPageRecognise;
 use Web\Page\Controller;
 use Web\Page\Handler;
 

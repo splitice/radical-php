@@ -1,6 +1,8 @@
 <?php
 namespace Web\Page\Controller\CSS_JS\Internal;
 
+use Utility\Cache\PooledCache;
+
 abstract class CombineBase extends IndividualBase {
 	protected $version;
 	
@@ -17,7 +19,7 @@ abstract class CombineBase extends IndividualBase {
 		$this->name = $n;
 	}
 	static function Link($name){
-		$cache = \Cache\PooledCache::Get(get_called_class(), 'Memory');
+		$cache = PooledCache::Get(get_called_class(), 'Memory');
 		
 		$version = (int)$cache->Get($name);
 		if(!$version){
@@ -47,7 +49,7 @@ abstract class CombineBase extends IndividualBase {
 		$key = static::EXTENSION.'_'.$this->name.'_'.$this->version;
 		
 		$this->sendHeaders();
-		$cache = \Cache\PooledCache::Get(get_called_class(), 'Memory');
+		$cache = PooledCache::Get(get_called_class(), 'Memory');
 		
 		$ret = $cache->get($key);
 		

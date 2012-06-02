@@ -2,7 +2,7 @@
 namespace Web;
 
 use Web\Resource\Javascript\Libraries\IJavascriptLibrary;
-use Resource\Resource\Javascript\RequireJS;
+use Web\Resource\Javascript\RequireJS;
 use Utility\HTML\Tag\Script;
 
 class Resource {

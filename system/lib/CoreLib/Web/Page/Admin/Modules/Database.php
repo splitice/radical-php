@@ -1,6 +1,7 @@
 <?php
-namespace Web\Admin\Modules;
-use Web\Admin\AdminModuleBase;
+namespace Web\Page\Admin\Modules;
+
+use Web\Page\Admin\AdminModuleBase;
 use Model\Database\Model\TableReferenceInstance;
 use Web\Session\User\IUserAdmin;
 use Net\URL\Pagination\QueryMethod;

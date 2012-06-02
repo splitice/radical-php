@@ -1,5 +1,8 @@
 <?php
 namespace Utility\Net\External\ContentAPI\Modules;
+
+use Utility\HTML;
+
 class AdultDVDEmpire extends Internal\ModuleBase implements \Utility\Net\External\ContentAPI\Interfaces\IFromURL {
 	const URL_RULE = '#adultdvdempire\.com\/([0-9]+)\/#i';
 	const URL = 'http://www.adultdvdempire.com';
@@ -20,7 +23,7 @@ class AdultDVDEmpire extends Internal\ModuleBase implements \Utility\Net\Externa
 		$ch = static::CH ( $url );
 		$data = curl_exec ( $ch );
 		
-		\HTML\Simple_HTML_DOM::LoadS ();
+		HTML\Simple_HTML_DOM::LoadS ();
 		$dom = \HTML\str_get_dom ( $data );
 		
 		try {

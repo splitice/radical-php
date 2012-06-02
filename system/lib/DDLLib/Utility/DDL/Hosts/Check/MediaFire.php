@@ -1,6 +1,8 @@
 <?php
 namespace DDL\Hosts\Check;
 
+use Utility\File;
+
 class MediaFire extends Internal\HostBase {
 	const HOST_SCORE = 1.2;
 	const HOST_ABBR = 'MF';
@@ -14,7 +16,7 @@ class MediaFire extends Internal\HostBase {
 			$ret->setStatus('ok');
 			$ret->setFilename(trim($m[1]));
 			if(preg_match('#<input type="hidden" id="sharedtabsfileinfo1-fs" value="([^"]+)">#',$data,$m)){
-				$fs = \File\Size::fromHuman($m[1]);
+				$fs = File\Size::fromHuman($m[1]);
 				$ret->setFilesize($fs);
 			}
 		}

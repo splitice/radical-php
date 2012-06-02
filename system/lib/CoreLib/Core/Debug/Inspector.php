@@ -61,7 +61,7 @@ class Inspector {
 		if (strpos($identifier, '::')) {
 			return (strpos($identifier, '$') !== false) ? 'property' : 'method';
 		}
-		if (is_readable(\Libraries::path($identifier))) {
+		if (is_readable(\Core\Libraries::path($identifier))) {
 			if (class_exists($identifier) && in_array($identifier, get_declared_classes())) {
 				return 'class';
 			}
@@ -343,7 +343,7 @@ class Inspector {
 	public static function lines($data, $lines) {
 		if (!strpos($data, PHP_EOL)) {
 			if (!file_exists($data)) {
-				$data = \Libraries::path($data);
+				$data = \Core\Libraries::path($data);
 				if (!file_exists($data)) {
 					return null;
 				}
@@ -451,7 +451,7 @@ class Inspector {
 		};
 
 		foreach ((array) $classes as $class) {
-			$data = explode("\n", file_get_contents(\Libraries::path($class)));
+			$data = explode("\n", file_get_contents(\Core\Libraries::path($class)));
 			$data = "<?php \n" . join("\n", preg_grep('/^\s*use /', $data)) . "\n ?>";
 
 			$classes = array_map($join, Parser::find($data, 'use *;', array(

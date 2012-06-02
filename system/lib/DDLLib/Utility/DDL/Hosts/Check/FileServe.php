@@ -1,6 +1,8 @@
 <?php
 namespace DDL\Hosts\Check;
 
+use Utility\File;
+
 class FileServe extends Internal\HostBase {
 	const HOST_SCORE = 1;
 	const HOST_ABBR = 'FSV';
@@ -18,7 +20,7 @@ class FileServe extends Internal\HostBase {
 				$ret->setFilename(trim($m[1]));
 			}
 			if(preg_match('#<strong>(.+)</strong> \| Uploaded#',$data,$m)){
-				$fs = \File\Size::fromHuman($m[1]);
+				$fs = File\Size::fromHuman($m[1]);
 				$ret->setFilesize($fs);
 			}
 		}

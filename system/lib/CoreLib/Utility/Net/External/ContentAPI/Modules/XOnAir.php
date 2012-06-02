@@ -1,5 +1,8 @@
 <?php
 namespace Utility\Net\External\ContentAPI\Modules;
+
+use Utility\HTML;
+
 class XOnAir extends Internal\ModuleBase implements \Utility\Net\External\ContentAPI\Interfaces\IFromURL {
 	const URL_RULE = '#xonair\.com\/detail\.cfm\?(?:.*)id=([0-9]+)#i';
 	const URL = 'http://www.xonair.com';
@@ -20,7 +23,7 @@ class XOnAir extends Internal\ModuleBase implements \Utility\Net\External\Conten
 		$ch = static::CH ( $url );
 		$data = curl_exec ( $ch );
 		
-		\HTML\Simple_HTML_DOM::LoadS ();
+		HTML\Simple_HTML_DOM::LoadS ();
 		$dom = \HTML\str_get_dom ( $data );
 		
 		$tref = 'table[width="518"] table[width="100%"] ';

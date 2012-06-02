@@ -1,6 +1,7 @@
 <?php
 namespace Web\Page\Router\Recognisers;
-use Web\PageRecogniser\IPageRecognise;
+
+use Web\Page\Router\IPageRecognise;
 use Web\Page\Controller;
 use Web\Page\Handler;
 
@@ -12,19 +13,19 @@ class Special implements IPageRecognise {
 		if($ext=='css'){
 			if($url->firstPathElement() == 'css'){//Direct access dont combine
 				$url->removeFirstPathElement();
-				return new Pages\CSS_JS\CSS\Individual(array('name'=>(string)$path));
+				return new Controller\CSS_JS\CSS\Individual(array('name'=>(string)$path));
 			}else{
 				$name = substr($path,1,-4);
-				return new Pages\CSS_JS\CSS\Combine(array('name'=>$name));
+				return new Controller\CSS_JS\CSS\Combine(array('name'=>$name));
 			}
 		}
 		if($ext=='js'){
 			if($url->firstPathElement() == 'js'){//Direct access dont combine
 				$url->removeFirstPathElement();
-				return new Pages\CSS_JS\JS\Individual(array('name'=>(string)$path));
+				return new Controller\CSS_JS\JS\Individual(array('name'=>(string)$path));
 			}else{
 				$name = substr($path,1,-3);
-				return new Pages\CSS_JS\JS\Combine(array('name'=>$name));
+				return new Controller\CSS_JS\JS\Combine(array('name'=>$name));
 			}
 		}
 	}

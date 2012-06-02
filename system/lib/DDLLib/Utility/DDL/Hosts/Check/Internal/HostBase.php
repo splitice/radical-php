@@ -1,6 +1,9 @@
 <?php
 namespace DDL\Hosts\Check\Internal;
 
+use Utility\Net\HTTP;
+use Utility\HTML;
+
 abstract class HostBase implements \DDL\Hosts\Check\Interfaces\IDDLHostCheck {
 	const HOST_SCORE = null;
 	const HOST_ABBR = null;
@@ -12,8 +15,8 @@ abstract class HostBase implements \DDL\Hosts\Check\Interfaces\IDDLHostCheck {
 		$links = array();
 		
 		//Parse HTML
-		\HTML\Simple_HTML_DOM::LoadS();
-		$b = \HTML\str_get_dom($data);
+		HTML\Simple_HTML_DOM::LoadS();
+		$b = HTML\str_get_dom($data);
 		foreach($b->find('a') as $link){
 			if($linka = self::RecogniseSingle($link->href)){
 				$links[] = $linka;
@@ -78,7 +81,7 @@ abstract class HostBase implements \DDL\Hosts\Check\Interfaces\IDDLHostCheck {
 		return $url;
 	}
 	function Check($url){
-		$F = new \HTTP\Fetch($url);
+		$F = new HTTP\Fetch($url);
 		$F->setTimeout(5);
 		$F->setModule('Link Checker');
 		$result = $F->Execute();
@@ -110,7 +113,7 @@ abstract class HostBase implements \DDL\Hosts\Check\Interfaces\IDDLHostCheck {
 			$links[$url] = $status;
 		};
 		
-		$mh = new \HTTP\Multi();
+		$mh = new HTTP\Multi();
 		foreach($urls as $url){
 			$this->CheckMulti($mh, $url, $callback);
 		}
@@ -120,7 +123,7 @@ abstract class HostBase implements \DDL\Hosts\Check\Interfaces\IDDLHostCheck {
 		return $links;
 	}
 	function CheckMulti($mh,$url,$callback){
-		$F = new \HTTP\Fetch($url);
+		$F = new HTTP\Fetch($url);
 		$F->setTimeout(5);
 		$F->setModule('Link Checker');
 		

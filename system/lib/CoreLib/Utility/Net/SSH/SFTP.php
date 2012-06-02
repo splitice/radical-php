@@ -24,7 +24,7 @@ class SFTP {
 		return $file;
 	}
 	function newFile($path){
-		return new \File\Instance($this->getPath($path));
+		return new \File($this->getPath($path));
 	}
 	function getPath($path){
 		return self::SCHEME."${sftp}${path}";

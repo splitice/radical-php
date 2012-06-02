@@ -8,7 +8,7 @@ use Web\Page\Handler;
 class API implements IPageRecognise {
 	const DEFAULT_TYPE = 'json';
 	static function Error($string,$type){
-		return Page\Handler::Objectify ( 'API', array('error'=>$string,'type'=>$type) );
+		return Handler::Objectify ( 'API', array('error'=>$string,'type'=>$type) );
 	}
 	static function Recognise(\Net\URL $url){
 		$url = $url->getPath();
@@ -51,7 +51,7 @@ class API implements IPageRecognise {
 			//Method
 			$c = new $c($url->getQuery(),$type);
 			if($c->can($method)){
-				return Page\Handler::Objectify ( 'API', array('object'=>$c,'method'=>$method, 'type'=>$type) );
+				return Handler::Objectify ( 'API', array('object'=>$c,'method'=>$method, 'type'=>$type) );
 			}else{
 				return static::Error('Invalid Method',$type);
 			}

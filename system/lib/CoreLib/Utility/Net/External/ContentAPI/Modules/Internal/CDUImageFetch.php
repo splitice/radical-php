@@ -1,7 +1,10 @@
 <?php
 namespace Utility\Net\External\ContentAPI\Modules\Internal;
 
-class CDUImageFetch implements \Image\Interfaces\IFetch {
+use Utility\Image\Interfaces\IFetch;
+use Utility\HTML;
+
+class CDUImageFetch implements IFetch {
 	private $ch;
 	
 	function __construct($ch){
@@ -10,7 +13,7 @@ class CDUImageFetch implements \Image\Interfaces\IFetch {
 	function Fetch(){
 		$data = curl_exec($this->ch);
 		$ch = $this->ch;
-		\HTML\Simple_HTML_DOM::LoadS ();
+		HTML\Simple_HTML_DOM::LoadS ();
 		$dom = \HTML\str_get_dom ( $data );
 		
 		if($img = $dom->find('img[src*="cover"]',0)){

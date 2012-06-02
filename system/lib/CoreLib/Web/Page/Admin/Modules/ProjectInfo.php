@@ -1,6 +1,6 @@
 <?php
-namespace Web\Admin\Modules;
-use Web\Admin\MultiAdminModuleBase;
+namespace Web\Page\Admin\Modules;
+use Web\Page\Admin\MultiAdminModuleBase;
 use Web\Page\Handler;
 
 class ProjectInfo extends MultiAdminModuleBase {	

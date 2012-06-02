@@ -1,5 +1,8 @@
 <?php
 namespace Utility\Net\External\rTorrent;
+
+use Utility\Format;
+
 class Torrent extends _CORE {
 	var $hash;
 	var $host;
@@ -39,7 +42,7 @@ class Torrent extends _CORE {
 		if(is_array($tf)){
 			return false;
 		}
-		$torrent = new \File\Format\Torrent ( $tf );
+		$torrent = Format\Torrent::fromFile ( $tf );
 		//die(var_dump($torrent));
 		
 		return $torrent;

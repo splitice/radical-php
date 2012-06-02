@@ -2,6 +2,8 @@
 namespace DDL\Hosts\API\Internal\FSapi;
 use DDL\Hosts\API\Internal\FSapi;
 
+use Utility\Net\HTTP;
+
 class Multi {
 	private $callback;
 	private $mh;
@@ -27,7 +29,7 @@ class Multi {
 		$jskey = $m[1];
 		$url = 'http://api-secure.recaptcha.net/challenge?k='.$jskey;
 		
-		$http = new \HTTP\Fetch($url);
+		$http = new HTTP\Fetch($url);
 		$http->setReferer($data->getPage()->getUrl());
 		$script = $http->Execute();
 

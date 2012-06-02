@@ -25,7 +25,7 @@ abstract class ErrorException extends \Exception implements IErrorException {
 	}
 
 	function getPage(){
-		return new Pages\Error($this);
+		return new Controller\Error($this);
 	}
 	
 	function getTraceOutput(){

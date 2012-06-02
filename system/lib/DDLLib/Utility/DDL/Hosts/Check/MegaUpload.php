@@ -1,6 +1,8 @@
 <?php
 namespace DDL\Hosts\Check;
 
+use Utility\File;
+
 class MegaUpload extends Internal\HostBase {
 	const HOST_SCORE = 1.4;
 	const HOST_ABBR = 'MU';
@@ -18,7 +20,7 @@ class MegaUpload extends Internal\HostBase {
 				$ret->setFilename(trim($m[1]));
 			}
 			if(preg_match('#<div class="download_file_size">([^>]+)</div>#',$data,$m)){
-				$fs = \File\Size::fromHuman(trim($m[1]));
+				$fs = File\Size::fromHuman(trim($m[1]));
 				$ret->setFilesize($fs);
 			}
 		}

@@ -1,5 +1,5 @@
 <?php
-namespace Web\Admin\Modules;
+namespace Web\Page\Admin\Modules;
 
 interface IAdminModule {
 	function getName();

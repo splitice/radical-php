@@ -12,8 +12,7 @@ namespace Debug;
  * The parser class uses PHP's tokenizer to provide methods and tools for performing static analysis
  * on PHP code.
  */
-use Basic\ArrayLib\Set;
-
+use Basic\Arr\Set;
 use Basic\Arr\Object\CollectionObject;
 
 class Parser {

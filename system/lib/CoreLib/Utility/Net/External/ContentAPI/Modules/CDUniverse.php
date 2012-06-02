@@ -1,6 +1,8 @@
 <?php
 namespace Utility\Net\External\ContentAPI\Modules;
+
 use Utility\Net\External\ContentAPI\Interfaces;
+use Utility\HTML;
 
 class CDUniverse extends Internal\ModuleBase implements Interfaces\IFromURL {
 	const URL_RULE = '#cduniverse\.com\/productinfo\.asp\?(?:.*)pid=([0-9]+)#i';
@@ -33,7 +35,7 @@ class CDUniverse extends Internal\ModuleBase implements Interfaces\IFromURL {
 		$ch = self::CH ( $this->toURL() );
 		$data = curl_exec ( $ch );
 
-		\HTML\Simple_HTML_DOM::LoadS ();
+		HTML\Simple_HTML_DOM::LoadS ();
 		$dom = \HTML\str_get_dom ( $data );
 		
 		try {

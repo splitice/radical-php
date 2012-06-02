@@ -1,6 +1,8 @@
 <?php
 namespace DDL\Hosts\Check;
 
+use Utility\Net\HTTP;
+
 class RapidShare extends Internal\HostBase {
 	const HOST_SCORE = 1.5;
 	const HOST_ABBR = 'RS';
@@ -9,7 +11,7 @@ class RapidShare extends Internal\HostBase {
 	
 	function Check($url){
 		preg_match('#'.self::HOST_REGEX.'#i', $url, $m);
-		$F = new \HTTP\Fetch('http://api.rapidshare.com/cgi-bin/rsapi.cgi?sub=checkfiles&files='.urlencode($m[1]).'&filenames='.urlencode($m[2]));
+		$F = new HTTP\Fetch('http://api.rapidshare.com/cgi-bin/rsapi.cgi?sub=checkfiles&files='.urlencode($m[1]).'&filenames='.urlencode($m[2]));
 		$F->setModule('Link Checker');
 		$result = $F->Execute();
 		
@@ -22,7 +24,7 @@ class RapidShare extends Internal\HostBase {
 	}
 	function CheckMulti($mh,$url,$callback){
 		preg_match('#'.self::HOST_REGEX.'#i', $url, $m);
-		$F = new \HTTP\Fetch('http://api.rapidshare.com/cgi-bin/rsapi.cgi?sub=checkfiles&files='.urlencode($m[1]).'&filenames='.urlencode($m[2]));
+		$F = new HTTP\Fetch('http://api.rapidshare.com/cgi-bin/rsapi.cgi?sub=checkfiles&files='.urlencode($m[1]).'&filenames='.urlencode($m[2]));
 		
 		$F->setTimeout(5);
 		$F->setModule('Link Checker');

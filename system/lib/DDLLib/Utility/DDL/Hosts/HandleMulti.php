@@ -1,5 +1,7 @@
 <?php
 namespace DDL\Hosts;
+use CLI\Threading\Thread;
+
 class HandleMulti {
 	const DELAYED_TRIES = 10;
 	
@@ -69,7 +71,7 @@ class HandleMulti {
 				if($link instanceof Upload\Struct\DelayReturn){
 					//Wait until is time for another check
 					while(!$link->isTime()){
-						\CLI\Thread::$self->Sleep(1);
+						Thread::curent()->Sleep(1);
 					}
 					for($i=0;$i<self::DELAYED_TRIES;$i++){
 						$r = $link->Call();

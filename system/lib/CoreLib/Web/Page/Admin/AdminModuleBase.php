@@ -1,9 +1,10 @@
 <?php
 namespace Web\Page\Admin;
 
+use Web\Page\Handler\HTMLPageBase;
 use Web\Page\Handler;
 
-abstract class AdminModuleBase extends Page\Handler\HTMLPageBase implements Modules\IAdminModule {
+abstract class AdminModuleBase extends HTMLPageBase implements Modules\IAdminModule {
 	function getName(){
 		return $this->getModuleName();
 	}

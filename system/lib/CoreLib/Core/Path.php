@@ -13,7 +13,7 @@ class Path {
 			return 1;
 		});
 		//$vars['projectDir'] = AutoLoader::$;
-		$vars['baseDir'] = AutoLoader::$baseDir;
+		$vars['baseDir'] = \AutoLoader::$baseDir;
 	
 		return $vars;
 	}
@@ -23,7 +23,7 @@ class Path {
 		$vars = static::getVars();
 		$path = realpath($path);
 	
-		$path = new File\Instance($path);
+		$path = new \File($path);
 		return $path->compact($vars);
 	}
 }

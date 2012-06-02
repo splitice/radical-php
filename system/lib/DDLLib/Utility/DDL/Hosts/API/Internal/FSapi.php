@@ -1,6 +1,8 @@
 <?php
 namespace DDL\Hosts\API\Internal;
 
+use Utility\Net\HTTP;
+
 class FSapi {
 	static function getConnectURL(){
 		return 'http://'.static::URL;
@@ -22,7 +24,7 @@ class FSapi {
 	}
 	static function buildRequest($module,$method,$data){
 		$url = self::buildCall($module, $method, $data);
-		$request = new \HTTP\Fetch($url);
+		$request = new HTTP\Fetch($url);
 		return $request;
 	}
 	static function Execute($module, $method, $data){
