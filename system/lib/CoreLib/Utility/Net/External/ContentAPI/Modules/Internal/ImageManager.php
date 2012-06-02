@@ -1,7 +1,7 @@
 <?php
-namespace Net\External\ContentAPI\Modules\Internal;
+namespace Utility\Net\External\ContentAPI\Modules\Internal;
 use \Net\ExternalInterfaces\ContentAPI\Interfaces;
-use \Basic\ArrayLib\Object\ArrayObject;
+use \Basic\Arr\Object\ArrayObject;
 
 class ImageManager extends ArrayObject implements Interfaces\IExportable {
 	const DATA_IMAGE = 0;

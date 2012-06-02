@@ -1,7 +1,7 @@
 <?php
 namespace Utility\Image\Graph;
 
-use Web\Interfaces\IToURL;
+use Web\IToURL;
 
 class URL implements IToURL{
 	protected $module;

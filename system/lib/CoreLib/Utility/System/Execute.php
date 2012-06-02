@@ -1,5 +1,5 @@
 <?php
-namespace CLI\Process;
+namespace Utility\System;
 
 class Execute {
 	private $command;

@@ -1,6 +1,6 @@
 <?php
 namespace Core;
-use \Basic\ArrayLib\Object\SortedCollectionObject;
+use \Basic\Arr\Object\SortedCollectionObject;
 
 class Path {
 	static function getVars(){

@@ -5,7 +5,7 @@ use Model\Database\SQL\IStatement;
 use Model\Database\SQL;
 use Model\Database\DBAL;
 
-class TableSet extends \Basic\ArrayLib\Object\IncompleteObject {
+class TableSet extends \Basic\Arr\Object\IncompleteObject {
 	/**
 	 * @var \Database\SQL\IStatement
 	 */

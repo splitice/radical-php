@@ -1,24 +1,22 @@
 <?php
-namespace Utility\File\Format;
+namespace Utility\Format;
 
-class SFV extends \File\Instance {
+class SFV {
 	private $entries = array();
+	private $data;
 	
-	function __construct($file){
-		parent::__construct($file);
-		$this->Parse();
+	function __construct($data){
+		$this->data = $data;
 	}
 	
-	private function hashFile($filename){
+	static function hashFile($filename){
 		return hash_file('crc32b', $filename);
 	}
 	
 	private function Parse(){
 		$entries = array();
 		
-		$file_contents = $this->Contents();
-		
-		foreach(explode("\n",$file_contents) as $line){
+		foreach(explode("\n",$this->data) as $line){
 			$line = trim($line);
 			if(!$line){
 				continue;
@@ -52,7 +50,7 @@ class SFV extends \File\Instance {
 		foreach($this->entries as $file=>$hash){
 			$full_file = dirname($this->file).DIRECTORY_SEPARATOR.$file;
 			if(file_exists($full_file)){
-				if($this->hashFile($full_file) != $hash){
+				if(self::hashFile($full_file) != $hash){
 					$ok = false;
 				}
 			}

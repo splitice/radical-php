@@ -2,7 +2,7 @@
 namespace Web\Form\Security;
 
 use Web\Session;
-use Basic\ArrayLib\Object\CollectionObject;
+use Basic\Arr\Object\CollectionObject;
 
 class KeyStorage extends CollectionObject {
 	function Add(Key $key){

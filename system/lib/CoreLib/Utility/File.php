@@ -1,11 +1,7 @@
 <?php
 namespace Utility;
 
-class File {
-	function __construct($file){
-		throw new \Exception('Static now, depreciated interface');
-	}	
-	
+class File extends File\Instance {	
 	static function Size($file){
 		$file = new File\Instance($file);
 		return $file->Size();

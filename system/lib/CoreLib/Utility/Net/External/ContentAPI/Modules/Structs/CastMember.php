@@ -1,5 +1,5 @@
 <?php
-namespace Net\External\ContentAPI\Modules\Structs;
+namespace Utility\Net\External\ContentAPI\Modules\Structs;
 
 class CastMember {
 	private $name;

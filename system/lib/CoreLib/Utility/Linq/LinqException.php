@@ -1,6 +1,5 @@
 <?php
-namespace Utility\Linq\Adapter;
-
+namespace Utility\Linq;
 /**
  * PHPLinq
  *
@@ -21,17 +20,18 @@ namespace Utility\Linq\Adapter;
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * @category   PHPLinq
- * @package    Adapter
+ * @package    PHPLinq
  * @copyright  Copyright (c) 2008 - 2009 PHPLinq (http://www.codeplex.com/PHPLinq)
  * @license    http://www.gnu.org/licenses/lgpl.txt	LGPL
  * @version    0.4.0, 2009-01-27
  */
 
+
 /**
- * PHPLinq\Adapter\Exception
+ * Exception
  *
  * @category   PHPLinq
- * @package    Adapter
+ * @package    PHPLinq
  * @copyright  Copyright (c) 2008 - 2009 PHPLinq (http://www.codeplex.com/PHPLinq)
  */
-class Exception extends \PHPLinq\Exception { }
+class LinqException extends \Exception { }

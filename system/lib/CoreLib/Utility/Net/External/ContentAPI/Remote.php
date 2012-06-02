@@ -1,5 +1,5 @@
 <?php
-namespace Net\External\ContentAPI;
+namespace Utility\Net\External\ContentAPI;
 
 class Remote {
 	protected $server;

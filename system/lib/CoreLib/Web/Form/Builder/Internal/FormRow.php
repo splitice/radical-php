@@ -1,7 +1,7 @@
 <?php
 namespace Web\Form\Builder\Internal;
 
-use Basic\ArrayLib\Object\CollectionObject;
+use Basic\Arr\Object\CollectionObject;
 
 class FormRow extends CollectionObject {
 	function toHTML(){

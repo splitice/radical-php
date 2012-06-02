@@ -1,5 +1,5 @@
 <?php
-namespace Net\External\ContentAPI\Modules;
+namespace Utility\Net\External\ContentAPI\Modules;
 use \Net\ExternalInterfaces\ContentAPI\Interfaces;
 
 class CDUniverse extends Internal\ModuleBase implements Interfaces\IFromURL {

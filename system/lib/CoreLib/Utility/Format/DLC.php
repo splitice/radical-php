@@ -1,5 +1,5 @@
 <?php
-namespace Utility\File\Format;
+namespace Utility\Format;
 
                    
 	class DLC {

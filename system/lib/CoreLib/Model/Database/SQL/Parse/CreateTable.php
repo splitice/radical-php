@@ -2,7 +2,7 @@
 namespace Model\Database\SQL\Parse;
 use Model\Database\DBAL;
 
-use Basic\ArrayLib\Object\CollectionObject;
+use Basic\Arr\Object\CollectionObject;
 
 class CreateTable extends CollectionObject {
 	public $indexes;

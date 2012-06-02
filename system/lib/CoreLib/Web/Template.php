@@ -37,7 +37,7 @@ class Template extends PageHandler\PageBase {
 	}
 	
 	static function adapters(){
-		return \ClassLoader::getNSExpression('Web\\Templates\\Adapter\\*');
+		return \Core\Libraries::getNSExpression('Web\\Templates\\Adapter\\*');
 	}
 	
 	function containedBy($file = Templates\ContainerTemplate::DEFAULT_CONTAINER){

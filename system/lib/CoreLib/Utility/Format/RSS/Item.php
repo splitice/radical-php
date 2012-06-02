@@ -1,7 +1,9 @@
 <?php
 namespace Net\ExternalInterfaces\RSS;
 
-class Item extends \Net\ExternalInterfaces\Internal\DownloadableItem {
+use Utility\Net\External\DownloadableItem;
+
+class Item extends DownloadableItem {
 	private $channel;
 	protected $title;
 	protected $description;
@@ -16,6 +18,7 @@ class Item extends \Net\ExternalInterfaces\Internal\DownloadableItem {
 	
 	function __construct(Document $document){
 		$this->document = $document;
+		parent::__construct($this->link);
 	}
 	
 	/**

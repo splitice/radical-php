@@ -1,7 +1,7 @@
 <?php
 namespace Utility\Image\Graph\Schema;
 
-use Basic\ArrayLib\Object\CollectionObject;
+use Basic\Arr\Object\CollectionObject;
 
 class Dataset extends CollectionObject implements \JsonSerializable {
 	function jsonSerialize(){

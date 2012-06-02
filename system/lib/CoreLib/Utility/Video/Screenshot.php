@@ -119,6 +119,6 @@ class Screenshot {
 	}
 	
 	static function I($img) {
-		return new \Image\File ( $img );
+		return new \Utility\Image\File ( $img );
 	}
 }

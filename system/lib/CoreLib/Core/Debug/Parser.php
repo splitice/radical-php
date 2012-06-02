@@ -14,7 +14,7 @@ namespace Debug;
  */
 use Basic\ArrayLib\Set;
 
-use Basic\ArrayLib\Object\CollectionObject;
+use Basic\Arr\Object\CollectionObject;
 
 class Parser {
 

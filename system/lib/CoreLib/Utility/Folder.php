@@ -68,9 +68,9 @@ class Folder {
 		$cmd = 'cp -R '.escapeshellarg($from).' '.escapeshellarg($to);
 		exec($cmd);
 	}
-	static function getIterator($path,$options_inner = FilesystemIterator::SKIP_DOTS, $options_outer = RecursiveIteratorIterator::CHILD_FIRST){
-		$inner = new RecursiveDirectoryIterator($path,$options_inner);
-		return new RecursiveIteratorIterator($inner, $options_outer);
+	static function getIterator($path,$options_inner = \FilesystemIterator::SKIP_DOTS, $options_outer = \RecursiveIteratorIterator::CHILD_FIRST){
+		$inner = new \RecursiveDirectoryIterator($path,$options_inner);
+		return new \RecursiveIteratorIterator($inner, $options_outer);
 	}
 	private static function _Remove($folder){
 		if(!file_exists($folder)){

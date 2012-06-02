@@ -16,7 +16,7 @@ class FormInstance extends FormCommon implements IFormInstance {
 		
 		if(!is_string($args[0])){
 			$handler = $args[0];
-			foreach(\ClassLoader::getNSExpression('HTML\\Form\\Builder\\Adapter\\*') as $class){
+			foreach(\Core\Libraries::getNSExpression('HTML\\Form\\Builder\\Adapter\\*') as $class){
 				if($class::is($handler)){
 					$this->handler = new $class($handler);
 					unset($args[0]);

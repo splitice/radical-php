@@ -1,5 +1,5 @@
 <?php
-namespace Net\External\ContentAPI\Cache;
+namespace Utility\Net\External\ContentAPI\Cache;
 
 use Model\Database\Model\DynamicTableReference;
 
@@ -92,7 +92,7 @@ class Mysql extends DynamicTableInstance {
 		$obj->Insert();
 	}
 	static function TTL(){
-		foreach(\ClassLoader::getNSExpression('\\Net\ExternalInterfaces\\ContentAPI\\Modules\\*') as $module){
+		foreach(\Core\Libraries::getNSExpression('\\Net\ExternalInterfaces\\ContentAPI\\Modules\\*') as $module){
 			$table = static::getTable($module);
 			if($table->Exists()){
 				foreach($table->getAll(' WHERE ca_ttl<='.time()) as $k){

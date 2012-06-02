@@ -1,5 +1,6 @@
 <?php
 namespace CLI\Cron\Jobs;
+use Model\Database;
 
 class BackupMail extends \Core\Object implements Interfaces\ICronJob {
 	static $__dependencies = array('lib.ddl.upload.module');
@@ -60,7 +61,7 @@ class BackupMail extends \Core\Object implements Interfaces\ICronJob {
 		}
 	}
 	function DoBackup($files = false){
-		$dBackup = new \Database\Backup\BackupAll();
+		$dBackup = new Database\Backup\BackupAll();
 		$dBackup->Execute();
 	}
 }

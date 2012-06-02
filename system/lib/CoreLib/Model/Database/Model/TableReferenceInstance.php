@@ -12,7 +12,7 @@ class TableReferenceInstance extends \Core\Object {
 			$class = get_class($class);
 		}else{
 			if(!class_exists($class)){
-				$class2 = \ClassLoader::getProjectSpace('DB\\'.$class);
+				$class2 = \Core\Libraries::getProjectSpace('DB\\'.$class);
 				if(class_exists($class2)){
 					$class = $class2;
 				}else{

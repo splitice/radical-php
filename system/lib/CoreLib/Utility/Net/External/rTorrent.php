@@ -1,5 +1,5 @@
 <? 
-namespace Net\External;
+namespace Utility\Net\External;
     class rTorrent extends rTorrent\_CORE {
         private $watch_dir;
         static $hashes = array();

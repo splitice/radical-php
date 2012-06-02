@@ -20,7 +20,7 @@ class Menu extends PageBase {
 			//Get admin modules
 			$modules = Arr::where(function($k,$v){
 				return class_exists($v);//is valid class
-			},\ClassLoader::getNSExpression(Admin::CLASS_PATH.'*'));
+			},\Core\Libraries::getNSExpression(Admin::CLASS_PATH.'*'));
 				
 			//Create links to modules
 			$VARS['modules'] = Arr::map(array('*','createLink'), $modules);

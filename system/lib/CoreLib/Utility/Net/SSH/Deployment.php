@@ -1,5 +1,5 @@
 <?php
-namespace Net\ExternalInterfaces\SSH;
+namespace Utility\Net\ExternalInterfaces\SSH;
 
 class Deployment extends Connection {
 	protected $path;

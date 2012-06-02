@@ -15,7 +15,7 @@ class Database extends AdminModuleBase {
 		if($url){
 			$class = $url->firstPathElement();
 			if($class) {
-				$model = \ClassLoader::getProjectSpace('DB\\'.$class);
+				$model = \Core\Libraries::getProjectSpace('DB\\'.$class);
 				if(!class_exists($model)){
 					throw new \Exception('Cant find database model of type '.$class);
 				}
@@ -66,13 +66,13 @@ class Database extends AdminModuleBase {
 		return $this->GET();
 	}
 	private static function extractName($name){
-		$prefix = \ClassLoader::getProjectSpace('DB\\');
+		$prefix = \Core\Libraries::getProjectSpace('DB\\');
 		return substr($name,strlen($prefix));
 	}
 	function GET(){
 		if($this->action == 'list'){
 			$classes = array();
-			foreach(\ClassLoader::getNSExpression(\ClassLoader::getProjectSpace('DB\\*')) as $k=>$v){
+			foreach(\Core\Libraries::getNSExpression(\Core\Libraries::getProjectSpace('DB\\*')) as $k=>$v){
 				$name = self::extractName($v);
 				$classes[$name] = self::toURL().'/'.$name;
 			}

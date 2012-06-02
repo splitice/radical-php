@@ -1,5 +1,5 @@
 <?php
-namespace Net\External\ContentAPI\Modules\Internal;
+namespace Utility\Net\External\ContentAPI\Modules\Internal;
 
 class CDUImageFetch implements \Image\Interfaces\IFetch {
 	private $ch;

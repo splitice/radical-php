@@ -241,7 +241,7 @@ abstract class Table implements ITable, \JsonSerializable {
 			//get the action part
 			$actionPart = substr($m,3);
 			$className = $actionPart;
-			$fullClassName = \ClassLoader::getProjectSpace('DB\\'.$className);
+			$fullClassName = \Core\Libraries::getProjectSpace('DB\\'.$className);
 			$actionPart{0} = strtolower($actionPart{0});
 			
 			//if we have the action part from the database

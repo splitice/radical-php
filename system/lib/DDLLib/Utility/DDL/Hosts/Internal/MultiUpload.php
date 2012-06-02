@@ -1,7 +1,7 @@
 <?php
 namespace DDL\Hosts\Internal;
 
-use Basic\ArrayLib\Object\CollectionObject;
+use Basic\Arr\Object\CollectionObject;
 
 class MultiUpload {
 	protected $module;

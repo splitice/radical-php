@@ -1,6 +1,6 @@
 <?php
 namespace Utility\File;
-use Basic\ArrayLib\Object\ArrayObject;
+use Basic\Arr\Object\ArrayObject;
 
 class Set extends ArrayObject {
 	function Add(Instance $v){

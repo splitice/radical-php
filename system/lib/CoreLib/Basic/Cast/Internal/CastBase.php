@@ -1,6 +1,6 @@
 <?php
-namespace Cast\Internal;
+namespace Basic\Cast\Internal;
 
-abstract class CastBase extends \Core\Object {
+abstract class CastBase {
 	
 }

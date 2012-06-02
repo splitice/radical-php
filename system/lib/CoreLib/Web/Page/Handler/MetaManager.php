@@ -1,7 +1,7 @@
 <?php
 namespace Web\Page\Handler;
 
-class MetaManager extends \Basic\ArrayLib\Object\CollectionObject {
+class MetaManager extends \Basic\Arr\Object\CollectionObject {
 	function __construct($data = array()){
 		if(!isset($data['keywords'])){
 			$data['keywords'] = array();

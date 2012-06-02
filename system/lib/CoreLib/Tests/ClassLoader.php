@@ -8,20 +8,20 @@ class ClassLoader extends Unit implements IUnitTest {
 	function testToPath(){
 		$class = 'ABC\\ClassLoader';
 		
-		$path = \ClassLoader::toPath($class,false);
+		$path = \Core\Libraries::toPath($class,false);
 		
 		$this->assertTrue(is_string($path),'Classloader path is a string');
 		$this->assertEqual($path, 'ABC'.DIRECTORY_SEPARATOR.'ClassLoader' ,'Classloader path is transformed correctly');
 		
 		$class = 'ClassLoader';
-		$path = \ClassLoader::toPath($class,true);
+		$path = \Core\Libraries::toPath($class,true);
 		$this->assertTrue(file_exists($path),'Class Loader full path resolves correctly');
 	}
 	function testToClass(){
 		$class = 'ABC\\ClassLoader';
 		$path = 'ABC'.DIRECTORY_SEPARATOR.'ClassLoader';
 		
-		$class2 = \ClassLoader::toClass($path);
+		$class2 = \Core\Libraries::toClass($path);
 	
 		$this->assertTrue(is_string($path),'Classloader path is a string');
 		$this->assertEqual($class, $class2 ,'Classloader path is transformed correctly');
@@ -29,7 +29,7 @@ class ClassLoader extends Unit implements IUnitTest {
 	
 	function testGetNSExpression(){
 		$expr = '*';
-		$classes = \ClassLoader::getNSExpression($expr);
+		$classes = \Core\Libraries::getNSExpression($expr);
 	
 		$this->assertTrue(is_array($classes),'Classloader is an array');
 		$this->assertTrue(in_array('ClassLoader',$classes),'Classloader is in array, expr matches');

@@ -42,6 +42,6 @@ class Resource {
 		return $files;
 	}
 	function getFile(){
-		return new \File\Instance($this->getFullPath());
+		return new \File($this->getFullPath());
 	}
 }

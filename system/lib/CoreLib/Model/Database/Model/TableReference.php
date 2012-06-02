@@ -3,7 +3,7 @@ namespace Model\Database\Model;
 
 class TableReference extends \Core\Object {	
 	protected static function getClasses(){
-		return \ClassLoader::getNSExpression(\ClassLoader::getProjectSpace('DB\\*'));
+		return \Core\Libraries::getNSExpression(\Core\Libraries::getProjectSpace('DB\\*'));
 	}
 	
 	private static $_name = array();

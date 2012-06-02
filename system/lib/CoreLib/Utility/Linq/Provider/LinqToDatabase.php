@@ -1,8 +1,12 @@
 <?php
 namespace Utility\Linq\Provider;
-use PHPLinq\Expression;
-use PHPLinq\OrderByExpression;
-use PHPLinq\Initiator;
+
+use Model\Database\SQL\SelectStatement;
+use Utility\Linq;
+use Utility\Linq\Adapter;
+use Utility\Linq\Expression;
+use Utility\Linq\OrderByExpression;
+use Utility\Linq\Initiator;
 use Model\Database\Model;
 
 /**
@@ -40,7 +44,7 @@ use Model\Database\Model;
  * @package    PHPLinq
  * @copyright  Copyright (c) 2008 - 2009 PHPLinq (http://www.codeplex.com/PHPLinq)
  */
-class LinqToDatabase implements Interfaces\ILinqProvider {
+class LinqToDatabase implements ILinqProvider {
 	/** Constants */
 	const T_FUNCTION 		= 1001001;
 	const T_PROPERTY 		= 1001002;
@@ -294,13 +298,10 @@ class LinqToDatabase implements Interfaces\ILinqProvider {
 	public function in($source) {
 		$this->_data = $source;
 		
-		// Configure PHPLinq\Adapter\Abstract
-		//$zendDbAdapter 	= get_class($source->getAdapter());
-		//$phpLinqAdapter = str_replace('Zend_Db', 'PHPLinq', $zendDbAdapter);
-		//require_once(str_replace('_', '/', $phpLinqAdapter) . '.php');
-		$phpLinqAdapter = '\\PHPLinq\\Adapter\\Mysqli';
+
+		$phpLinqAdapter = '';
 		$adapter = \DB::getInstance();
-		$this->_adapter = new $phpLinqAdapter($adapter);
+		$this->_adapter = new Adapter\Mysqli($adapter);
 		
 		return $this;
 	}
@@ -325,7 +326,7 @@ class LinqToDatabase implements Interfaces\ILinqProvider {
 		
 		// Data source
 		$dataSourceInfo = $this->_data->Info();
-		$dataSource = new \Database\SQL\SelectStatement(array($this->_from => $dataSourceInfo['name']),$this->_columns);
+		$dataSource = new SelectStatement(array($this->_from => $dataSourceInfo['name']),$this->_columns);
 
 		// Create selector expression
 		$selector = new Expression($expression, $this->_from);
@@ -935,7 +936,7 @@ class LinqToDatabase implements Interfaces\ILinqProvider {
 	 */
 	public function reverse($preserveKeys = null) {
 		$data = array_reverse($this->select(), $preserveKeys);
-		return \Linq::from($this->_from)->in($data);
+		return Linq::from($this->_from)->in($data);
 	}
 	
 	/**
@@ -981,7 +982,7 @@ class LinqToDatabase implements Interfaces\ILinqProvider {
 	 */
 	public function concat($source) {
 		$data = array_merge($this->select(), $source);
-		return \Linq::from($this->_from)->in($data);
+		return Linq::from($this->_from)->in($data);
 	}
 	
 	/**

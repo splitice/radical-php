@@ -29,7 +29,7 @@ class Graph extends APIBase {
 		}
 	}
 	private function _getModule($module){
-		return \ClassLoader::getProjectSpace('DB\\'.ucfirst($module));
+		return \Core\Libraries::getProjectSpace('DB\\'.ucfirst($module));
 	}
 	function can($module){		
 		return class_exists($this->_getModule($module));

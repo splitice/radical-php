@@ -26,7 +26,7 @@ class MagicNamespace {
 	function getFile(){
 		global $BASEPATH;
 		
-		$expr = $BASEPATH.DIRECTORY_SEPARATOR.'*'.DIRECTORY_SEPARATOR.'lib'.DIRECTORY_SEPARATOR.$this->library.DIRECTORY_SEPARATOR.\ClassLoader::toPath($this->class).'.php';
+		$expr = $BASEPATH.DIRECTORY_SEPARATOR.'*'.DIRECTORY_SEPARATOR.'lib'.DIRECTORY_SEPARATOR.$this->library.DIRECTORY_SEPARATOR.\Core\Libraries::toPath($this->class).'.php';
 		$files = glob($expr);
 		$files = array_reverse($files);
 		if(!$files){

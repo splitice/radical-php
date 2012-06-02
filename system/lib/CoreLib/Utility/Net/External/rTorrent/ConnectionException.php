@@ -1,4 +1,4 @@
 <?php
-namespace Net\External\rTorrent;
+namespace Utility\Net\External\rTorrent;
 class ConnectionException extends \Exception { }
 ?>

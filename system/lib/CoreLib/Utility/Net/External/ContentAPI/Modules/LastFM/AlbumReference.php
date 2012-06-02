@@ -1,5 +1,5 @@
 <?php
-namespace Net\External\ContentAPI\Modules\LastFM;
+namespace Utility\Net\External\ContentAPI\Modules\LastFM;
 
 class AlbumReference {
 	private $artist;

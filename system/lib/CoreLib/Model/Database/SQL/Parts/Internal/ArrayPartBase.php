@@ -1,7 +1,7 @@
 <?php
 namespace Model\Database\SQL\Parts\Internal;
 
-use Basic\ArrayLib\Object\CollectionObject;
+use Basic\Arr\Object\CollectionObject;
 use Model\Database\IToSQL;
 
 abstract class ArrayPartBase extends CollectionObject implements IToSQL {

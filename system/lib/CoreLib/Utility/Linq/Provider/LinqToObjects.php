@@ -1,8 +1,10 @@
 <?php
 namespace Utility\Linq\Provider;
-use PHPLinq\Expression;
-use PHPLinq\OrderByExpression;
-use PHPLinq\Initiator;
+use Utility\Linq;
+
+use Utility\Linq\Expression;
+use Utility\Linq\OrderByExpression;
+use Utility\Linq\Initiator;
 
 /**
  * PHPLinq
@@ -38,7 +40,7 @@ use PHPLinq\Initiator;
  * @package    PHPLinq
  * @copyright  Copyright (c) 2008 - 2009 PHPLinq (http://www.codeplex.com/PHPLinq)
  */
-class LinqToObjects implements Interfaces\ILinqProvider {
+class LinqToObjects implements ILinqProvider {
 	/**
 	 * Default variable name
 	 *
@@ -632,7 +634,7 @@ class LinqToObjects implements Interfaces\ILinqProvider {
 	 */
 	public function reverse($preserveKeys = null) {
 		$data = array_reverse($this->select(), $preserveKeys);
-		return \Linq::from($this->_from)->in($data);
+		return Linq::from($this->_from)->in($data);
 	}
 	
 	/**
@@ -678,7 +680,7 @@ class LinqToObjects implements Interfaces\ILinqProvider {
 	 */
 	public function concat($source) {
 		$data = array_merge($this->select(), $source);
-		return \Linq::from($this->_from)->in($data);
+		return Linq::from($this->_from)->in($data);
 	}
 	
 	/**

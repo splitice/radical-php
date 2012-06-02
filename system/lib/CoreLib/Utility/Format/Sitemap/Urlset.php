@@ -1,6 +1,5 @@
 <?php
-namespace Web\Sitemap\Internal;
-use Web\Sitemap\SitemapBase;
+namespace Utility\Format\Sitemap;
 
 class Urlset extends SitemapBase {
 	private $urls = array();

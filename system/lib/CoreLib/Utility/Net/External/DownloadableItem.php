@@ -1,5 +1,5 @@
 <?php
-namespace Net\External\Internal;
+namespace Utility\Net\External;
 
 class DownloadableItem {
 	public $link;

@@ -1,5 +1,5 @@
 <?php
-namespace Net\External\ContentAPI\Modules\Internal;
+namespace Utility\Net\External\ContentAPI\Modules\Internal;
 use \Net\ExternalInterfaces\ContentAPI\Interfaces;
 
 abstract class ModuleBase {

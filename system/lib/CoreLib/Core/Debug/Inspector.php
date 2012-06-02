@@ -8,7 +8,7 @@
 
 namespace Debug;
 
-use Basic\ArrayLib\Object\CollectionObject;
+use Basic\Arr\Object\CollectionObject;
 
 use Exception;
 use ReflectionClass;

@@ -15,7 +15,7 @@ class ProjectInfo extends MultiAdminModuleBase {
 		return $ret;
 	}
 	function actionInfo(){
-		foreach(\ClassLoader::getLibraries() as $libName=>$libPath){
+		foreach(\Core\Libraries::getLibraries() as $libName=>$libPath){
 			echo '<h2>'.$libName.'</h2>';
 			echo '<p>';
 			$info = $this->getInfo($libPath);

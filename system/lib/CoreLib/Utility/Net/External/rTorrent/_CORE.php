@@ -1,5 +1,5 @@
 <?php
-namespace Net\External\rTorrent;
+namespace Utility\Net\External\rTorrent;
 class _CORE {
 	function Post($command,$post) {
 		$post_data = xmlrpc_encode_request($command,$post);

@@ -1,7 +1,7 @@
 <?php
 namespace Model\Database\DBAL;
 
-class Set extends \Basic\ArrayLib\Object\ArrayObject {
+class Set extends \Basic\Arr\Object\ArrayObject {
 	function OrderBy($field,$order='ASC'){
 		$method = 'get'.ucfirst($field);
 		if(strtoupper($order) == 'ASC'){

@@ -1,6 +1,6 @@
 <?php
 namespace Utility\Net\HTTP\Curl;
-use Basic\ArrayLib\Object\CollectionObject;
+use Basic\Arr\Object\CollectionObject;
 
 abstract class CurlBase extends CollectionObject {
 	function setUrl($url){
