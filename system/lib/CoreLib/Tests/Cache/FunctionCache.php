@@ -1,6 +1,7 @@
 <?php
 namespace Tests\Cache;
 
+use Utility\Cache as Target;
 use Debug\Test\IUnitTest;
 use Debug\Test\Unit;
 
@@ -8,13 +9,13 @@ class FunctionCache extends Unit implements IUnitTest {
 	public $a = 0;
 	private function _testCache(){
 		$self = $this;
-		return \Cache\FunctionCache::Call($function = function() use($self){
+		return Target\FunctionCache::Call($function = function() use($self){
 			$self->a++;
 			return 'true';
 		},100,__FILE__,4,'Memory');
 	}
 	function testCache(){		
-		$cache = \Cache\FunctionCache::Get('Memory');
+		$cache = Target\FunctionCache::Get('Memory');
 		$cache->Delete(__FILE__.':4');
 		
 		$result1 = $this->_testCache();

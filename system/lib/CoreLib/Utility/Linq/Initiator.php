@@ -87,6 +87,6 @@ class Initiator {
 		}
 		
 		// No provider found...
-		throw new Exception("No valid ILinqProvider found for the specified data source.");
+		throw new LinqException("No valid ILinqProvider found for the specified data source.");
 	}
 }

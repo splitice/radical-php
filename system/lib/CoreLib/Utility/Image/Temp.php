@@ -1,7 +1,7 @@
 <?php
 namespace Utility\Image;
 
-class Temp extends \Image\File {
+class Temp extends File {
 	static function getTempName(){
 		return tempnam('/tmp/',md5(get_called_class()));
 	}

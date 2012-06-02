@@ -1,6 +1,9 @@
 <?php
 namespace Utility\Format;
 
+use Utility\System;
+use CLI\Threading;
+
 class RAR {
 	private $src;
 	private $to;
@@ -110,10 +113,10 @@ class RAR {
 		
 		//Execute Command
 		//echo "RAR: $cmd\r\n";
-		$e = new \CLI\Process\Execute ($cmd);
+		$e = new System\Execute ($cmd);
 		$process = $e->Run();
 		do {
-			\CLI\Threading\Thread::current()->Sleep(1);
+			Threading\Thread::current()->Sleep(1);
 		}while($process->isRunning());
 		
 		//Clear temp files
@@ -144,11 +147,11 @@ class RAR {
 		@mkdir ( $to );
 		
 		//Execute
-		$e = new \CLI\Process\Execute ( 'rar -y -o+ e ' . escapeshellarg ( $in ) . ' ' . escapeshellarg ( $to ) );
+		$e = new System\Execute ( 'rar -y -o+ e ' . escapeshellarg ( $in ) . ' ' . escapeshellarg ( $to ) );
 		$process = $e->Run();
 		
 		do {
-			\CLI\Threading\Thread::current()->Sleep(1);
+			Threading\Thread::current()->Sleep(1);
 		}while($process->isRunning());
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 namespace Utility\Image\Graph\Renderer;
-use Image\Graph\pChart\pChart;
-use Image\Graph\Renderer\IRenderable;
+use Utility\Image\Graph\pChart\pChart;
+use Utility\Image\Graph\Renderer\IRenderable;
 
 class JSON extends ImageGraph implements IRenderable {
 	function Output(\Image\Graph\Schema\Graph $schema){

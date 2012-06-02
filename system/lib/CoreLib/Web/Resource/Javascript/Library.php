@@ -1,7 +1,7 @@
 <?php
-namespace Web\Resource;
-use Core\Libraries;
+namespace Web\Resource\Javascript;
 
+use Core\Libraries;
 use Utility\HTML\Tag;
 
 class Library extends Tag\Script {

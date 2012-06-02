@@ -123,7 +123,7 @@ class DynamicTableReference extends TableReferenceInstance {
 	}
 	
 	function ValidateFields(){
-		$table = \Database\SQL\Parse\CreateTable::fromTable($this->_tableName);
+		$table = CreateTable::fromTable($this->_tableName);
 		$data = $table->asArray();
 	
 		foreach(array_merge($this->id,$this->field) as $name=>$type){

@@ -1,5 +1,6 @@
 <?php
 namespace Utility\Image\Watermark\Internal;
+use Utility\Image;
 
 class Result {
 	function __construct($image){
@@ -22,6 +23,6 @@ class Result {
 			}
 		}
 		
-		return new \Image\File($file);
+		return new Image\File($file);
 	}
 }

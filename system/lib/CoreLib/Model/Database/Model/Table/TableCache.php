@@ -1,5 +1,7 @@
 <?php
 namespace Model\Database\Model\Table;
+
+use Utility\Cache\Object\WeakRef;
 use Model\Database\Model\Table;
 
 class TableCache {
@@ -8,7 +10,7 @@ class TableCache {
 	
 	private static function Init(){
 		if(!self::$cache){
-			self::$cache = new \Cache\Object\WeakRef();
+			self::$cache = new WeakRef();
 		}
 	}
 	private static function _Add($key,$value){

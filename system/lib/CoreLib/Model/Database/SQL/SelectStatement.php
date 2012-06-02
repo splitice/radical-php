@@ -2,17 +2,12 @@
 namespace Model\Database\SQL;
 
 use Basic\String\Number;
-
-use Model\Database\SQL\Parts\From;
-
-use Model\Database\SQL\Parts\Where;
-
+use Basic\Cast;
 use Basic\Arr;
-
+use Model\Database\SQL\Parts\From;
+use Model\Database\SQL\Parts\Where;
 use Model\Database\SQL\Parse\CreateTable;
-
 use Model\Database\IToSQL;
-
 use Model\Database\DBAL;
 
 /*
@@ -127,7 +122,7 @@ class SelectStatement extends Internal\StatementBase {
 		$count->fields('COUNT(*)');
 	
 		$res = \DB::Query($count);
-		return $res->Fetch(DBAL\Fetch::FIRST,new \Cast\Integer());
+		return $res->Fetch(DBAL\Fetch::FIRST,new Cast\Integer());
 	}
 	
 	function toSQL(){

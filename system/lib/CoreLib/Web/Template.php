@@ -13,14 +13,14 @@ class Template extends PageHandler\PageBase {
 	function __construct($name, $vars = array(), $container = 'HTML') {
 		$this->vars = $vars;
 		$this->name = $name;
-		$this->file = new \File\Instance(static::getPath($name,$container));
+		$this->file = new \File(static::getPath($name,$container));
 		$this->container = $container;
 		if(!$this->file->Exists()){
 			throw new \Exception('Template '.$name.' in '.$container.' doesnt exist');
 		}
 		
 		foreach(array_slice(debug_backtrace(true),1) as $r){
-			if(isset($r['object']) && $r['object'] instanceof PageHandler\IPage && !($r['object'] instanceof Template)){
+			if(isset($r['object']) && $r['object'] instanceof Page\Handler\IPage && !($r['object'] instanceof Template)){
 				$this->handler = $r['object'];
 				break;
 			}
@@ -45,8 +45,8 @@ class Template extends PageHandler\PageBase {
 	}
 	
 	static function isSupported($path){
-		if(!($path instanceof \File\Instance)){
-			$path = new \File\Instance($path);
+		if(!($path instanceof \File)){
+			$path = new \File($path);
 		}
 		
 		$handlers = static::adapters();
@@ -97,7 +97,7 @@ class Template extends PageHandler\PageBase {
 		}
 
 		if($adapter instanceof Templates\Adapter\ITemplateAdapter){
-			PageHandler::Top()->headers->Add('Content-Type', 'text/html;charset=utf-8');
+			Page\Handler::Top()->headers->Add('Content-Type', 'text/html;charset=utf-8');
 			//$VAR,$HANDLER,$TEMPLATE_FILE
 			$adapter->Output($this->_scope());
 		}else{

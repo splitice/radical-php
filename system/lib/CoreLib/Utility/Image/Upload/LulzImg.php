@@ -1,6 +1,8 @@
 <?php
 namespace Utility\Image\Upload;
 
+use Utility\Image;
+
 class LulzImg extends _BASE implements IUploadHost {
 	static $ch = array();
 	
@@ -45,7 +47,7 @@ class LulzImg extends _BASE implements IUploadHost {
 	}
 	function Upload($file,$file_type,$size='500x500'){
 		//Only family safe uploads
-		if($file_type == \Image\File::TYPE_ADULT){
+		if($file_type == Image\File::TYPE_ADULT){
 			throw new UploadException('LulzImg doesnt allow adult image uploads');
 		}
 		
@@ -70,10 +72,10 @@ class LulzImg extends _BASE implements IUploadHost {
 					$size[0] = 'auto';
 				}
 				
-				$filter = new \Image\Filters\Resize($size[0],$size[1]);
+				$filter = new Image\Filters\Resize($size[0],$size[1]);
 				$gd = imagecreatefromstring(file_get_contents($file));
 				$gd = $filter->Execute($gd);
-				$temp = new \Image\Temp($gd);
+				$temp = new Image\Temp($gd);
 				$thumb = $temp->Upload($this, $file_type, null);
 				if($thumb){
 					$thumb = $thumb['url'];

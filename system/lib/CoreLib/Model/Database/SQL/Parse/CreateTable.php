@@ -1,5 +1,7 @@
 <?php
 namespace Model\Database\SQL\Parse;
+use Model\Database\SQL\ShowCreateTable;
+
 use Model\Database\DBAL;
 
 use Basic\Arr\Object\CollectionObject;
@@ -45,9 +47,9 @@ class CreateTable extends CollectionObject {
 	}
 	
 	static function fromTable($table){
-		$table = new \Database\SQL\ShowCreateTable($table);
+		$query = new ShowCreateTable($table);
 		try {
-			$res = \DB::Q($table->toSQL());
+			$res = \DB::Q($query->toSQL());
 			$data = $res->Fetch(DBAL\Fetch::NUM);
 		}catch(\Exception $ex){
 			throw new \Exception('Couldnt get Create Table (permissions?) for '.$table,null,$ex);

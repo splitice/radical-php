@@ -1,6 +1,6 @@
 <?php
 namespace Utility\Image\Graph\Source;
-use Image\Graph\Renderer\IRenderable;
+use Utility\Image\Graph\Renderer\IRenderable;
 
 interface IGraphSource {
 	function Setup($width,$height);

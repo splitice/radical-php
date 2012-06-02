@@ -1,6 +1,6 @@
 <?php
 namespace Utility\Image\Graph\Renderer;
-use Image\Graph\pChart\pChart;
+use Utility\Image\Graph\pChart\pChart;
 
 class String extends RawRender {
 	function Output(\Image\Graph\Schema\Graph $pChart){

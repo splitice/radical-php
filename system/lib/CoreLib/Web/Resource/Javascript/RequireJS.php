@@ -1,5 +1,5 @@
 <?php
-namespace Web\Resource;
+namespace Web\Resource\Javascript;
 
 use HTML\Tag\Script;
 

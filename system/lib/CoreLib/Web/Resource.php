@@ -1,11 +1,9 @@
 <?php
 namespace Web;
 
-use HTML\Javascript\Libraries\IJavascriptLibrary;
-
-use HTML\Javascript\RequireJS;
-
-use HTML\Tag\Script;
+use Web\Resource\Javascript\Libraries\IJavascriptLibrary;
+use Resource\Resource\Javascript\RequireJS;
+use Utility\HTML\Tag\Script;
 
 class Resource {
 	static $javascript = array();
@@ -29,7 +27,7 @@ class Resource {
 	}
 	function getScript(){
 		if($this->type != 'script') throw new \Exception($this->type.' is not a javascript type');
-		return new \HTML\Javascript\Library($this->name,$this->version);
+		return new Resource\Javascript\Library($this->name,$this->version);
 	}
 	
 	function getHtml(){
@@ -71,7 +69,7 @@ class Resource {
 				$scripts[] = $script->getModule();
 				
 				//Is it a CDN hosted library?
-				$extLib = \HTML\Javascript\Library::Find($script->name,$script->version);
+				$extLib = Resource\Javascript\Library::Find($script->name,$script->version);
 				if($extLib instanceof IJavascriptLibrary){
 					$paths[$script->getModule()] = substr((string)$extLib,0,-3);
 				}

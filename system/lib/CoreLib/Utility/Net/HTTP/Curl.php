@@ -1,5 +1,5 @@
 <?php
-namespace Utility\HTTP;
+namespace Utility\Net\HTTP;
 
 use Utility\Net\HTTP\Curl\CurlBase;
 

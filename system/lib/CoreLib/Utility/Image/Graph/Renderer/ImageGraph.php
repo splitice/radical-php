@@ -1,9 +1,9 @@
 <?php
 namespace Utility\Image\Graph\Renderer;
-use Image\Graph\Source\Internal\GraphBase;
-use CLI\PHP\Extension;
-use Image\Graph\pChart\pChart;
-use Image\Graph\pChart\pData;
+use Utility\Image\Graph\Source\Internal\GraphBase;
+use Utility\PHP\Extension;
+use Utility\Image\Graph\pChart\pChart;
+use Utility\Image\Graph\pChart\pData;
 
 abstract class ImageGraph {
 	const BORDER = 40;

@@ -67,10 +67,10 @@ class LinqFunction {
 	public function __construct($parameterNames = '', $functionCode = '') {
 		// Check parameters
 		if (strpos($parameterNames, '$') === false) {
-			throw new Exception('Missing arguments in parameter $parameterNames.');
+			throw new LinqException('Missing arguments in parameter $parameterNames.');
 		}
 		if (strpos($functionCode, 'return') === false) {
-			throw new Exception('Missing return statement in parameter $functionCode.');
+			throw new LinqException('Missing return statement in parameter $functionCode.');
 		}
 		
 		// Store parameters

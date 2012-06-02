@@ -7,6 +7,7 @@ use Model\Database\IToSQL;
 use Model\Database\ORM;
 use Model\Database\DBAL;
 use Model\Database\SQL;
+use Model\Database\SQL\Parts;
 
 abstract class Table implements ITable, \JsonSerializable {	
 	static function _idString($id){
@@ -297,10 +298,10 @@ abstract class Table implements ITable, \JsonSerializable {
 		$obj = static::_select();
 		if(is_array($sql)){
 			$obj = static::_fromFields($sql);
-		}elseif($sql instanceof \Database\SQL\Parts\Where){
+		}elseif($sql instanceof Parts\Where){
 			$obj = static::_select()
 				->where($sql);
-		}elseif($sql instanceof \Database\IToSQL){
+		}elseif($sql instanceof IToSQL){
 			$obj = $sql->mergeTo(static::_select());
 		}elseif($sql){
 			debug_print_backtrace();
@@ -330,7 +331,7 @@ abstract class Table implements ITable, \JsonSerializable {
 		}
 		
 		//Build SQL
-		$where = new \Database\SQL\Parts\Where($prefixedFields);
+		$where = new Parts\Where($prefixedFields);
 
 		$sql = static::_select()
 					->where($where);
@@ -360,7 +361,7 @@ abstract class Table implements ITable, \JsonSerializable {
 		$sql = static::_select();
 		
 		//Build
-		if($id instanceof \Database\SQL\Parts\Where){
+		if($id instanceof Parts\Where){
 			$sql->where($id);
 		}else{
 			$idk = $orm->id;

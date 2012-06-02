@@ -1,6 +1,6 @@
 <?php
 namespace Web\Form\Element;
-use HTML\SingleTag;
+use Utility\HTML\SingleTag;
 
 class Form extends SingleTag {
 	function __construct($action = null, $method = 'POST'){

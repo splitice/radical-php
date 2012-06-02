@@ -1,5 +1,5 @@
 <?php
-namespace Utility\HTTP;
+namespace Utility\Net\HTTP;
 
 class CachedFetch extends Fetch {
 	public $cache;

@@ -1,5 +1,5 @@
 <?php
-namespace Web\Resource\Libraries;
+namespace Web\Resource\Javascript\Libraries;
 use Web\Resource\Shared;
 
 class jQuery extends Shared\LibraryBase implements IJavascriptLibrary {

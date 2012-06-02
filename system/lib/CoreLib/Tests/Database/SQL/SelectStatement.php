@@ -1,12 +1,13 @@
 <?php
 namespace Tests\Database\SQL;
 
+use Model\Database\SQL as Target;
 use Debug\Test\IUnitTest;
 use Debug\Test\Unit;
 
 class SelectStatement extends Unit implements IUnitTest {
 	function test1Compound(){
-		$select = new \Database\SQL\SelectStatement('table');
+		$select = new Target\SelectStatement('table');
 		$this->assertEqual('SELECT * FROM table', $select->toSQL(),'FROM test');
 		
 		$select->where('ab=cd');

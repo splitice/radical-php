@@ -1,7 +1,7 @@
 <?php
 namespace Utility\Image\Graph\Schema;
 
-use Image\Graph\Renderer\IRenderable;
+use Utility\Image\Graph\Renderer\IRenderable;
 
 class Graph extends Internal\SchemaBase {
 	public $data;
