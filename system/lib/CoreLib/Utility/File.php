@@ -1,7 +1,7 @@
 <?php
 namespace Utility;
 
-class File extends File\Instance {	
+class File {	
 	static function Size($file){
 		$file = new File\Instance($file);
 		return $file->Size();

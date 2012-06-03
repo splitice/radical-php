@@ -1,7 +1,7 @@
 <?php
 namespace Utility\Format;
 
-class ZIP extends \Utility\File\Instance {
+class ZIP extends \File {
 	function __construct($filename, $create = false){
 		$this->zip = new \ZipArchive;
 		

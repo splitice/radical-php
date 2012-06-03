@@ -1,7 +1,8 @@
 <?php
 namespace Web\Page\Handler;
+
 use Core\ErrorHandling\Errors\Internal\ErrorException;
-use Core\ErrorHandling\Handler;
+use Core\ErrorHandling;
 
 abstract class PageBase extends \Core\Object implements IPage {
 	function can($method){
@@ -10,6 +11,6 @@ abstract class PageBase extends \Core\Object implements IPage {
 	
 	function Execute($method = 'GET'){
 		$request = new PageRequest($this);
-		\ErrorHandling\Handler::Handle(array($request,'Execute'),array($method));
+		ErrorHandling\Handler::Handle(array($request,'Execute'),array($method));
 	}
 }

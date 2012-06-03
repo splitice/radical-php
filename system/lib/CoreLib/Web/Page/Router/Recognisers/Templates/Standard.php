@@ -13,6 +13,9 @@ class Standard implements IPageRecognise {
 		foreach(static::$match as $expr=>$class){
 			$match = Format::Consume($path, $expr);
 			if($match){
+				if($class{0} != '\\'){
+					$class = '\\Web\\Page\\Controller\\'.$class;
+				}
 				return new $class($match);
 			}
 		}

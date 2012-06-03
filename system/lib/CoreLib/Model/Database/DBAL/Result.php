@@ -1,6 +1,8 @@
 <?php
 namespace Model\Database\DBAL;
 
+use Basic\Cast\ICast;
+
 class Result {
 	private $result;
 	public $affected_rows;
@@ -21,7 +23,7 @@ class Result {
 	 * @throws \DB\Exception\FetchNotAResult
 	 * @return mixed
 	 */
-	function Fetch($format = Fetch::ASSOC, \Cast\ICast $cast=null) {
+	function Fetch($format = Fetch::ASSOC, ICast $cast=null) {
 		//Do something for each format
 		switch($format){
 			case Fetch::ASSOC:

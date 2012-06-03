@@ -8,6 +8,7 @@ class Recognise extends \Core\Object {
 		$url = \Net\URL::fromRequest();
 		return static::fromURL($url);
 	}
+	
 	static function fromURL(\Net\URL $url){
 		$recognisers = \Core\Libraries::getNSExpression('Web\\Page\\Router\\Recognisers\\*');
 		foreach($recognisers as $class){
