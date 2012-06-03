@@ -242,7 +242,9 @@ class From extends Internal\MergePartBase {
 		//FROM
 		$ret = 'FROM ';
 		if(is_array($this->tables)){
-			$ret .= implode(', ',$this->tables);
+			$ret .= implode(', ',array_map(function($e){
+				return '`'.$e.'`';
+			},$this->tables));
 		}
 		
 		//Joins

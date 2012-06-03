@@ -1,5 +1,9 @@
 <?php
 namespace Model\Database\Model;
+use Model\Database\SQL\UnLockTable;
+
+use Model\Database\SQL\LockTable;
+
 use Model\Database\SQL\SelectStatement;
 
 use Model\Database\ORM;
@@ -77,6 +81,14 @@ class TableReferenceInstance extends \Core\Object {
 		return $class::TABLE_PREFIX;
 	}
 	
+	function lock($mode = 'write'){
+		$sql = new LockTable($this, $mode);
+		$sql->Execute();
+	}
+	function unlock(){
+		$sql = new UnLockTable();
+		$sql->Execute();
+	}
 	/**
 	 * @return \Database\SQL\SelectStatement
 	 */
