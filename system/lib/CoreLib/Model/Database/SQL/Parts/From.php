@@ -142,7 +142,7 @@ class From extends Internal\MergePartBase {
 			}
 		}
 	
-		$class = '\\Database\\SQL\\Parts\\Join\\'.ucfirst($type).'Join';
+		$class = '\\Model\\Database\\SQL\\Parts\\Join\\'.ucfirst($type).'Join';
 		$this->joins[$alias] = new $class($table.' '.$alias,$where);
 		return $this;
 	}

@@ -7,7 +7,7 @@ class Object {
 	
 	static function __getDependencies(){
 		$dependencies = static::$__dependencies;
-		$class = new \Debug\PHPClassTools(\Core\Libraries::toPath(get_called_class(),true));
+		$class = new Debug\PHPClassTools(\Core\Libraries::toPath(get_called_class(),true));
 		foreach($class->getDependencies() as $d){
 			$dependencies[] = 'php.'.str_replace('\\','.',ltrim($d,'\\'));
 		}

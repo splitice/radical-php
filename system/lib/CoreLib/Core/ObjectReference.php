@@ -6,7 +6,7 @@ class ObjectReference extends Object {
 	
 	function getDependencies(){
 		$dependencies = static::$__dependencies;
-		$class = new \Debug\PHPClassTools(\Core\Libraries::toPath($this->class,true));
+		$class = new Debug\PHPClassTools(\Core\Libraries::toPath($this->class,true));
 		foreach($class->getDependencies() as $d){
 			$dependencies[] = 'php.'.str_replace('\\','.',ltrim($d,'\\'));
 		}

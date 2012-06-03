@@ -3,7 +3,7 @@ namespace Web\Page\Controller\Debug;
 
 use Web\Page\Handler\HTMLPageBase;
 use Web\Page\Handler;
-use Debug\WebGrind;
+use Core\Debug\WebGrind;
 
 class Profile extends HTMLPageBase {
 	protected $filename;

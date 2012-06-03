@@ -2,7 +2,6 @@
 namespace Web\Page\Handler;
 
 use Web\Form\Security\KeyStorage;
-
 use Web\Form\Security\Key;
 
 abstract class EventPageBase extends HTMLPageBase {

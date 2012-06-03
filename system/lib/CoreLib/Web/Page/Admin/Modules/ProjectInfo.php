@@ -25,7 +25,7 @@ class ProjectInfo extends MultiAdminModuleBase {
 		}
 	}
 	function actionUnitTest(){
-		$testResults = \Debug\Test\Controller::RunUnitTests();
+		$testResults = \Core\Debug\Test\Controller::RunUnitTests();
 	
 		foreach($testResults as $class=>$v){
 			echo '<h1>',$class,'</h1>';
