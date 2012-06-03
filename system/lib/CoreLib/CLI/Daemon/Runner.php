@@ -11,7 +11,7 @@ class Runner extends \Core\Object {
 	}
 	
 	private function getClass(){
-		$class = '\\CLI\\Cron\\Jobs\\'.$this->module;
+		$class = '\\CLI\\Daemon\\Module\\'.$this->module;
 		return $class;
 	}
 	
