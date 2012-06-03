@@ -1,7 +1,6 @@
 <?php
 namespace Web\Form\Builder;
 
-use Web\Form\Element;
 use Utility\HTML\Element;
 
 class FormInstance extends FormCommon implements IFormInstance {

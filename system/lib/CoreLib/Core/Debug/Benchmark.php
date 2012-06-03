@@ -1,5 +1,5 @@
 <?php
-namespace Debug;
+namespace Core\Debug;
 class Benchmark {
 	private $tests;
 	function __construct(array $tests){

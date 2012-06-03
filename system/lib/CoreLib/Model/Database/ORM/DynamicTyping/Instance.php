@@ -1,8 +1,7 @@
 <?php
 namespace Model\Database\ORM\DynamicTyping;
 
-use Debug\Inspector;
-
+use Core\Debug\Inspector;
 use Model\Database\Model\TableReferenceInstance;
 
 class Instance {
@@ -44,7 +43,7 @@ class Instance {
 		
 		//Prefix if not given
 		if((strpos($var, '\\') === false) || ($var{0} != '\\' && !class_exists($var))){
-			$var = '\\Database\\DynamicTypes\\'.$var;
+			$var = '\\Model\\Database\\DynamicTypes\\'.$var;
 		}
 		
 		return compact('var','extra');

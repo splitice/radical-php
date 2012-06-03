@@ -6,12 +6,12 @@
  * @license       http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
-namespace Debug\Test;
+namespace Core\Debug\Test;
 
 use Exception;
 use Libraries;
-use Debug\Debugger;
-use Debug\Inspector;
+use Core\Debug\Debugger;
+use Core\Debug\Inspector;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Basic\String;

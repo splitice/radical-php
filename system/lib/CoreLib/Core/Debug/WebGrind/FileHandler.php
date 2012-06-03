@@ -1,5 +1,5 @@
 <?php
-namespace Debug\WebGrind;
+namespace Core\Debug\WebGrind;
 
 /**
  * Class handling access to data-files(original and preprocessed) for webgrind.

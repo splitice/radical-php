@@ -1,5 +1,5 @@
 <?php
-namespace Debug\PHP;
+namespace Core\Debug\PHP;
 
 class TokenizerDebug {
 	function __construct($source){

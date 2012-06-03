@@ -1,5 +1,5 @@
 <?php
-namespace Debug;
+namespace Core\Debug;
 use ReflectionClass;
 use Basic\String;
 

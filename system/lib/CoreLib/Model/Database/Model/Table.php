@@ -168,7 +168,7 @@ abstract class Table implements ITable, \JsonSerializable {
 		foreach($this->orm->dynamicTyping as $field=>$value){
 			$dT = $value['var'];
 			if($this->$field === null){
-				if(!oneof($dT, '\\Database\\DynamicTypes\\INullable')){
+				if(!oneof($dT, '\\Model\\Database\\DynamicTypes\\INullable')){
 					continue;
 				}
 			}

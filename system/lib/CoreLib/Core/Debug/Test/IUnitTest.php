@@ -1,5 +1,5 @@
 <?php
-namespace Debug\Test;
+namespace Core\Debug\Test;
 
 interface IUnitTest {
 	

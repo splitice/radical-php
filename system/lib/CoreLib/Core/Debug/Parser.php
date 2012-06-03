@@ -6,7 +6,7 @@
  * @license       http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
-namespace Debug;
+namespace Core\Debug;
 
 /**
  * The parser class uses PHP's tokenizer to provide methods and tools for performing static analysis

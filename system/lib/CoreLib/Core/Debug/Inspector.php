@@ -6,7 +6,7 @@
  * @license       http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
-namespace Debug;
+namespace Core\Debug;
 
 use Basic\Arr\Object\CollectionObject;
 

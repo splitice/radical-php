@@ -1,5 +1,5 @@
 <?php
-namespace Debug;
+namespace Core\Debug;
 
 class PHPClassTools {
 	protected $tokens;

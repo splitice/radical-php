@@ -1,5 +1,5 @@
 <?php
-namespace Debug\WebGrind;
+namespace Core\Debug\WebGrind;
 
 /**
  * Configuration for webgrind

@@ -6,7 +6,7 @@
  * @license       http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
-namespace Debug\Test;
+namespace Core\Debug\Test;
 
 /**
  * This is the base class for integration tests.

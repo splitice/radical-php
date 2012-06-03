@@ -1,5 +1,5 @@
 <?php
-namespace Debug\WebGrind;
+namespace Core\Debug\WebGrind;
 
 use Web\Template;
 use Web\Page\Handler\PageBase;
