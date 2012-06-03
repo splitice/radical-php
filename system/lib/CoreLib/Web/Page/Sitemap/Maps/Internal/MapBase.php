@@ -1,9 +1,11 @@
 <?php
 namespace Web\Page\Sitemap\Maps\Internal;
+use Utility\Format\Sitemap\Urlset;
+
 use Web\Sitemap\Internal;
 use Web\Sitemap\SitemapBase;
 
-abstract class MapBase extends SitemapBase {
+abstract class MapBase {
 	protected $page_number = 0;
 	
 	function __construct($page_number){
@@ -34,7 +36,7 @@ abstract class MapBase extends SitemapBase {
 		return _U($u);
 	}
 	function toXML(){
-		$ret = new Internal\Urlset();
+		$ret = new Urlset();
 		foreach($this->getRows() as $r){
 			$ret->Add($r);
 		}

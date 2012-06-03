@@ -1,5 +1,5 @@
 <?php
-namespace ErrorHandling\Errors;
+namespace Core\ErrorHandling\Errors;
 
 class PHPError extends Internal\ErrorBase {
 	const HEADER = 'Site Error (PHP)';

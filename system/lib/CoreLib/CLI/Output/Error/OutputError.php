@@ -1,7 +1,7 @@
 <?php
 namespace CLI\Output\Error;
-use ErrorHandling\Errors\Internal;
-use ErrorHandling\IToCode;
+use Core\ErrorHandling\Errors\Internal;
+use Core\ErrorHandling\IToCode;
 use CLI\Console\Colors;
 
 class OutputError extends Internal\ErrorBase implements IToCode {

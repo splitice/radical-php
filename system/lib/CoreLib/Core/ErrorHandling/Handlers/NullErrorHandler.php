@@ -1,10 +1,11 @@
 <?php
-namespace ErrorHandling\Handlers;
-use ErrorHandling\Errors\Internal\ErrorBase;
-use ErrorHandling\Errors\Internal\ErrorException;
+namespace Core\ErrorHandling\Handlers;
+
+use Core\ErrorHandling\Errors\Internal\ErrorBase;
+use Core\ErrorHandling\Errors\Internal\ErrorException;
 use CLI\Console\Colors;
 
-class NullErrorHandler extends Internal\ErrorHandlerBase {
+class NullErrorHandler extends ErrorHandlerBase {
 	function Error(ErrorBase $error) {
 	}
 	function Exception(ErrorException $error){

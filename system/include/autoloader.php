@@ -11,7 +11,7 @@ class AutoLoader {
 		spl_autoload_register(array($this,'__autoload'));
 	}
 	
-	protected static $pathCache = array();
+	static $pathCache = array();
 	private static function _buildPathCache($libDir){
 		$pathCache = array();
 		$expr = $libDir.'*';

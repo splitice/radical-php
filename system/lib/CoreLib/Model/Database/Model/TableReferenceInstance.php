@@ -19,7 +19,7 @@ class TableReferenceInstance extends \Core\Object {
 					throw new \Exception($class.' class does not exist');
 				}
 			}
-			if(!oneof($class,'\\Database\\Model\\ITable')){
+			if(!oneof($class,'\\Model\\Database\\Model\\ITable')){
 				throw new \Exception($class.' is not a Database Table object');
 			}
 		}

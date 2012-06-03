@@ -1,6 +1,7 @@
 <?php
-namespace ErrorHandling;
-use ErrorHandling\Errors\Internal\ErrorException;
+namespace Core\ErrorHandling;
+
+use Core\ErrorHandling\Errors\Internal\ErrorException;
 
 /* STATIC */
 abstract class Handler {
@@ -30,7 +31,7 @@ abstract class Handler {
 			self::handleException($ex,true);
 		}
 		catch(\Exception $ex){
-			$ex = new \ErrorHandling\Errors\ExceptionError($ex,false);
+			$ex = new Errors\ExceptionError($ex,false);
 			self::handleException($ex,true);
 		}
 	}

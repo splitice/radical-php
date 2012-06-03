@@ -1,14 +1,14 @@
 <?php
-namespace ErrorHandling\Handlers;
+namespace Core\ErrorHandling\Handlers;
 
-use ErrorHandling\IToCode;
-use ErrorHandling\Errors\Internal\ErrorBase;
-use ErrorHandling\Errors\Internal\ErrorException;
+use Core\ErrorHandling\IToCode;
+use Core\ErrorHandling\Errors\Internal\ErrorBase;
+use Core\ErrorHandling\Errors\Internal\ErrorException;
 use CLI\Console\Colors;
 use CLI\Threading\Thread;
-use ErrorHandling\Errors;
+use Core\ErrorHandling\Errors;
 
-class OutputErrorHandler extends Internal\ErrorHandlerBase {
+class OutputErrorHandler extends ErrorHandlerBase {
 	const CLI_START = "[%s]%s\n";
 	
 	function Error(ErrorBase $error) {

@@ -54,13 +54,13 @@ class TableReference extends \Core\Object {
 	
 	/**
 	 * @param string $tableClass
-	 * @return \Database\Model\TableReferenceInstance
+	 * @return \Model\Database\Model\TableReferenceInstance
 	 */
 	static function getByTableClass($tableClass){
 		try {
 			return static::_create($tableClass);
 		}catch(\Exception $ex){
-	
+
 		}
 	}
 }

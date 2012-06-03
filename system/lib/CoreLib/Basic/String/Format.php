@@ -73,13 +73,18 @@ class Format extends \Core\Object {
 			$format = substr_replace ( $format, '', $arg_pos, $arg_len );
 			// next iteration
 		}
-		
+
 		if(!$array_return){
 			return ($str == $format);
 		}
-	
+		
+		$in = sscanf($str, $format);
+		if($in === null){
+			return false;
+		}
+		
 		$ret = array();
-		foreach(sscanf($str, $format) as $num=>$value){
+		foreach($in as $num=>$value){
 			if($value === NULL) return false;
 			$ret[$array_return[$num]] = $value;
 		}

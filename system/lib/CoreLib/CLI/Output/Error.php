@@ -1,6 +1,6 @@
 <?php
 namespace CLI\Output;
-use ErrorHandling\Handler;
+use Core\ErrorHandling\Handler;
 
 class Error extends Internal\OutputBase {
 	const FORMAT = "[%s] %s\r\n";

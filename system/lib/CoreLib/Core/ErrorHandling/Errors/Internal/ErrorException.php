@@ -1,7 +1,7 @@
 <?php
-namespace ErrorHandling\Errors\Internal;
+namespace Core\ErrorHandling\Errors\Internal;
 use Web\Page\Controller;
-use ErrorHandling\IErrorException;
+use Core\ErrorHandling\IErrorException;
 
 abstract class ErrorException extends \Exception implements IErrorException {
 	protected $heading;

@@ -1,5 +1,5 @@
 <?php
-namespace ErrorHandling;
+namespace Core\ErrorHandling;
 
 interface IToCode {
 	function toCode();

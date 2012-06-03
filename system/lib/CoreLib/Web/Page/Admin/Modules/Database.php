@@ -95,7 +95,7 @@ class Database extends AdminModuleBase {
 				case 'add':
 					$_GET['id'] = null;
 				case 'edit':
-					$tm = new \HTML\Form\Builder\FormInstance($this->table);
+					$tm = new \Web\Form\Builder\FormInstance($this->table);
 					$id = unserialize($_GET['id']);
 					$form = $tm->fromId($id);
 					$vars = array('form'=>$form,'relations'=>$this->table->getTableManagement()->getRelations());

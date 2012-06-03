@@ -1,9 +1,11 @@
 <?php
-namespace ErrorHandling\Handlers\Internal;
-use ErrorHandling\Errors\Internal\ErrorBase;
-use ErrorHandling\Errors\Internal\ErrorException;
+namespace Core\ErrorHandling\Handlers;
 
-abstract class ErrorHandlerBase extends \ErrorHandling\Handler {
+use Core\ErrorHandling\Errors\Internal\ErrorBase;
+use Core\ErrorHandling\Errors\Internal\ErrorException;
+use Core\ErrorHandling\Handler;
+
+abstract class ErrorHandlerBase extends Handler {
 	
 	function __construct(){
 		//Itterate

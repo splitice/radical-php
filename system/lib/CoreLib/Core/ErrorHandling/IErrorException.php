@@ -1,5 +1,5 @@
 <?php
-namespace ErrorHandling;
+namespace Core\ErrorHandling;
 
 interface IErrorException {
 	function getMessage();

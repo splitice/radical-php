@@ -1,5 +1,5 @@
 <?php
-namespace ErrorHandling\Errors\Structs;
+namespace Core\ErrorHandling\Errors\Structs;
 
 class LocationReference {
 	private $file;

@@ -1,5 +1,5 @@
 <?php
-namespace ErrorHandling\Errors;
+namespace Core\ErrorHandling\Errors;
 
 class UserError extends Internal\ErrorBase {
 	

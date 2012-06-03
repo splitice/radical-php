@@ -21,8 +21,8 @@ class Libraries {
 		$ret = array();
 	
 		$path_expr = static::toPath($expr).'.php';
-	
-		$paths = parent::$pathCache;
+
+		$paths = \AutoLoader::$pathCache;
 		foreach($paths as $p){
 			foreach(glob($p.$path_expr) as $file){
 				$key = static::toClass($file);
@@ -40,7 +40,7 @@ class Libraries {
 	
 	static function getAllClass(){
 		$classes = array();
-		foreach(parent::$pathCache as $libDir){
+		foreach(\AutoLoader::$pathCache as $libDir){
 			$prefixLen = strlen(realpath($libDir));
 			foreach(\Folder::ListDir($libDir,true) as $f){
 				$f = substr($f,$prefixLen);
@@ -60,7 +60,7 @@ class Libraries {
 	
 	static function getLibraries(){
 		$ret = array();
-		foreach(static::$pathCache as $pc){
+		foreach(\AutoLoader::$pathCache as $pc){
 			$ret[basename($pc)] = $pc;
 		}
 		return $ret;

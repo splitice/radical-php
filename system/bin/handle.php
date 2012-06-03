@@ -1,7 +1,7 @@
 <?php
 include(__DIR__.'/../include/common.php');
 
-new ErrorHandling\Handlers\OutputErrorHandler();
+new Core\ErrorHandling\Handlers\OutputErrorHandler();
 
 $handler = Web\Page\Router\Recognise::fromRequest();
 if(!$handler){

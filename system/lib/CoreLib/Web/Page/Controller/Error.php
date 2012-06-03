@@ -5,7 +5,7 @@ use Web\Page\Router\Recognise;
 use Web\Page\Handler\HTMLPageBase;
 use Web\Template;
 use Web\Page\Handler;
-use ErrorHandling\Errors\Internal\ErrorException;
+use Core\ErrorHandling\Errors\Internal\ErrorException;
 
 class Error extends HTMLPageBase {
 	private $error;
