@@ -1,5 +1,5 @@
 <?php
-namespace DDL\TitleParse\Scene\Types;
+namespace Utility\DDL\TitleParse\Scene\Types;
 
 class XXX_XVID extends Internal\XXXBase {
 	function Parse(){

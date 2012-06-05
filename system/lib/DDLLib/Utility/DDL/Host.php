@@ -1,5 +1,5 @@
 <?php
-namespace DDL;
+namespace Utility\DDL;
 
 class Host {
 	protected $id;
@@ -8,21 +8,21 @@ class Host {
 	}
 	
 	function Upload(){
-		$class = '\\DDL\\Hosts\\Upload\\'.$this->id;
+		$class = '\\Utility\\DDL\\Hosts\\Upload\\'.$this->id;
 		if(class_exists($class)){
 			return new $class();
 		}
 	}
 	
 	function Check(){
-		$class = '\\DDL\\Hosts\\Check\\'.$this->id;
+		$class = '\\Utility\\DDL\\Hosts\\Check\\'.$this->id;
 		if(class_exists($class)){
 			return new $class();
 		}
 	}
 	
 	static function fromID($id){
-		$b = '\\DDL\\Hosts\\';
+		$b = '\\Utility\\DDL\\Hosts\\';
 		if(!class_exists($b.'Upload\\'.$id) || !class_exists($b.'Check\\'.$id)){
 			return false;
 		}

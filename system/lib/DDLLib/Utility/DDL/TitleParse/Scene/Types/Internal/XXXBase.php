@@ -1,5 +1,5 @@
 <?php
-namespace DDL\TitleParse\Scene\Types\Internal;
+namespace Utility\DDL\TitleParse\Scene\Types\Internal;
 
 class XXXBase extends MovieBase {
 	const NATIVE_TYPE = 'xxx';

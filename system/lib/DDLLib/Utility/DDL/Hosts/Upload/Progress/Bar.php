@@ -1,5 +1,5 @@
 <?php
-namespace DDL\Hosts\Upload\Progress;
+namespace Utility\DDL\Hosts\Upload\Progress;
 use CLI\Console\Progress\Bar as CLI_Bar;
 
 class Bar extends CLI_Bar {

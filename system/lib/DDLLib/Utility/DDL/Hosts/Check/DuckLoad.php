@@ -1,5 +1,5 @@
 <?php
-namespace DDL\Hosts\Check;
+namespace Utility\DDL\Hosts\Check;
 
 class DuckLoad extends Internal\HostBase {
 	const HOST_SCORE = 0.8;

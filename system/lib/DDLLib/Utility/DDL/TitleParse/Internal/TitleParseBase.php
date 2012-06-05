@@ -1,5 +1,5 @@
 <?php
-namespace DDL\TitleParse\Internal;
+namespace Utility\DDL\TitleParse\Internal;
 
 abstract class TitleParseBase extends TitleResources {
 	protected $rls;

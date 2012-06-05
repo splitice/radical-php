@@ -1,5 +1,5 @@
 <?php
-namespace DDL\Hosts\Upload;
+namespace Utility\DDL\Hosts\Upload;
 use DDL\Hosts\API;
 
 class FileSonic extends Internal\FTPHostBase implements Interfaces\IUploadHost {

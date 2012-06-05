@@ -1,5 +1,5 @@
 <?php
-namespace DDL\Hosts;
+namespace Utility\DDL\Hosts;
 
 class HandleDebug {
 	private $modules = array ();

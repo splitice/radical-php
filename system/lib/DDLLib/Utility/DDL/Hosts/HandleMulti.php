@@ -1,5 +1,5 @@
 <?php
-namespace DDL\Hosts;
+namespace Utility\DDL\Hosts;
 use CLI\Threading\Thread;
 
 class HandleMulti {

@@ -1,5 +1,5 @@
 <?php
-namespace DDL\Hosts\API\Internal\FSapi;
+namespace Utility\DDL\Hosts\API\Internal\FSapi;
 
 use DDL\Hosts\API\Internal\FSapi;
 use Utility\Net\HTTP;

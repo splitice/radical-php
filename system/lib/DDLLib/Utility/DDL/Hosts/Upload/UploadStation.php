@@ -1,5 +1,5 @@
 <?php
-namespace DDL\Hosts\Upload;
+namespace Utility\DDL\Hosts\Upload;
 
 class UploadStation extends Internal\FTPHostBase implements Interfaces\IUploadHost {
 	static $__provides = array('lib.ddl.upload.module');

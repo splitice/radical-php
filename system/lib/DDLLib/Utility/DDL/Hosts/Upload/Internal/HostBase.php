@@ -1,5 +1,5 @@
 <?php
-namespace DDL\Hosts\Upload\Internal;
+namespace Utility\DDL\Hosts\Upload\Internal;
 use DDL\Hosts\Upload\Struct\LoginDetails;
 use DDL\Hosts\Upload\Exception;
 

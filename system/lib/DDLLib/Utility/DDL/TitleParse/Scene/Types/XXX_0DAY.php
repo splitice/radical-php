@@ -1,5 +1,5 @@
 <?php
-namespace DDL\TitleParse\Scene\Types;
+namespace Utility\DDL\TitleParse\Scene\Types;
 
 class XXX_0DAY extends XXX_X264 {
 	static $exts = array('avi','mkv','wmv','mov','mp4','m4v','flv','f4v');

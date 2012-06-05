@@ -1,5 +1,5 @@
 <?php
-namespace DDL\TitleParse\Scene\Types;
+namespace Utility\DDL\TitleParse\Scene\Types;
 
 class X264 extends Internal\MovieBase {
 	protected $quality;

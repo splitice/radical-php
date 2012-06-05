@@ -1,5 +1,5 @@
 <?php
-namespace DDL\TitleParse\Internal;
+namespace Utility\DDL\TitleParse\Internal;
 
 abstract class TitleResources {
 	static function _countries() {

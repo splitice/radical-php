@@ -50,7 +50,7 @@ abstract class AdapterAbstract {
 	 *
 	 * @param Zend_Db_Adapter_Abstract $adapter
 	 */
-	public function __construct(\Database\Connection $adapter = null) {
+	public function __construct(\Model\Database\Connection $adapter = null) {
 		$this->_adapter = $adapter;
 	}
 	

@@ -1,5 +1,5 @@
 <?php
-namespace DDL\Hosts\API\Internal;
+namespace Utility\DDL\Hosts\API\Internal;
 
 use Utility\Net\HTTP;
 

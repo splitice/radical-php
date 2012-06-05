@@ -12,7 +12,7 @@ Web\Mobile\HTML::Output();
 <?php 
 /*
  *  manifest="/cache.manifest"
- * if(\Server::isProduction()){
+ * if(\Core\Server::isProduction()){
 	echo '<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />';
 	echo '<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>';
 	echo '<script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>';

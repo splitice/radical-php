@@ -1,5 +1,5 @@
 <?php
-namespace DDL\Hosts\Check\Internal;
+namespace Utility\DDL\Hosts\Check\Internal;
 
 class CheckReturn {
 	protected $status;

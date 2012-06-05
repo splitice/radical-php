@@ -1,5 +1,5 @@
 <?php
-namespace DDL\TitleParse\Natural\Types;
+namespace Utility\DDL\TitleParse\Natural\Types;
 
 class Application extends Internal\NaturalBase {
 	protected $name;

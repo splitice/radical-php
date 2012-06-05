@@ -1,5 +1,5 @@
 <?php
-namespace DDL\Hosts\Check\Interfaces;
+namespace Utility\DDL\Hosts\Check\Interfaces;
 
 interface IDDLHostCheck {
 	function Recognise($data);

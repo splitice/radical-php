@@ -1,5 +1,5 @@
 <?php
-namespace DDL\Hosts\Check;
+namespace Utility\DDL\Hosts\Check;
 
 use Utility\Net\HTTP;
 

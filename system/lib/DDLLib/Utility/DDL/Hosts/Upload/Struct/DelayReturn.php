@@ -1,5 +1,5 @@
 <?php
-namespace DDL\Hosts\Upload\Struct;
+namespace Utility\DDL\Hosts\Upload\Struct;
 
 class DelayReturn {
 	public $multi;

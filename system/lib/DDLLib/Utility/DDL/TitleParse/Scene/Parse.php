@@ -1,5 +1,5 @@
 <?php
-namespace DDL\TitleParse\Scene;
+namespace Utility\DDL\TitleParse\Scene;
 
 class Parse {
 	static function NS(){

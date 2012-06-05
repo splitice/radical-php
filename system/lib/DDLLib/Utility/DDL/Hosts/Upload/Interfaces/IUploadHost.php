@@ -1,5 +1,5 @@
 <?php
-namespace DDL\Hosts\Upload\Interfaces;
+namespace Utility\DDL\Hosts\Upload\Interfaces;
 
 interface IUploadHost {
 	function Upload($file);

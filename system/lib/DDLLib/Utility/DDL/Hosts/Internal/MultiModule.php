@@ -1,5 +1,5 @@
 <?php
-namespace DDL\Hosts\Internal;
+namespace Utility\DDL\Hosts\Internal;
 
 class MultiModule {
 	protected $host;

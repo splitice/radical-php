@@ -1,5 +1,5 @@
 <?php
-namespace DDL\Hosts\Check\Internal;
+namespace Utility\DDL\Hosts\Check\Internal;
 
 use Utility\Net\HTTP;
 use Utility\HTML;

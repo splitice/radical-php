@@ -1,5 +1,5 @@
 <?php
-namespace DDL\Hosts\Internal;
+namespace Utility\DDL\Hosts\Internal;
 
 use DDL\Hosts\Upload\Interfaces\INoHTTP;
 

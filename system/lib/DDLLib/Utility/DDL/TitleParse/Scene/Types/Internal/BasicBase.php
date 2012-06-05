@@ -1,5 +1,5 @@
 <?php
-namespace DDL\TitleParse\Scene\Types\Internal;
+namespace Utility\DDL\TitleParse\Scene\Types\Internal;
 
 abstract class BasicBase extends \DDL\TitleParse\Internal\TitleParseBase {
 	const DELIMITER = ' ';

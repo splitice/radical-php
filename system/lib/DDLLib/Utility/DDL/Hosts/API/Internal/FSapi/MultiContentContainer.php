@@ -1,5 +1,5 @@
 <?php
-namespace DDL\Hosts\API\Internal\FSapi;
+namespace Utility\DDL\Hosts\API\Internal\FSapi;
 
 class MultiContentContainer{
 	private $status;

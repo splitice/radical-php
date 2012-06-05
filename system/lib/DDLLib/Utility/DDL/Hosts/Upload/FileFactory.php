@@ -1,5 +1,5 @@
 <?php
-namespace DDL\Hosts\Upload;
+namespace Utility\DDL\Hosts\Upload;
 use DDL\Hosts\Upload\Struct\DelayReturn;
 
 class FileFactory extends Internal\HostBase implements Interfaces\IUploadHost {

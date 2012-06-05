@@ -1,5 +1,5 @@
 <?php
-namespace DDL\Hosts\Upload\Struct;
+namespace Utility\DDL\Hosts\Upload\Struct;
 use DDL\Hosts\Upload\Interfaces\IUploadHost;
 use DDL\Hosts\Upload\Internal\FTPHostBase;
 

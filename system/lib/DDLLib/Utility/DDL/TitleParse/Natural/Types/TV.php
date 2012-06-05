@@ -1,5 +1,5 @@
 <?php
-namespace DDL\TitleParse\Natural\Types;
+namespace Utility\DDL\TitleParse\Natural\Types;
 
 class TV extends Internal\NaturalBase {
 	const IS_NOT = 0;

@@ -1,5 +1,5 @@
 <?php
-namespace DDL\Hosts\Check;
+namespace Utility\DDL\Hosts\Check;
 use DDL\Hosts\API;
 
 class WUpload extends Internal\HostBase {
