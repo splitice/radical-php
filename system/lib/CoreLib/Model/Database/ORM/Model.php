@@ -47,7 +47,7 @@ class Model extends ModelData {
 		//Work out reverse references
 		$tableName = $this->tableInfo['name'];
 		foreach(TableReference::getAll() as $ref){
-			$rStruct = CreateTable::fromTable($ref);
+			$rStruct = CreateTable::fromTable($ref->getTable());
 			foreach($rStruct->relations as $relation){
 				$reference = $relation->getReference();
 				$rTable = $reference->getTable();

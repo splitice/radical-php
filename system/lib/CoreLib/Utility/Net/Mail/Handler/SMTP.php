@@ -1,7 +1,7 @@
 <?php
+namespace Utility\Net\Mail\Handler;
+use Utility\Net\Mail\Message;
 
-namespace Net\Mail\Handler;
-use Net\Mail\Message;
 class SMTP implements IMailHandler {
   public $server;
   public $port;

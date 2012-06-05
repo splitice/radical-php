@@ -1,10 +1,10 @@
 <?php
-namespace Utility\Utility\Net\External\SSH;
+namespace Utility\Net\SSH;
 
 class SFTP {
 	const SCHEME = 'ssh2.sftp://';
 	/**
-	 * @var \Utility\Net\External\SSH\Connection
+	 * @var \Utility\Net\SSH\Connection
 	 */
 	private $ssh;
 	

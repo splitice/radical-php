@@ -1,6 +1,6 @@
 <?php
-namespace Net\Mail\Handler;
-use Net\Mail\Message;
+namespace Utility\Net\Mail\Handler;
+use Utility\Net\Mail\Message;
 
 interface IMailHandler {
 	function Send(Message $message,$body);

@@ -1,5 +1,5 @@
 <?php
-namespace Utility\Utility\Net\External\SSH;
+namespace Utility\Net\SSH;
 
 class Connection {
 	//Connection Details
