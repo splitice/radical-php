@@ -11,7 +11,7 @@ class Paypal implements IPageRecognise {
 		$url = $url->getPath();
 		if($url->firstPathElement() == 'paypal.html'){
 			$url->removeFirstPathElement();
-			return Page\Handler::Objectify ( 'Paypal', array('action'=>$_GET['action']) );
+			return Page\Handler::Objectify ( 'Paypal', array('action'=>(isset($_GET['action'])?$_GET['action']:null)) );
 		}
 	}
 }

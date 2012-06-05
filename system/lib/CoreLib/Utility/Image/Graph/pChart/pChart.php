@@ -3249,8 +3249,8 @@ class pChart {
 			$Xi3 = cos ( $i * $piRad ) * $Radius + $X2 - $Radius;
 			$Yi3 = sin ( $i * $piRad ) * $Radius + $Y2 - $Radius;
 			
-			$Xi3 = cos ( ($i + 90) * $piRad ) * $Radius + $xPr;
-			$Yi3 = sin ( ($i + 90) * $piRad ) * $Radius + $Y2 - $Radius;
+			$Xi4 = cos ( ($i + 90) * $piRad ) * $Radius + $xPr;
+			$Yi4 = sin ( ($i + 90) * $piRad ) * $Radius + $Y2 - $Radius;
 			
 			if($filled){
 				imageline ( $this->Picture, $Xi1, $Yi1, $xPr, $Yi1, $C_Rectangle );
@@ -3376,7 +3376,7 @@ class pChart {
 			return;
 		}
 		
-		$Distance = self::distanceBetweenPoints ( ($X2 - $X1) * ($X2 - $X1) + ($Y2 - $Y1) * ($Y2 - $Y1) );
+		$Distance = self::distanceBetweenPoints($X1, $Y1, $X2, $Y2);
 		if ($Distance == 0)
 			return false;
 		$XStep = ($X2 - $X1) / $Distance;

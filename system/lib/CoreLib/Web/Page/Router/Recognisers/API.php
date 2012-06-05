@@ -30,7 +30,7 @@ class API implements IPageRecognise {
 			}
 			
 			//Check Class
-			$c = '\\Web\\API\\'.$module;
+			$c = '\\Web\\Page\\API\\Module\\'.$module;
 			if(!class_exists($c)){
 				return static::Error('Invalid Module',$type);
 			}

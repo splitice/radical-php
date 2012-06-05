@@ -8,7 +8,7 @@ use Utility\Image\Graph\pChart\pData;
 abstract class ImageGraph {
 	const BORDER = 40;
 	
-	protected function _buildChart(\Image\Graph\Schema\Graph $graph){
+	protected function _buildChart(\Utility\Image\Graph\Schema\Graph $graph){
 		$ext = new Extension('gd', 'gd2');
 		if(!$ext->isLoaded()){
 			throw new \Exception('GD2 is required for graphing');
