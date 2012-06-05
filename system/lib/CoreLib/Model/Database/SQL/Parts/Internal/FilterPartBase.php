@@ -26,6 +26,9 @@ abstract class FilterPartBase extends ArrayPartBase {
 				//Add(string) -> Statement -> Add
 				$this->data[] = new WhereAND($v);
 			}elseif(is_array($v)){
+				if(!$v){
+					return;//Empty array
+				}
 				if(Arr::is_assoc($v)){
 					//Add(array(array('field'=>'value'))) -> Statement -> Add
 					foreach($v as $k=>$vv){

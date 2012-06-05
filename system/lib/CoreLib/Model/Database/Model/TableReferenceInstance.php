@@ -1,5 +1,7 @@
 <?php
 namespace Model\Database\Model;
+use Model\Database\SQL\UpdateStatement;
+
 use Model\Database\SQL\UnLockTable;
 
 use Model\Database\SQL\LockTable;
@@ -94,6 +96,10 @@ class TableReferenceInstance extends \Core\Object {
 	 */
 	function select($fields = '*'){
 		return new SelectStatement($this->getTable(),$fields);
+	}
+	
+	function update($values = array(),$where = array()){
+		return new UpdateStatement($this->getTable(),$values,$where);
 	}
 	
 	function __call($method,$arguments){

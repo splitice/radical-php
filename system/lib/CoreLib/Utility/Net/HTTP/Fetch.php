@@ -5,7 +5,7 @@ class Fetch {
 	public $curl;
 	private $headers = array();
 	
-	function __construct($url=false,$class='\\HTTP\\Curl'){
+	function __construct($url=false,$class='\\Utility\\Net\\HTTP\\Curl'){
 		$this->curl = new $class($url);
 		
 		global $_CONFIG;

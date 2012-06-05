@@ -21,6 +21,9 @@ class DateTime extends \Basic\DateTime\DateTime implements IDynamicType {
 		return (string)$this->toSQL();
 	}
 	static function fromDatabaseModel($value,array $extra,ITable $model){
+		if(is_int($value)){
+			return new static($value);
+		}
 		return parent::fromSQL($value);
 	}
 }

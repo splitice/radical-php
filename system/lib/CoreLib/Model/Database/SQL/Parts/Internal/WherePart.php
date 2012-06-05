@@ -13,6 +13,10 @@ abstract class WherePart extends PartBase {
 		$this->expr = $expr;
 	}
 	
+	function expr(){
+		return $this->expr;
+	}
+	
 	function toSQL($first = false){
 		$ret = '';
 		if(!$first) $ret = ' '.static::SEPPERATOR.' ';
