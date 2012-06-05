@@ -4,7 +4,7 @@ namespace Web\Page\Admin\Modules;
 use Web\Page\Admin\AdminModuleBase;
 use Model\Database\Model\TableReferenceInstance;
 use Web\Session\User\IUserAdmin;
-use Net\URL\Pagination\QueryMethod;
+use Utility\Net\URL\Pagination\QueryMethod;
 use Web\Page\Controller\Special\Redirect;
 use Web\Templates;
 use Web\Form;
@@ -13,7 +13,7 @@ class Database extends AdminModuleBase {
 	protected $table;
 	protected $action = 'list';
 		
-	function __construct(\Net\URL\Path $url = null){
+	function __construct(\Utility\Net\URL\Path $url = null){
 		if($url){
 			$class = $url->firstPathElement();
 			if($class) {

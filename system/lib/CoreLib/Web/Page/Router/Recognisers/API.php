@@ -1,6 +1,7 @@
 <?php
 namespace Web\Page\Router\Recognisers;
 
+use Utility\Net\URL;
 use Web\Page\Router\IPageRecognise;
 use Web\Page\Controller;
 use Web\Page\Handler;
@@ -10,7 +11,7 @@ class API implements IPageRecognise {
 	static function Error($string,$type){
 		return Handler::Objectify ( 'API', array('error'=>$string,'type'=>$type) );
 	}
-	static function Recognise(\Net\URL $url){
+	static function Recognise(URL $url){
 		$url = $url->getPath();
 		if($url->firstPathElement() == 'api'){
 			$url->removeFirstPathElement();

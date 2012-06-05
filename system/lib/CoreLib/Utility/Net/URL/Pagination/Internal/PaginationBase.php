@@ -1,11 +1,11 @@
 <?php
-namespace Net\URL\Pagination\Internal;
+namespace Utility\Net\URL\Pagination\Internal;
 
 use Model\Database\SQL\SelectStatement;
 
 use Model\Database\IToSQL;
 
-use Net\URL\Pagination\Template\IPaginationTemplate;
+use Utility\Net\URL\Pagination\Template\IPaginationTemplate;
 
 abstract class PaginationBase extends \Core\Object {
 	protected $url;

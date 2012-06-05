@@ -1,5 +1,5 @@
 <?php
-namespace Net;
+namespace Utility\Net;
 use Basic\String\UTF8;
 
 class URL extends \Core\Object {

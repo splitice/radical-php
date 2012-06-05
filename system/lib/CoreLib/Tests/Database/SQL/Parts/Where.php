@@ -3,8 +3,8 @@ namespace Tests\Database\SQL\Parts;
 
 use Model\Database\SQL\Parts\Expression\Between;
 
-use Debug\Test\IUnitTest;
-use Debug\Test\Unit;
+use Core\Debug\Test\IUnitTest;
+use Core\Debug\Test\Unit;
 
 class Where extends Unit implements IUnitTest {
 	const PART_NAME = 'WHERE';

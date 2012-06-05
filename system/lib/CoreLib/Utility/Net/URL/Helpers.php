@@ -1,5 +1,5 @@
 <?php
-namespace Net\URL;
+namespace Utility\Net\URL;
 
 //TODO: Objectivize
 

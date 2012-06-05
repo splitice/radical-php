@@ -1,5 +1,5 @@
 <?php
-namespace Net;
+namespace Utility\Net;
 
 use Basic\Cryptography\CRC32;
 

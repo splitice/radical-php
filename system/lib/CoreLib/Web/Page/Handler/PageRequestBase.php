@@ -60,7 +60,7 @@ abstract class PageRequestBase {
 		}
 	}
 	
-	static function fromURL(\Net\URL $url){
+	static function fromURL(\Utility\Net\URL $url){
 		return Recognise::fromURL($url);
 	}
 }

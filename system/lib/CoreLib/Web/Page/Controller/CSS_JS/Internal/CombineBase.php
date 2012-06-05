@@ -66,12 +66,13 @@ abstract class CombineBase extends IndividualBase {
 			
 			$ret = '';
 			foreach($data as $f=>$d){
-				if(!\Server::isProduction()){
+				if(!\Core\Server::isProduction()){
 					$ret .= "\r\n/* Including: ".$f." */\r\n";
 				}
 				$ret .= $d;
 			}
-			if(\Server::isProduction()){
+			
+			if(\Core\Server::isProduction()){
 				$ret = $this->Optimize($ret);
 				$cache->set($key, $ret);
 			}

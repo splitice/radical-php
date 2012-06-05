@@ -1,8 +1,8 @@
 <?php
 namespace Tests\Database\SQL\Parts;
 
-use Debug\Test\IUnitTest;
-use Debug\Test\Unit;
+use Core\Debug\Test\IUnitTest;
+use Core\Debug\Test\Unit;
 
 class Limit extends Unit implements IUnitTest {
 	function testScalar(){

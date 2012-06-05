@@ -1,6 +1,8 @@
 <?php
 namespace Web;
 
+use Utility\Net\IP;
+
 use Web\Session\Storage\Internal;
 
 use Web\Session\Authenticator;
@@ -29,16 +31,16 @@ class Session extends \Core\Object {
 	private static $extras = array();
 	
 	static function IP(){
-		if(\Server::isCLI()){
-			return new \Net\IP(static::DEFAULT_IP);
+		if(\Core\Server::isCLI()){
+			return new IP(static::DEFAULT_IP);
 		}
 		if(isset($_SERVER['HTTP_X_REAL_IP'])){
-			return new \Net\IP($_SERVER['HTTP_X_REAL_IP']);
+			return new IP($_SERVER['HTTP_X_REAL_IP']);
 		}
 		if(isset($_SERVER['REMOTE_ADDR'])){
-			return new \Net\IP($_SERVER['REMOTE_ADDR']);
+			return new IP($_SERVER['REMOTE_ADDR']);
 		}
-		return new \Net\IP(static::DEFAULT_IP);
+		return new IP(static::DEFAULT_IP);
 	}
 	
 	static function Init(){

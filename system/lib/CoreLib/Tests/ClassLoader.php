@@ -1,8 +1,8 @@
 <?php
 namespace Tests;
 
-use Debug\Test\IUnitTest;
-use Debug\Test\Unit;
+use Core\Debug\Test\IUnitTest;
+use Core\Debug\Test\Unit;
 
 class ClassLoader extends Unit implements IUnitTest {
 	function testToPath(){

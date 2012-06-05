@@ -13,7 +13,7 @@ class MultipleDatabase extends NullSource {
 		$this->tables = func_get_args();
 		parent::__construct();
 	}
-	protected function getFields($username,$password,$table){
+	protected function getFields($username){
 		return array(static::FIELD_USERNAME=>$username);
 	}
 
@@ -21,7 +21,7 @@ class MultipleDatabase extends NullSource {
 		foreach($this->tables as $table){
 			$class = $table->getClass();
 	
-			$data = $this->getFields($username,$password,$table);
+			$data = $this->getFields($username);
 	
 			$res = $class::fromFields($data);
 

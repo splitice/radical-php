@@ -38,7 +38,7 @@ class Mysqli extends AdapterAbstract {
 	/**
 	 * Constructor
 	 *
-	 * @param \Database\Connection $adapter
+	 * @param \Model\Database\Connection $adapter
 	 */
 	public function __construct(\Database\Connection $adapter = null) {
 		return parent::__construct($adapter);

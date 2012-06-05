@@ -1,8 +1,8 @@
 <?php
 namespace Tests\Database\SQL\Parts;
 
-use Debug\Test\IUnitTest;
-use Debug\Test\Unit;
+use Core\Debug\Test\IUnitTest;
+use Core\Debug\Test\Unit;
 
 class WhereOR extends Unit implements IUnitTest {
 	const SEPPERATOR = 'OR';

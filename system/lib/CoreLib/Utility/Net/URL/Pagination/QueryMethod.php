@@ -1,5 +1,5 @@
 <?php
-namespace Net\URL\Pagination;
+namespace Utility\Net\URL\Pagination;
 
 class QueryMethod extends Internal\PaginationBase implements IPaginator {
 	protected $query;

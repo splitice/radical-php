@@ -3,8 +3,8 @@ namespace Model\Database\Model\Pagination;
 
 use Model\Database\Model\Table\TableSet;
 use Model\Database\Model\TableReferenceInstance;
-use Net\URL\Pagination\IPaginator;
-use Net\URL\Pagination\Template\IPaginationTemplate;
+use Utility\Net\URL\Pagination\IPaginator;
+use Utility\Net\URL\Pagination\Template\IPaginationTemplate;
 use Model\Database\SQL;
 use Model\Database\Model\TableReference;
 

@@ -1,8 +1,8 @@
 <?php
 namespace Tests\Core;
 
-use Debug\Test\IUnitTest;
-use Debug\Test\Unit;
+use Core\Debug\Test\IUnitTest;
+use Core\Debug\Test\Unit;
 
 class MagicNamespace extends Unit implements IUnitTest {
 	function testTheory(){

@@ -1,7 +1,7 @@
 <?php
-namespace Net\URL\Pagination\Template;
+namespace Utility\Net\URL\Pagination\Template;
 
-use Net\URL\Pagination\IPaginator;
+use Utility\Net\URL\Pagination\IPaginator;
 
 class Standard extends \Core\Object implements IPaginationTemplate {
 	function onePage(){

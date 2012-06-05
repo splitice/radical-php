@@ -1,7 +1,7 @@
 <?php
 namespace Web\Page\Admin;
 
-use Net\URL\Path;
+use Utility\Net\URL\Path;
 use Web\Page\Handler;
 
 abstract class MultiAdminModuleBase extends AdminModuleBase {

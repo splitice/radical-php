@@ -22,7 +22,7 @@ class Error extends HTMLPageBase {
 		return $this->GET();
 	}
 	
-	static function fromURL(\Net\URL $url){
+	static function fromURL(\Utility\Net\URL $url){
 		$page = Recognise::fromURL($url);
 		return new static($page);
 	}

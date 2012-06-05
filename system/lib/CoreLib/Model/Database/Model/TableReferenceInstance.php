@@ -90,7 +90,7 @@ class TableReferenceInstance extends \Core\Object {
 		$sql->Execute();
 	}
 	/**
-	 * @return \Database\SQL\SelectStatement
+	 * @return \Model\Database\SQL\SelectStatement
 	 */
 	function select($fields = '*'){
 		return new SelectStatement($this->getTable(),$fields);

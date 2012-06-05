@@ -2,8 +2,8 @@
 namespace Tests\Database\SQL;
 
 use Model\Database\SQL as Target;
-use Debug\Test\IUnitTest;
-use Debug\Test\Unit;
+use Core\Debug\Test\IUnitTest;
+use Core\Debug\Test\Unit;
 
 class SelectStatement extends Unit implements IUnitTest {
 	function test1Compound(){

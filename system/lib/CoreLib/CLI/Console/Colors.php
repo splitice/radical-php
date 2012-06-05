@@ -46,7 +46,7 @@ class Colors extends \Core\Object {
 	
 	// Returns colored string
 	public function getColoredString($string, $foreground_color = null, $background_color = null) {
-		if(\Server::isWindows()){
+		if(\Core\Server::isWindows()){
 			//TODO: console parsable
 			return $string;
 		}

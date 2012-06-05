@@ -4,7 +4,7 @@ namespace Web\Page\Controller;
 use Web\Page\Handler\HTMLPageBase;
 use Web\Templates;
 use Web\Session\User\IUserAdmin;
-use Net\URL\Pagination\QueryMethod;
+use Utility\Net\URL\Pagination\QueryMethod;
 use Web\Page\Controller\Special\Redirect;
 use Web\Page\Handler;
 
@@ -20,7 +20,7 @@ class Admin extends HTMLPageBase {
 	protected $module;
 	protected $url;
 	
-	function __construct(\Net\URL\Path $url,$module){
+	function __construct(\Utility\Net\URL\Path $url,$module){
 		$this->module = $module;
 		$this->url = $url;
 	}

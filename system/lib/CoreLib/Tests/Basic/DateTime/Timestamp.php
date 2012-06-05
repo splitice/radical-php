@@ -1,8 +1,8 @@
 <?php
 namespace Tests\Basic\DateTime;
 
-use Debug\Test\IUnitTest;
-use Debug\Test\Unit;
+use Core\Debug\Test\IUnitTest;
+use Core\Debug\Test\Unit;
 
 class Timestamp extends Unit implements IUnitTest {
 	private $standard_formats = array(

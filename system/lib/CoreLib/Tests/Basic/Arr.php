@@ -1,8 +1,8 @@
 <?php
 namespace Tests\Basic;
 
-use Debug\Test\IUnitTest;
-use Debug\Test\Unit;
+use Core\Debug\Test\IUnitTest;
+use Core\Debug\Test\Unit;
 
 class Arr extends Unit implements IUnitTest {
 	function testIsAssoc()

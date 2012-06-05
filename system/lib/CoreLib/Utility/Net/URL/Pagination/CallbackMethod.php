@@ -1,5 +1,5 @@
 <?php
-namespace Net\URL\Pagination;
+namespace Utility\Net\URL\Pagination;
 
 class CallbackMethod extends Internal\PaginationBase implements IPaginator {
 	function toURL($page = 1){

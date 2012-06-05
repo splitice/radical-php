@@ -7,7 +7,7 @@ use Model\Database\DBAL;
 
 class TableSet extends \Basic\Arr\Object\IncompleteObject {
 	/**
-	 * @var \Database\SQL\IStatement
+	 * @var \Model\Database\SQL\IStatement
 	 */
 	public $sql;
 	public $tableClass;

@@ -1,12 +1,13 @@
 <?php
 namespace Web\Page\Router\Recognisers;
 
+use Utility\Net\URL;
 use Web\Page\Router\IPageRecognise;
 use Web\Page\Controller;
 use Web\Page\Handler;
 
 class Special implements IPageRecognise {
-	static function Recognise(\Net\URL $url){
+	static function Recognise(URL $url){
 		$url = $url->getPath();
 		$path = $url->getPath(true);
 		$ext = pathinfo($path,PATHINFO_EXTENSION);

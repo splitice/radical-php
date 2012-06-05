@@ -1,4 +1,6 @@
 <?php
+namespace Core;
+
 class Server {
 	static function isProduction(){
 		if(!isset($_SERVER['SERVER_ADDR'])) return true;

@@ -10,7 +10,7 @@ class TableReference extends \Core\Object {
 	
 	/**
 	 * @param string $tableClass
-	 * @return \Database\Model\TableReferenceInstance
+	 * @return \Model\Database\Model\TableReferenceInstance
 	 */
 	static function getByTableName($tableName){
 		if(!self::$_name){

@@ -1,6 +1,6 @@
 <?php
-namespace Net\URL\Pagination;
-use Net\URL\Pagination\Template\IPaginationTemplate;
+namespace Utility\Net\URL\Pagination;
+use Utility\Net\URL\Pagination\Template\IPaginationTemplate;
 
 interface IPaginator {
 	function toURL($page = 1);

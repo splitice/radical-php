@@ -39,7 +39,7 @@ class DB extends Adapter\SQLUtils {
 	 * @param string $user
 	 * @param string $pass
 	 * @param string $db
-	 * @throws \Database\Exception\ConnectionException
+	 * @throws \Model\Database\Exception\ConnectionException
 	 */
 	static function Connect(Adapter\Connection $connection) {
 		static::Init();
@@ -132,8 +132,8 @@ class DB extends Adapter\SQLUtils {
 	/**
 	 * Execute MySQL query
 	 * @param string $sql
-	 * @throws \Database\Exception\QueryError
-	 * @return \Database\DBAL\Result
+	 * @throws \Model\Database\Exception\QueryError
+	 * @return \Model\Database\DBAL\Result
 	 */
 	static function Query($sql,$timeout=Adapter\Instance::QUERY_TIMEOUT,$is_retry=false) {
 		return static::__callStatic(__FUNCTION__, func_get_args());
@@ -144,7 +144,7 @@ class DB extends Adapter\SQLUtils {
 	 *
 	 * @param string $sql
 	 * @param int $timeout
-	 * @return Ambigous <resource, \Database\NOT_A_RESULT, string, unknown>
+	 * @return Ambigous <resource, \Model\Database\NOT_A_RESULT, string, unknown>
 	 */
 	static function Q($sql,$timeout=Adapter\Instance::QUERY_TIMEOUT){
 		return static::__callStatic(__FUNCTION__, func_get_args());

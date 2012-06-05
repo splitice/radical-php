@@ -2,8 +2,8 @@
 namespace Tests\Cache;
 
 use Utility\Cache as Target;
-use Debug\Test\IUnitTest;
-use Debug\Test\Unit;
+use Core\Debug\Test\IUnitTest;
+use Core\Debug\Test\Unit;
 
 class FunctionCache extends Unit implements IUnitTest {
 	public $a = 0;

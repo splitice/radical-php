@@ -1,5 +1,5 @@
 <?php
-namespace Net\URL\Stub\Generator;
+namespace Utility\Net\URL\Stub\Generator;
 
 /**
  * Generate URL Stubs by replacing all non alpha numeric

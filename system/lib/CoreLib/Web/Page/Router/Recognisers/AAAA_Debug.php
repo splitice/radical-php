@@ -1,6 +1,7 @@
 <?php
 namespace Web\Page\Router\Recognisers;
 
+use Utility\Net\URL;
 use Web\Page\Router\Recognise;
 use Web\Page\Router\IPageRecognise;
 use Utility\Net\HTTP;
@@ -9,7 +10,7 @@ use Web\Page\Controller;
 class AAAA_Debug implements IPageRecognise {
 	private static $enable = true;
 	
-	private static function _call(\Net\URL $url){
+	private static function _call(URL $url){
 		//Execute origional page
 		ob_start();
 		$handler = Recognise::fromURL($url);
@@ -18,7 +19,7 @@ class AAAA_Debug implements IPageRecognise {
 		}
 		ob_end_clean();
 	}
-	static function Recognise(\Net\URL $url){
+	static function Recognise(URL $url){
 		//Just incase disabling debug doesnt work.
 		if(!self::$enable){
 			return;

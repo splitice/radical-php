@@ -1,6 +1,6 @@
 <?php
-namespace Net\URL\Pagination\Template;
-use Net\URL\Pagination\IPaginator;
+namespace Utility\Net\URL\Pagination\Template;
+use Utility\Net\URL\Pagination\IPaginator;
 
 interface IPaginationTemplate {
 	function onePage();

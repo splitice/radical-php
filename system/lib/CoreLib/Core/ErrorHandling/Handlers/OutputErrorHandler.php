@@ -17,7 +17,7 @@ class OutputErrorHandler extends ErrorHandlerBase {
 		}
 	}
 	function Exception(ErrorException $error){
-		if(\Server::isCLI()){
+		if(\Core\Server::isCLI()){
 			$c = Colors::getInstance();
 			
 			//Code

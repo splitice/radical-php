@@ -11,7 +11,7 @@ class Mappings {
 	 */
 	private $model;
 	/**
-	 * @var \Database\SQL\Parse\CreateTable
+	 * @var \Model\Database\SQL\Parse\CreateTable
 	 */
 	private $structure;
 	
