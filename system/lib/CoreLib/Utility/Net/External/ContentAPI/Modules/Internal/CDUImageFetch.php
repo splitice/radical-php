@@ -14,7 +14,7 @@ class CDUImageFetch implements IFetch {
 		$data = curl_exec($this->ch);
 		$ch = $this->ch;
 		HTML\Simple_HTML_DOM::LoadS ();
-		$dom = \HTML\str_get_dom ( $data );
+		$dom = HTML\str_get_dom ( $data );
 		
 		if($img = $dom->find('img[src*="cover"]',0)){
 			$link = $img->src;

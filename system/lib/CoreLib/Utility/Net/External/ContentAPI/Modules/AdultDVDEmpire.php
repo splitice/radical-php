@@ -24,7 +24,7 @@ class AdultDVDEmpire extends Internal\ModuleBase implements \Utility\Net\Externa
 		$data = curl_exec ( $ch );
 		
 		HTML\Simple_HTML_DOM::LoadS ();
-		$dom = \HTML\str_get_dom ( $data );
+		$dom = HTML\str_get_dom ( $data );
 		
 		try {
 			$ret ['categories'] = array ();

@@ -15,7 +15,7 @@ class OutputError extends Internal\ErrorBase implements IToCode {
 		parent::__construct($message,'',false);
 		
 		//Send to Exception
-		$errorHandler = \ErrorHandling\Handler::getInstance();
+		$errorHandler = \Core\ErrorHandling\Handler::getInstance();
 		$errorHandler->Exception($this);
 	}
 	

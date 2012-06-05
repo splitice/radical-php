@@ -58,7 +58,7 @@
 		</div>
 	</div>
 	<?php 
-	if($_->vars['error'] instanceof ErrorHandling\Errors\Internal\ErrorException){
+	if($_->vars['error'] instanceof Core\ErrorHandling\Errors\Internal\ErrorException){
 	?>
 	<div class="alert-container">
 		<div class="alert-inner">

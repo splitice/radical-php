@@ -90,7 +90,7 @@ class URL extends \Core\Object {
 	}
 	
 	/**
-	 * @return \Net\URL\Path $path
+	 * @return \Utility\Net\URL\Path $path
 	 */
 	public function getPath() {
 		return $this->path;

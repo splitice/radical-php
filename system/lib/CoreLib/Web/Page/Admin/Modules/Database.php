@@ -110,7 +110,7 @@ class Database extends AdminModuleBase {
 					$per_page = 30;
 					$vars['count']  = ceil($this->table->getAll()->getCount()/$per_page);
 					
-					$pagination = new \Net\URL\Pagination\QueryMethod();
+					$pagination = new \Utility\Net\URL\Pagination\QueryMethod();
 					$vars['pagination'] = $pagination;
 					
 					$vars['data'] = $this->table->getAll($pagination->getLimit($per_page));

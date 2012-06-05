@@ -26,7 +26,7 @@ abstract class PaypalBase extends HTMLPageBase {
 	function GET(){
 		$p = new \Utility\Net\External\Paypal (); // initiate an instance of the class
 
-		$this_script = \Net\URL::fromRequest();
+		$this_script = \Utility\Net\URL::fromRequest();
 		$this_script->getPath()->setQuery(array());
 		$this_script = (string)$this_script;
 

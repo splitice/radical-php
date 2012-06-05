@@ -12,7 +12,7 @@ class Process {
 			if(is_dir($p) || pathinfo($p,PATHINFO_EXTENSION) == 'php'){
 				foreach(\Folder::ListDir($p,true) as $file){
 					if(pathinfo($file,PATHINFO_EXTENSION) == 'php'){
-						$c = new \Debug\PHPClassTools($file);
+						$c = new \Core\Debug\PHPClassTools($file);
 						$d = $c->getDependencies();
 						foreach($d as $dd){
 							if(\Core\Libraries::toPath($dd,true)){

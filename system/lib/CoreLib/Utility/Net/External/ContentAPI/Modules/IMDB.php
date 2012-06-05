@@ -34,7 +34,7 @@ class IMDB extends Internal\ModuleBase implements IFromURL {
 		$data = $request->Execute ();
 	
 		HTML\Simple_HTML_DOM::LoadS ();
-		$dom =\HTML\str_get_dom ( $data->getContent () );
+		$dom = HTML\str_get_dom ( $data->getContent () );
 	
 		$ret = array ();
 		foreach ( $dom->find ( '.thumb_list img', null, true ) as $img ) {
@@ -55,7 +55,7 @@ class IMDB extends Internal\ModuleBase implements IFromURL {
 		$data = $request->Execute ();
 	
 		HTML\Simple_HTML_DOM::LoadS ();
-		$dom =\HTML\str_get_dom ( $data->getContent () );
+		$dom =HTML\str_get_dom ( $data->getContent () );
 	
 		$ret = array ();
 		foreach ( $dom->find ( '.sodatext', null, true ) as $text ) {
@@ -145,7 +145,7 @@ class IMDB extends Internal\ModuleBase implements IFromURL {
 		$data = $request->Execute ();
 	
 		HTML\Simple_HTML_DOM::LoadS ();
-		$dom = \HTML\str_get_dom ( $data->getContent () );
+		$dom = HTML\str_get_dom ( $data->getContent () );
 	
 		
 	

@@ -1,7 +1,7 @@
 <?php 
 if(!function_exists('UU')){
 	function UU($url){
-		$base = \Net\URL::fromRequest();
+		$base = \Utility\Net\URL::fromRequest();
 		$base->getPath()->setQuery(array());
 		$base = (string)$base.$url;
 		return $base;
@@ -41,6 +41,6 @@ if(!function_exists('UU')){
 	echo '</tbody></table>';
 	echo '<br />';
 	echo '<div class="nodata">';
-	$_->vars['pagination']->Output($_->vars['count'], new \Net\URL\Pagination\Template\Standard());
+	$_->vars['pagination']->Output($_->vars['count'], new \Utility\Net\URL\Pagination\Template\Standard());
 	echo '</div>';
 ?>

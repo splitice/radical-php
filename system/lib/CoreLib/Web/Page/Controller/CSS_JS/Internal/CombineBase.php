@@ -59,7 +59,7 @@ abstract class CombineBase extends IndividualBase {
 			foreach($files as $f){
 				//die(var_dump($f));
 				$fn = basename($f);
-				//$url = \Net\URL::fromRequest('/'.static::EXTENSION.'/'.$this->name.'/'.$f);
+				//$url = \Utility\Net\URL::fromRequest('/'.static::EXTENSION.'/'.$this->name.'/'.$f);
 				//$data[$f] = \Web\Page\Handler\SubRequest::fromURL($url)->Execute('GET');
 				$data[$fn] = file_get_contents($f);
 			}

@@ -7,9 +7,9 @@ class QueryMethod extends Internal\PaginationBase implements IPaginator {
 	function __construct($url = null,$query = 'page'){
 		//Create URL object
 		if($url == null){
-			$url = \Net\URL::fromRequest();
+			$url = \Utility\Net\URL::fromRequest();
 		}else{
-			$url = \Net\URL::fromURL($url);
+			$url = \Utility\Net\URL::fromURL($url);
 		}
 		
 		//Reset Page

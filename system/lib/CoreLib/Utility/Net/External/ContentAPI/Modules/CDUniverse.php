@@ -36,7 +36,7 @@ class CDUniverse extends Internal\ModuleBase implements Interfaces\IFromURL {
 		$data = curl_exec ( $ch );
 
 		HTML\Simple_HTML_DOM::LoadS ();
-		$dom = \HTML\str_get_dom ( $data );
+		$dom = HTML\str_get_dom ( $data );
 		
 		try {
 			$ret ['director'] = $dom->find ( 'a[href*="HT_Search=xdirector"]', 0, true )->plaintext;

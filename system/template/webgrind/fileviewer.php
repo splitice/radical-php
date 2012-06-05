@@ -16,7 +16,7 @@
 <body>
     <div id="head">
         <div id="logo">
-            <h1>webgrind<sup style="font-size:10px">v<?php echo \Debug\WebGrind\Config::$webgrindVersion?></sup></h1>
+            <h1>webgrind<sup style="font-size:10px">v<?php echo \Core\Debug\WebGrind\Config::$webgrindVersion?></sup></h1>
             <p>profiling in the browser</p>
         </div>
         <div style="clear:both;"></div>

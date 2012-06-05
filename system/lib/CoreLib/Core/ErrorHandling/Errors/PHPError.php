@@ -6,7 +6,7 @@ class PHPError extends Internal\ErrorBase {
 	
 	function __construct($errno, $msg_text, Structs\LocationReference $where){
 		//Build Error page
-		if(!\Server::isProduction() || \Core\Server::isCLI()){
+		if(!\Core\Server::isProduction() || \Core\Server::isCLI()){
 			$message = 'A PHP error occured at '.$where->toShort().': '.$msg_text;
 		}else{
 			$message = 'An error has occured in the script.';

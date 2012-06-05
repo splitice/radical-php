@@ -22,7 +22,7 @@ class Page {
 	function absoluteize(){
 		foreach(static::$_absoluteize as $tag=>$attribute){
 			foreach($this->dom->find($tag.'['.$attribute.']') as $link){
-				$link->$attribute = \Net\URL\Helpers::url_to_absolute($this->url, $link->$attribute);
+				$link->$attribute = \Utility\Net\URL\Helpers::url_to_absolute($this->url, $link->$attribute);
 			}
 		}
 	}

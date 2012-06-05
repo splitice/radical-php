@@ -24,7 +24,7 @@ class XOnAir extends Internal\ModuleBase implements \Utility\Net\External\Conten
 		$data = curl_exec ( $ch );
 		
 		HTML\Simple_HTML_DOM::LoadS ();
-		$dom = \HTML\str_get_dom ( $data );
+		$dom = HTML\str_get_dom ( $data );
 		
 		$tref = 'table[width="518"] table[width="100%"] ';
 		try {

@@ -26,7 +26,7 @@ function oneof($object, $class){
 	return $ret;
 }*/
 function _U($url,$param=null){
-	return (string)\Net\URL::fromRequest(U($url,$param));
+	return (string)\Utility\Net\URL::fromRequest(U($url,$param));
 }
 function U($url,$param=null) {
 	global $BASEPATH;

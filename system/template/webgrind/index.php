@@ -3,7 +3,7 @@
 ?>
 	<title>webgrind</title>
 	<script type="text/javascript" charset="utf-8">
-		var fileUrlFormat = '<?php echo \Debug\WebGrind\Config::$fileUrlFormat?>';
+		var fileUrlFormat = '<?php echo \Core\Debug\WebGrind\Config::$fileUrlFormat?>';
 		var currentDataFile = null;
 		var callInfoLoaded = new Array();
 		var disableAjaxBlock = false;
@@ -202,7 +202,7 @@
 <body>
     <div id="head">
         <div id="logo">
-            <h1>webgrind<sup style="font-size:10px">v<?php echo \Debug\WebGrind\Config::$webgrindVersion?></sup></h1>
+            <h1>webgrind<sup style="font-size:10px">v<?php echo \Core\Debug\WebGrind\Config::$webgrindVersion?></sup></h1>
             <p>profiling in the browser</p>
         </div>
         <div id="options">
@@ -213,9 +213,9 @@
             	<div style="float:right;">
             		<label style="margin:0 5px">in</label>
             		<select id="costFormat" name="costFormat">
-            		    <option value="percent" <?php echo (\Debug\WebGrind\Config::$defaultCostformat=='percent') ? 'selected' : ''?>>percent</option>
-            		    <option value="msec" <?php echo (\Debug\WebGrind\Config::$defaultCostformat=='msec') ? 'selected' : ''?>>milliseconds</option>
-            		    <option value="usec" <?php echo (\Debug\WebGrind\Config::$defaultCostformat=='usec') ? 'selected' : ''?>>microseconds</option>
+            		    <option value="percent" <?php echo (\Core\Debug\WebGrind\Config::$defaultCostformat=='percent') ? 'selected' : ''?>>percent</option>
+            		    <option value="msec" <?php echo (\Core\Debug\WebGrind\Config::$defaultCostformat=='msec') ? 'selected' : ''?>>milliseconds</option>
+            		    <option value="usec" <?php echo (\Core\Debug\WebGrind\Config::$defaultCostformat=='usec') ? 'selected' : ''?>>microseconds</option>
             		</select>
             	</div>
             	<div style="float:right;">
@@ -226,13 +226,13 @@
             		<label style="margin:0 5px">Show</label>
             		<select id="showFraction" name="showFraction">
             			<?php for($i=100; $i>0; $i-=10):?>
-            			<option value="<?php echo $i/100?>" <?php if ($i==\Debug\WebGrind\Config::$defaultFunctionPercentage):?>selected="selected"<?php endif;?>><?php echo $i?>%</option>
+            			<option value="<?php echo $i/100?>" <?php if ($i==\Core\Debug\WebGrind\Config::$defaultFunctionPercentage):?>selected="selected"<?php endif;?>><?php echo $i?>%</option>
             			<?php endfor;?>
             		</select>
             	</div>
             	<div style="clear:both;"></div>    	
             	<div style="margin:0 70px">
-            	    <input type="checkbox" name="hideInternals" value="1" <?php echo (\Debug\WebGrind\Config::$defaultHideInternalFunctions==1) ? 'checked' : ''?> id="hideInternals">
+            	    <input type="checkbox" name="hideInternals" value="1" <?php echo (\Core\Debug\WebGrind\Config::$defaultHideInternalFunctions==1) ? 'checked' : ''?> id="hideInternals">
             	    <label for="hideInternals">Hide PHP functions</label>
             	</div>
             </form>
