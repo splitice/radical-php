@@ -1,6 +1,6 @@
 <?php
 namespace Utility\DDL\Hosts\Upload;
-use DDL\Hosts\API;
+use Utility\DDL\Hosts\API;
 
 class FileSonic extends Internal\FTPHostBase implements Interfaces\IUploadHost {
 	static $__provides = array('lib.ddl.upload.module');

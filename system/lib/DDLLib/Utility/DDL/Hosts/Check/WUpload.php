@@ -1,6 +1,6 @@
 <?php
 namespace Utility\DDL\Hosts\Check;
-use DDL\Hosts\API;
+use Utility\DDL\Hosts\API;
 
 class WUpload extends Internal\HostBase {
 	const HOST_SCORE = 0.9;

@@ -1,6 +1,6 @@
 <?php
 namespace Utility\DDL\Hosts\Upload\Internal;
-use DDL\Hosts\Upload\Struct;
+use Utility\DDL\Hosts\Upload\Struct;
 
 abstract class FTPHostBase extends HostBase {
 	/**

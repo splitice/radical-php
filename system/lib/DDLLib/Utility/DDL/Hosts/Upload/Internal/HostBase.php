@@ -1,7 +1,7 @@
 <?php
 namespace Utility\DDL\Hosts\Upload\Internal;
-use DDL\Hosts\Upload\Struct\LoginDetails;
-use DDL\Hosts\Upload\Exception;
+use Utility\DDL\Hosts\Upload\Struct\LoginDetails;
+use Utility\DDL\Hosts\Upload\Exception;
 
 abstract class HostBase extends \Core\Object {
 	/**

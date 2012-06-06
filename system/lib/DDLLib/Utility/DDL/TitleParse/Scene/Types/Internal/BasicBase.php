@@ -1,7 +1,9 @@
 <?php
 namespace Utility\DDL\TitleParse\Scene\Types\Internal;
 
-abstract class BasicBase extends \DDL\TitleParse\Internal\TitleParseBase {
+use Utility\DDL\TitleParse\Internal\TitleParseBase;
+
+abstract class BasicBase extends TitleParseBase {
 	const DELIMITER = ' ';
 	protected $parts = array();
 	

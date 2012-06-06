@@ -1,10 +1,12 @@
 <?php
 namespace Utility\DDL\Hosts\Check\Internal;
 
+use Utility\DDL\Hosts\Check\Interfaces\IDDLHostCheck;
+
 use Utility\Net\HTTP;
 use Utility\HTML;
 
-abstract class HostBase implements \DDL\Hosts\Check\Interfaces\IDDLHostCheck {
+abstract class HostBase implements IDDLHostCheck {
 	const HOST_SCORE = null;
 	const HOST_ABBR = null;
 	const HOST_DOMAIN = null;

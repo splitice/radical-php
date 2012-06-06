@@ -1,6 +1,8 @@
 <?php
 namespace Utility\DDL\TitleParse\Scene\Types\Internal;
 
+use Utility\DDL\TitleParse\Scene\Types\XXX_0DAY;
+
 class XXXBase extends MovieBase {
 	const NATIVE_TYPE = 'xxx';
 	
@@ -35,7 +37,7 @@ class XXXBase extends MovieBase {
 			}
 		}while($this->isScene($next) || $this->isSource($next,$n2));
 		
-		if($this instanceof \DDL\TitleParse\Scene\Types\XXX_0DAY){
+		if($this instanceof XXX_0DAY){
 			$this->parts[] = $next;
 		}
 		

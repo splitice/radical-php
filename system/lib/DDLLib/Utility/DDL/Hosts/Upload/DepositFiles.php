@@ -1,6 +1,6 @@
 <?php
 namespace Utility\DDL\Hosts\Upload;
-use DDL\Hosts\Upload\Struct\DelayReturn;
+use Utility\DDL\Hosts\Upload\Struct\DelayReturn;
 
 class DepositFiles extends Internal\HostBase implements Interfaces\IUploadHost {
 	static $__provides = array('lib.ddl.upload.module');

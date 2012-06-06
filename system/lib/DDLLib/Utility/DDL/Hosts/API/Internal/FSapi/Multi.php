@@ -1,7 +1,7 @@
 <?php
 namespace Utility\DDL\Hosts\API\Internal\FSapi;
 
-use DDL\Hosts\API\Internal\FSapi;
+use Utility\DDL\Hosts\API\Internal\FSapi;
 use Utility\Net\HTTP;
 
 class Multi {

@@ -1,5 +1,7 @@
 <?php
 namespace Utility\DDL\TitleParse\Natural\Types\Internal;
 
-abstract class NaturalBase extends \DDL\TitleParse\Internal\TitleParseBase {
+use Utility\DDL\TitleParse\Internal\TitleParseBase;
+
+abstract class NaturalBase extends TitleParseBase {
 }

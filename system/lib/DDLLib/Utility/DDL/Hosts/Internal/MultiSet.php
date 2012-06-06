@@ -1,11 +1,11 @@
 <?php
 namespace Utility\DDL\Hosts\Internal;
 
-use DDL\Hosts\Upload\Interfaces\INoHTTP;
+use Utility\DDL\Hosts\Upload\Interfaces\INoHTTP;
 
 use CLI\Console\Progress\Container;
-use DDL\Hosts\HandleMulti;
-use DDL\Hosts\Upload\Struct\DelayReturn;
+use Utility\DDL\Hosts\HandleMulti;
+use Utility\DDL\Hosts\Upload\Struct\DelayReturn;
 
 class MultiSet {
 	protected $set = array();

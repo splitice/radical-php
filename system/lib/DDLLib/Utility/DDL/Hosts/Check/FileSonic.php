@@ -1,7 +1,7 @@
 <?php
 namespace Utility\DDL\Hosts\Check;
-use DDL\Hosts\API;
-use DDL\Hosts\Internal\CheckReturn;
+use Utility\DDL\Hosts\API;
+use Utility\DDL\Hosts\Internal\CheckReturn;
 
 class FileSonic extends Internal\HostBase {
 	const HOST_SCORE = 1;
