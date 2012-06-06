@@ -89,6 +89,18 @@ class URL extends \Core\Object {
 		return $this->host;
 	}
 	
+	function getIP(){
+		$ip = new IP($this->host);
+		if(!$ip->isValid()){
+			$ip = gethostbyname($this->host);
+			if($ip == $this->host){
+				throw new \Exception('DNS lookup for hostname failed');
+			}
+			$ip = new IP($ip);
+		}
+		return $ip;
+	}
+	
 	/**
 	 * @return \Utility\Net\URL\Path $path
 	 */
