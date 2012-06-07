@@ -7,6 +7,9 @@ class IP {
 	private $ip;
 	
 	function __construct($ip){
+		if($ip instanceof self){
+			$ip = $ip->getIp();
+		}
 		$this->ip = $ip;
 	}
 	

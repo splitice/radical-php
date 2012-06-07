@@ -1,5 +1,5 @@
 <?php
-namespace Utility\Format\SSL;
+namespace Utility\SSL;
 
 class SigningDetails {
 	public $countryName = 'XX';

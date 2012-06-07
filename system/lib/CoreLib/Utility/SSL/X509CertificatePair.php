@@ -1,0 +1,16 @@
+<?php
+namespace Utility\SSL;
+
+class X509CertificatePair {
+	public $public;
+	public $private;
+	
+	function __construct($public,$private){
+		$this->public = $public;
+		$this->private = $private;
+	}
+	
+	function Validate($passphrase = null){
+		return X509::CheckPair($this->public, $this->private, $passphrase);
+	}
+}

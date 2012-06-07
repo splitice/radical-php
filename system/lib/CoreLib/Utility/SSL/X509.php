@@ -1,5 +1,5 @@
 <?php
-namespace Utility\Format\SSL;
+namespace Utility\SSL;
 
 class X509 {
 	static function CheckPair($cert, $key, $passphrase = null){
@@ -11,17 +11,18 @@ class X509 {
 	
 	static function Generate(SigningDetails $dn, $privkeypass = null, $numberofdays = 365){
 		$privkey = openssl_pkey_new();
-		$csr = openssl_csr_new($dn, $privkey);
+		$csr = openssl_csr_new($dn->toArray(), $privkey);
 		$sscert = openssl_csr_sign($csr, null, $privkey, $numberofdays);
 		openssl_x509_export($sscert, $publickey);
 		$privatekey = null;
-		openssl_pkey_export($privkey, $privatekey, $privkeypass);
-		$csrStr = null;
-		openssl_csr_export($csr, $csrStr);
+		if(!openssl_pkey_export($privkey, $privatekey, $privkeypass)){
+			throw new \Exception('Private key generatio failed');
+		}
+		/*$csrStr = null;
+		if(!openssl_csr_export($csr, $csrStr)){
+			throw new \Exception('CSR generation failed');
+		}*/
 		
-		//openssl genrsa -des3 -out server.key 1024
-		//openssl req -new -key server.key -out server.csr
-		//openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
-		die(var_dump($privatekey,$csrStr));
+		return new X509CertificatePair($publickey, $privatekey);
 	}
 }
