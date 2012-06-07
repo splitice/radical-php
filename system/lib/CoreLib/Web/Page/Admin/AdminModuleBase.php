@@ -10,7 +10,7 @@ abstract class AdminModuleBase extends HTMLPageBase implements Modules\IAdminMod
 	}
 	function getModuleName(){
 		$c = ltrim(get_called_class(),'\\');
-		$c = substr($c,strlen('Web\\Admin\\Modules\\'));
+		$c = substr($c,strlen(Constants::CLASS_PATH));
 		return $c;
 	}
 	function getSubmodules(){

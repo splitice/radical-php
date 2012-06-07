@@ -7,6 +7,7 @@ use Web\Session\User\IUserAdmin;
 use Utility\Net\URL\Pagination\QueryMethod;
 use Web\Page\Controller\Special\Redirect;
 use Web\Page\Handler;
+use Web\Page;
 
 /**
  * The admin controller
@@ -14,13 +15,11 @@ use Web\Page\Handler;
  * @author SplitIce
  *
  */
-class Admin extends HTMLPageBase {
-	const CLASS_PATH = '\\Web\\Admin\\Modules\\';
-	
+class Admin extends HTMLPageBase {	
 	protected $module;
 	protected $url;
 	
-	function __construct(\Utility\Net\URL\Path $url,$module){
+	function __construct(\Utility\Net\URL\Path $url,$module = null){
 		$this->module = $module;
 		$this->url = $url;
 	}
@@ -53,7 +52,7 @@ class Admin extends HTMLPageBase {
 			return new Templates\ContainerTemplate('index', array(),'admin');
 		}else{
 			//Class path to the module
-			$class = static::CLASS_PATH.$this->module;
+			$class = Page\Admin\Constants::CLASS_PATH.$this->module;
 			if(!class_exists($class)){
 				throw new \Exception('Couldnt find admin module');
 			}

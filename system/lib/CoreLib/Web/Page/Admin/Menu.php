@@ -1,8 +1,6 @@
 <?php
 namespace Web\Page\Admin;
 
-use Web\Page\Controller\Admin;
-
 use Basic\Arr;
 use Web\Template;
 
@@ -20,7 +18,7 @@ class Menu extends PageBase {
 			//Get admin modules
 			$modules = Arr::where(function($k,$v){
 				return class_exists($v);//is valid class
-			},\Core\Libraries::getNSExpression(Admin::CLASS_PATH.'*'));
+			},\Core\Libraries::getNSExpression(Constants::CLASS_PATH.'*'));
 				
 			//Create links to modules
 			$VARS['modules'] = Arr::map(array('*','createLink'), $modules);
