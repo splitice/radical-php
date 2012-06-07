@@ -60,7 +60,7 @@ class Thread {
 		}
 		return false;
 	}
-	function setName(){
+	function setName($name){
 		$this->name = $name;
 		if(function_exists('setproctitle')){
 			global $_SCRIPT_NAME;
