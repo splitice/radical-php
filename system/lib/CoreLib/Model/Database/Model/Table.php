@@ -206,8 +206,6 @@ abstract class Table implements ITable, \JsonSerializable {
 	}
 	
 	function Update(){
-		//die(var_dump($this->toSQL()));
-		
 		\DB::Update($this->orm->tableInfo['name'], $this->toSQL(), $this->getIdentifyingSQL());
 	}
 	
@@ -274,9 +272,13 @@ abstract class Table implements ITable, \JsonSerializable {
 				$relationship = TableReference::getByTableClass($className);
 				if(isset($relationship)){//Is a relationship
 					$class = $relationship->getClass();
-					return $class::getAll($this->getIdentifyingSQL());
+					try{
+						return $class::getAll($this->getIdentifyingSQL());
+					}catch(\Exception $ex){
+						throw new \Exception('Not related or invalid id select',0,$ex);
+					}
 				}else{
-					throw new \Exception('Cant get an array of something that isnt a relationship');
+					throw new \Exception('Cant get an array of something that isnt a model');
 				}
 			}
 		}elseif(0 === substr_compare($m,'set',0,3)){
