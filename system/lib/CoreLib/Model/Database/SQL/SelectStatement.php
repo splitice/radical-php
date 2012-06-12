@@ -108,8 +108,8 @@ class SelectStatement extends Internal\StatementBase {
 	function group_by($group){
 		return $this->group($group);
 	}
-	function order_by($order_by = null){
-		return $this->_R($this->from->order_by($order_by));
+	function order_by($order_by = null,$order){
+		return $this->_R($this->from->order_by($order_by,$order));
 	}
 	
 	function limit($start = null,$end = null){

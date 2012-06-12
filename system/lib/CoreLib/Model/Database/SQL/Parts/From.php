@@ -201,8 +201,11 @@ class From extends Internal\MergePartBase {
 	 * @throws \Exception
 	 * @return \Model\Database\SQL\Parts\OrderBy|\Database\SQL\Parts\From
 	 */
-	function order_by($order_by = null){
+	function order_by($order_by = null,$order = null){
 		if($order_by === null) return $this->order_by;
+		if($order !== null && is_string($order_by)){
+			$order_by = array(array($order_by,$order));
+		}
 		$this->order_by = new OrderBy($order_by);
 		
 		return $this;

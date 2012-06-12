@@ -10,7 +10,7 @@ class OrderBy extends Internal\ArrayPartBase {
 				$this->data[] = $order_by;
 			}elseif($order_by instanceof OrderBy){
 				//Add(OrderByPart)
-				$this->order_by = $order_by;
+				$this->data = $order_by;
 			}elseif(is_array($order_by)){
 				if(Arr::is_assoc($order_by)){
 					foreach($order_by as $key=>$order){
@@ -21,7 +21,7 @@ class OrderBy extends Internal\ArrayPartBase {
 						if(is_array($o)){
 							//Add(array(array(expr1,order1 = ASC),array(expr1,order2 = ASC)))
 							if(count($o) == 2){
-								$this->_Add($o[0], $o[1]);
+								$this->_Set($o[0], $o[1]);
 							}else{
 								throw new \Exception('Unknown array format');
 							}
@@ -31,17 +31,12 @@ class OrderBy extends Internal\ArrayPartBase {
 						}
 					}
 				}
-				if(count($order_by[0]) == 2){
-					$this->order_by = new OrderBy($order_by[0],$order_by[1]);
-				}else{
-					throw new \Exception('Invalid Order By call array');
-				}
 			}else{
 				throw new \Exception('Invalid order by call');
 			}
 		}else{
 			//Add(expr,order)
-			$this->order_by[] = new OrderByPart($k,$v);
+			$this->data[] = new OrderByPart($k,$order_by);
 		}
 	}
 	function toSQL(){
