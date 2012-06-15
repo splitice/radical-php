@@ -1,6 +1,10 @@
 <?php
 namespace Utility\Net\Mail;
 
+use Web\Page\Handler\SubRequest;
+
+use Web\Page\Handler\PageBase;
+
 use Utility\Net\Mail\Handler;
 
 class Message {
@@ -76,8 +80,17 @@ class Message {
 	public function setSubject($subject) {
 		$this->subject = $subject;
 	}
+	
+	static function body($body){
+		if($body instanceof PageBase){
+			$sr = new SubRequest($body);
+			$body = $sr->Execute('GET');
+		}
+		return $body;
+	}
 
 	function Send($body){
+		$body = self::body($body);
 		return $this->handler->Send($this,$body);
 	}
 }

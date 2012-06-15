@@ -66,7 +66,7 @@ class Mappings {
 			if($relation = $this->isReference($databaseField)){				
 				$rTableRef = $relation->getTableReference();
 				if(!$rTableRef){
-					die(var_dump($relation));
+					throw new \Exception('No table for reference');
 				}
 				$rInfo = $rTableRef->Info();
 				

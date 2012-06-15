@@ -5,14 +5,10 @@ namespace Utility\Net\External;
  * PHP Paypal IPN Integration Class
  *******************************************************************************
  * Origional Author:     Micah Carrick
- * Email:      email@micahcarrick.com
- * Website:    http://www.micahcarrick.com
+ * Modifications by:	 SplitIce
  *
  *******************************************************************************
  * DESCRIPTION:
- *
- * NOTE: See www.micahcarrick.com for the most recent version of this class
- * along with any applicable sample files and other documentaion.
  *
  * This file provides a neat and simple method to interface with paypal and
  * The paypal Instant Payment Notification (IPN) interface.  This file is

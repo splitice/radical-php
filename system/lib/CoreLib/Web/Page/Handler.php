@@ -23,16 +23,24 @@ class Handler extends \Core\Object {
 		return call_user_func_array(array(static::$stack,$method),$arguments);
 	}
 	
+	static function top(){
+		return self::current();
+	}
+	
 	/**
 	 * @param bool $notExistsCreate
 	 * @return \Web\Page\Handler\NullPageRequest
 	 */
 	static function current($notExistsCreate = false){
-		$ret = static::$stack->top();
-		if($notExistsCreate && !$ret){
-			$ret = new NullPageRequest();
+		static::Init();
+		if(static::$stack->count() == 0){
+			if($notExistsCreate){
+				return new NullPageRequest();
+			}
+			return null;
+		}else{
+			return static::$stack->top();
 		}
-		return $ret;
 	}
 	
 	static function Objectify($object,$data = null){

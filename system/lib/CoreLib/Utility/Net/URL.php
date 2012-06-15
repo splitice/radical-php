@@ -5,6 +5,7 @@ use Basic\String\UTF8;
 class URL extends \Core\Object {
 	private $scheme;
 	private $host;
+	private $port = 80;
 	/**
 	 * @var URL\Path
 	 */
@@ -20,6 +21,11 @@ class URL extends \Core\Object {
 	function __construct($data) {
 		$this->scheme = $data ['scheme'];
 		$this->host = $data ['host'];
+		if(isset($data ['port']))
+			$this->port = (int)$data ['port'];
+		
+		if($this->port == 0)
+			$this->port = 80;
 		
 		$path = isset($data ['path'])?$data ['path']:'/';
 		$query = isset($data ['query'])?$data ['query']:null;
@@ -62,7 +68,11 @@ class URL extends \Core\Object {
 	}
 	
 	function toURL() {
-		$url = $this->scheme . '://' . $this->host . '/' . ltrim($this->path->__toString(),'/');
+		$url = $this->scheme . '://' . $this->host;
+		if($this->port != 80){
+			$url .= ':'.$this->port;
+		}
+		$url .='/' . ltrim($this->path->__toString(),'/');
 		return rtrim($url,'/');
 	}
 	
