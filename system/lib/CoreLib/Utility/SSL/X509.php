@@ -9,8 +9,23 @@ class X509 {
 		return openssl_x509_check_private_key($cert,$key);
 	}
 	
-	static function Generate(SigningDetails $dn, $privkeypass = null, $numberofdays = 365){
-		$privkey = openssl_pkey_new();
+	static function generatePrivateKey(){
+		return openssl_pkey_new();
+	}
+	
+	static function Generate(SigningDetails $dn, $privateKey = null, $privkeypass = null, $numberofdays = 365){
+		if($privateKey === null){
+			$privkey = self::generatePrivateKey();
+		}elseif(is_string($privateKey)){
+			$privkey = openssl_pkey_get_private($privateKey);
+		}else{
+			throw new \Exception('Invalid format for private key');
+		}
+		
+		if(!$privkey){
+			throw new \Exception('Invalid private key');
+		}
+		
 		$csr = openssl_csr_new($dn->toArray(), $privkey);
 		$sscert = openssl_csr_sign($csr, null, $privkey, $numberofdays);
 		openssl_x509_export($sscert, $publickey);

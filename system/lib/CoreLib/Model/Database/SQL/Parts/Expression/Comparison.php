@@ -18,6 +18,10 @@ class Comparison extends Internal\PartBase implements IComparison {
 		$this->operation = $operation;
 	}
 	function toSQL(){
-		return $this->a.' '.$this->operation.' '.\DB::E($this->b);
+		$a = $this->a;
+		if(strpos($a, '(') === false){
+			$a = '`'.$a.'`';
+		}
+		return $a.' '.$this->operation.' '.\DB::E($this->b);
 	}
 }

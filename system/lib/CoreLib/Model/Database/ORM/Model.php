@@ -26,12 +26,23 @@ class Model extends ModelData {
 		$structure = CreateTable::fromTable($table);
 		$this->engine = $structure->engine;
 		
+		foreach($structure as $col){
+			if($col->hasAttribute('AUTO_INCREMENT')){
+				$this->autoIncrementField = $col->getName();
+				break;
+			}
+		}
+		
 		if(isset($structure->indexes['PRIMARY'])){
 			$this->id = $structure->indexes['PRIMARY']->getKeys();
 		}
 		
 		//Build mapping translation array=
 		$this->mappings = $this->getMappings($structure)->translationArray();
+		
+		if($this->autoIncrementField){
+			$this->autoIncrement = $this->mappings[$this->autoIncrementField];
+		}
 		
 		//build relation array
 		if($this->engine == 'innodb'){

@@ -34,4 +34,7 @@ class String implements IDynamicType {
 		
 		return new static($value,$extra);
 	}
+	static function fromUserModel($value,array $extra,ITable $model){
+		return static::fromDatabaseModel($value, $extra, $model);
+	}
 }

@@ -1,7 +1,27 @@
 <?php
 namespace Model\Database\DynamicTypes;
 
+use Model\Database\Model\ITable;
+
 class Boolean extends String {
+	/**
+	 * @param string $value
+	 */
+	public function setValue($value) {
+		if(is_bool($value)){
+			if($value){
+				$value = $this->getTrueValue();
+			}else{
+				$value = $this->getFalseValue();
+			}
+			parent::setValue($value);
+		}elseif(in_array($value, $this->extra)){
+			parent::setValue($value);
+		}else{
+			throw new \Exception('Invalid value');
+		}
+	}
+	
 	function getTrueValue(){
 		return $this->extra[0];
 	}
@@ -13,5 +33,22 @@ class Boolean extends String {
 	}
 	function false(){
 		return ($this->value == $this->getFalseValue());
+	}
+	function isTrue(){
+		return $this->true();
+	}
+	function isFalse(){
+		return $this->false();
+	}
+	
+	static function fromUserModel($value,array $extra,ITable $model){
+		if(is_bool($value)){
+			if($value){
+				$value = $extra[0];
+			}else{
+				$value = $extra[1];
+			}
+		}
+		return static::fromDatabaseModel($value, $extra, $model);
 	}
 }

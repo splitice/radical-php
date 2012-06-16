@@ -13,6 +13,8 @@ class ModelData {
 	public $validation;
 	public $engine;
 	public $dynamicTyping;
+	public $autoIncrementField;
+	public $autoIncrement;
 	
 	function __construct(){
 		$this->reverseMappings = array_flip($this->mappings);

@@ -26,4 +26,7 @@ class DateTime extends \Basic\DateTime\DateTime implements IDynamicType {
 		}
 		return parent::fromSQL($value);
 	}
+	static function fromUserModel($value,array $extra,ITable $model){
+		return static::fromDatabaseModel($value, $extra, $model);
+	}
 }

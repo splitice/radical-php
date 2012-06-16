@@ -1,6 +1,7 @@
 <?php
 namespace Model\Database\Model;
 
+use Model\Database\DynamicTypes\INullable;
 use Exceptions\ValidationException;
 use Model\Database\DynamicTypes\IDynamicType;
 use Model\Database\IToSQL;
@@ -180,14 +181,16 @@ abstract class Table implements ITable, \JsonSerializable {
 	function toSQL($in = null){
 		$ret = array();
 		foreach($this->orm->mappings as $k=>$mapped){
-			$v = $this->$mapped;
-			if(is_object($v) && isset($this->orm->relations[$k])){
-				$v = $v->getSQLField($k);
+			if(isset($this->$mapped)){
+				$v = $this->$mapped;
+				if(is_object($v) && isset($this->orm->relations[$k])){
+					$v = $v->getSQLField($k);
+				}
+				if(is_object($v) && $v instanceof IDynamicType){
+					$v = (string)$v;
+				}
+				$ret[$k] = $v;
 			}
-			if(is_object($v) && $v instanceof IDynamicType){
-				$v = (string)$v;
-			}
-			$ret[$k] = $v;
 		}
 		return $ret;
 	}
@@ -288,7 +291,25 @@ abstract class Table implements ITable, \JsonSerializable {
 				if(!isset($a[0])){
 					throw new \BadMethodCallException('set{X}(value) called without argument');
 				}
-				$this->$actionPart = $a[0];
+				//die(var_dump($this->orm->dynamicTyping));
+				if(isset($this->orm->dynamicTyping[$actionPart])){
+					if(is_object($this->$actionPart) && $this->$actionPart instanceof IDynamicType){
+						if($a[0] !== null || $this->$actionPart instanceof INullable){
+							$this->$actionPart->setValue($a[0]);
+						}else{
+							$this->$actionPart = $a[0];
+						}
+					}elseif($a[0] instanceof IDynamicType){
+						$this->$actionPart = $a[0];
+					}elseif($a[0] !== null || oneof($this->orm->dynamicTyping[$actionPart]['var'], 'Model\Database\DynamicTypes\INullable')){
+						$var = $this->orm->dynamicTyping[$actionPart]['var'];
+						$this->$actionPart = $var::fromUserModel($a[0],$this->orm->dynamicTyping[$actionPart]['extra'],$this);
+					}else{
+						$this->$actionPart = null;
+					}
+				}else{
+					$this->$actionPart = $a[0];
+				}
 				return $this;
 			}
 		}
@@ -407,7 +428,21 @@ abstract class Table implements ITable, \JsonSerializable {
 				unset($data[$k]);
 			}
 		}
-		\DB::Insert($this->orm->tableInfo['name'],$data,$ignore);
+		$id = \DB::Insert($this->orm->tableInfo['name'],$data,$ignore);
+		
+		//Is an auto incrememnt returned?
+		if($id){
+			$autoInc = $this->orm->autoIncrement;
+			
+			//Is auto increment column
+			if($autoInc){
+				//Set auto increment column
+				$this->$autoInc = $id;
+				
+				//Set store
+				$this->_store[$this->orm->autoIncrementField] = $id;
+			}
+		}
 	}
 	static function Exists(){
 		return \DB::tableExists($this->orm->tableInfo['name']);

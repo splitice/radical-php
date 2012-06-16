@@ -123,7 +123,11 @@ class Instance extends Connection {
 		$insert = new SQL\InsertStatement($tbl, $data, $ignore);
 		//die(var_dump($insert->toSQL()));
 		//Execute
-		return ( bool ) $this->Query ( $insert );
+		$success = ( bool ) $this->Query ( $insert );
+		
+		//if(!$success) return false;
+		//echo var_dump($this->InsertId());
+		return $this->InsertId();
 	}
 	
 	/**
@@ -197,7 +201,8 @@ class Instance extends Connection {
 	 * Return the AUTO_INCREMENT value of the last MySQL insert
 	 */
 	function InsertId() {
-		return mysqli_insert_id ( $this->Connect() );
+		$mysqli = $this->Connect();
+		return $mysqli->insert_id;
 	}
 	
 	function Fetch(DBAL\Result $res, $format = DBAL\Fetch::ASSOC, $cast=null){
