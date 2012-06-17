@@ -186,6 +186,8 @@ class Instance extends Connection {
 				return $str->toEscaped();
 			}elseif($str instanceof IToSQL){
 				return $str->toSQL();
+			}elseif(method_exists($str, '__toString')){
+				$str = (string)$str;
 			}else{
 				throw new \BadMethodCallException('cant escape this object, non escapable');
 			}
