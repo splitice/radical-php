@@ -1,6 +1,7 @@
 <?php
 namespace Core;
 
+//TODO: Finish, still incomplete.
 class MagicNamespace {
 	protected $class;
 	protected $library;

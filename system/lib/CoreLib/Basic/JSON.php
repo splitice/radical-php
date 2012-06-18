@@ -17,14 +17,6 @@ namespace Basic;
 *
 * @package Flourish
 * @link http://flourishlib.com/fJSON
-*
-* @version 1.0.0b6
-* @changes 1.0.0b6 Removed `e` flag from preg_replace() calls [wb, 2010-06-08]
-* @changes 1.0.0b5 Added the ::output() method [wb, 2010-03-15]
-* @changes 1.0.0b4 Fixed a bug with ::decode() where JSON objects could lose all but the first key: value pair [wb, 2009-05-06]
-* @changes 1.0.0b3 Updated the class to be consistent with PHP 5.2.9+ for encoding and decoding invalid data [wb, 2009-05-04]
-* @changes 1.0.0b2 Changed @ error suppression operator to `error_reporting()` calls [wb, 2009-01-26]
-* @changes 1.0.0b The initial implementation [wb, 2008-07-12]
 */
 class JSON extends \Core\Object {
 	// The following constants allow for nice looking callbacks to static

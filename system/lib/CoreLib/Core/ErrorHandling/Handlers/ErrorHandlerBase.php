@@ -6,7 +6,9 @@ use Core\ErrorHandling\Errors\Internal\ErrorException;
 use Core\ErrorHandling\Handler;
 
 abstract class ErrorHandlerBase extends Handler {
-	
+	/**
+	 * Calls the init functions for all the error modules
+	 */
 	function __construct(){
 		//Itterate
 		foreach(\Core\Libraries::getNSExpression('\\Core\\ErrorHandling\\Errors\\*') as $class){

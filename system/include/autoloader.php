@@ -4,8 +4,6 @@ class AutoLoader {
 	const BOOTSTRAP_FILE = 'bootstrap.php';
 	static $projectDirs = array('app','system');
 	
-	static $baseDir;
-	
 	function __construct(){
 		static::InitPathCache();
 		spl_autoload_register(array($this,'__autoload'));

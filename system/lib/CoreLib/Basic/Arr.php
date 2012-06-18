@@ -4,8 +4,6 @@ namespace Basic;
 /**
  * Array helper.
  *
- * @package    Kohana
- * @category   Helpers
  * @author     Kohana Team
  * @copyright  (c) 2007-2011 Kohana Team
  * @license    http://kohanaframework.org/license
@@ -620,7 +618,6 @@ class Arr {
 	 *
 	 * @param   array   array to flatten
 	 * @return  array
-	 * @since   3.0.6
 	 */
 	public static function flatten($array)
 	{
@@ -639,12 +636,20 @@ class Arr {
 		return $flat;
 	}
 	
+	/**
+	 * Return all values from an array where the callback function
+	 * returns true. The function callback is called with the key 
+	 * as the first parameter and the value as the second.
+	 * 
+	 * @param callback $callback
+	 * @param array $array
+	 * @return array
+	 */
 	function where($callback,$array){
-		$ret = array();
 		foreach($array as $k=>$v){
-			if($callback($k,$v)) $ret[$k] = $v;
+			if(!$callback($k,$v)) unset($array[$k]);
 		}
-		return $ret;
+		return $array;
 	}
 
 } // End arr
