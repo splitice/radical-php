@@ -46,7 +46,6 @@ class PHPError extends Internal\ErrorBase {
 		set_error_handler ( array (get_called_class(), 'Handler' ) );
 	}
 	static function Handler($errno, $msg_text, $errfile, $errline) {
-		//die(var_dump($errno,$msg_text,$errfile,$errline));	
 		if (! (error_reporting () & $errno)) {
 			return true;
 		}
