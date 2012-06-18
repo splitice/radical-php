@@ -13,11 +13,21 @@ class Error extends HTMLPageBase {
 	function __construct(ErrorException $error){
 		$this->error = $error;
 	}
-	
-	
+
+	/**
+	 * Handle GET request
+	 *
+	 * @throws \Exception
+	 */
 	function GET(){
 		return new Template('error',array('error'=>$this->error),'framework');
 	}
+	
+	/**
+	 * Handle POST request
+	 *
+	 * @throws \Exception
+	 */
 	function POST(){
 		return $this->GET();
 	}

@@ -11,7 +11,7 @@ abstract class ErrorHandlerBase extends Handler {
 	 */
 	function __construct(){
 		//Itterate
-		foreach(\Core\Libraries::getNSExpression('\\Core\\ErrorHandling\\Errors\\*') as $class){
+		foreach(\Core\Libraries::get('\\Core\\ErrorHandling\\Errors\\*') as $class){
 			$class::Init();
 		}
 		

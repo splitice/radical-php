@@ -14,7 +14,7 @@ class Handler extends PageBase {
 	}
 	function GET(){
 		$template = new Template($this->template,array(),'webgrind');
-		$template->addVarMember('filename', $this->filename);
+		$template->vars['filename'] = $this->filename;
 		return $template;
 	}
 	function POST(){

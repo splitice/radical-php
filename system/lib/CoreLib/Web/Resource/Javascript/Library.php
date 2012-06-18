@@ -18,7 +18,7 @@ class Library extends Tag\Script {
 	
 	static function Find($library,$version = null){
 		$library = strtolower($library);
-		$libs = Libraries::getNSExpression('HTML\\Javascript\\Libraries\\*');
+		$libs = Libraries::get('HTML\\Javascript\\Libraries\\*');
 		foreach($libs as $l){
 			$ll = strtolower(array_pop(explode('\\',$l)));
 			if($ll == $library){

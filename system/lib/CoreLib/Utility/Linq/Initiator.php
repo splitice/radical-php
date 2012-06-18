@@ -75,7 +75,7 @@ class Initiator {
 	public function in($source) {
 		//Load Providers
 		if(!self::$_registeredProviders){
-			self::$_registeredProviders = Libraries::getNSExpression('\\PHPLinq\\Provider\\*');
+			self::$_registeredProviders = Libraries::get('\\PHPLinq\\Provider\\*');
 		}
 		
 		// Search correct provider

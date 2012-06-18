@@ -25,7 +25,12 @@ class Profile extends HTMLPageBase {
 		}
 		return ($a > $b) ? -1 : 1;
 	}
-	
+
+	/**
+	 * Handle GET request
+	 *
+	 * @throws \Exception
+	 */
 	function GET(){
 		// Make sure we have a timezone for date functions.
 		if (ini_get('date.timezone') == '')

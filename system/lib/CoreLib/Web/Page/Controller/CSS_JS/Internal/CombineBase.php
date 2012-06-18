@@ -45,6 +45,11 @@ abstract class CombineBase extends IndividualBase {
 	function Optimize($code){
 		return $code;
 	}
+	/**
+	 * Handle GET request
+	 *
+	 * @throws \Exception
+	 */
 	function GET(){
 		$key = static::EXTENSION.'_'.$this->name.'_'.$this->version;
 		

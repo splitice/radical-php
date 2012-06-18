@@ -71,10 +71,16 @@ class Database extends AdminModuleBase {
 		$prefix = \Core\Libraries::getProjectSpace('DB\\');
 		return substr($name,strlen($prefix));
 	}
+	
+	/**
+	 * Handle GET request
+	 *
+	 * @throws \Exception
+	 */
 	function GET(){
 		if($this->action == 'list'){
 			$classes = array();
-			foreach(\Core\Libraries::getNSExpression(\Core\Libraries::getProjectSpace('DB\\*')) as $k=>$v){
+			foreach(\Core\Libraries::get(\Core\Libraries::getProjectSpace('DB\\*')) as $k=>$v){
 				$name = self::extractName($v);
 				$classes[$name] = self::toURL().'/'.$name;
 			}

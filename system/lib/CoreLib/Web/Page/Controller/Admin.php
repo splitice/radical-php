@@ -42,8 +42,13 @@ class Admin extends HTMLPageBase {
 		//This user isnt an admin cant go any further
 		throw new \Exception('Not an admin');
 	}
-			
-	function GET(){
+
+	/**
+	 * Handle GET request
+	 *
+	 * @throws \Exception
+	 */
+	 function GET(){
 		$page = $this->checkAdmin();
 		if($page) return $page;
 		
@@ -64,6 +69,12 @@ class Admin extends HTMLPageBase {
 			return new $class($this->url);
 		}
 	}
+	
+	/**
+	 * Handle POST request
+	 *
+	 * @throws \Exception
+	 */
 	function POST(){
 		return $this->GET();
 	}

@@ -33,6 +33,11 @@ abstract class IndividualBase extends \Web\Page\Handler\PageBase {
 		$expr = $BASEPATH.'*'.DS.$this->getPath();
 		return array_pop(glob($expr));
 	}
+	/**
+	 * Handle GET request
+	 *
+	 * @throws \Exception
+	 */
 	function GET(){
 		$file = $this->getFile();
 		$this->sendHeaders($file);

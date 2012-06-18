@@ -92,7 +92,7 @@ class Mysql extends DynamicTableInstance {
 		$obj->Insert();
 	}
 	static function TTL(){
-		foreach(\Core\Libraries::getNSExpression('\\Utility\Net\External\\ContentAPI\\Modules\\*') as $module){
+		foreach(\Core\Libraries::get('\\Utility\Net\External\\ContentAPI\\Modules\\*') as $module){
 			$table = static::getTable($module);
 			if($table->Exists()){
 				foreach($table->getAll(' WHERE ca_ttl<='.time()) as $k){

@@ -12,7 +12,7 @@ class Recognise extends \Core\Object {
 	}
 	
 	static function fromURL(URL $url){
-		$recognisers = \Core\Libraries::getNSExpression('Web\\Page\\Router\\Recognisers\\*');
+		$recognisers = \Core\Libraries::get('Web\\Page\\Router\\Recognisers\\*');
 		foreach($recognisers as $class){
 			if(\oneof($class,'Web\\Page\\Router\\IPageRecognise')){
 				$r = $class::Recognise(clone $url);

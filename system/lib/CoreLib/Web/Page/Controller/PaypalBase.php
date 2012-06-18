@@ -23,6 +23,12 @@ abstract class PaypalBase extends HTMLPageBase {
 		if (!empty ( $data ['action'] ))
 			$this->action = $data['action'];
 	}
+	
+	/**
+	 * Handle GET request
+	 *
+	 * @throws \Exception
+	 */
 	function GET(){
 		$p = new \Utility\Net\External\Paypal (); // initiate an instance of the class
 
@@ -54,6 +60,12 @@ abstract class PaypalBase extends HTMLPageBase {
 				return $this->onIPL($p);
 		}
 	}
+
+	/**
+	 * Handle POST request
+	 *
+	 * @throws \Exception
+	 */
 	function POST(){
 		return $this->GET();
 	}

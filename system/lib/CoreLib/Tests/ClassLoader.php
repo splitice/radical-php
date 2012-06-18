@@ -29,7 +29,7 @@ class ClassLoader extends Unit implements IUnitTest {
 	
 	function testGetNSExpression(){
 		$expr = '*';
-		$classes = \Core\Libraries::getNSExpression($expr);
+		$classes = \Core\Libraries::get($expr);
 	
 		$this->assertTrue(is_array($classes),'Classloader is an array');
 		$this->assertTrue(in_array('ClassLoader',$classes),'Classloader is in array, expr matches');

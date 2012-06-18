@@ -26,6 +26,12 @@ class API extends PageBase {
 		array_walk_recursive($array, array ($this, '_addChild'), $xml);
 		return $xml->asXML();
 	}
+	
+	/**
+	 * Handle GET request
+	 *
+	 * @throws \Exception
+	 */
 	function GET(){
 		$ret = array();
 		
