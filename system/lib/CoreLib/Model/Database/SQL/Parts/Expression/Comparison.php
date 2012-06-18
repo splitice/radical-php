@@ -11,15 +11,11 @@ class Comparison extends Internal\PartBase implements IComparison {
 	function __construct($a,$b,$operation = '='){
 		$this->a = $a;
 		$this->b = $b;
-		if(is_array($b)){
-			debug_print_backtrace();
-			exit;
-		}
 		$this->operation = $operation;
 	}
 	function toSQL(){
 		$a = $this->a;
-		if(strpos($a, '(') === false){
+		if(is_string($a) && strpos($a, '(') === false && strpos($a, '`') === false){
 			$a = '`'.$a.'`';
 		}
 		return $a.' '.$this->operation.' '.\DB::E($this->b);
