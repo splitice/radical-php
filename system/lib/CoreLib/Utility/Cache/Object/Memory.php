@@ -15,7 +15,7 @@ class Memory extends Internal\CacheBase implements ICache {
 	function Get($key) {
 		$key = $this->key($key);
 		if (function_exists ( 'apc_fetch' )) {
-			if(apc_exists($key)){
+			if(function_exists ( 'apc_exists' ) && apc_exists($key)){
 				return apc_fetch ( $key );
 			}
 		}

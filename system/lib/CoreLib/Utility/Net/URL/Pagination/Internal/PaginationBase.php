@@ -1,13 +1,15 @@
 <?php
 namespace Utility\Net\URL\Pagination\Internal;
 
+use Utility\Net\URL\Pagination\IPaginator;
+
 use Model\Database\SQL\SelectStatement;
 
 use Model\Database\IToSQL;
 
 use Utility\Net\URL\Pagination\Template\IPaginationTemplate;
 
-abstract class PaginationBase extends \Core\Object {
+abstract class PaginationBase extends \Core\Object implements IPaginator {
 	protected $url;
 	public $nofollow;
 	protected $current;
@@ -29,7 +31,6 @@ abstract class PaginationBase extends \Core\Object {
 		return $this->current;
 	}
 
-	abstract function toURL($i);
 	private function _noFollow($i){
 		if($this->nofollow){
 			if($this->nofollow()){
