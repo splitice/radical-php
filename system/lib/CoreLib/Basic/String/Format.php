@@ -83,6 +83,15 @@ class Format extends \Core\Object {
 			return false;
 		}
 		
+		if(preg_match ( '/%(?:[a-z])([^%]+)$/', $format, $m)){
+			$e = array_pop($in);
+			$l = -1*strlen($m[1]);
+			if(substr($e, $l) != $m[1])
+				return false;
+			$e = substr($e,0,$l);
+			array_push($in, $e);
+		}
+		
 		$ret = array();
 		foreach($in as $num=>$value){
 			if($value === NULL) return false;
