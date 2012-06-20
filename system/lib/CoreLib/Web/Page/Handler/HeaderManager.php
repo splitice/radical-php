@@ -2,7 +2,7 @@
 namespace Web\Page\Handler;
 
 class HeaderManager {
-	private $headers = array('Cache-Control'=>'no-cache');
+	public $headers = array('Cache-Control'=>'no-cache');
 	private $status_code = 200;
 	
 	const DEFAULT_EXPIRE = 1200;//20minutes
