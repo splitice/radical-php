@@ -28,8 +28,10 @@ class Connection {
 	}
 	
 	function Close(){
-		$this->exec('exit');
-		$this->ssh = null;
+		if($this->ssh !== null){
+			$this->exec('exit');
+			$this->ssh = null;
+		}
 	}
 	function __destruct(){
 		try {
