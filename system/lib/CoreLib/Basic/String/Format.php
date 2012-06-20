@@ -83,7 +83,8 @@ class Format extends \Core\Object {
 			return false;
 		}
 		
-		if(preg_match ( '/%(?:[a-z])([^%]+)$/', $format, $m)){
+		//has stuff at the end
+		if(preg_match ( '/%s([^%]+)$/', $format, $m)){
 			$e = array_pop($in);
 			$l = -1*strlen($m[1]);
 			if(substr($e, $l) != $m[1])
