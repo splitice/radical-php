@@ -1,30 +1,30 @@
 <?php
 namespace Web\Page\Handler;
 
-class HeaderManager {
-	public $headers = array('Cache-Control'=>'no-cache');
+use Basic\Arr\Object\CollectionObject;
+
+class HeaderManager extends CollectionObject {
 	private $status_code = 200;
 	
 	const DEFAULT_EXPIRE = 1200;//20minutes
 	
 	function __construct($headers=null){
 		if($headers!==null){
-			$this->headers = $headers;
+			parent::__construct($headers);
+		}else{
+			parent::__construct(array('Cache-Control'=>'no-cache'));
 		}
 		$this->setExpires(time()+self::DEFAULT_EXPIRE);
 		
 	}
 	function Clear(){
-		$this->headers = array();
-	}
-	function Add($k,$v){
-		$this->headers[$k] = $v;	
+		$this->data = array();
 	}
 	function Status($code){
 		$this->status_code = $code;
 	}
 	function getHeaders(){
-		return $this->headers;
+		return $this->data;
 	}
 	function setCache($time){
 		if(is_numeric($time)){
@@ -49,11 +49,11 @@ class HeaderManager {
 		$this->Add('Content-Type',$mime);
 	}
 	function Output(){
-		if(!$this->headers){
+		if(!$this->data){
 			header($this->status_code.' A', true, $this->status_code);
 		}
 		
-		foreach($this->headers as $k=>$v){
+		foreach($this->data as $k=>$v){
 			header($k.': '.$v,true,$this->status_code);
 		}
 	}
