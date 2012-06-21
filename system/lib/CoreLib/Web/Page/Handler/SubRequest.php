@@ -1,11 +1,14 @@
 <?php
 namespace Web\Page\Handler;
+
+use Web\Page\Cache\NullCacheManager;
 use Web\Page\Handler as PH;
 
 class SubRequest extends PageRequestBase {
 	function __construct(IPage $page){
 		parent::__construct($page);
 		$this->headers = new NullHeaderManager();
+		$this->cache = new NullCacheManager();
 	}
 	function Execute($method = 'GET'){
 		ob_start();

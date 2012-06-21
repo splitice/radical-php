@@ -4,7 +4,7 @@ namespace Web\Page\Handler;
 use Basic\Arr\Object\CollectionObject;
 
 class HeaderManager extends CollectionObject {
-	private $status_code = 200;
+	public $status = 200;
 	
 	const DEFAULT_EXPIRE = 1200;//20minutes
 	
@@ -18,7 +18,7 @@ class HeaderManager extends CollectionObject {
 		
 	}
 	function Status($code){
-		$this->status_code = $code;
+		$this->status = $code;
 	}
 	function getHeaders(){
 		return $this->data;
@@ -47,11 +47,11 @@ class HeaderManager extends CollectionObject {
 	}
 	function Output(){
 		if(!$this->data){
-			header($this->status_code.' A', true, $this->status_code);
+			header($this->status.' A', true, $this->status);
 		}
 		
 		foreach($this->data as $k=>$v){
-			header($k.': '.$v,true,$this->status_code);
+			header($k.': '.$v,true,$this->status);
 		}
 	}
 }

@@ -1,9 +1,9 @@
 <?php
 namespace Web\Page\Handler;
+
+use Web\Page\Cache\DefaultCacheManager;
 use Web\Page\Handler\Exceptions\PageHandlerException;
-
 use Utility\Net\External\ContentAPI\Recognise;
-
 use Web\Page\Handler as PH;
 
 abstract class PageRequestBase {
@@ -16,10 +16,12 @@ abstract class PageRequestBase {
 	public $headers;
 	
 	protected $page;
+	protected $cache;
 	
 	function __construct(IPage $page = null){
 		$this->page = $page;
 		$this->headers = new HeaderManager();
+		$this->cache = new DefaultCacheManager();
 	}
 	
 	
@@ -58,6 +60,9 @@ abstract class PageRequestBase {
 			$this->headers->Clear();
 			throw new PageHandlerException('Invalid or unknown method '.$method);
 		}
+		
+		//Pass to the cache handler
+		$this->cache->postExecute($this->headers);
 	}
 	
 	static function fromURL(\Utility\Net\URL $url){
