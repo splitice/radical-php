@@ -17,9 +17,6 @@ class HeaderManager extends CollectionObject {
 		$this->setExpires(time()+self::DEFAULT_EXPIRE);
 		
 	}
-	function Clear(){
-		$this->data = array();
-	}
 	function Status($code){
 		$this->status_code = $code;
 	}

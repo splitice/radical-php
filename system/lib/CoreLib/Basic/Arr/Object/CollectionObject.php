@@ -4,7 +4,7 @@ namespace Basic\Arr\Object;
 use Basic\Arr;
 
 /**
- * The basis for all objects that are also arrays.
+ * The basis for all objects that are also collections.
  * 
  * @author SplitIce
  *
@@ -167,6 +167,13 @@ class CollectionObject extends \Core\Object implements \IteratorAggregate, \Arra
      */
     function Where($callback,$strict = false){
     	return Arr::where($callback, $this, $strict);
+    }
+    
+    /**
+     * Empty the array
+     */
+    function Clear(){
+    	$this->data = array();
     }
     
     /* TODO: Find better names */
