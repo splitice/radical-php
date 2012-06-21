@@ -1,7 +1,7 @@
 <?php
 namespace Basic\Structs;
 
-class ApiKey extends LoginDetails {
+class ApiKey implements ILoginDetails {
 	protected $key;
 	
 	function __construct($key){
@@ -11,7 +11,7 @@ class ApiKey extends LoginDetails {
 	/**
 	 * @return the $key
 	 */
-	public function getKey() {
-		return $this->key;
+	public function getDetails() {
+		return array($this->key);
 	}
 }

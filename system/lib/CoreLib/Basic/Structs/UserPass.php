@@ -1,7 +1,7 @@
 <?php
 namespace Basic\Structs;
 
-class UserPass extends LoginDeatils {
+class UserPass implements ILoginDeatils {
 	protected $username;
 	protected $password;
 	
@@ -11,16 +11,9 @@ class UserPass extends LoginDeatils {
 	}
 	
 	/**
-	 * @return the $username
+	 * @return the $username and $password
 	 */
-	public function getUsername() {
-		return $this->username;
-	}
-	
-	/**
-	 * @return the $password
-	 */
-	public function getPassword() {
-		return $this->password;
+	public function getDetails() {
+		return array($this->username, $this->password);
 	}
 }
