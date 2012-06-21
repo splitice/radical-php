@@ -1,6 +1,14 @@
 <?php
 namespace Web\Templates;
 
+/**
+ * Extra scope functions for templates based off
+ *  ContainerTemplate for including the body of
+ *  the container.
+ * 
+ * @author SplitIce
+ *
+ */
 class ContainerScope extends Scope {
 	protected $body;
 	protected $container;
@@ -10,9 +18,15 @@ class ContainerScope extends Scope {
 		$this->container = $container;
 		parent::__construct($vars,$handler);
 	}
+	/**
+	 * Include the body template
+	 */
 	function body(){
 		return $this->incl($this->body,$this->container);
 	}
+	/**
+	 * Get the name of the body
+	 */
 	function bodyName(){
 		return $this->body;
 	}
