@@ -124,7 +124,7 @@ class DynamicTableReference extends TableReferenceInstance {
 	
 	function ValidateFields(){
 		$table = CreateTable::fromTable($this->_tableName);
-		$data = $table->asArray();
+		$data = $table->toArray();
 	
 		foreach(array_merge($this->id,$this->field) as $name=>$type){
 			$k = $this->_tablePrefix.$name;

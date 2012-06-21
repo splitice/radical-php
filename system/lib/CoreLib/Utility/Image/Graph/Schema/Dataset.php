@@ -5,7 +5,7 @@ use Basic\Arr\Object\CollectionObject;
 
 class Dataset extends CollectionObject implements \JsonSerializable {
 	function jsonSerialize(){
-		$t = $this->asArray();
+		$t = $this->toArray();
 		if(isset($t['X'])) unset($t['X']);
 		return $t;
 	}

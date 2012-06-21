@@ -65,8 +65,8 @@ class MysqlFulltextTable extends MysqlFulltext {
 		$rows = $this->Search($text,$table);
 		foreach($rows as $row){
 			if(count($row) == 1){
-				$a = array_keys($row->asArray());
-				$b = array_values($row->asArray());
+				$a = array_keys($row->toArray());
+				$b = array_values($row->toArray());
 				$k = $a[0];
 				$i[] = $b[0];
 			}else{

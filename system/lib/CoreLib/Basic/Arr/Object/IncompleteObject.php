@@ -83,7 +83,7 @@ abstract class IncompleteObject implements \IteratorAggregate, \ArrayAccess, \Se
 		$this->Init();
 		unset($this->data[$k]);
 	}
-	function asArray(){
+	function toArray(){
 		$this->Init();
 		return $this->data;
 	}

@@ -25,11 +25,11 @@ class TableManagement extends \Core\Object {
 	}
 	function getRelations(){
 		$ct = $this->getCreateTable();
-		return $ct->relations->asArray();
+		return $ct->relations->toArray();
 	}
 	function getColumns(){
 		$ct = $this->getCreateTable();
-		return $ct->asArray();
+		return $ct->toArray();
 	}
 	/**
 	 * @return the $table

@@ -42,6 +42,6 @@ class ImageManager extends ArrayObject implements Interfaces\IExportable {
 		return $ret;
 	}
 	function toExport(){
-		return $this->asArray();
+		return $this->toArray();
 	}
 }

@@ -23,7 +23,7 @@ abstract class ImageGraph {
 			$pChart->setDateFormat($graph->axis['X']->dateFormat);
 		}
 		
-		$data = $graph->data->asArray();
+		$data = $graph->data->toArray();
 		if($graph->type == 'pie'){
 			$data = array(array_values($data),array_keys($data));
 		}

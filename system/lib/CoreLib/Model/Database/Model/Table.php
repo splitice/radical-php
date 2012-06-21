@@ -134,7 +134,7 @@ abstract class Table implements ITable, \JsonSerializable {
 	}
 	
 	protected function _handleResult($in){
-		if(is_object($in)) $in = $in->asArray();
+		if(is_object($in)) $in = $in->toArray();
 
 		foreach($this->orm->mappings as $k=>$v){
 			if(isset($in[$k])){

@@ -70,7 +70,7 @@ class CollectionObject implements \IteratorAggregate, \ArrayAccess, \Serializabl
 	function Remove($k){
 		unset($this->data[$k]);
 	}
-	function asArray(){
+	function toArray(){
 		return $this->data;
 	}
 	function isAssoc () {
