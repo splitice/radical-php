@@ -1,6 +1,12 @@
 <?php
 namespace Basic\Arr\Object;
 
+/**
+ * An array object that doesnt know what it contains until it is initialized.
+ * 
+ * @author SplitIce
+ *
+ */
 abstract class IncompleteObject implements \IteratorAggregate, \ArrayAccess, \Serializable, \Countable {
 	protected $data = null;
 	abstract function getData();

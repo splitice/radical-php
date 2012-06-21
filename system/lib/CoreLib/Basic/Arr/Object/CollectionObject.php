@@ -58,10 +58,13 @@ class CollectionObject extends \Core\Object implements \IteratorAggregate, \Arra
 		$this->data = $data;
 	}
 	
-	function _Set($k,$v){
-		$this->data[$k] = $v;
+	protected function _Set($k,$v){
+		if($k === null)
+			$this->data[] = $v;
+		else
+			$this->data[$k] = $v;
 	}
-	function _Add($k,$v){
+	protected function _Add($k,$v){
 		$ret = isset($this->data[$k]);
 		$this->_Set($k,$v);
 		return $ret;
