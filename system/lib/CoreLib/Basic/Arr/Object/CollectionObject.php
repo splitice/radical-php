@@ -9,7 +9,7 @@ use Basic\Arr;
  * @author SplitIce
  *
  */
-class CollectionObject implements \IteratorAggregate, \ArrayAccess, \Serializable, \Countable {
+class CollectionObject extends \Core\Object implements \IteratorAggregate, \ArrayAccess, \Serializable, \Countable {
 	/**
 	 * The array all the data is stored in
 	 * 
