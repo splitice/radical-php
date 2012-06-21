@@ -3,6 +3,12 @@ namespace Web;
 
 use Web\Templates\Scope;
 
+/**
+ * The main template class
+ * 
+ * @author SplitIce
+ *
+ */
 class Template extends Page\Handler\PageBase {
 	public $vars = array();
 	protected $file;

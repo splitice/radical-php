@@ -3,6 +3,15 @@ namespace Web\Templates\Adapter;
 
 use Web\Templates\Scope;
 
+/**
+ * The default adapter. Uses php files for templates.
+ * 
+ * $_ is a global in these files which provides access
+ * to variables and a set of helper functions.
+ * 
+ * @author SplitIce
+ *
+ */
 class PHPTemplate implements ITemplateAdapter {
 	private $file;
 	function __construct(\File $file){
