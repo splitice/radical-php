@@ -1,8 +1,21 @@
 <?php
 namespace Basic\Arr\Object;
 
+use Basic\Arr;
+
+/**
+ * The basis for all objects that are also arrays.
+ * 
+ * @author SplitIce
+ *
+ */
 class CollectionObject implements \IteratorAggregate, \ArrayAccess, \Serializable, \Countable {
-	protected $data = array();
+	/**
+	 * The array all the data is stored in
+	 * 
+	 * @var array
+	 */
+	protected $data = array();//TODO: Make private
 	
 	/* IteratorAggregate */
 	function getIterator() {
@@ -21,7 +34,7 @@ class CollectionObject implements \IteratorAggregate, \ArrayAccess, \Serializabl
 		return isset($this->data[$offset]);
 	}
 	public function offsetUnset($offset) {
-		unset($this->data[$offset]);
+		$this->Remove($offset);
 	}
 	public function offsetGet($offset) {
 		return $this->_Get($offset);
@@ -58,25 +71,89 @@ class CollectionObject implements \IteratorAggregate, \ArrayAccess, \Serializabl
 			return $this->data[$k];
 		}
 	}
+	
+	/**
+	 * Set a value in the array, if it doesnt exist create it.
+	 * 
+	 * @param mixed $k key
+	 * @param mixed $v value
+	 */
 	function Set($k,$v){
 		$this->_Set($k,$v);
 	}
+	
+	/**
+	 * Add a value to the array, if it exists overwrite.
+	 * 
+	 * @param unknown_type $k key
+	 * @param unknown_type $v value
+	 * @return boolean if it was overwritten
+	 */
 	function Add($k,$v){
 		return $this->_Add($k,$v);
 	}
+	
+	/**
+	 * Get a value from an array
+	 * 
+	 * @param mixed $k key
+	 */
 	function Get($k){
 		return $this->_Get($k);
 	}
+	
+	/**
+	 * Remove a value from an array using a key
+	 * 
+	 * @param mixed $k key
+	 */
 	function Remove($k){
 		unset($this->data[$k]);
 	}
+	
+	/**
+	 * Remove from an array where $value matches the value in the array.
+	 * 
+	 * Or if $value is a callback and $strict is false then where $value(key,value) is true.
+	 * 
+	 * @param mixed $value a value or callback to compare with
+	 * @param bool $strict use strict logic to remove
+	 */
+	function RemoveWhere($value,$strict = false){
+		if(is_callable($value) && $strict === false){
+			foreach($this as $k=>$v){
+				if($value($k,$v)){
+					unset($this[$k]);
+				}
+			}
+		}else{
+			foreach($this as $k=>$v){
+				if(($strict && $v === $value) || $v == $value){
+					unset($this[$k]);
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Return the object as a native array.
+	 * 
+	 * @return array
+	 */
 	function toArray(){
 		return $this->data;
 	}
+
+	/**
+	 * Return true if the array is associative.
+	 * 
+	 * @return boolean
+	 */
 	function isAssoc () {
-		$arr = $this->data;
-        return (is_array($arr) && (!count($arr) || count(array_filter(array_keys($arr),'is_string')) == count($arr)));
+		return Arr::is_assoc($this->data);
     }
+    
+    /* TODO: Find better names */
     function GetAll(){
     	return $this->data;
     }
