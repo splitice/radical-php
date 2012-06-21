@@ -117,7 +117,7 @@ class CollectionObject extends \Core\Object implements \IteratorAggregate, \Arra
 	/**
 	 * Remove from an array where $value matches the value in the array.
 	 * 
-	 * Or if $value is a callback and $strict is false then where $value(key,value) is true.
+	 * Or if $value is a callback and $strict is false then where $value(value,key) is true.
 	 * 
 	 * @param mixed $value a value or callback to compare with
 	 * @param bool $strict use strict logic to remove
@@ -125,7 +125,7 @@ class CollectionObject extends \Core\Object implements \IteratorAggregate, \Arra
 	function RemoveWhere($value,$strict = false){
 		if(is_callable($value) && $strict === false){
 			foreach($this as $k=>$v){
-				if($value($k,$v)){
+				if($value($v,$k)){
 					unset($this[$k]);
 				}
 			}
@@ -154,6 +154,19 @@ class CollectionObject extends \Core\Object implements \IteratorAggregate, \Arra
 	 */
 	function isAssoc () {
 		return Arr::is_assoc($this->data);
+    }
+    
+    /**
+     * Gets values from an array where $value matches the value in the array.
+	 * 
+	 * Or if $value is a callback and $strict is false then where $value(value) is true.
+	 * 
+     * @param mixed $callback
+     * @param boolean $strict
+     * @return array
+     */
+    function Where($callback,$strict = false){
+    	return Arr::where($callback, $this, $strict);
     }
     
     /* TODO: Find better names */
