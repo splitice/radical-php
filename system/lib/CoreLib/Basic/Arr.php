@@ -4,12 +4,44 @@ namespace Basic;
 /**
  * Array helper.
  *
- * @author     Kohana Team
- * @copyright  (c) 2007-2011 Kohana Team
- * @license    http://kohanaframework.org/license
+ * Based on code from Kohana
  */
 class Arr {
-
+	protected static function _is_accessible($in){
+		if(is_array($in)){
+			return true;
+		}
+		if(is_object($in) && $in instanceof \ArrayAccess){
+			return true;
+		}
+		return false;
+	}
+	static function toArray($in){
+		if(is_object($in)){
+			if($in instanceof Arr\Object\CollectionObject){
+				return $in->toArray();
+			}elseif($in instanceof \Traversable){
+				$ret = array();
+				foreach($in as $k=>$v){
+					$ret[$k] = $v;
+				}
+				return $ret;
+			}
+		}
+		return false;
+	}
+	protected static function parameterHandle(&$p){
+		if(self::_is_accessible($p)){
+			return;
+		}
+		$r = self::toArray($p);
+		if($r){
+			$p = $r;
+			return;
+		}
+		throw new \BadMethodCallException('Parameter must be an array');
+	}
+	
 	/**
 	 * @var  string  default delimiter for path()
 	 */
@@ -27,8 +59,18 @@ class Arr {
 	 * @param   array   array to check
 	 * @return  boolean
 	 */
-	public static function is_assoc(array $array)
+	public static function is_assoc($array)
 	{
+		self::parameterHandle($array);
+		
+		//Handle as object
+		if(is_object($array)){
+			if($array instanceof Arr\Object\CollectionObject){
+				return $array->isAssoc();
+			}
+			$array = self::toArray($array);
+		}
+		
 		// Keys of the array
 		$keys = array_keys($array);
 
@@ -54,10 +96,10 @@ class Arr {
 	 */
 	public static function is_array($value)
 	{
-		if (is_array($value))
+		if (self::_is_accessible($value))
 		{
-			// Definitely an array
-			return TRUE;
+			// An accessible array type
+			return true;
 		}
 		else
 		{

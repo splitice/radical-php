@@ -19,7 +19,7 @@ namespace Basic\Arr;
  *    a text matching the regex `/lithium/i`.
  *  - `'/Comment/@*'`: Selects all key names of all comments.
  */
-class Set extends Internal\ArrayBase {
+class Set {
 	
 	/**
 	 * Select a number of elements evenly distributed
