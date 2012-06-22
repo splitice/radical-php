@@ -1,9 +1,9 @@
 <?php
 namespace Utility\Image\Upload;
 
-use Basic\Structs\LoginDetails;
 use Basic\Structs\UserPass;
 use Basic\Structs\ApiKey;
+
 
 abstract class _BASE {
 	public $user;
@@ -13,13 +13,15 @@ abstract class _BASE {
 	const TYPE_SAFE = 1;
 	const TYPE_ADULT = 2;
 	
-	function __construct(LoginDetails $details){
+	function __construct($details){
 		if($details instanceof UserPass) {
-			$this->user = $details->getUsername();
-			$this->pass = $details->getPassword();
+			$details_array = $deails->getDetails;
+			$this->user = $details_array[0]
+			$this->pass = $details_array[1]
 		}
 		elseif ($details instanceof ApiKey)
-			$this->key = $details->getKey;
+			$details_array = $deails->getDetails;
+			$this->key = $details_array[0]
 	}
 	
 	static function Login(){
