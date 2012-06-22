@@ -15,7 +15,7 @@ class Imgur extends _BASE implements IUploadHost {
 		}
 		return false;
 	}
-	static function Login($key = null){		
+	static function Login($username = null /* used as key */, $password = null){		
 		$ch = parent::Login();
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_USERAGENT, 'msie');
