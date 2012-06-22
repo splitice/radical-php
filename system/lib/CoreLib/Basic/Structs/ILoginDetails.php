@@ -2,6 +2,6 @@
 namespace Basic\Structs;
 
 interface LoginDetails {
-	function getDetails();
+	function getDetails($detail);
 
 }

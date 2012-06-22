@@ -11,7 +11,8 @@ class ApiKey implements ILoginDetails {
 	/**
 	 * @return the $key
 	 */
-	public function getDetails() {
-		return array($this->key);
+	public function getDetails(detail = null) {
+		if ($detail = 'key') return $this->key;
+		else return array('key' => $this->key);
 	}
 }

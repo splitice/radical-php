@@ -22,7 +22,7 @@ class FileSonic extends Internal\FTPHostBase implements Interfaces\IUploadHost {
 			$url = 'http://www.filesonic.'.self::$host_is.'/user/login';
 			$ch = $this->CH($url);
 			curl_setopt($ch,CURLOPT_POST,true);
-			$post = array('email'=>$this->login->getUsername(),'password'=>$this->login->getPassword(),"rememberMe"=>'1');
+			$post = array('email'=>$this->login->getDetails('username'),'password'=>$this->login->getDetails('password'),"rememberMe"=>'1');
 			curl_setopt($ch,CURLOPT_POSTFIELDS,$post);
 			$data = curl_exec($ch);
 			self::$ch = $ch;
@@ -51,7 +51,7 @@ class FileSonic extends Internal\FTPHostBase implements Interfaces\IUploadHost {
 	public function Upload($file) {
 		$this->UploadStart($file);
 		
-		$url = API\FileSonic::UploadURL($this->login->getUsername(),$this->login->getPassword());
+		$url = API\FileSonic::UploadURL($this->login->getDetails('username'),$this->login->getDetails('password'));
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_POST, true);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, array('files[]'=>'@'.$file));

@@ -4,18 +4,18 @@ use Utility\DDL\Hosts\Upload\Struct;
 
 abstract class FTPHostBase extends HostBase {
 	/**
-	 * @var \DDL\Hosts\Upload\Struct\LoginDetails
+	 * @var \DDL\Hosts\Upload\Struct\UserPass
 	 */
 	protected $ftpLogin;
 	
 	const FTP_HOST = '';
 	
-	function __construct(Struct\LoginDetails $login,Struct\LoginDetails $ftpLogin = null){
+	function __construct(Struct\UserPass $login,Struct\UserPass $ftpLogin = null){
 		$this->ftpLogin = $ftpLogin;
 		parent::__construct($login);
 	}
 	protected function ftpUrl($host,$file){
-		return 'ftp://'.urlencode($this->ftpLogin->getUsername()).':'.urlencode($this->ftpLogin->getPassword()).'@'.$host.'/'.basename($file);
+		return 'ftp://'.urlencode($this->ftpLogin->getDetails('username')).':'.urlencode($this->ftpLogin->getDetail('password')).'@'.$host.'/'.basename($file);
 	}
 	public function FTPUpload($file){
 		$host = static::FTP_HOST;

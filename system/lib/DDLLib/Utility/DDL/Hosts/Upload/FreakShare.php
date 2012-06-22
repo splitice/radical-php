@@ -10,10 +10,10 @@ class FreakShare extends Internal\HostBase implements Interfaces\IUploadHost {
 		curl_setopt_array ( $ch, array (CURLOPT_HTTPHEADER => array ('Expect:' ), CURLOPT_HEADER => true, CURLOPT_REFERER=>'http://freakshare.com/login.html'));
 		
 		//Do login
-		if($this->login->getUsername() && $this->login->getPassword()){
+		if($this->login->getDetails()){
 			$post = array();
-			$post["user"] = $this->login->getUsername();
-			$post["pass"] = $this->login->getPassword();
+			$post["user"] = $this->login->getDetails('username');
+			$post["pass"] = $this->login->getDetails('password');
 			$post["submit"] = 'Login';
 			curl_setopt_array ( $ch, array (CURLOPT_POST => true, CURLOPT_POSTFIELDS => $post, CURLOPT_HEADER => true ) );
 
