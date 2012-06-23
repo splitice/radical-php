@@ -24,8 +24,8 @@ class FileServe extends Internal\FTPHostBase implements Interfaces\IUploadHost {
 		curl_setopt_array ( $ch, array (CURLOPT_HTTPHEADER => array ('Expect:' ), CURLOPT_HEADER => true, CURLOPT_REFERER=>'http://fileserve.com/index.php'));
 		
 		//Do login
-		if($this->login->getDetails()){
-			$post = array ("autoLogin"=>1,"loginUserName"=>$this->login->getDetails('username'),"loginUserPassword"=>$this->login->getDetails('password'),"loginFormSubmit"=>1);
+		if($this->login->hasDetails()){
+			$post = array ("autoLogin"=>1,"loginUserName"=>$this->login->getUsername(),"loginUserPassword"=>$this->login->getPassword(),"loginFormSubmit"=>1);
 			curl_setopt_array ( $ch, array (CURLOPT_POST => true, CURLOPT_POSTFIELDS => $post ) );
 			curl_exec ( $ch );
 			curl_setopt_array ( $ch, array (CURLOPT_POST => false, CURLOPT_POSTFIELDS => false ) );

@@ -22,13 +22,13 @@ class FileJungle extends Internal\FTPHostBase implements Interfaces\IUploadHost 
 	}
 	function prepare(){
 		//Login
-		$post = array ("autoLogin"=>'on',"loginUserName"=>$this->login->getDetails('username'),"loginUserPassword"=>$this->login->getDetails('password'),"loginFormSubmit"=>'Login');
+		$post = array ("autoLogin"=>'on',"loginUserName"=>$this->login->getUsername(),"loginUserPassword"=>$this->login->getPassword(),"loginFormSubmit"=>'Login');
 		$ch = self::CH ( 'http://filejungle.com/login.php' );
 		//curl_setopt ( $ch, CURLOPT_HTTPHEADER, array ('Expect:' ) );
 		curl_setopt_array ( $ch, array (CURLOPT_RETURNTRANSFER => true, CURLOPT_COOKIEFILE => 'cookies.txt', CURLOPT_COOKIEJAR => 'cookies.txt', CURLOPT_FOLLOWLOCATION => true, CURLOPT_HEADER => true, CURLOPT_USERAGENT=>"Moz"));
 		
 		//Do login
-		if($this->login->getDetails()){
+		if($this->login->hasDetails()){
 			curl_setopt_array ( $ch, array (CURLOPT_POST => true, CURLOPT_POSTFIELDS => $post ) );
 			curl_exec ( $ch );
 		}

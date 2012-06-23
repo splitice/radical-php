@@ -32,13 +32,13 @@ class FilePost extends Internal\FTPHostBase implements Interfaces\IUploadHost {
 	}
 	function prepare(){
 		//Login
-		$post = array ("remember"=>'on',"email"=>$this->login->getDetails('username'),"password"=>$this->login->getDetails('password'));
+		$post = array ("remember"=>'on',"email"=>$this->login->getUsername(),"password"=>$this->login->getPassword());
 		$ch = self::CH ( 'http://filepost.com/general/login_form/' );
 		//curl_setopt ( $ch, CURLOPT_HTTPHEADER, array ('Expect:' ) );
 		curl_setopt_array ( $ch, array (CURLOPT_RETURNTRANSFER => true, CURLOPT_HEADER=> true, CURLOPT_COOKIEFILE => 'cookies.txt', CURLOPT_COOKIEJAR => 'cookies.txt', CURLOPT_FOLLOWLOCATION => true, CURLOPT_HEADER => true, CURLOPT_USERAGENT=>"Moz"));
 		
 		//Do login
-		if($this->login->getDetails()){
+		if($this->login->hasDetails()){
 			curl_setopt_array ( $ch, array (CURLOPT_POST => true, CURLOPT_POSTFIELDS => $post ) );
 			$page = curl_exec ( $ch );
 		}

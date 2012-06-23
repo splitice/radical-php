@@ -10,11 +10,11 @@ class DepositFiles extends Internal\HostBase implements Interfaces\IUploadHost {
 		curl_setopt_array ( $ch, array (CURLOPT_HTTPHEADER => array ('Expect:' ), CURLOPT_HEADER => true, CURLOPT_REFERER=>'http://depositfiles.com'));
 		
 		//Do login
-		if($this->login->getDetails()){
+		if($this->login->hasDetails()){
 			$post = array();
 			$post["redirect"] = "/";
-			$post["login"] = $this->login->getDetails('username');
-			$post["password"] = $this->login->getDetails('password');
+			$post["login"] = $this->login->getUsername();
+			$post["password"] = $this->login->getPassword();
 			
 			curl_setopt_array ( $ch, array (CURLOPT_POST => true, CURLOPT_POSTFIELDS => $post, CURLOPT_HEADER => true ) );
 

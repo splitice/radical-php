@@ -1,7 +1,7 @@
 <?php
 namespace Basic\Structs;
 
-class UserPass implements ILoginDeatils {
+class UserPass implements ILoginDetails {
 	protected $username;
 	protected $password;
 	
@@ -11,7 +11,21 @@ class UserPass implements ILoginDeatils {
 	}
 	
 	/**
-	 * @return the $username and $password
+	 * @return the $username
+	 */
+	public function getUsername() {
+		return $this->username;
+	}
+
+	/**
+	 * @return the $password
+	 */
+	public function getPassword() {
+		return $this->password;
+	}
+
+	/**
+	 * @return array the $username and $password
 	 */
 	public function getDetails($detail = null) {
 		switch ($detail) {
@@ -19,8 +33,23 @@ class UserPass implements ILoginDeatils {
 				return $this->username;
 			case 'password':
 				return $this->password;
+			case null:
+				return array('username' => $this->username, 'password' => $this->password);
 			default:
-				return array('username => $this->username, 'password' => $this->password);
+				throw new \Exception('Invalid Detail');
 		}
+	}
+	
+	/**
+	 * Do we have details?
+	 * 
+	 * @return bool true if we have details
+	 */
+	function hasDetails(){
+		return !empty($this->username) && !empty($this->password);
+	}
+	
+	function __toString(){
+		return $this->username.':'.$this->password;
 	}
 }

@@ -15,12 +15,12 @@ abstract class _BASE {
 	
 	function __construct($details){
 		if($details instanceof UserPass) {
-			$this->user = $deails->getDetails('username');
-			$this->pass = $deails->getDetails('password');
+			$this->user = $deails->getUsername();
+			$this->pass = $deails->getPassword();
 		}
 		elseif ($details instanceof ApiKey) {
-			$this->key = $deails->getDetails('key');
-                }
+			$this->key = $deails->getKey();
+        }
 	}
 	
 	static function Login(){

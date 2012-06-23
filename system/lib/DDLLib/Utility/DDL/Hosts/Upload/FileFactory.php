@@ -15,11 +15,11 @@ class FileFactory extends Internal\HostBase implements Interfaces\IUploadHost {
 		}
 		
 		//Do login
-		if($this->login->getDetails()){
+		if($this->login->hasDetails()){
 			$post = array();
 			$post["redirect"] = "/";
-			$post["email"] = $this->login->getDetails('username');
-			$post["password"] = $this->login->getDetails('password');
+			$post["email"] = $this->login->getUsername();
+			$post["password"] = $this->login->getPassword();
 			
 			curl_setopt_array ( $ch, array (CURLOPT_POST => true, CURLOPT_POSTFIELDS => $post, CURLOPT_HEADER => true ) );
 

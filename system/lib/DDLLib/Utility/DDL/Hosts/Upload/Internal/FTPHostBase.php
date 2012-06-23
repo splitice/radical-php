@@ -15,7 +15,7 @@ abstract class FTPHostBase extends HostBase {
 		parent::__construct($login);
 	}
 	protected function ftpUrl($host,$file){
-		return 'ftp://'.urlencode($this->ftpLogin->getDetails('username')).':'.urlencode($this->ftpLogin->getDetail('password')).'@'.$host.'/'.basename($file);
+		return 'ftp://'.urlencode($this->ftpLogin->getUsername()).':'.urlencode($this->ftpLogin->getDetail('password')).'@'.$host.'/'.basename($file);
 	}
 	public function FTPUpload($file){
 		$host = static::FTP_HOST;
