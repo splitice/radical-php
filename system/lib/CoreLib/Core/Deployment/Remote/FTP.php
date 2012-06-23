@@ -1,7 +1,7 @@
 <?php
 namespace Core\Deployment\Remote;
 
-use Basic\Structs\LoginDetails;
+use Basic\Structs\UserPass;
 
 class FTP implements IRemoteLocation {
 	protected $login;
@@ -16,7 +16,7 @@ class FTP implements IRemoteLocation {
 		$this->context = stream_context_create(array('ftp'=>array('overwrite'=>true)));
 	}
 	function toPath($file){
-		return "ftp://".urlencode($this->login->getUsername()).":".urlencode($this->login->getPassword())."@".$this->host.$this->basePath.$file;
+		return "ftp://".urlencode($this->login->getDeatils('username')).":".urlencode($this->login->getDeatils('password'))."@".$this->host.$this->basePath.$file;
 	}
 	function writeFile($file,$data){
 		$path = '';
