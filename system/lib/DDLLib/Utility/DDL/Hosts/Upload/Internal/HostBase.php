@@ -1,15 +1,15 @@
 <?php
 namespace Utility\DDL\Hosts\Upload\Internal;
-use Utility\DDL\Hosts\Upload\Struct\LoginDetails;
+use Utility\DDL\Hosts\Upload\Struct\UserPass;
 use Utility\DDL\Hosts\Upload\Exception;
 
 abstract class HostBase extends \Core\Object {
 	/**
-	 * @var \DDL\Hosts\Upload\Struct\LoginDetails
+	 * @var \DDL\Hosts\Upload\Struct\UserPass
 	 */
 	protected $login;
 	
-	function __construct(LoginDetails $login){
+	function __construct(UserPass $login){
 		$this->login = $login;
 	}
 	

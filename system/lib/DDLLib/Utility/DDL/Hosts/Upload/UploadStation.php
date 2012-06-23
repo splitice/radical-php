@@ -27,13 +27,13 @@ class UploadStation extends Internal\FTPHostBase implements Interfaces\IUploadHo
 	}
 	function prepare(){
 		//Login
-		$post = array ("autoLogin"=>'on',"loginUserName"=>$this->login->getUsername(),"loginUserPassword"=>$this->login->getPassword(),"loginFormSubmit"=>'Login');
+		$post = array ("autoLogin"=>'on',"loginUserName"=>$this->login->getDetails('username'),"loginUserPassword"=>$this->login->getDetails('password'),"loginFormSubmit"=>'Login');
 		$ch = self::CH ( 'http://www.uploadstation.com/login.php' );
 		//curl_setopt ( $ch, CURLOPT_HTTPHEADER, array ('Expect:' ) );
 		curl_setopt_array ( $ch, array (CURLOPT_RETURNTRANSFER => true, CURLOPT_COOKIEFILE => 'cookies.txt', CURLOPT_COOKIEJAR => 'cookies.txt', CURLOPT_FOLLOWLOCATION => true, CURLOPT_HEADER => true, CURLOPT_USERAGENT=>"Moz"));
 		
 		//Do login
-		if($this->login->getUsername() && $this->login->getPassword()){
+		if($this->login->getDetails()){
 			curl_setopt_array ( $ch, array (CURLOPT_POST => true, CURLOPT_POSTFIELDS => $post ) );
 			$page = curl_exec ( $ch );
 		}
