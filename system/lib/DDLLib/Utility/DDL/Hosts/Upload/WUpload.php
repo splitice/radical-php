@@ -22,7 +22,7 @@ class WUpload extends Internal\FTPHostBase implements Interfaces\IUploadHost {
 			$url = 'http://www.wupload.'.self::$host_is.'/account/login';
 			$ch = $this->CH($url);
 			curl_setopt($ch,CURLOPT_POST,true);
-			$post = array('email'=>$this->login->getUsername(),'password'=>$this->login->getPassword(),'redirect'=>'/',"rememberMe"=>'1');
+			$post = array('email'=>$this->login->getDetails('username'),'password'=>$this->login->getDetails('password'),'redirect'=>'/',"rememberMe"=>'1');
 			curl_setopt($ch,CURLOPT_POSTFIELDS,$post);
 			$data = curl_exec($ch);
 			self::$ch = $ch;

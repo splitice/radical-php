@@ -1,10 +1,10 @@
 <?php
-use Basic\Structs\LoginDetails;
+use Basic\Structs\UserPass;
 error_reporting(E_ALL);
 include(__DIR__.'/../include/common.php');
 
 $d = new Core\Deployment\Process();
-$d->Execute(new Core\Deployment\Remote\FTP(new LoginDetails('webuser', 'webuser'),'127.0.0.1','/fgv2/'));
+$d->Execute(new Core\Deployment\Remote\FTP(new UserPass('webuser', 'webuser'),'127.0.0.1','/fgv2/'));
 
 
 exit;

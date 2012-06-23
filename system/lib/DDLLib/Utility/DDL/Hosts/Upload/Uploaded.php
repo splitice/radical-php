@@ -24,10 +24,10 @@ class Uploaded extends Internal\FTPHostBase implements Interfaces\IUploadHost, I
 		curl_setopt_array ( $ch, array (CURLOPT_HTTPHEADER => array ('Expect:' ), CURLOPT_HEADER => true));
 		
 		//Do login
-		if($this->login->getUsername() && $this->login->getPassword()){
+		if($this->login->getDetails()){
 			$post = array();
-			$post["id"] = $this->login->getUsername();
-			$post["pw"] = $this->login->getPassword();
+			$post["id"] = $this->login->getDetails('username');
+			$post["pw"] = $this->login->getDetails('password');
 			curl_setopt_array ( $ch, array (CURLOPT_POST => true, CURLOPT_POSTFIELDS => $post, CURLOPT_HEADER => true ) );
 
 			$data = curl_exec ( $ch );
