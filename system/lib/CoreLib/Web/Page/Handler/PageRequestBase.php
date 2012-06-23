@@ -62,7 +62,7 @@ abstract class PageRequestBase {
 		}
 		
 		//Pass to the cache handler
-		$this->cache->postExecute($this->headers);
+		if($method=='GET') $this->cache->postExecute($this->headers);
 	}
 	
 	static function fromURL(\Utility\Net\URL $url){

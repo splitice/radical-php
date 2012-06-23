@@ -42,6 +42,10 @@ class FormInstance extends FormCommon implements IFormInstance {
 		return parent::_R($return);
 	}
 	
+	function form(){
+		return $this->form;
+	}
+	
 	function __toString(){
 		return (string)$this->form;
 	}
