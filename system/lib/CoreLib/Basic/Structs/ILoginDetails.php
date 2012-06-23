@@ -1,7 +1,7 @@
 <?php
 namespace Basic\Structs;
 
-interface LoginDetails {
+interface ILoginDetails {
 	function getDetails($detail);
 
 }
