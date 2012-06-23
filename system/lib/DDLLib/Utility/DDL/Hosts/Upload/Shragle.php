@@ -10,11 +10,11 @@ class Shragle extends Internal\HostBase implements Interfaces\IUploadHost {
 		curl_setopt_array ( $ch, array (CURLOPT_HTTPHEADER => array ('Expect:' ), CURLOPT_HEADER => true, CURLOPT_REFERER=>'http://shragle.com'));
 		
 		//Do login
-		if($this->login->getUsername() && $this->login->getPassword()){
+		if($this->login->getDetails()){
 			$post = array();
 			$post["submit"] = "Log in";
-			$post["username"] = $this->login->getUsername();
-			$post["password"] = $this->login->getPassword();
+			$post["username"] = $this->login->getDetails('username');
+			$post["password"] = $this->login->getDetails('password');
 			
 			curl_setopt_array ( $ch, array (CURLOPT_POST => true, CURLOPT_POSTFIELDS => $post, CURLOPT_HEADER => true ) );
 
