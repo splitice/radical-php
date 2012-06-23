@@ -2,6 +2,9 @@
 namespace Basic\Structs;
 
 class ApiKey implements ILoginDetails {
+	/**
+	 * @var string
+	 */
 	protected $key;
 	
 	function __construct($key){
