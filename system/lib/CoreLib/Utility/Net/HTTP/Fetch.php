@@ -18,20 +18,38 @@ class Fetch {
 		$this->curl->cookieManager = Curl\CookieManager::Create();
 	}
 	function setUrl($url){
-		$this->curl[CURLOPT_URL] = $$url;
+		$this->curl[CURLOPT_URL] = $url;
 		return $this;
 	}
 	function setUserAgent($ua){
 		$this->curl[CURLOPT_USERAGENT] = $ua;
 		return $this;
 	}
-	function setIP($ip_addr,$proxy_details=false){
-		//Check (Cached)
-		
-		//Use
-		
-		//TODO: Implement setIP
+	function setProxy($ip_addr,$port=80,$proxy_details=array(),$httptunnel=false,$proxy_type=CURLPROXY_HTTP){
+            
+                //set ip adress, can be a domain name
+		$this->curl[CURLOPT_PROXY] = $$ip_addr;
+                
+                //set proxy port
+                if(is_int($port))
+                        $this->curl[CURLOPT_PROXYPORT] = $port;
+                
+                //set proxy auth
+                if((is_array($proxy_details)) &&(sizeof($proxy_details) == 2))
+                        $this->curl[CURLOPT_PROXYUSERPWD] = implode(':',$proxy_details);
+                
+                //set proxy tunnel mode
+                if($httptunnel)
+                         $this->curl[CURLOPT_HTTPPROXYTUNNEL] = true;
+                
+                //set proxy type
+                $this->curl[CURLOPT_PROXYTYPE] = $proxy_type;
+
 	}
+        function setInterface($interface){
+                $this->curl[CURLOPT_INTERFACE] = $interface;
+        }
+        //TODO; setRanges($array) array having X and Y, or  having arrays of Xs and Ys
 	function setHeader($name,$value){
 		$this->headers[$name] = $value;
 		$r = array();
