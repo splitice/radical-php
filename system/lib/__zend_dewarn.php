@@ -107,6 +107,9 @@ function xcache_get(){
 function xcache_unset(){
 	
 }
+function ssh2_sftp_stat(){
+	
+}
 class Memcache{
 	
 }
