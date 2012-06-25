@@ -28,7 +28,7 @@ class DefaultCacheManager implements ICacheManager {
 						ob_start();
 						
 						//Send 304 not modified
-						$this->headers->Status(304);
+						$headers->Status(304);
 					}
 				}
 			}else{ //If no Last-Modified specified
