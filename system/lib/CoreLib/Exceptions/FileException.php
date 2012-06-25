@@ -2,16 +2,16 @@
 namespace Exceptions;
 
 abstract class FileException extends IOException {
-	private $file;
+	private $theFile;
 	
 	function __construct($file){
-		$this->file = $file;
+		$this->theFile = $file;
 	}
 	
 	/**
-	 * @return the $file
+	 * @return the $theFile
 	 */
-	public function getFile() {
-		return $this->file;
+	public function getTheFile() {
+		return $this->theFile;
 	}
 }

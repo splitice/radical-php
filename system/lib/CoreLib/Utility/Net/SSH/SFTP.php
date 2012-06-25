@@ -27,7 +27,7 @@ class SFTP {
 		return new \File($this->getPath($path));
 	}
 	function getPath($path){
-		return self::SCHEME."${sftp}${path}";
+		return self::SCHEME.$this->sftp.$path;
 	}
 	function getLocalPath($path){
 		if(substr($path,0,strlen(self::SCHEME)) == self::SCHEME){

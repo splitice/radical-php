@@ -18,7 +18,7 @@ class Fetch {
 		$this->curl->cookieManager = Curl\CookieManager::Create();
 	}
 	function setUrl($url){
-		$this->curl[CURLOPT_URL] = $$url;
+		$this->curl[CURLOPT_URL] = $url;
 		return $this;
 	}
 	function setUserAgent($ua){

@@ -39,8 +39,11 @@ class Instance {
 	function Exists(){
 		return file_exists($this->file);
 	}
-	function Contents(){
-		return file_get_contents($this->file);
+	function Contents($data = null){
+		if($data === null)
+			return file_get_contents($this->file);
+		
+		return file_put_contents($this->file, $data);
 	}
 	function Rename($to) {
 		rename ( $this->file, $to );
