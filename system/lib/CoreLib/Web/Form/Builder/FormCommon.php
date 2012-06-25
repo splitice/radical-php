@@ -43,6 +43,10 @@ class FormCommon implements IFormControls {
 		return $this->_R(new Element\TextInput($name, $value));
 	}
 	
+	function password($name, $value = ''){
+		return $this->_R(new Element\TextInput($name, $value ,'password'));
+	}
+	
 	function radio($name, $value, $checked = null){
 		return $this->radiobox($name, $value, $checked);
 	}
