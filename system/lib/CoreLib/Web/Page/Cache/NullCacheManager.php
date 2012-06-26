@@ -1,6 +1,8 @@
 <?php
 namespace Web\Page\Cache;
 
+use Web\Page\Handler\HeaderManager;
+
 /**
  * A cache manager to do nothing
  * 
@@ -9,7 +11,7 @@ namespace Web\Page\Cache;
  * @author SplitIce
  */
 class NullCacheManager implements ICacheManager {
-	function postExecute(){
+	function postExecute(HeaderManager $headers){
 		//Do nothing
 	}
 }
