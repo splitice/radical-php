@@ -1,25 +1,11 @@
 <?php
 namespace Model\Database\ORM;
 
-use Model\Database\SQL\Parse\CreateTable\ColumnReference;
-
 use Model\Database\Model\TableReference;
-
 use Model\Database\Model\TableReferenceInstance;
-
 use Model\Database\SQL\Parse\CreateTable;
 
 class Model extends ModelData {	
-	private function fieldReferences(CreateTable $structure){
-		$ret = array();
-		foreach($structure as $field=>$statement){
-			$ref = ModelReference::Find($field);
-			if($ref != $this->table){
-				$ret[$field] = new ColumnReference($ref->getTable(), $field);
-			}
-		}
-		return $ret;
-	}
 	function __construct(TableReferenceInstance $table){
 		$this->table = $table;
 		$this->tableInfo = $table->Info();
@@ -51,7 +37,7 @@ class Model extends ModelData {
 				$this->relations[$r->getField()] = $r->getReference();
 			}
 		}elseif($this->engine == 'myisam'){
-			$this->relations = $this->fieldReferences($structure);
+			$this->relations = MyIsam::fieldReferences($structure);
 		}else{
 			throw new \Exception('Unknown database engine type: '.$this->engine);
 		}
@@ -84,17 +70,26 @@ class Model extends ModelData {
 	}
 	
 	function getMappings($structure = null){
+		//Accept a null strucure for when this method is called externally
 		if($structure === null){
 			$structure = CreateTable::fromTable($this->table);
 		}
+		
+		//Return a Mapping Manager
 		return new Mappings($this,$structure);
 	}
 	
+	/**
+	 * Make an instance of the parent class. Usually this
+	 * is used for storage.
+	 * 
+	 * @return \Model\Database\ORM\ModelData
+	 */
 	function toModelData(){
 		$r = new ModelData();
-		foreach($this as $k=>$v){
+		foreach($this as $k=>$v)
 			$r->$k = $v;
-		}
+		
 		return $r;
 	}
 }
