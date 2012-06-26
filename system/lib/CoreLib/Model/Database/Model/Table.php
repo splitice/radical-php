@@ -218,7 +218,7 @@ abstract class Table implements ITable, \JsonSerializable {
 	
 	public function __sleep()
 	{
-		return array('_store');//array_values($this->getIdentifyingKeys());
+		return array('_store');
 	}
 	
 	public function __wakeup()
@@ -237,80 +237,91 @@ abstract class Table implements ITable, \JsonSerializable {
 		if(is_array($id)) $id = implode('|',$id);
 		return $id;
 	}
-	
+	private function call_get_member($actionPart,$a){
+		$relations = $this->orm->relations;
+		$dbName = $this->orm->reverseMappings[$actionPart];
+		if(isset($relations[$dbName]) && !is_object($this->$actionPart)){
+			$class = $relations[$dbName]->getTableClass();
+			if(isset($a[0]) && $a[0] == 'id'){
+				$ret = &$this->$actionPart;
+				if(is_object($ret)){
+					$ret = $this->getId();
+				}
+			}else{
+				$this->$actionPart = $class::fromId($this->$actionPart);
+			}
+		}
+		if(isset($a[0]) && $a[0] == 'id' && is_object($this->$actionPart)){
+			$ret = $this->$actionPart->getId();
+		}else{
+			$ret = &$this->$actionPart;
+		}
+		return $ret;
+	}
+	private function call_get_related(){
+		//Remove the pluralising s from the end
+		$className = substr($className,0,-1);
+		
+		//Get Class
+		$relationship = TableReference::getByTableClass($className);
+		if(isset($relationship)){//Is a relationship
+			$class = $relationship->getClass();
+			try{
+				return $class::getAll($this->getIdentifyingSQL());
+			}catch(\Exception $ex){
+				throw new \Exception('Not related or invalid id select',0,$ex);
+			}
+		}
+	}
+	private function call_set_value($actionPart,$value){
+		if(isset($this->orm->reverseMappings[$actionPart])){
+			if(!isset($value)){
+				throw new \BadMethodCallException('set{X}(value) called without argument');
+			}
+		
+			//Is this key a dynamic type?
+			if(isset($this->orm->dynamicTyping[$actionPart])){
+				if(is_object($this->$actionPart) && $this->$actionPart instanceof IDynamicType){//Do we already have the key set as a dynamic type?
+					if($value !== null || $this->$actionPart instanceof INullable){//can be set, set value
+						$this->$actionPart->setValue($value);
+					}else{//Else replace (used for null)
+						$this->$actionPart = $value;
+					}
+				}elseif($value instanceof IDynamicType){//Have we been given a dynamic type?
+					$this->$actionPart = $value;
+				}elseif($value !== null || oneof($this->orm->dynamicTyping[$actionPart]['var'], 'Model\Database\DynamicTypes\INullable')){
+					$var = $this->orm->dynamicTyping[$actionPart]['var'];
+					$this->$actionPart = $var::fromUserModel($a[0],$this->orm->dynamicTyping[$actionPart]['extra'],$this);
+				}else{//else set to null
+					$this->$actionPart = null;
+				}
+			}else{
+				$this->$actionPart = $value;
+			}
+			return $this;
+		}else{
+			throw new \BadMethodCallException('no field exists for set call');
+		}
+	}
 	function __call($m,$a){
 		if(0 === substr_compare($m,'get',0,3)){//if starts with is get*
 			//get the action part
 			$actionPart = substr($m,3);
-			$className = $actionPart;
-			$fullClassName = \Core\Libraries::getProjectSpace('DB\\'.$className);
-			$actionPart{0} = strtolower($actionPart{0});
 			
 			//if we have the action part from the database
 			if(isset($this->orm->reverseMappings[$actionPart])){
-				$relations = $this->orm->relations;
-				$dbName = $this->orm->reverseMappings[$actionPart];
-				if(isset($relations[$dbName]) && !is_object($this->$actionPart)){
-					$class = $relations[$dbName]->getTableClass();
-					if(isset($a[0]) && $a[0] == 'id'){
-						$ret = &$this->$actionPart;
-						if(is_object($ret)){
-							$ret = $this->getId();
-						}
-					}else{
-						$this->$actionPart = $class::fromId($this->$actionPart);
-					}
-				}
-				if(isset($a[0]) && $a[0] == 'id' && is_object($this->$actionPart)){
-					$ret = $this->$actionPart->getId();
-				}else{
-					$ret = &$this->$actionPart;
-				}
-				return $ret;
+				$actionPart{0} = strtolower($actionPart{0});
+				return $this->call_get_member($actionPart,$a);
 			}elseif($actionPart{strlen($actionPart)-1} == 's'){//Get related objects (foward)
-				//Remove the pluralising s from the end
-				$className = substr($className,0,-1);
-				
-				//Get Class
-				$relationship = TableReference::getByTableClass($className);
-				if(isset($relationship)){//Is a relationship
-					$class = $relationship->getClass();
-					try{
-						return $class::getAll($this->getIdentifyingSQL());
-					}catch(\Exception $ex){
-						throw new \Exception('Not related or invalid id select',0,$ex);
-					}
-				}else{
-					throw new \Exception('Cant get an array of something that isnt a model');
-				}
+				return $this->call_get_related($actionPart);
+			}else{
+				throw new \Exception('Cant get an array of something that isnt a model');
 			}
 		}elseif(0 === substr_compare($m,'set',0,3)){
 			$actionPart = substr($m,3);
 			$actionPart{0} = strtolower($actionPart{0});
-			if(isset($this->orm->reverseMappings[$actionPart])){
-				if(!isset($a[0])){
-					throw new \BadMethodCallException('set{X}(value) called without argument');
-				}
-				//die(var_dump($this->orm->dynamicTyping));
-				if(isset($this->orm->dynamicTyping[$actionPart])){
-					if(is_object($this->$actionPart) && $this->$actionPart instanceof IDynamicType){
-						if($a[0] !== null || $this->$actionPart instanceof INullable){
-							$this->$actionPart->setValue($a[0]);
-						}else{
-							$this->$actionPart = $a[0];
-						}
-					}elseif($a[0] instanceof IDynamicType){
-						$this->$actionPart = $a[0];
-					}elseif($a[0] !== null || oneof($this->orm->dynamicTyping[$actionPart]['var'], 'Model\Database\DynamicTypes\INullable')){
-						$var = $this->orm->dynamicTyping[$actionPart]['var'];
-						$this->$actionPart = $var::fromUserModel($a[0],$this->orm->dynamicTyping[$actionPart]['extra'],$this);
-					}else{
-						$this->$actionPart = null;
-					}
-				}else{
-					$this->$actionPart = $a[0];
-				}
-				return $this;
+			if(count($a) == 0){
+				return $this->call_set_value($actionPart, $a[0]);
 			}
 		}
 		throw new \BadMethodCallException('Not a valid function: '.$m);
@@ -327,8 +338,7 @@ abstract class Table implements ITable, \JsonSerializable {
 		}elseif($sql instanceof IToSQL){
 			$obj = $sql->mergeTo(static::_select());
 		}elseif($sql){
-			debug_print_backtrace();
-			die(var_dump($sql));
+			throw new \Exception('Invalid SQL Type');
 		}
 		
 		$cached = Table\TableCache::Get($obj);

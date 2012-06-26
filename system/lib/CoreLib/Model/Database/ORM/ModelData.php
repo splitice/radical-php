@@ -7,8 +7,8 @@ class ModelData {
 	public $mappings;
 	public $reverseMappings;
 	public $fields;
-	public $relations;
-	public $depends = array();
+	public $relations = array();//$this -> $other
+	public $references = array();//$other -> $this
 	public $id;
 	public $validation;
 	public $engine;

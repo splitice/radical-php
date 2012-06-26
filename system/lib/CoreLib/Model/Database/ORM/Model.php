@@ -26,22 +26,23 @@ class Model extends ModelData {
 		$structure = CreateTable::fromTable($table);
 		$this->engine = $structure->engine;
 		
-		foreach($structure as $col){
-			if($col->hasAttribute('AUTO_INCREMENT')){
-				$this->autoIncrementField = $col->getName();
-				break;
-			}
-		}
-		
+		//Work out which fields are IDs
 		if(isset($structure->indexes['PRIMARY'])){
 			$this->id = $structure->indexes['PRIMARY']->getKeys();
 		}
 		
-		//Build mapping translation array=
+		//Build mapping translation array
 		$this->mappings = $this->getMappings($structure)->translationArray();
 		
-		if($this->autoIncrementField){
-			$this->autoIncrement = $this->mappings[$this->autoIncrementField];
+		//This is the auto increment field, if it exists
+		foreach($this->id as $col){
+			if($structure[$col]->hasAttribute('AUTO_INCREMENT')){
+				//Store the auto increment field in ORM format
+				$this->autoIncrementField = $this->mappings[$col];
+				
+				//There can only be one AUTO_INCREMENT field per table (also it must be in the PKey)
+				break;
+			}
 		}
 		
 		//build relation array
@@ -64,7 +65,7 @@ class Model extends ModelData {
 				$rTable = $reference->getTable();
 				
 				if($rTable == $tableName){
-					$this->depends[$reference->getTableClass()] = array('table'=>$ref,'from'=>$relation->getField(),'to'=>$reference->getColumn());
+					$this->references[] = array('from_table'=>$ref,'from_field'=>$relation->getField(),'to_table'=>$reference->getTableClass(),'to_field'=>$reference->getColumn());
 				}
 			}
 		}
