@@ -25,27 +25,6 @@ class Fetch {
 		$this->curl[CURLOPT_USERAGENT] = $ua;
 		return $this;
 	}
-	function setProxy($ip_addr,$port=80,$proxy_details=array(),$httptunnel=false,$proxy_type=CURLPROXY_HTTP){
-            
-                //set ip adress, can be a domain name
-		$this->curl[CURLOPT_PROXY] = $$ip_addr;
-                
-                //set proxy port
-                if(is_int($port))
-                        $this->curl[CURLOPT_PROXYPORT] = $port;
-                
-                //set proxy auth
-                if((is_array($proxy_details)) &&(sizeof($proxy_details) == 2))
-                        $this->curl[CURLOPT_PROXYUSERPWD] = implode(':',$proxy_details);
-                
-                //set proxy tunnel mode
-                if($httptunnel)
-                         $this->curl[CURLOPT_HTTPPROXYTUNNEL] = true;
-                
-                //set proxy type
-                $this->curl[CURLOPT_PROXYTYPE] = $proxy_type;
-
-	}
         function setInterface($interface){
                 $this->curl[CURLOPT_INTERFACE] = $interface;
         }
@@ -80,6 +59,22 @@ class Fetch {
 		}
 	}
 	
+        //gets an array having arrays of X and Y
+        //if one range is passed, it should be passed in a simple array
+        function _getRanges($ranges){
+            if (coun($ranges) == 2 && is_int($ranges[0]) && is_int($ranges[1]))
+                return $this->_implodeRange($ranges);
+            else {
+                array_map(array('this','_implodeRange'), $ranges);
+                return implode(',', $ranges);
+            }
+            
+        }
+        
+        function _implodeRange($range){
+             return implode('-', $range);
+        }
+        
 	function Post($data){
 		//Store previous post state
 		$post = $data = null;
