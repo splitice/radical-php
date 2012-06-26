@@ -24,8 +24,9 @@ class Model extends ModelData {
 		foreach($this->id as $col){
 			if($structure[$col]->hasAttribute('AUTO_INCREMENT')){
 				//Store the auto increment field in ORM format
-				$this->autoIncrementField = $this->mappings[$col];
-				
+				$this->autoIncrement = $this->mappings[$col];
+				$this->autoIncrementField = $col;
+
 				//There can only be one AUTO_INCREMENT field per table (also it must be in the PKey)
 				break;
 			}
@@ -63,7 +64,7 @@ class Model extends ModelData {
 		//Validation
 		$this->validation = new Validation($structure,$this->dynamicTyping);
 		
-		parent::__construct();
+		parent::__construct($this->mappings);
 		
 		//Store into cache
 		Cache::Set($table,$this);
@@ -86,10 +87,9 @@ class Model extends ModelData {
 	 * @return \Model\Database\ORM\ModelData
 	 */
 	function toModelData(){
-		$r = new ModelData();
+		$r = new ModelData($this->mappings);
 		foreach($this as $k=>$v)
 			$r->$k = $v;
-		
 		return $r;
 	}
 }

@@ -258,7 +258,7 @@ abstract class Table implements ITable, \JsonSerializable {
 		}
 		return $ret;
 	}
-	private function call_get_related(){
+	private function call_get_related($className){
 		//Remove the pluralising s from the end
 		$className = substr($className,0,-1);
 		
@@ -307,10 +307,10 @@ abstract class Table implements ITable, \JsonSerializable {
 		if(0 === substr_compare($m,'get',0,3)){//if starts with is get*
 			//get the action part
 			$actionPart = substr($m,3);
+			$actionPart{0} = strtolower($actionPart{0});
 			
 			//if we have the action part from the database
 			if(isset($this->orm->reverseMappings[$actionPart])){
-				$actionPart{0} = strtolower($actionPart{0});
 				return $this->call_get_member($actionPart,$a);
 			}elseif($actionPart{strlen($actionPart)-1} == 's'){//Get related objects (foward)
 				return $this->call_get_related($actionPart);

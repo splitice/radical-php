@@ -16,7 +16,7 @@ class ModelData {
 	public $autoIncrementField;
 	public $autoIncrement;
 	
-	function __construct(){
-		$this->reverseMappings = array_flip($this->mappings);
+	function __construct(array $mappings){
+		$this->reverseMappings = array_flip($mappings);
 	}
 }
