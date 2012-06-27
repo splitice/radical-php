@@ -13,7 +13,7 @@ class Template extends Page\Handler\PageBase {
 	public $vars = array();
 	protected $file;
 	protected $name = 'error';
-	protected $handler = false;
+	protected $handler = null;
 	private $container;
 	
 	/**
