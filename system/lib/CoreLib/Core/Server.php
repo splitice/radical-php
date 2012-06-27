@@ -44,9 +44,9 @@ class Server {
 	 * @return string
 	 */
 	static function getSiteRoot(){
-		global $_SITEROOT;
-		if(!isset($_SITEROOT))
+		global $WEBPATH;
+		if(!isset($WEBPATH))
 			return '/';
-		return $_SITEROOT;
+		return $WEBPATH.'/';
 	}
 }

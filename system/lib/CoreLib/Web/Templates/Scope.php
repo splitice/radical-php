@@ -91,7 +91,7 @@ class Scope {
 		
 		//Is relative? Make siterooted
 		if($first_part{0} != '/'){
-			return \Core\Server::getSiteRoot().$first_part;
+			$object = \Core\Server::getSiteRoot().$object;
 		}
 		
 		return $object;
