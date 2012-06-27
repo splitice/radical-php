@@ -10,15 +10,12 @@ if(!isset($BASEPATH)){
 			if(isset($_SERVER['DOCUMENT_ROOT'])){
 				$dr = rtrim($_SERVER['DOCUMENT_ROOT'],DS);
 				$sDR = strlen($dr);
+				$WEBPATH = '';
 				if(substr($BASEPATH, 0, $sDR) == $dr){
 					$WEBPATH = substr($BASEPATH,$sDR);
 					if($WEBPATH){
-						$WEBPATH = str_replace($WEBPATH,DS,'/').'/';
-					}else{
-						$WEBPATH = '/';
+						$WEBPATH = rtrim(str_replace(DS,'/', $WEBPATH),'/');
 					}
-				}else{
-					$WEBPATH = '/';
 				}
 				unset($dr,$sDR);
 			}
@@ -36,7 +33,7 @@ if(!isset($BASEPATH)){
 	}
 	$BASEPATH .= DS;
 }else{
-	if(!isset($WEBPATH)) $WEBPATH = '/';
+	if(!isset($WEBPATH)) $WEBPATH = '';
 }
 
 //Check PHP Version
@@ -59,9 +56,9 @@ include (__DIR__ . '/autoloader.php');
 include (__DIR__ . '/functions.php');
 
 //Config
-include ($application_dir . '/config.php');
-if($application_include && file_exists($application_dir.'config.php')){
-	include($application_dir.'config.php');
+
+if($application_include && file_exists($application_dir.DS.'config.php')){
+	include($application_dir.DS.'config.php');
 }
 
 //Connect SQL if used

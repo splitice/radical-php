@@ -4,6 +4,10 @@ namespace Web\Page;
 class Request {
 	static $headers = array();
 	
+	static function getUrl(){
+		global $WEBPATH;
+		return RequestURL::fromRequest();
+	}
 	static function fromRequest(){
 		foreach ($_SERVER as $name => $value)
 		{
