@@ -1,21 +1,23 @@
 <?php
 define ( 'DS', DIRECTORY_SEPARATOR );
 
-//Attempt to compute basepath
-if($_SERVER['SCRIPT_FILENAME']){
-	$BASEPATH = dirname(dirname(dirname($_SERVER['SCRIPT_FILENAME'])));
-}else if($_SERVER['DOCUMENT_ROOT']){
-	$BASEPATH = $_SERVER['DOCUMENT_ROOT'];
-}elseif(php_sapi_name() == 'cli'){
-	if(isset($argv) && isset($argv[0])){
-		$BASEPATH = dirname(dirname(dirname($argv[0])));
-	}else{
-		$BASEPATH = getcwd();//We guess
+if(!isset($BASEPATH)){
+	//Attempt to compute basepath
+	if($_SERVER['SCRIPT_FILENAME']){
+		$BASEPATH = dirname(dirname(dirname($_SERVER['SCRIPT_FILENAME'])));
+	}else if($_SERVER['DOCUMENT_ROOT']){
+		$BASEPATH = $_SERVER['DOCUMENT_ROOT'];
+	}elseif(php_sapi_name() == 'cli'){
+		if(isset($argv) && isset($argv[0])){
+			$BASEPATH = dirname(dirname(dirname($argv[0])));
+		}else{
+			$BASEPATH = getcwd();//We guess
+		}
+	}else{	
+		$BASEPATH = realpath(__DIR__ . DS . '..');
 	}
-}else{	
-	$BASEPATH = realpath(__DIR__ . DS . '..');
+	$BASEPATH .= DS;
 }
-$BASEPATH .= DS;
 
 //Check PHP Version
 if (version_compare (PHP_VERSION, '5.3.3') < 0)
