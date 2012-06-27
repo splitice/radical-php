@@ -338,6 +338,31 @@ abstract class Table implements ITable, \JsonSerializable {
 	}
 	
 	/* Static Functions */
+	/**
+	 * This function gets all rows that match a specific query
+	 * or all if $sql is left blank.
+	 * 
+	 * $sql can be an array() of tablecolumns e.g post_id
+	 * $sql can be an instance of \Model\Database\SQL\Parts\Where
+	 * $sql can be any class that implements IToSQL including a query built with the query builder
+	 * 
+	 * ```
+	 * foreach(Post::getAll() as $post){
+	 * 		echo $post->getId(),'<br />';
+	 * }
+	 * //or
+	 * $posts = Post::getAll(array('category_id'=>1));
+	 * echo 'Posts: ',$post->getCount(),'<br />';
+	 * foreach($posts as $post){
+	 * 		echo $post->getId(),'<br />';
+	 * }
+	 * //etc
+	 * ```
+	 * 
+	 * @param mixed $sql
+	 * @throws \Exception
+	 * @return \Model\Database\Model\Table\TableSet
+	 */
 	static function getAll($sql = ''){
 		$obj = static::_select();
 		if(is_array($sql)){
@@ -381,6 +406,14 @@ abstract class Table implements ITable, \JsonSerializable {
 
 		return $sql;
 	}
+	
+	/**
+	 * Gets a row that matches the `$fields` supplied.
+	 * Returns null if nothing found.
+	 * 
+	 * @param array $fields
+	 * @return \Model\Database\Model\Table
+	 */
 	static function fromFields(array $fields){
 		$res = \DB::Query(static::_fromFields($fields));
 		if($row = $res->Fetch()){
@@ -388,6 +421,20 @@ abstract class Table implements ITable, \JsonSerializable {
 		}
 	}
 	
+	/**
+	 * Gets a row from ID.
+	 * If the primary key spans multiple columns then accepts
+	 * input only as an of column => value etc `array('key_name1'=> ...)`
+	 * Else also accepts input as a scalar value
+	 * 
+	 * ```
+	 * $post = Post::fromId(1);
+	 * ```
+	 * 
+	 * @param mixed $id
+	 * @throws \Exception
+	 * @return NULL|\Model\Database\Model\Table
+	 */
 	static function fromId($id){
 		//Check Cache
 		$cache_string = static::_idString($id);
@@ -438,9 +485,22 @@ abstract class Table implements ITable, \JsonSerializable {
 			return $r;
 		}
 	}
+	
+	/**
+	 * Returns a table made up of $res values.
+	 * Usually used in creation/insert.
+	 * 
+	 * @param mixed $res
+	 * @param bool $prefix array is prefixed or not
+	 * @return \Model\Database\Model\Table
+	 */
 	static function fromSQL($res,$prefix=false){
 		return new static($res,$prefix);
 	}
+	
+	/* (non-PHPdoc)
+	 * @see \Model\Database\Model\ITable::Insert()
+	 */
 	function Insert($ignore = -1){
 		$data = $this->toSQL();
 		foreach($data as $k=>$v){
@@ -464,6 +524,7 @@ abstract class Table implements ITable, \JsonSerializable {
 			}
 		}
 	}
+	
 	static function Exists(){
 		return \DB::tableExists($this->orm->tableInfo['name']);
 	}
