@@ -52,7 +52,7 @@ class Model extends ModelData {
 				$rTable = $reference->getTable();
 				
 				if($rTable == $tableName){
-					$this->references[] = array('from_table'=>$ref,'from_field'=>$relation->getField(),'to_table'=>$reference->getTableClass(),'to_field'=>$reference->getColumn());
+					$this->references[] = array('from_table'=>$ref,'from_field'=>$relation->getField(),'to_field'=>$reference->getColumn());
 				}
 			}
 		}

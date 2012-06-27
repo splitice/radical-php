@@ -265,9 +265,14 @@ abstract class Table implements ITable, \JsonSerializable {
 		//Get Class
 		$relationship = TableReference::getByTableClass($className);
 		if(isset($relationship)){//Is a relationship
-			$class = $relationship->getClass();
 			try{
-				return $class::getAll($this->getIdentifyingSQL());
+				foreach($this->orm->references as $ref){
+					if($ref['from_table']->getName() == $className){
+						$select = array($ref['from_field']=>$this->getSQLField($ref['to_field']));
+						return $relationship->getAll($select);
+					}
+				}
+				return $relationship->getAll($this->getIdentifyingSQL());
 			}catch(\Exception $ex){
 				throw new \Exception('Not related or invalid id select',0,$ex);
 			}
@@ -303,13 +308,14 @@ abstract class Table implements ITable, \JsonSerializable {
 		if(0 === substr_compare($m,'get',0,3)){//if starts with is get*
 			//get the action part
 			$actionPart = substr($m,3);
+			$className = $actionPart;
 			$actionPart{0} = strtolower($actionPart{0});
 			
 			//if we have the action part from the database
 			if(isset($this->orm->reverseMappings[$actionPart])){
 				return $this->call_get_member($actionPart,$a);
 			}elseif($actionPart{strlen($actionPart)-1} == 's'){//Get related objects (foward)
-				return $this->call_get_related($actionPart);
+				return $this->call_get_related($className);
 			}else{
 				throw new \Exception('Cant get an array of something that isnt a model');
 			}
