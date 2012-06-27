@@ -1,6 +1,8 @@
 <?php
 namespace Model\Database\DynamicTypes;
 
+use Exceptions\ValidationException;
+
 //TODO array based arithmatic
 //TODO gmp support (optional)
 class Decimal extends String implements IDynamicValidate {
