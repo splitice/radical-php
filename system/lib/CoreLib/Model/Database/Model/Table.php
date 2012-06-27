@@ -259,24 +259,27 @@ abstract class Table implements ITable, \JsonSerializable {
 		return $ret;
 	}
 	private function call_get_related($className){
-		//Remove the pluralising s from the end
-		$className = substr($className,0,-1);
-		
 		//Get Class
-		$relationship = TableReference::getByTableClass($className);
-		if(isset($relationship)){//Is a relationship
-			try{
-				foreach($this->orm->references as $ref){
-					if($ref['from_table']->getName() == $className){
-						$select = array($ref['from_field']=>$this->getSQLField($ref['to_field']));
-						return $relationship->getAll($select);
-					}
+		try{
+			//Use schema
+			foreach($this->orm->references as $ref){
+				if($ref['from_table']->getName() == $className){
+					$select = array($ref['from_field']=>$this->getSQLField($ref['to_field']));
+					return $ref['from_table']->getAll($select);
 				}
-				return $relationship->getAll($this->getIdentifyingSQL());
-			}catch(\Exception $ex){
-				throw new \Exception('Not related or invalid id select',0,$ex);
 			}
+			
+			//Fallback, not schema related so try a fetch
+			$relationship = TableReference::getByTableClass($className);
+			if(isset($relationship)){//Is a relationship
+				//Fallback to attempting to get 
+				return $relationship->getAll($this->getIdentifyingSQL());
+			}
+		}catch(\Exception $ex){
+			throw new \BadMethodCallException('Relationship doesnt exist: unable to relate');
 		}
+		
+		throw new \BadMethodCallException('Relationship doesnt exist: unkown table');
 	}
 	private function call_set_value($actionPart,$value){
 		if(isset($this->orm->reverseMappings[$actionPart])){		
@@ -315,6 +318,9 @@ abstract class Table implements ITable, \JsonSerializable {
 			if(isset($this->orm->reverseMappings[$actionPart])){
 				return $this->call_get_member($actionPart,$a);
 			}elseif($actionPart{strlen($actionPart)-1} == 's'){//Get related objects (foward)
+				//Remove the pluralising s from the end
+				$className = substr($className,0,-1);
+				
 				return $this->call_get_related($className);
 			}else{
 				throw new \Exception('Cant get an array of something that isnt a model');
