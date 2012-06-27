@@ -274,11 +274,7 @@ abstract class Table implements ITable, \JsonSerializable {
 		}
 	}
 	private function call_set_value($actionPart,$value){
-		if(isset($this->orm->reverseMappings[$actionPart])){
-			if(!isset($value)){
-				throw new \BadMethodCallException('set{X}(value) called without argument');
-			}
-		
+		if(isset($this->orm->reverseMappings[$actionPart])){		
 			//Is this key a dynamic type?
 			if(isset($this->orm->dynamicTyping[$actionPart])){
 				if(is_object($this->$actionPart) && $this->$actionPart instanceof IDynamicType){//Do we already have the key set as a dynamic type?
@@ -322,6 +318,8 @@ abstract class Table implements ITable, \JsonSerializable {
 			$actionPart{0} = strtolower($actionPart{0});
 			if(count($a) == 0){
 				return $this->call_set_value($actionPart, $a[0]);
+			}else{
+				throw new \BadMethodCallException('set{X}(value) called without argument');
 			}
 		}
 		throw new \BadMethodCallException('Not a valid function: '.$m);
