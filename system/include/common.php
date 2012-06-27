@@ -2,7 +2,9 @@
 define ( 'DS', DIRECTORY_SEPARATOR );
 
 //Attempt to compute basepath
-if($_SERVER['DOCUMENT_ROOT']){
+if($_SERVER['SCRIPT_FILENAME']){
+	$BASEPATH = dirname(dirname(dirname($_SERVER['SCRIPT_FILENAME'])));
+}else if($_SERVER['DOCUMENT_ROOT']){
 	$BASEPATH = $_SERVER['DOCUMENT_ROOT'];
 }elseif(php_sapi_name() == 'cli'){
 	if(isset($argv) && isset($argv[0])){
