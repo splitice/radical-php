@@ -1,10 +1,28 @@
 <?php
 define ( 'DS', DIRECTORY_SEPARATOR );
 
+//Work out base path
 if(!isset($BASEPATH)){
 	//Attempt to compute basepath
 	if($_SERVER['SCRIPT_FILENAME']){
 		$BASEPATH = dirname(dirname(dirname($_SERVER['SCRIPT_FILENAME'])));
+		if(!isset($WEBPATH)){
+			if(isset($_SERVER['DOCUMENT_ROOT'])){
+				$dr = rtrim($_SERVER['DOCUMENT_ROOT'],DS);
+				$sDR = strlen($dr);
+				if(substr($BASEPATH, 0, $sDR) == $dr){
+					$WEBPATH = substr($BASEPATH,$sDR);
+					if($WEBPATH){
+						$WEBPATH = str_replace($WEBPATH,DS,'/').'/';
+					}else{
+						$WEBPATH = '/';
+					}
+				}else{
+					$WEBPATH = '/';
+				}
+				unset($dr,$sDR);
+			}
+		}
 	}else if($_SERVER['DOCUMENT_ROOT']){
 		$BASEPATH = $_SERVER['DOCUMENT_ROOT'];
 	}elseif(php_sapi_name() == 'cli'){
@@ -17,6 +35,8 @@ if(!isset($BASEPATH)){
 		$BASEPATH = realpath(__DIR__ . DS . '..');
 	}
 	$BASEPATH .= DS;
+}else{
+	if(!isset($WEBPATH)) $WEBPATH = '/';
 }
 
 //Check PHP Version
