@@ -16,9 +16,9 @@ class SFTP {
 		$this->sftp = ssh2_sftp($ssh->getResource());
 	}
 	
-	function getFile($path){
+	function getFile($path,$mustExist = false){
 		$file = $this->newFile($path);
-		if(!$file->Exists()){
+		if($mustExist && !$file->Exists()){
 			throw new \Exceptions\FileNotExists($path);
 		}
 		return $file;
@@ -41,6 +41,11 @@ class SFTP {
 	function stat($filename){
 		$filename = $this->getLocalPath($filename);
 		return ssh2_sftp_stat ($this->sftp,$filename);
+	}
+	
+	function mkdir($filename){
+		$filename = $this->getPath($filename);
+		return mkdir ($filename);
 	}
 	
 	function ctime($filename){

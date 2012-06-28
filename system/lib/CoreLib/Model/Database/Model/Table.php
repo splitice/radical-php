@@ -328,7 +328,7 @@ abstract class Table implements ITable, \JsonSerializable {
 		}elseif(0 === substr_compare($m,'set',0,3)){
 			$actionPart = substr($m,3);
 			$actionPart{0} = strtolower($actionPart{0});
-			if(count($a) == 0){
+			if(count($a) != 0){
 				return $this->call_set_value($actionPart, $a[0]);
 			}else{
 				throw new \BadMethodCallException('set{X}(value) called without argument');
