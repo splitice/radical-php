@@ -31,4 +31,12 @@ class ArrayObject extends CollectionObject {
 		//Reorder over gap
 		$this->data = array_values($this->data);
 	}
+	
+	function UnShift($value){
+		array_unshift ($this->data,$value);
+	}
+	
+	function Pop(){
+		return array_pop($this->data);
+	}
 }
