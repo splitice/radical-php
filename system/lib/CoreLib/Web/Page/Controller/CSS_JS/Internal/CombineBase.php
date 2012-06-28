@@ -23,8 +23,8 @@ abstract class CombineBase extends IndividualBase {
 		
 		$version = (int)$cache->Get($name);
 		if(!$version){
-			$path = new \Core\Resource('css'.DS.$name);
-			foreach($path->getFiles('*.css') as $f){
+			$path = new \Core\Resource(static::EXTENSION.DS.$name);
+			foreach($path->getFiles('*.'.static::EXTENSION) as $f){
 				$version = max($version,filemtime($f));
 			}
 			$cache->Set($name, $version, 10);
