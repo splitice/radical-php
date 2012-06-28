@@ -10,6 +10,8 @@ use Web\Templates\Scope;
  *
  */
 class Template extends Page\Handler\PageBase {
+	const DEFAULT_CONTAINER = 'HTML';
+	
 	public $vars = array();
 	protected $file;
 	protected $name = 'error';
@@ -30,7 +32,7 @@ class Template extends Page\Handler\PageBase {
 	 * @param string $container the template container to use (template/*)
 	 * @throws \Exception
 	 */
-	function __construct($name, $vars = array(), $container = 'HTML') {
+	function __construct($name, $vars = array(), $container = self::DEFAULT_CONTAINER) {
 		$this->vars = $vars;
 		$this->name = $name;
 		$this->file = new \File(static::getPath($name,$container));
