@@ -61,20 +61,22 @@ class Fetch {
 	
         //gets an array having arrays of X and Y
         //if one range is passed, it should be passed in a simple array
-        function _getRanges($ranges){
-            if (coun($ranges) == 2 && is_int($ranges[0]) && is_int($ranges[1]))
-                return $this->_implodeRange($ranges);
-            else {
-                array_map(array('this','_implodeRange'), $ranges);
-                return implode(',', $ranges);
-            }
-            
-        }
+        function _formatRanges(array $ranges){
+            if (count($ranges) == 2 && is_int($ranges[0]) && is_int($ranges[1]))
+                return implode('-', $range);          
+            else{
+		foreach($ranges as $key=>$value){
+			if(!is_array($value)) { throw new \Exception('invalid range format'); return null; }
+			else $ranges[$key] = implode('-', $value);
+		}
+		return implode(',', $ranges);
+	    }
+	}
         
-        function _implodeRange($range){
-             return implode('-', $range);
+        function setRanges($ranges){
+             $this->curl[CURLOPT_RANGE] = $this->_formatRanges($ranges);
         }
-        
+                
 	function Post($data){
 		//Store previous post state
 		$post = $data = null;
