@@ -6,7 +6,7 @@ use Basic\Cryptography\Internal\HashBase;
 class Blowfish implements HashTypes\ITwoWayEncryption {
 	const IV = '12345678';
 	
-	public static function Encode($cleartext, $key, $iv = self::IV){
+	static function Encode($cleartext, $key, $iv = self::IV){
 		if(extension_loaded('mcrypt')){
 			$cipher = mcrypt_module_open(MCRYPT_BLOWFISH, '', MCRYPT_MODE_CBC, '');
 			
