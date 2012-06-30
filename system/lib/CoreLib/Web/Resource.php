@@ -93,6 +93,12 @@ class Resource {
 		}
 	}
 	static function output($type = 'script'){
-		echo self::generate($type);
+		$r = self::generate($type);
+		
+		if(is_object($r))
+			if(!$r->inner) return;
+		elseif(!$r) return;
+		
+		echo $r;
 	}
 }
