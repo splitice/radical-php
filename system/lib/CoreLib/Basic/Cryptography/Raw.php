@@ -3,7 +3,7 @@ namespace Basic\Cryptography;
 
 use Basic\Cryptography\Internal\HashBase;
 
-class Raw extends HashBase implements HashTypes\ITwoWayEncryption, HashTypes\IOneWayHash {
+class Raw extends HashBase implements HashTypes\ITwoWayEncryption, HashTypes\IHash {
 	static function Hash($text){
 		return $text;
 	}
