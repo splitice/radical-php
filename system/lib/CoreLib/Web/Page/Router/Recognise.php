@@ -2,12 +2,13 @@
 namespace Web\Page\Router;
 
 use Utility\Net\URL;
+use Web\Page\Request;
 
 class Recognise extends \Core\Object {
 	static $__dependencies = array('interface.Web.Page.Router.IPageRecognise','interface.Web.Page.API.IAPIModule');
 	
 	static function fromRequest(){
-		$url = URL::fromRequest();
+		$url = Request::getUrl();
 		return static::fromURL($url);
 	}
 	

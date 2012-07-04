@@ -1,6 +1,8 @@
 <?php
 namespace Web\Templates;
 
+use Web\Page\Handler\IPage;
+
 /**
  * Extra scope functions for templates based off
  *  ContainerTemplate for including the body of
@@ -13,7 +15,7 @@ class ContainerScope extends Scope {
 	protected $body;
 	protected $container;
 	
-	function __construct(array $vars,$handler,$body,$container){
+	function __construct(array $vars,IPage $handler = null,$body,$container){
 		$this->body = $body;
 		$this->container = $container;
 		parent::__construct($vars,$handler);

@@ -16,9 +16,9 @@ class SFTP {
 		$this->sftp = ssh2_sftp($ssh->getResource());
 	}
 	
-	function getFile($path){
+	function getFile($path,$mustExist = false){
 		$file = $this->newFile($path);
-		if(!$file->Exists()){
+		if($mustExist && !$file->Exists()){
 			throw new \Exceptions\FileNotExists($path);
 		}
 		return $file;
@@ -27,7 +27,7 @@ class SFTP {
 		return new \File($this->getPath($path));
 	}
 	function getPath($path){
-		return self::SCHEME."${sftp}${path}";
+		return self::SCHEME.$this->sftp.$path;
 	}
 	function getLocalPath($path){
 		if(substr($path,0,strlen(self::SCHEME)) == self::SCHEME){
@@ -41,6 +41,11 @@ class SFTP {
 	function stat($filename){
 		$filename = $this->getLocalPath($filename);
 		return ssh2_sftp_stat ($this->sftp,$filename);
+	}
+	
+	function mkdir($filename){
+		$filename = $this->getPath($filename);
+		return mkdir ($filename);
 	}
 	
 	function ctime($filename){

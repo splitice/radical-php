@@ -65,6 +65,9 @@ class Connection {
 		return $this->Execute($command);
 	}
 	
+	/**
+	 * @return \Utility\Net\SSH\SFTP
+	 */
 	function SFTP(){
 		if(!$this->sftp){
 			//Make new Connection

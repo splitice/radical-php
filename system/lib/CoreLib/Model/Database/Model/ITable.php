@@ -13,4 +13,7 @@ interface ITable {
 	static function fromFields(array $fields);
 	static function fromId($id);
 	static function fromSQL($res);
+	
+	static function Exists();
+	static function Create($data,$prefix=false);
 }

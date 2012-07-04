@@ -3,13 +3,13 @@ namespace Utility\Net;
 use Basic\String\UTF8;
 
 class URL extends \Core\Object {
-	private $scheme;
-	private $host;
-	private $port = 80;
+	protected $scheme;
+	protected $host;
+	protected $port = 80;
 	/**
 	 * @var URL\Path
 	 */
-	private $path;
+	protected $path;
 	
 	static private function _SCHEME_VALID($url) {
 		$scheme = strtolower ( ( string ) parse_url ( $url, PHP_URL_SCHEME ) );
@@ -176,7 +176,7 @@ class URL extends \Core\Object {
 		if (isset ( $ret ['scheme'] )) {
 			$ret ['scheme'] = UTF8::lower ( $ret ['scheme'] );
 			$ret ['host'] = UTF8::lower ( $ret ['host'] );
-			return new URL ( $ret );
+			return new static ( $ret );
 		}
 		return false;
 	}
@@ -190,7 +190,7 @@ class URL extends \Core\Object {
 		$url = $scheme.$_SERVER["HTTP_HOST"];
 		if(!$path) $path = $_SERVER['REQUEST_URI'];
 		$url.=$path;
-		
+
 		return static::fromURL($url);
 	}
 }

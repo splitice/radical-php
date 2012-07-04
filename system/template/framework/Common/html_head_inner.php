@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+<link rel="shortcut icon" href="<?=$_->u('favicon.ico');?>" type="image/x-icon"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 

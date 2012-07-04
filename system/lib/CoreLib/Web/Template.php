@@ -10,21 +10,29 @@ use Web\Templates\Scope;
  *
  */
 class Template extends Page\Handler\PageBase {
+	const DEFAULT_CONTAINER = 'HTML';
+	
 	public $vars = array();
 	protected $file;
 	protected $name = 'error';
-	protected $handler = false;
+	protected $handler = null;
 	private $container;
 	
 	/**
-	 * Instansiate a new Template
+	 * Instansiate a new Template. Templates can be used as a page handler.
+	 * Or rendered to a string using a sub request.
 	 * 
-	 * @param string $name
-	 * @param array $vars
-	 * @param string $container
+	 * Templates can be handled by a variety of different adapters detirmined
+	 * by the file extension.
+	 * 
+	 * Templates are sourced from ([app|system])/{$container}/{$name}.*
+	 * 
+	 * @param string $name name of the template file without extension.
+	 * @param array $vars variables to start with
+	 * @param string $container the template container to use (template/*)
 	 * @throws \Exception
 	 */
-	function __construct($name, $vars = array(), $container = 'HTML') {
+	function __construct($name, $vars = array(), $container = self::DEFAULT_CONTAINER) {
 		$this->vars = $vars;
 		$this->name = $name;
 		$this->file = new \File(static::getPath($name,$container));

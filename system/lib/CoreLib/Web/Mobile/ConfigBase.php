@@ -7,7 +7,7 @@ abstract class ConfigBase extends \Core\Object {
 	static $LOADSCREEN = null;//string or array of MODEL=>screen
 	static $ICON = null;//string or array of SIZE=>icon or SIZE=>aray('src'=>icon,'precomposed'=>true)
 	static $VIEWPORT = array(
-							'width=device-width, initial-scale=1, maximum-scale=1',
+	//						'width=device-width, initial-scale=1, maximum-scale=1',
 							'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
 						);
 	

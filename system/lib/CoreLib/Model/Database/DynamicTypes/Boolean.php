@@ -1,9 +1,10 @@
 <?php
 namespace Model\Database\DynamicTypes;
 
+use Exceptions\ValidationException;
 use Model\Database\Model\ITable;
 
-class Boolean extends String {
+class Boolean extends String implements IDynamicValidate {
 	/**
 	 * @param string $value
 	 */
@@ -40,6 +41,12 @@ class Boolean extends String {
 	function isFalse(){
 		return $this->false();
 	}
+	function Validate($value){
+		return in_array($value, $this->extra);
+	}
+	function DoValidate($value){
+		if(!$this->Validate($value)) throw new ValidationException();
+	}
 	
 	static function fromUserModel($value,array $extra,ITable $model){
 		if(is_bool($value)){
@@ -48,6 +55,8 @@ class Boolean extends String {
 			}else{
 				$value = $extra[1];
 			}
+		}else{
+			throw new ValidationException();
 		}
 		return static::fromDatabaseModel($value, $extra, $model);
 	}

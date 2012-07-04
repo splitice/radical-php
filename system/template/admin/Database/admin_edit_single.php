@@ -4,6 +4,7 @@
 
 <div class="admin">
 	<?php 
+	
 	$_->vars['form']->Add(new \Web\Form\Element\SubmitButton());
 	$_->vars['form']->action($_SERVER['REQUEST_URI']);
 	//die(var_dump($_->vars['form']));

@@ -40,6 +40,9 @@ class Path {
 	 * @param multitype: $path
 	 */
 	public function setPath($path) {
+		if(is_string($path)){
+			$path = explode('/',ltrim($path,'/'));
+		}
 		$this->path = $path;
 	}
 

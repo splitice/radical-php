@@ -8,7 +8,7 @@ class Library extends Tag\Script {
 	static $__dependencies = array('interface.HTML.Javascript.IJavascriptLibrary');
 	
 	function __construct($library,$version = null){
-		$class = '\\HTML\\Javascript\\Libraries\\'.$library;
+		$class = 'Web\\Resource\\Javascript\\Libraries\\'.$library;
 		if(!class_exists($class)){
 			throw new \Exception('Cant find javascript library');
 		}
@@ -18,7 +18,7 @@ class Library extends Tag\Script {
 	
 	static function Find($library,$version = null){
 		$library = strtolower($library);
-		$libs = Libraries::get('HTML\\Javascript\\Libraries\\*');
+		$libs = Libraries::get('Web\\Resource\\Javascript\\Libraries\\*');
 		foreach($libs as $l){
 			$ll = strtolower(array_pop(explode('\\',$l)));
 			if($ll == $library){

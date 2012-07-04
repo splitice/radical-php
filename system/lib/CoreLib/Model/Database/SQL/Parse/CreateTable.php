@@ -52,7 +52,7 @@ class CreateTable extends CollectionObject {
 			$res = \DB::Q($query->toSQL());
 			$data = $res->Fetch(DBAL\Fetch::NUM);
 		}catch(\Exception $ex){
-			throw new \Exception('Couldnt get Create Table (permissions?) for '.$table,null,$ex);
+			throw new \Exception('Couldnt get Create Table ('.$ex->getMessage().') for '.$table,null,$ex);
 		}
 		return new static($data[1]);
 	}

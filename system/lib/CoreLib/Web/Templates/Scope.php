@@ -24,7 +24,7 @@ class Scope {
 	 * @param array $vars the variables to put in the scope
 	 * @param IPage $handler the page handler that called for a template
 	 */
-	function __construct(array $vars,IPage $handler){
+	function __construct(array $vars,IPage $handler = null){
 		$this->form = new FormBuilder();
 		$this->vars = $vars;
 		$this->handler = $handler;
@@ -91,7 +91,7 @@ class Scope {
 		
 		//Is relative? Make siterooted
 		if($first_part{0} != '/'){
-			return \Core\Server::getSiteRoot().$first_part;
+			$object = \Core\Server::getSiteRoot().$object;
 		}
 		
 		return $object;

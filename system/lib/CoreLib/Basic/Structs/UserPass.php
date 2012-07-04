@@ -2,7 +2,14 @@
 namespace Basic\Structs;
 
 class UserPass implements ILoginDetails {
+	/**
+	 * @var string
+	 */
 	protected $username;
+	
+	/**
+	 * @var string
+	 */
 	protected $password;
 	
 	function __construct($username,$password){
@@ -51,5 +58,9 @@ class UserPass implements ILoginDetails {
 	
 	function __toString(){
 		return $this->username.':'.$this->password;
+	}
+	
+	function toArray(){
+		return $this->getDetails();
 	}
 }

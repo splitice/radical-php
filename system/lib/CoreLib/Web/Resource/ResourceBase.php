@@ -1,6 +1,8 @@
 <?php
 namespace Web\Resource;
 
+use Core\Server;
+
 abstract class ResourceBase {
 	const PATH = '|';
 	
@@ -22,6 +24,6 @@ abstract class ResourceBase {
 	}
 	protected static abstract function _HTML($path);
 	static function HTML($name){
-		return static::_HTML('/'.$name.'.'.static::FileTime($name).'.'.static::PATH);
+		return static::_HTML(Server::getSiteRoot().$name.'.'.static::FileTime($name).'.'.static::PATH);
 	}
 }

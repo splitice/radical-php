@@ -1,47 +1,35 @@
 <?php
 namespace Model\Database\ORM;
 
-use Model\Database\SQL\Parse\CreateTable\ColumnReference;
-
 use Model\Database\Model\TableReference;
-
 use Model\Database\Model\TableReferenceInstance;
-
 use Model\Database\SQL\Parse\CreateTable;
 
 class Model extends ModelData {	
-	private function fieldReferences(CreateTable $structure){
-		$ret = array();
-		foreach($structure as $field=>$statement){
-			$ref = ModelReference::Find($field);
-			if($ref != $this->table){
-				$ret[$field] = new ColumnReference($ref->getTable(), $field);
-			}
-		}
-		return $ret;
-	}
 	function __construct(TableReferenceInstance $table){
 		$this->table = $table;
 		$this->tableInfo = $table->Info();
 		$structure = CreateTable::fromTable($table);
 		$this->engine = $structure->engine;
 		
-		foreach($structure as $col){
-			if($col->hasAttribute('AUTO_INCREMENT')){
-				$this->autoIncrementField = $col->getName();
-				break;
-			}
-		}
-		
+		//Work out which fields are IDs
 		if(isset($structure->indexes['PRIMARY'])){
 			$this->id = $structure->indexes['PRIMARY']->getKeys();
 		}
 		
-		//Build mapping translation array=
+		//Build mapping translation array
 		$this->mappings = $this->getMappings($structure)->translationArray();
 		
-		if($this->autoIncrementField){
-			$this->autoIncrement = $this->mappings[$this->autoIncrementField];
+		//This is the auto increment field, if it exists
+		foreach($this->id as $col){
+			if($structure[$col]->hasAttribute('AUTO_INCREMENT')){
+				//Store the auto increment field in ORM format
+				$this->autoIncrement = $this->mappings[$col];
+				$this->autoIncrementField = $col;
+
+				//There can only be one AUTO_INCREMENT field per table (also it must be in the PKey)
+				break;
+			}
 		}
 		
 		//build relation array
@@ -50,7 +38,7 @@ class Model extends ModelData {
 				$this->relations[$r->getField()] = $r->getReference();
 			}
 		}elseif($this->engine == 'myisam'){
-			$this->relations = $this->fieldReferences($structure);
+			$this->relations = MyIsam::fieldReferences($structure);
 		}else{
 			throw new \Exception('Unknown database engine type: '.$this->engine);
 		}
@@ -64,7 +52,7 @@ class Model extends ModelData {
 				$rTable = $reference->getTable();
 				
 				if($rTable == $tableName){
-					$this->depends[$reference->getTableClass()] = array('table'=>$ref,'from'=>$relation->getField(),'to'=>$reference->getColumn());
+					$this->references[] = array('from_table'=>$ref,'from_field'=>$relation->getField(),'to_field'=>$reference->getColumn());
 				}
 			}
 		}
@@ -76,24 +64,32 @@ class Model extends ModelData {
 		//Validation
 		$this->validation = new Validation($structure,$this->dynamicTyping);
 		
-		parent::__construct();
+		parent::__construct($this->mappings);
 		
 		//Store into cache
 		Cache::Set($table,$this);
 	}
 	
 	function getMappings($structure = null){
+		//Accept a null strucure for when this method is called externally
 		if($structure === null){
 			$structure = CreateTable::fromTable($this->table);
 		}
+		
+		//Return a Mapping Manager
 		return new Mappings($this,$structure);
 	}
 	
+	/**
+	 * Make an instance of the parent class. Usually this
+	 * is used for storage.
+	 * 
+	 * @return \Model\Database\ORM\ModelData
+	 */
 	function toModelData(){
-		$r = new ModelData();
-		foreach($this as $k=>$v){
+		$r = new ModelData($this->mappings);
+		foreach($this as $k=>$v)
 			$r->$k = $v;
-		}
 		return $r;
 	}
 }

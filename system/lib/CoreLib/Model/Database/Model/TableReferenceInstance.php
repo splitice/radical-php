@@ -65,6 +65,10 @@ class TableReferenceInstance extends \Core\Object {
 		return array_pop($e);
 	}
 	
+	function __toString(){
+		return $this->class;
+	}
+	
 	function Info(){
 		$class = $this->class;
 		$info = array();

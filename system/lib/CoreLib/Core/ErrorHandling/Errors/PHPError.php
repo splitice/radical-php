@@ -43,7 +43,7 @@ class PHPError extends Internal\ErrorBase {
 		}
 	}
 	static function Init(){
-		set_error_handler ( array (get_called_class(), 'Handler' ) );
+		set_error_handler ( array (get_called_class(), 'Handler' ), E_ALL);
 	}
 	static function Handler($errno, $msg_text, $errfile, $errline) {
 		if (! (error_reporting () & $errno)) {

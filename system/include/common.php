@@ -1,19 +1,40 @@
 <?php
 define ( 'DS', DIRECTORY_SEPARATOR );
 
-//Attempt to compute basepath
-if($_SERVER['DOCUMENT_ROOT']){
-	$BASEPATH = $_SERVER['DOCUMENT_ROOT'];
-}elseif(php_sapi_name() == 'cli'){
-	if(isset($argv) && isset($argv[0])){
-		$BASEPATH = dirname(dirname(dirname($argv[0])));
-	}else{
-		$BASEPATH = getcwd();//We guess
+//Work out base path
+if(!isset($BASEPATH)){
+	//Attempt to compute basepath
+	if($_SERVER['SCRIPT_FILENAME']){
+		$BASEPATH = dirname(dirname(dirname($_SERVER['SCRIPT_FILENAME'])));
+		if(!isset($WEBPATH)){
+			if(isset($_SERVER['DOCUMENT_ROOT'])){
+				$dr = rtrim($_SERVER['DOCUMENT_ROOT'],DS);
+				$sDR = strlen($dr);
+				$WEBPATH = '';
+				if(substr($BASEPATH, 0, $sDR) == $dr){
+					$WEBPATH = substr($BASEPATH,$sDR);
+					if($WEBPATH){
+						$WEBPATH = rtrim(str_replace(DS,'/', $WEBPATH),'/');
+					}
+				}
+				unset($dr,$sDR);
+			}
+		}
+	}else if($_SERVER['DOCUMENT_ROOT']){
+		$BASEPATH = $_SERVER['DOCUMENT_ROOT'];
+	}elseif(php_sapi_name() == 'cli'){
+		if(isset($argv) && isset($argv[0])){
+			$BASEPATH = dirname(dirname(dirname($argv[0])));
+		}else{
+			$BASEPATH = getcwd();//We guess
+		}
+	}else{	
+		$BASEPATH = realpath(__DIR__ . DS . '..');
 	}
-}else{	
-	$BASEPATH = realpath(__DIR__ . DS . '..');
+	$BASEPATH .= DS;
+}else{
+	if(!isset($WEBPATH)) $WEBPATH = '';
 }
-$BASEPATH .= DS;
 
 //Check PHP Version
 if (version_compare (PHP_VERSION, '5.3.3') < 0)
@@ -35,9 +56,9 @@ include (__DIR__ . '/autoloader.php');
 include (__DIR__ . '/functions.php');
 
 //Config
-include ($application_dir . '/config.php');
-if($application_include && file_exists($application_dir.'config.php')){
-	include($application_dir.'config.php');
+
+if($application_include && file_exists($application_dir.DS.'config.php')){
+	include($application_dir.DS.'config.php');
 }
 
 //Connect SQL if used

@@ -7,8 +7,8 @@ class ModelData {
 	public $mappings;
 	public $reverseMappings;
 	public $fields;
-	public $relations;
-	public $depends = array();
+	public $relations = array();//$this -> $other
+	public $references = array();//$other -> $this
 	public $id;
 	public $validation;
 	public $engine;
@@ -16,7 +16,7 @@ class ModelData {
 	public $autoIncrementField;
 	public $autoIncrement;
 	
-	function __construct(){
-		$this->reverseMappings = array_flip($this->mappings);
+	function __construct(array $mappings){
+		$this->reverseMappings = array_flip($mappings);
 	}
 }
