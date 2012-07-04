@@ -106,4 +106,7 @@ class Instance {
 	function Delete(){
 		unlink($this->file);
 	}
+        function Handle($mode){
+		return fopen($this->file, $mode);
+	}
 }
