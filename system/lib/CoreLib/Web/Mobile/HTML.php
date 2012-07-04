@@ -72,7 +72,7 @@ class HTML extends Config {
 					
 					if($loadScreen){
 						//TODO: Rotate and Resize
-						$ret[] = new Link('apple-touch-startup-image', $loadScreen, $media);
+						$ret[] = new Link($loadScreen, 'apple-touch-startup-image', $media);
 					}
 				}
 			}
