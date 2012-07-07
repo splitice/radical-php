@@ -3,8 +3,8 @@
 <title><?=$_->handler->Title();?></title>
 
 <?php 
-if(\Web\Resource\Javascript::Exists('admin')){
-	echo \Web\Resource\Javascript::HTML('admin');
+if(\Web\Resource\Javascript::Exists('main')){
+	echo \Web\Resource\Javascript::HTML('main');
 }
 if(\Web\Resource\CSS::Exists('admin')){
 	echo \Web\Resource\CSS::HTML('admin');

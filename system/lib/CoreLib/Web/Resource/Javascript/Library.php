@@ -8,11 +8,15 @@ class Library extends Tag\Script {
 	static $__dependencies = array('interface.HTML.Javascript.IJavascriptLibrary');
 	
 	function __construct($library,$version = null){
-		$class = 'Web\\Resource\\Javascript\\Libraries\\'.$library;
-		if(!class_exists($class)){
-			throw new \Exception('Cant find javascript library');
+		if(substr($library,0,6) == 'local:'){
+			$this->attributes['src'] = substr($library,6);
+		}else{
+			$class = 'Web\\Resource\\Javascript\\Libraries\\'.$library;
+			if(!class_exists($class)){
+				throw new \Exception('Cant find javascript library');
+			}
+			$this->attributes['src'] = new $class($version);
 		}
-		$this->attributes['src'] = new $class($version);
 	}
 	
 	

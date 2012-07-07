@@ -24,7 +24,7 @@ class Menu extends PageBase {
 			$modules = Arr::where(function($k,$v){
 				return class_exists($v);//is valid class
 			},\Core\Libraries::get(Constants::CLASS_PATH.'*'));
-				
+
 			//Create links to modules
 			$VARS['modules'] = Arr::map(array('*','createLink'), $modules);
 				
