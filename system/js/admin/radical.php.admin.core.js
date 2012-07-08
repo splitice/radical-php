@@ -1,4 +1,4 @@
-define(["jQuery",'jQueryUI'],function($){
+define(["jQuery",'jQueryUI'],function(a){
 	$(function(){
 		$('.tabs').tabs({
 			ajaxOptions: {

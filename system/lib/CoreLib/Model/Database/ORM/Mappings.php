@@ -15,7 +15,7 @@ class Mappings {
 	 */
 	private $structure;
 	
-	function __construct(Model $model,CreateTable $structure){
+	function __construct(ModelData $model,CreateTable $structure){
 		$this->model = $model;
 		$this->structure = $structure;
 	}

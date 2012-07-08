@@ -12,7 +12,14 @@
 		<?=$_->subrequest(new \Web\Page\Admin\Menu());?>
 	</ul>
 	<div id="test">
-	<? $_->body()?>
+		<div class="tabs tabs-left">
+			<ul>
+				<?=$_->subrequest(new \Web\Page\Admin\SubMenu(new \Web\Page\Admin\Modules\Database()));?>
+			</ul>
+			<div id="tt">
+				<? $_->body()?>
+			</div>
+		</div>
 	</div>
 </div>
 <? $_->inc('Common/footer','framework'); ?>

@@ -70,16 +70,6 @@ class Model extends ModelData {
 		Cache::Set($table,$this);
 	}
 	
-	function getMappings($structure = null){
-		//Accept a null strucure for when this method is called externally
-		if($structure === null){
-			$structure = CreateTable::fromTable($this->table);
-		}
-		
-		//Return a Mapping Manager
-		return new Mappings($this,$structure);
-	}
-	
 	/**
 	 * Make an instance of the parent class. Usually this
 	 * is used for storage.

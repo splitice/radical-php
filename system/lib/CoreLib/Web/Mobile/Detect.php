@@ -44,6 +44,12 @@ class Detect {
 		
 		return $mobile_browser;
 	}
+	static function getIOSVersion(){
+		if(preg_match('/OS (\d)+_(\d)+ like Mac OS X/i', $_SERVER['HTTP_USER_AGENT'], $m)){
+			$m = $m[1].'.'.$m[2];
+			return (float)$m;
+		}
+	}
 	static function isApple($model = null){
 		if($model){
 			//format model string
