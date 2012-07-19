@@ -11,20 +11,6 @@ use Model\Database\SQL;
 use Model\Database\SQL\Parts;
 
 abstract class Table implements ITable, \JsonSerializable {	
-	static function _idString($id){
-		if(is_object($id)){
-			$id = (array)$id;
-		}
-		if(is_array($id)) {
-			ksort($id);
-			$id = implode('|',$id);
-		}
-		$id .= '|'.get_called_class();
-		return $id;
-	}
-	public function getIdKey(){
-		return static::_idString($this->getId());
-	}
 	protected $_id;
 	function getId(){
 		//Check if already done
@@ -336,6 +322,21 @@ abstract class Table implements ITable, \JsonSerializable {
 		}
 		throw new \BadMethodCallException('Not a valid function: '.$m);
 	}
+	protected static function _getAll($sql = ''){
+		$obj = static::_select();
+		if(is_array($sql)){
+			$obj = static::_fromFields($sql);
+		}elseif($sql instanceof Parts\Where){
+			$obj = static::_select()
+				->where($sql);
+		}elseif($sql instanceof IToSQL){
+			$obj = $sql->mergeTo(static::_select());
+		}elseif($sql){
+			throw new \Exception('Invalid SQL Type');
+		}
+		
+		return $obj;
+	}
 	
 	/* Static Functions */
 	/**
@@ -364,24 +365,9 @@ abstract class Table implements ITable, \JsonSerializable {
 	 * @return \Model\Database\Model\Table\TableSet
 	 */
 	static function getAll($sql = ''){
-		$obj = static::_select();
-		if(is_array($sql)){
-			$obj = static::_fromFields($sql);
-		}elseif($sql instanceof Parts\Where){
-			$obj = static::_select()
-				->where($sql);
-		}elseif($sql instanceof IToSQL){
-			$obj = $sql->mergeTo(static::_select());
-		}elseif($sql){
-			throw new \Exception('Invalid SQL Type');
-		}
+		$obj = static::_getAll($sql);
 		
-		$cached = Table\TableCache::Get($obj);
-		if($cached){		
-			return $cached;
-		}else{
-			return new Table\TableSet($obj, get_called_class());
-		}
+		return new Table\TableSet($obj, get_called_class());
 	}
 	private static function _select(){
 		return new SQL\SelectStatement(static::TABLE);
@@ -435,16 +421,7 @@ abstract class Table implements ITable, \JsonSerializable {
 	 * @throws \Exception
 	 * @return NULL|\Model\Database\Model\Table
 	 */
-	static function fromId($id){
-		//Check Cache
-		$cache_string = static::_idString($id);
-		$ret = Table\TableCache::Get($cache_string);
-		
-		//If is cached
-		if($ret){
-			return $ret;
-		}
-		
+	static function fromId($id){		
 		$orm = ORM\Manager::getModel(TableReference::getByTableClass(get_called_class()));
 		
 		//Base SQL
@@ -480,9 +457,7 @@ abstract class Table implements ITable, \JsonSerializable {
 		
 		$res = \DB::Query($sql);
 		if($row = $res->Fetch()){
-			$r = new static($row);
-			Table\TableCache::Add($r);
-			return $r;
+			return new static($row);
 		}
 	}
 	

@@ -15,8 +15,6 @@ class TableSet extends \Basic\Arr\Object\IncompleteObject {
 	function __construct(IStatement $sql,$tableClass){
 		$this->sql = $sql;
 		$this->tableClass = $tableClass;
-		
-		TableCache::Add($this, $this->sql);
 	}
 	function Search($text,ISearchAdapter $adapter){
 		$sql = clone $this->sql;
@@ -43,10 +41,7 @@ class TableSet extends \Basic\Arr\Object\IncompleteObject {
 		$res = \DB::Query($this->sql);
 		
 		//Table'ify
-		$tableClass = $this->tableClass;
-		return $res->FetchCallback(function($obj) use($tableClass){
-			return TableCache::Add($tableClass::fromSQL($obj));
-		});
+		return $res->FetchCallback(array($this->tableClass,'fromSQL'));
 	}
 	
 	public function count(){
