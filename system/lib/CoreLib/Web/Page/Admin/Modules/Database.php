@@ -104,6 +104,7 @@ class Database extends AdminModuleBase {
 					$tm = new \Web\Form\Builder\FormInstance($this->table);
 					$id = unserialize($_GET['id']);
 					$form = $tm->fromId($id);
+					
 					$vars = array('form'=>$form,'relations'=>$this->table->getTableManagement()->getRelations());
 					return new Templates\ContainerTemplate('Database/admin_edit_single',$vars,'admin');
 				case 'edit_all':

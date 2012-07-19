@@ -55,8 +55,12 @@ $application_include = $application_dir . DS . 'include' . DS;
 include (__DIR__ . '/autoloader.php');
 include (__DIR__ . '/functions.php');
 
-//Config
+//GPC
+if (get_magic_quotes_gpc()) {
+	include (__DIR__ . '/magicgpc.php');
+}
 
+//Config
 if($application_include && file_exists($application_dir.DS.'config.php')){
 	include($application_dir.DS.'config.php');
 }
