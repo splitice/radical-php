@@ -24,8 +24,7 @@ class Runner extends \Core\Object {
 		return false;
 	}
 	
-	
-	function Run(array $arguments){
+	function Run(array $arguments = array()){
 		$class = $this->getClass();
 		$instance = new $class();
 		if($instance instanceof Jobs\Interfaces\ICronJob){

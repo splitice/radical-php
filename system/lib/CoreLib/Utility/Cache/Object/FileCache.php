@@ -16,22 +16,22 @@ class FileCache extends Internal\FileCacheBase implements ICache {
 			}
 		}
 		
-		$path = $dir.DS.substr($hash,4);
-		if(!@file_exists($path)){
-			return false;
-		}
-		
-		return $path;
+		return $dir.DS.substr($hash,4);
 	}
 	function Get($key){
 		if($path = $this->path($key)){
+			if(!@file_exists($path)){
+				return false;
+			}
 			return file_get_contents($path);
 		}
 	}
 	function Set($key,$value,$ttl = null){
 		$path = $this->path($key);
 		if($path){
-			@file_put_contents($path, $value);
+			$success = (@file_put_contents($path, $value) !== false);
+			if(!$success)
+				throw new \Exception('Couldnt Write file for cache');
 		}
 	}
 	function Delete($key){
