@@ -11,7 +11,7 @@ abstract class PageRequestBase {
 	
 	/**
 	 * Headers to output
-	 * @var \Page\HeaderManager
+	 * @var \Web\Page\Handler\HeaderManager
 	 */
 	public $headers;
 	

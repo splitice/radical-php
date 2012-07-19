@@ -8,15 +8,25 @@ abstract class CrontabJob extends \Core\Object implements Interfaces\ICronJob {
 	abstract protected function _Execute(array $arguments);
 	
 	private function getTime(){
+		$time = 0;
 		switch($this->getInterval()){
 			case 'minutely':
+			case 'hourly':
+			case 'daily':
+			case 'weekly':
 				$time = 60;
 			case 'hourly':
+			case 'daily':
+			case 'weekly':
 				$time *= 60;
 			case 'daily':
-				$time *= 60;
+			case 'weekly':
+				$time *= 24;
 			case 'weekly':
 				$time *= 7;
+				break;
+			default:
+				throw new \Exception('Unknown Interval: '.$this->getInterval());
 		}
 		return $time;
 	}
@@ -24,15 +34,14 @@ abstract class CrontabJob extends \Core\Object implements Interfaces\ICronJob {
 	function Execute(array $arguments){
 		$key = '__cron__'.$this->getName();//because pool isnt working for file
 		$fileCache = PooledCache::Get('cron', 'FileCache');
-		$lastExecute = $fileCache->Get($key);
-		$fileCache->Set($key,time());
-		die(var_dump($lastExecute));
+		$lastExecute = (int)$fileCache->Get($key);
 		$lastWantTo = time() - $this->getTime();
 		if(!$lastExecute || $lastExecute < $lastWantTo){
 			$this->_Execute($arguments);
 			$fileCache->Set($key,time());
+			return true;
 		}else{
-			die('its not time');
+			return false;
 		}
 	}
 }

@@ -2,6 +2,7 @@
 namespace Utility\Cache\Object;
 
 class FileCache extends Internal\FileCacheBase implements ICache {
+	const BASE = 'cache';
 	const PATH = 'main';
 
 	protected function path($key){
@@ -15,13 +16,12 @@ class FileCache extends Internal\FileCacheBase implements ICache {
 				@mkdir($dir);
 			}
 		}
-		
 		return $dir.DS.substr($hash,4);
 	}
 	function Get($key){
 		if($path = $this->path($key)){
 			if(!@file_exists($path)){
-				return false;
+				return null;
 			}
 			return file_get_contents($path);
 		}
@@ -31,7 +31,7 @@ class FileCache extends Internal\FileCacheBase implements ICache {
 		if($path){
 			$success = (@file_put_contents($path, $value) !== false);
 			if(!$success)
-				throw new \Exception('Couldnt Write file for cache');
+				throw new \Exception('Couldnt Write file for cache: '.$path);
 		}
 	}
 	function Delete($key){
