@@ -5,7 +5,7 @@ use Model\Database\SQL\IStatement;
 use Model\Database\SQL;
 use Model\Database\DBAL;
 
-class CacheableTableSet extends TableCache {
+class CacheableTableSet extends TableSet {
 	function __construct(IStatement $sql,$tableClass){
 		parent::__construct($sql,$tableClass);
 		TableCache::Add($this, $this->sql);
