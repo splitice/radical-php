@@ -29,8 +29,8 @@ class CacheableTable extends Table {
 		}
 		
 		$ret = parent::fromId($id);
-		
-		Table\TableCache::Add($ret);
+		if($ret)
+			Table\TableCache::Add($ret);
 		
 		return $ret;
 	}
