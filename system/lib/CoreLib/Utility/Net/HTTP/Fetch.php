@@ -25,13 +25,10 @@ class Fetch {
 		$this->curl[CURLOPT_USERAGENT] = $ua;
 		return $this;
 	}
-	function setIP($ip_addr,$proxy_details=false){
-		//Check (Cached)
-		
-		//Use
-		
-		//TODO: Implement setIP
-	}
+        function setInterface($interface){
+                $this->curl[CURLOPT_INTERFACE] = $interface;
+        }
+        //TODO; setRanges($array) array having X and Y, or  having arrays of Xs and Ys
 	function setHeader($name,$value){
 		$this->headers[$name] = $value;
 		$r = array();
@@ -41,15 +38,38 @@ class Fetch {
 		$this->curl[CURLOPT_HTTPHEADER] = $r;
 	}
 	function setReferer($url){
-		if(is_bool($url)){
-			$this->curl[CURLOPT_FOLLOWLOCATION] = $url;
-		}else{
-			$this->curl[CURLOPT_REFERER] = $url;
-		}
+		$this->curl[CURLOPT_REFERER] = $url;
 		return $this;
+	}
+	function followLocation($bool, $max = null){
+                $this->curl[CURLOPT_FOLLOWLOCATION] = $bool;
+                if($max)
+                    $this->curl[CURLOPT_MAXREDIRS] = $amx;
+                return $this;
 	}
 	function setTimeout($time){
 		$this->curl[CURLOPT_TIMEOUT] = $time;
+		return $this;
+	}
+        function setBinary($bool){
+		$this->curl[CURLOPT_BINARYTRANSFER] = $bool;
+		return $this;
+	}
+        function setBufferSize($size){
+		$this->curl[CURLOPT_BUFFERSIZE] = $size;
+		return $this;
+	}
+        function setLowSpeed($speed, $time = null){
+		$this->curl[CURLOPT_LOW_SPEED_LIMIT] = $speed;
+                if($time)
+                    $this->curl[CURLOPT_LOW_SPEED_TIME] = $time;
+		return $this;
+	}
+        function setMaxSpeed($down = null, $up = null){
+                if($down)
+                    $this->curl[CURLOPT_MAX_RECV_SPEED_LARGE] = $down;
+                if($up)
+                    $this->curl[CURLOPT_MAX_SEND_SPEED_LARGE] = $up;
 		return $this;
 	}
 	function setConnectTimeout($time){
@@ -62,6 +82,24 @@ class Fetch {
 		}
 	}
 	
+        //gets an array having arrays of X and Y
+        //if one range is passed, it should be passed in a simple array
+        protected function _formatRanges(array $ranges){
+            if (count($ranges) == 2 && is_int($ranges[0]) && is_int($ranges[1]))
+                return implode('-', $ranges);          
+            else{
+		foreach($ranges as $key=>$value){
+			if(!is_array($value)) { throw new \Exception('invalid range format'); return null; }
+			else $ranges[$key] = implode('-', $value);
+		}
+		return implode(',', $ranges);
+	    }
+	}
+        
+        function setRanges($ranges){
+             $this->curl[CURLOPT_RANGE] = $this->_formatRanges($ranges);
+        }
+                
 	function Post($data){
 		//Store previous post state
 		$post = $data = null;
