@@ -44,9 +44,6 @@ class Boolean extends String implements IDynamicValidate {
 	function Validate($value){
 		return in_array($value, $this->extra);
 	}
-	function DoValidate($value){
-		if(!$this->Validate($value)) throw new ValidationException();
-	}
 	
 	static function fromUserModel($value,array $extra,ITable $model){
 		if(is_bool($value)){

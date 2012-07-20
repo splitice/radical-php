@@ -1,6 +1,8 @@
 <?php
 namespace Model\Database\Model;
 
+use Model\Database\DynamicTypes\IDynamicValidate;
+
 use Model\Database\DynamicTypes\INullable;
 use Exceptions\ValidationException;
 use Model\Database\DynamicTypes\IDynamicType;
@@ -195,6 +197,7 @@ abstract class Table implements ITable, \JsonSerializable {
 	}
 	
 	function Update(){
+		$this->Validate();
 		\DB::Update($this->orm->tableInfo['name'], $this->toSQL(), $this->getIdentifyingSQL());
 	}
 	
@@ -461,6 +464,14 @@ abstract class Table implements ITable, \JsonSerializable {
 		}
 	}
 	
+	function Validate(){
+		foreach($this->orm->dynamicTyping as $k=>$v){
+			$v = $this->$k;
+			if($v instanceof IDynamicValidate)
+				$v->DoValidate((string)$v,$k);
+		}
+	}
+	
 	/**
 	 * Returns a table made up of $res values.
 	 * Usually used in creation/insert.
@@ -477,6 +488,9 @@ abstract class Table implements ITable, \JsonSerializable {
 	 * @see \Model\Database\Model\ITable::Insert()
 	 */
 	function Insert($ignore = -1){
+		$this->Validate();
+		
+		//Build & Do SQL
 		$data = $this->toSQL();
 		foreach($data as $k=>$v){
 			if($v === null){

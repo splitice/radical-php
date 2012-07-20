@@ -3,7 +3,7 @@ namespace Model\Database\DynamicTypes;
 
 use Model\Database\Model\ITable;
 
-class String implements IDynamicType {
+class String extends DynamicType implements IDynamicType {
 	protected $value;
 	protected $extra;
 	

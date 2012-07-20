@@ -10,6 +10,7 @@ interface IDynamicValidate extends IValidator {
 	 *
 	 * @throws ValidationException if $value in invalid
 	 * @param mixed $value
+	 * @param string $field
 	 */
-	function DoValidate($value);
+	function DoValidate($value,$field);
 }
