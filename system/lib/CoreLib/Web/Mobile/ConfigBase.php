@@ -22,8 +22,7 @@ abstract class ConfigBase extends \Core\Object {
 			
 			//iPhone
 			'iphone'=>'screen and (min-device-width: 200px) and (max-device-width: 320px) and (orientation:landscape) and (-webkit-min-device-pixel-ratio: 1)',
-			'iphone_landscape'=>'screen and (min-device-width: 200px) and (max-device-width: 320) and (orientation:portrait) and (-webkit-min-device-pixel-ratio: 1)',
-	
+
 			//Retina iPhone
 			'iphone_retina'=>'screen and (min-device-width: 200px) and (max-device-width: 320px) and (orientation:portrait) and (-webkit-min-device-pixel-ratio: 2)',
 			'iphone_landscape_retina'=>'screen and (min-device-width: 200px) and (max-device-width: 320px) and (orientation:landscape) and (-webkit-min-device-pixel-ratio: 2)',

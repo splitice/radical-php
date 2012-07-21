@@ -28,10 +28,9 @@ abstract class IndividualBase extends \Web\Page\Handler\PageBase {
 		return $this->name;
 	}
 	private function getFile(){
-		//TODO: Override
 		global $BASEPATH;
-		$expr = $BASEPATH.'*'.DS.$this->getPath();
-		return array_pop(glob($expr));
+		$expr = $BASEPATH.'{app,system}'.DS.$this->getPath();
+		return array_pop(glob($expr,GLOB_BRACE ));
 	}
 	/**
 	 * Handle GET request

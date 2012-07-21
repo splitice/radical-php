@@ -4,6 +4,7 @@ namespace Web\Page\Admin\Modules\Database;
 use Model\Database\Model\Table\TableManagement;
 
 class HumanTableManagement extends TableManagement {
+	public $SHOW_ADMIN = true;
 	function RenameColumn($k){
 		$orm = $this->table->getORM();
 		if(count($orm->id) == 1){

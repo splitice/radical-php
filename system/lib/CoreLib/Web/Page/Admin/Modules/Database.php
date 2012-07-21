@@ -1,6 +1,10 @@
 <?php
 namespace Web\Page\Admin\Modules;
 
+use Model\Database\Model\TableReference;
+
+use Model\Database\Model\Table\TableManagement;
+
 use Web\Page\Admin\AdminModuleBase;
 use Model\Database\Model\TableReferenceInstance;
 use Web\Session\User\IUserAdmin;
@@ -82,13 +86,16 @@ class Database extends AdminModuleBase {
 			$classes = array();
 			foreach(\Core\Libraries::get(\Core\Libraries::getProjectSpace('DB\\*')) as $k=>$v){
 				$name = self::extractName($v);
-				$classes[$name] = self::toURL().'/'.$name;
+				$t = TableReference::getByTableClass($v);
+				$tm = $t->getTableManagement();
+				if($tm->SHOW_ADMIN)
+					$classes[$name] = self::toURL().'/'.$name;
 			}
 				
 			
 			$vars = array();
 			$vars['classes'] = $classes;
-				
+			
 			return new Templates\ContainerTemplate('Database/admin_table_list',$vars,'admin');
 		}else{
 			switch($this->action){

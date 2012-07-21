@@ -25,13 +25,14 @@ define(["jquery"],
 				ret = '/api/'+ret;
 				return ret;
 			};
+			this.timeout = 4000;
 			this.Request = function(args,cache){
 				args = args || {};
-				cache = true;
+				cache = false;
 				
 				var 
 					url = this.toURL(),
-					data = {cache:cache,data:args},
+					data = {cache:cache,data:args,timeout:this.timeout},
 					a = APICall(this,args);
 				
 				//dataType:'jsonp',crossDomain:true,
@@ -47,6 +48,7 @@ define(["jquery"],
 						}
 					}
 				}(a);
+				
 				
 				data.error = function(a){
 					return function(j,error){
