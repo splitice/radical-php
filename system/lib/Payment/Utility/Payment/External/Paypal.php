@@ -1,5 +1,5 @@
 <?php
-namespace Utility\Net\External;
+namespace Utility\Payment\External;
 
 /*******************************************************************************
  * PHP Paypal IPN Integration Class
