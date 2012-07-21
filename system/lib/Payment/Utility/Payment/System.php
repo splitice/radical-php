@@ -4,7 +4,7 @@ namespace Utility\Payment;
 abstract class System {
 	protected $module;
 	function __construct($module,$arg = null){
-		$class = 'Utility\\Payment\\'.$module;
+		$class = 'Utility\\Payment\\Modules\\'.$module;
 		if(!class_exists($class)){
 			throw new \Exception('Payment module "'.$module.'" doesnt exist');
 		}
@@ -28,22 +28,22 @@ abstract class System {
 				return $this->onCancel();
 		
 			case 'ipn' : // Paypal is calling page for IPN validation...
-				if($this->module->ipn()){
-					$this->onReceived();
+				if($transaction = $this->module->ipn()){
+					$this->onReceived($transaction);
 				}
 		
 		}
 	}
 	
 	function __call($method,$arguments){
-		return call_user_func_array($method,$arguments);
+		return call_user_func_array(array($this->module,$method),$arguments);
 	}
 	
 	/* Overloadables */
 	abstract function toUrl();
 	abstract function onReceived(Transaction $p);
-	abstract function onSuccess(Transaction $p);
-	function onCancel(Order $p){
+	abstract function onSuccess();
+	function onCancel(){
 		echo "<html><head><title>Canceled</title></head><body><h3>The order was canceled.</h3>";
 		echo "</body></html>";
 	}

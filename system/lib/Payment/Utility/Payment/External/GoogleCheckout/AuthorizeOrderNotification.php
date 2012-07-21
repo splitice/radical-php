@@ -1,7 +1,10 @@
 <?php
+
 namespace Utility\Payment\External\GoogleCheckout;
+
 /**
- * A message you send to Google asking them to re-authorize the purchaser's credit
+ * A message you send to Google asking them to re-authorize the purchaser's
+ * credit
  * card.
  *
  * The <authorize-order> command instructs Google Checkout to explicitly
@@ -17,18 +20,21 @@ namespace Utility\Payment\External\GoogleCheckout;
 class AuthorizeOrderNotification extends Message {
 	protected $orderNumber;
 	/**
-	 * @param string The Google Checkout order number.
+	 *
+	 * @param
+	 *        	string The Google Checkout order number.
 	 */
 	function __construct($o) {
 		$this->orderNumber = $o;
 	}
 	/**
 	 * Serialize the notification into XML.
+	 * 
 	 * @return string The message formated as XML.
 	 */
 	public function toXML() {
-		$xml  = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
-		$xml .= '<authorize-order xmlns="http://checkout.google.com/schema/2" google-order-number="'.$this->orderNumber.'" />'."\n";
+		$xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+		$xml .= '<authorize-order xmlns="http://checkout.google.com/schema/2" google-order-number="' . $this->orderNumber . '" />' . "\n";
 		return $xml;
 	}
 }

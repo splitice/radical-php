@@ -1,6 +1,8 @@
 <?php
 namespace Utility\Payment\External;
 
+use Utility\Payment\Logging;
+
 /*******************************************************************************
  * PHP Paypal IPN Integration Class
  *******************************************************************************
@@ -156,14 +158,14 @@ class Paypal {
 		// script.
 		$post_string = '';
 		foreach ( $_POST as $field => $value ) {
-			$this->ipn_data ["$field"] = $value;
+			$this->ipn_data [$field] = $value;
 			$post_string .= $field . '=' . urlencode ( stripslashes ( $value ) ) . '&';
 		}
 		$post_string .= "cmd=_notify-validate"; // append ipn command
 		
 
 		// open the connection to paypal
-		$fp = fsockopen ( $url_parsed [host], "80", $err_num, $err_str, 30 );
+		$fp = fsockopen ( 'ssl://'.$url_parsed ['host'], 443, $err_num, $err_str, 30 );
 		if (! $fp) {
 			
 			// could not open the connection.  If loggin is on, the error message
@@ -232,11 +234,8 @@ class Paypal {
 		// Log the response from the paypal server
 		$text .= "\nIPN Response from Paypal Server:\n " . $this->ipn_response;
 		
-		// Write to log
-		$fp = fopen ( $this->ipn_log_file, 'a' );
-		fwrite ( $fp, $text . "\n\n" );
-		
-		fclose ( $fp ); // close file
+		$log = new Logging('Paypal');
+		$log->log($text);
 	}
 	
 	function dump_fields() {

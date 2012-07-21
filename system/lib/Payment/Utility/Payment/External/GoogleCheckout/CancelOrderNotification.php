@@ -1,5 +1,7 @@
 <?php
+
 namespace Utility\Payment\External\GoogleCheckout;
+
 /**
  * A message you send to Google instructing them to cancel the order.
  *
@@ -18,25 +20,30 @@ class CancelOrderNotification extends Message {
 	protected $comment;
 	protected $reason;
 	/**
-	 * @param string The Google Checkout order number.
-	 * @param string A comment about the canceled order.
-	 * @param string The reason the order is being cancelled.
+	 *
+	 * @param
+	 *        	string The Google Checkout order number.
+	 * @param
+	 *        	string A comment about the canceled order.
+	 * @param
+	 *        	string The reason the order is being cancelled.
 	 */
-	function __construct($o,$c,$r) {
+	function __construct($o, $c, $r) {
 		$this->orderNumber = $o;
 		$this->comment = $c;
 		$this->reason = $r;
 	}
 	/**
 	 * Serialize the notification into XML.
+	 * 
 	 * @return string The message formated as XML.
 	 */
 	public function toXML() {
-		$xml  = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
-		$xml .= '<cancel-order xmlns="http://checkout.google.com/schema/2" google-order-number="'.$this->orderNumber.'">'."\n";
-		$xml .= '  <comment>'.$this->comment.'</comment>'."\n";
-		$xml .= '  <reason>'.$this->reason.'</reason>'."\n";
-		$xml .= '</cancel-order>'."\n";
+		$xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+		$xml .= '<cancel-order xmlns="http://checkout.google.com/schema/2" google-order-number="' . $this->orderNumber . '">' . "\n";
+		$xml .= '  <comment>' . $this->comment . '</comment>' . "\n";
+		$xml .= '  <reason>' . $this->reason . '</reason>' . "\n";
+		$xml .= '</cancel-order>' . "\n";
 		return $xml;
 	}
 }

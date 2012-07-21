@@ -1,5 +1,7 @@
 <?php
+
 namespace Utility\Payment\External\GoogleCheckout;
+
 /**
  * This class inspects the global $_POST variable, a variable managed by PHP
  * that contains all of the posted name value pairs, and constructs and
@@ -14,25 +16,26 @@ namespace Utility\Payment\External\GoogleCheckout;
  */
 class HTMLMessageFactory {
 	/**
+	 *
 	 * @return GoogleMessage A message corresponding to the posted
-	 * content
+	 *         content
 	 * @throws Exception Throws an exception if the message posted in not
-	 * recognized.
+	 *         recognized.
 	 */
 	public static function create() {
 		global $_POST;
-		if ($_POST['_type'] == 'new-order-notification') {
-			return NewOrderNotification::fromPost($_POST);
-		} else if ($_POST['_type'] == 'order-state-change-notification') {
-			return OrderStateChangeNotification::fromPost($_POST);
-		} else if ($_POST['_type'] == 'risk-information-notification') {
-			return RiskInformationNotification::fromPost($_POST);
-		} else if ($_POST['_type'] == 'charge-amount-notification') {
-			return ChargeAmountNotification::fromPost($_POST);
-		} else if ($_POST['_type'] == 'merchant-calculation-callback') {
-			return MerchantCalculationCallback::fromPost($_POST);
+		if ($_POST ['_type'] == 'new-order-notification') {
+			return NewOrderNotification::fromPost ( $_POST );
+		} else if ($_POST ['_type'] == 'order-state-change-notification') {
+			return OrderStateChangeNotification::fromPost ( $_POST );
+		} else if ($_POST ['_type'] == 'risk-information-notification') {
+			return RiskInformationNotification::fromPost ( $_POST );
+		} else if ($_POST ['_type'] == 'charge-amount-notification') {
+			return ChargeAmountNotification::fromPost ( $_POST );
+		} else if ($_POST ['_type'] == 'merchant-calculation-callback') {
+			return MerchantCalculationCallback::fromPost ( $_POST );
 		} else {
-			throw new \Exception("Unknown message type: " . $_POST['_type']);
+			throw new \Exception ( "Unknown message type: " . $_POST ['_type'] );
 		}
 	}
 }

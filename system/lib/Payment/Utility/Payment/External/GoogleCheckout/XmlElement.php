@@ -1,5 +1,7 @@
 <?php
+
 namespace Utility\Payment\External\GoogleCheckout;
+
 /**
  * A helper class for parsing XML messages posted by Google Checkout.
  *

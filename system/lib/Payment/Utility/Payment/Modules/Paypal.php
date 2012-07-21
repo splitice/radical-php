@@ -40,7 +40,7 @@ class Paypal implements IPaymentModule {
 		if($order->name)
 			$this->p->add_field ( 'item_name', $order->name );
 		
-		$p->add_field ( 'amount', $order->ammount );
+		$this->p->add_field ( 'amount', $order->ammount );
 		
 		if($order->item)
 			$this->p->add_field ('item_number', $order->item );
@@ -54,7 +54,7 @@ class Paypal implements IPaymentModule {
 		
 	}
 	function ipn(){
-		if ($this->p->validate_ipn ()) {
+		if ($this->p->validate_ipn () && $this->p->ipn_data['payment_status'] == 'Completed') {
 			$transaction = new Transaction();
 			$transaction->id = $p->ipn_data['txn_id'];
 			

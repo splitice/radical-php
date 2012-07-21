@@ -1,4 +1,5 @@
 <?php
+
 namespace Utility\Payment\External\GoogleCheckout;
 
 class Order {
