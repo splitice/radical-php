@@ -10,8 +10,8 @@ use Utility\Payment;
 abstract class PaymentBase extends HTMLPageBase {
 	protected $system;
 	
-	function __construct($data){		
-		$this->system = new Payment\System($data['module']);
+	function __construct($data,$address = null){		
+		$this->system = new Payment\System($data['module'],$address);
 	}
 	
 	/**
@@ -25,6 +25,7 @@ abstract class PaymentBase extends HTMLPageBase {
 	 * @throws \Exception
 	 */
 	function GET(){
+		$this->system->sandboxed(true);
 		if(isset($_GET['action']))
 			$this->system->process();
 		else

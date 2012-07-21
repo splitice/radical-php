@@ -1,6 +1,8 @@
 <?php
 namespace Utility\Payment\Modules;
 
+use Utility\Payment\Transaction;
+
 use Utility\Payment\Order;
 use Utility\Payment\External;
 
@@ -53,7 +55,19 @@ class Paypal implements IPaymentModule {
 	}
 	function ipn(){
 		if ($this->p->validate_ipn ()) {
-			return true;
+			$transaction = new Transaction();
+			$transaction->id = $p->ipn_data['txn_id'];
+			
+			$transaction->gross = $p->ipn_data ['mc_gross'];
+			$transaction->fee = $p->ipn_data['mc_fee'];
+			
+			$order = new Order($transaction->gross - $transaction->fee);
+			$order->name = $p->ipn_data['item_name'];
+			$order->item = $p->ipn_data['item_number'];
+			
+			$transaction->order = $order;
+			
+			return $transaction;
 		}
 	}
 }

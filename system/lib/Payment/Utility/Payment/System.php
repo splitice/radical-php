@@ -41,12 +41,10 @@ abstract class System {
 	
 	/* Overloadables */
 	abstract function toUrl();
-	abstract function getPaypalAccount();
 	abstract function onReceived(Transaction $p);
 	abstract function onSuccess(Transaction $p);
 	function onCancel(Order $p){
 		echo "<html><head><title>Canceled</title></head><body><h3>The order was canceled.</h3>";
 		echo "</body></html>";
 	}
-	abstract function onIPL(Order $p);
 }
