@@ -23,6 +23,9 @@ class SFTP {
 		}
 		return $file;
 	}
+	function getConnection(){
+		return $this->ssh;
+	}
 	function newFile($path){
 		return new \File($this->getPath($path));
 	}

@@ -7,7 +7,7 @@ class Connection {
 	private $port;
 	
 	//SSH Connection
-	private $ssh;
+	protected $ssh;
 	
 	//SFTP
 	private $sftp;
@@ -20,11 +20,20 @@ class Connection {
 		$this->host = $host;
 		$this->port = $port;
 		
-		//Connect Resource
-		$this->ssh = ssh2_connect($host,$port,$methods,array('disconnect'=>array($this,'onDisconnect')));
-		
 		//Setup Auth
-		$this->authenticate = new Authenticate($this->ssh);
+		$this->authenticate = new Authenticate(&$this->ssh);
+		
+		//Connect
+		$this->Connect($methods);
+	}
+	
+	function Connect($methods = array()){
+		//Connect Resource
+		$this->ssh = ssh2_connect($this->host,$this->port,$methods,array('disconnect'=>array($this,'onDisconnect')));
+		
+		//Re-connection authentication
+		$this->authenticate->ssh = $this->ssh;
+		$this->authenticate->Authenticate($this->authenticate);
 	}
 	
 	function Close(){
@@ -70,12 +79,8 @@ class Connection {
 	 */
 	function SFTP(){
 		if(!$this->sftp){
-			//Make new Connection
-			$ssh = new static($this->host,$this->port);
-			$ssh->authenticate->Authenticate($this->authenticate);
-			
-			//Allocate it to SFTP
-			$this->sftp = new SFTP($ssh);
+			//Store SFTP channel
+			$this->sftp = new SFTP($this);
 		}
 		return $this->sftp;
 	}

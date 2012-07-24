@@ -237,27 +237,5 @@ class Paypal {
 		$log = new Logging('Paypal');
 		$log->log($text);
 	}
-	
-	function dump_fields() {
-		
-		// Used for debugging, this function will output all the field/value pairs
-		// that are currently defined in the instance of the class using the
-		// add_field() function.
-		
-
-		echo "<h3>paypal_class->dump_fields() Output:</h3>";
-		echo "<table width=\"95%\" border=\"1\" cellpadding=\"2\" cellspacing=\"0\">
-            <tr>
-               <td bgcolor=\"black\"><b><font color=\"white\">Field Name</font></b></td>
-               <td bgcolor=\"black\"><b><font color=\"white\">Value</font></b></td>
-            </tr>";
-		
-		ksort ( $this->fields );
-		foreach ( $this->fields as $key => $value ) {
-			echo "<tr><td>$key</td><td>" . urldecode ( $value ) . "&nbsp;</td></tr>";
-		}
-		
-		echo "</table><br>";
-	}
 }         
 

@@ -39,11 +39,11 @@ class Client {
 		$response = $request->Post($message);
 		error_reporting ( $old_log_level );
 		$this->logger->log ( "Request sent." );
-		if (PEAR::isError ( $response )) {
+		/*if (PEAR::isError ( $response )) {
 			$this->logger->log ( "There was an error (" . $request->getResponseCode () . "): " . $response->getMessage () );
 		} else {
 			$this->logger->log ( "Request successful: " . $request->getResponseBody () );
 			return $request->getResponseBody ();
-		}
+		}*/
 	}
 }

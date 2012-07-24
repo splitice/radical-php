@@ -2,7 +2,7 @@
 namespace Utility\Net\SSH;
 
 class Authenticate {
-	private $ssh;
+	public $ssh;
 	/**
 	 * @var AuthenticatedDetails
 	 */
@@ -21,7 +21,10 @@ class Authenticate {
 		$auth->Execute($this);
 	}
 	
-	function Execute(Authenticate $object){
+	function Execute(Authenticate $object = null){
+		if(!$this->auth) return false;
+		if($object == null) $object = $this;
 		$this->auth->Execute($object);
+		return true;
 	}
 }
