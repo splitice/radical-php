@@ -20,7 +20,7 @@ class URL extends \Core\Object {
 	}
 	function __construct($data) {
 		$this->scheme = $data ['scheme'];
-		$this->host = $data ['host'];
+		$this->host = new URL\Host($data ['host']);
 		if(isset($data ['port']))
 			$this->port = (int)$data ['port'];
 		

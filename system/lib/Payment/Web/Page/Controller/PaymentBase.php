@@ -25,7 +25,6 @@ abstract class PaymentBase extends HTMLPageBase {
 	 * @throws \Exception
 	 */
 	function GET(){
-		$this->system->sandboxed(true);
 		if(isset($_GET['action']))
 			$this->system->process();
 		else
