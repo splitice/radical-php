@@ -14,7 +14,12 @@ class Host {
 		$this->host = implode('.',$split);
 	}
 	
-	function getLeaseSignificant(){
+	/**
+	 * Get subdomain
+	 * 
+	 * @return string
+	 */
+	function getLeastSignificant(){
 		$s = $this->getSplit();
 		$r = array_shift($s);
 		$this->setSplit($s);

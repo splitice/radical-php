@@ -69,7 +69,7 @@ class CollectionObject extends \Core\Object implements \IteratorAggregate, \Arra
 		$this->_Set($k,$v);
 		return $ret;
 	}
-	function _Get($k){
+	protected function _Get($k){
 		if(isset($this->data[$k])){
 			return $this->data[$k];
 		}
