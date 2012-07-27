@@ -43,7 +43,9 @@ class TableSet extends \Basic\Arr\Object\IncompleteObject {
 		//Table'ify
 		return $res->FetchCallback(array($this->tableClass,'fromSQL'));
 	}
-	
+	function Reset(){
+		$this->data = null;
+	}
 	public function count(){
 		return $this->getCount();
 	}

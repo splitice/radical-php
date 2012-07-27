@@ -1,15 +1,10 @@
 <?php
 namespace Utility\Payment\Modules;
-
 use Utility\Payment\Transaction;
-
 use Utility\Payment\Order;
 use Utility\Payment\External;
 
 class Alertpay implements IPaymentModule {
-	const SANDBOX_URL = 'https://sandbox.Payza.com/sandbox/payprocess.aspx';
-	const SANDBOX_IPN = 'https://sandbox.Payza.com/sandbox/IPN2.ashx';
-	
 	protected $ipn;
 	protected $account;
 	protected $p;
@@ -18,7 +13,7 @@ class Alertpay implements IPaymentModule {
 		$this->ipn = $ipn;
 		$this->account = $account;
 		
-		$this->p = new External\Paypal();
+		$this->p = new External\Alertpay();
 		
 		if($this->sandbox)
 			$this->p->url = self::SANDBOX_URL;
@@ -31,8 +26,13 @@ class Alertpay implements IPaymentModule {
 	private $sandbox;
 	function sandboxed($is){
 		$this->sandbox = $is;
-		if($is)
-			$this->p->paypal_url = self::SANDBOX_URL;
+		if($is){
+			$this->p->url = External\Alertpay::URL_SANDBOX;
+			$this->p->ipn = External\Alertpay::IPN_SANDBOX;
+		}else{
+			$this->p->url = External\Alertpay::URL;
+			$this->p->ipn = External\Alertpay::IPN;
+		}
 	}
 	function bill($order){
 		if(!is_object($order))
@@ -51,8 +51,9 @@ class Alertpay implements IPaymentModule {
 	function subscribe($ammount){
 		
 	}
-	function ipn(){
-		if ($this->p->validate_ipn () && $this->p->ipn_data['payment_status'] == 'Completed') {
+	function ipn(){			
+		if ($this->p->validate_ipn () && $this->p->ipn_data['ap_status'] == 'Success') {
+
 			$transaction = new Transaction();
 			$transaction->id = $p->ipn_data['txn_id'];
 			

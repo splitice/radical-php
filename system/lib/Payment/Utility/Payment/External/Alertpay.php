@@ -4,7 +4,14 @@ namespace Utility\Payment\External;
 use Utility\Payment\Logging;
 
 class Alertpay {
-	protected $url = 'https://www.payza.com/PayProcess.aspx';
+	const IPN = "https://secure.payza.com/ipn2.ashx";
+	const IPN_SANDBOX = 'https://sandbox.Payza.com/sandbox/IPN2.ashx';
+	
+	const URL = 'https://www.payza.com/PayProcess.aspx';
+	const URL_SANDBOX = 'https://sandbox.Payza.com/sandbox/payprocess.aspx';
+	
+	public $url = self::URL;
+	public $ipn = self::IPN;
 	protected $field = array();
 	public $ipn_data;
 		
@@ -47,7 +54,7 @@ class Alertpay {
 
 		echo "<html>\n";
 		echo "<head><title>Processing Payment...</title></head>\n";
-		echo "<body onLoad=\"document.forms['paypal_form'].submit();\">\n";
+		echo "<body onLoad=\"document.forms['alertpay_form'].submit();\">\n";
 		echo "<center><h2>Please wait, your order is being processed and you";
 		echo " will be redirected to the alertpay website.</h2></center>\n";
 		echo "<form method=\"post\" name=\"alertpay_form\" ";
@@ -57,7 +64,7 @@ class Alertpay {
 			echo "<input type=\"hidden\" name=\"$name\" value=\"$value\"/>\n";
 		}
 		echo "<center><br/><br/>If you are not automatically redirected to ";
-		echo "paypal within 5 seconds...<br/><br/>\n";
+		echo "alertpay within 5 seconds...<br/><br/>\n";
 		echo "<input type=\"submit\" value=\"Click Here\"></center>\n";
 		
 		echo "</form>\n";
@@ -66,15 +73,17 @@ class Alertpay {
 	}
 	
 	function validate_ipn() {
+		$log = new Logging('Alertpay');
+		$log->log($text);
+		
 		//The value is the url address of IPN V2 handler and the identifier of the token string
-		define("IPN_V2_HANDLER", "https://secure.payza.com/ipn2.ashx");
-		define("TOKEN_IDENTIFIER", "token=");
 		
 		// get the token from Payza
 		$token = urlencode($_POST['token']);
 		
 		//preappend the identifier string "token="
-		$token = TOKEN_IDENTIFIER.$token;
+		$token = "token=".$token;
+		$log->log($token);
 		
 		/**
 		 *
@@ -88,7 +97,7 @@ class Alertpay {
 		
 		$ch = curl_init();
 		
-		curl_setopt($ch, CURLOPT_URL, IPN_V2_HANDLER);
+		curl_setopt($ch, CURLOPT_URL, $this->ipn);
 		curl_setopt($ch, CURLOPT_POST, true);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $token);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -97,6 +106,7 @@ class Alertpay {
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		
 		$response = curl_exec($ch);
+		$log->log($response);
 		
 		curl_close($ch);
 		

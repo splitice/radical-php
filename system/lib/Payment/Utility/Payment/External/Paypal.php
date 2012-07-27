@@ -109,7 +109,11 @@ class Paypal {
 		// array, it will be overwritten.
 		
 
-		$this->fields ["$field"] = $value;
+		$this->fields [$field] = $value;
+	}
+	
+	function submit(){
+		return $this->submit_paypal_post();
 	}
 	
 	function submit_paypal_post() {
