@@ -7,7 +7,7 @@ class Alertpay {
 	const IPN = "https://secure.payza.com/ipn2.ashx";
 	const IPN_SANDBOX = 'https://sandbox.Payza.com/sandbox/IPN2.ashx';
 	
-	const URL = 'https://www.payza.com/PayProcess.aspx';
+	const URL = 'https://secure.payza.com/PayProcess.aspx';
 	const URL_SANDBOX = 'https://sandbox.Payza.com/sandbox/payprocess.aspx';
 	
 	public $url = self::URL;
