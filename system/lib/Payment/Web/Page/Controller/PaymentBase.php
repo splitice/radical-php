@@ -19,16 +19,20 @@ abstract class PaymentBase extends HTMLPageBase {
 	 */
 	abstract function getOrder();
 	
+	private function _GET(){
+		if(isset($_GET['action']))
+			$this->system->process();
+		else
+			$this->system->bill($this->getOrder());
+	}
+	
 	/**
 	 * Handle GET request
 	 *
 	 * @throws \Exception
 	 */
 	function GET(){
-		if(isset($_GET['action']))
-			$this->system->process();
-		else
-			$this->system->bill($this->getOrder());
+		$this->_GET();
 	}
 
 	/**
@@ -37,6 +41,6 @@ abstract class PaymentBase extends HTMLPageBase {
 	 * @throws \Exception
 	 */
 	function POST(){
-		return $this->GET();
+		return $this->_GET();
 	}
 }

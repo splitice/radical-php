@@ -27,11 +27,15 @@ abstract class System {
 			case 'cancel' : // Order was canceled...
 				return $this->onCancel();
 		
-			case 'ipn' : // Paypal is calling page for IPN validation...
+			case 'ipn': // Paypal is calling page for IPN validation...
 				if($transaction = $this->module->ipn()){
 					$this->onReceived($transaction);
+					die('Done');
+				}else{
+					die('Not IPN');
 				}
-		
+			default:
+				die('Unknown Action');
 		}
 	}
 	

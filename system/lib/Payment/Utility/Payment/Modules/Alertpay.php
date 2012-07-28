@@ -53,16 +53,15 @@ class Alertpay implements IPaymentModule {
 	}
 	function ipn(){			
 		if ($this->p->validate_ipn () && $this->p->ipn_data['ap_status'] == 'Success') {
-
 			$transaction = new Transaction();
-			$transaction->id = $p->ipn_data['txn_id'];
+			$transaction->id = $this->p->ipn_data['ap_referencenumber'];
 			
-			$transaction->gross = $p->ipn_data ['mc_gross'];
-			$transaction->fee = $p->ipn_data['mc_fee'];
+			$transaction->gross = $this->p->ipn_data ['ap_totalamount'];
+			$transaction->fee = $this->p->ipn_data['ap_feeamount'];
 			
 			$order = new Order($transaction->gross - $transaction->fee);
-			$order->name = $p->ipn_data['item_name'];
-			$order->item = $p->ipn_data['item_number'];
+			$order->name = $this->p->ipn_data['ap_itemname'];
+			$order->item = $this->p->ipn_data['ap_itemcode'];
 			
 			$transaction->order = $order;
 			

@@ -58,7 +58,7 @@ class Alertpay {
 		echo "<center><h2>Please wait, your order is being processed and you";
 		echo " will be redirected to the alertpay website.</h2></center>\n";
 		echo "<form method=\"post\" name=\"alertpay_form\" ";
-		echo "action=\"" . $this->paypal_url . "\">\n";
+		echo "action=\"" . $this->url . "\">\n";
 		
 		foreach ( $this->fields as $name => $value ) {
 			echo "<input type=\"hidden\" name=\"$name\" value=\"$value\"/>\n";
@@ -125,7 +125,7 @@ class Alertpay {
 				$aps = explode("&", $response);
 		
 				//create a file to save the response information from Payza's IPN V2
-				$myFile = "IPNRes.txt";
+				$myFile = "/tmp/IPNRes.txt";
 				$fh = fopen($myFile,'a') or die("can't open the file");
 					
 				//define an array to put the IPN information
@@ -135,12 +135,12 @@ class Alertpay {
 				{
 					//put the IPN information into an associative array $info
 					$ele = explode("=", $ap);
-					$info[$ele[0]] = $ele[1];
+					$info[trim($ele[0])] = trim($ele[1]);
 		
 					//write the information to the file IPNRes.txt
-					fwrite($fh, "$ele[0] \t");
-					fwrite($fh, "=\t");
-					fwrite($fh, "$ele[1]\r\n");
+					fwrite($fh, trim($ele[0]));
+					fwrite($fh, "=");
+					fwrite($fh, trim($ele[1])."\r\n");
 				}
 					
 				fclose($fh);
