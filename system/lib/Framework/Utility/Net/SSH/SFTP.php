@@ -13,6 +13,10 @@ class SFTP {
 	function __construct(Connection $ssh){
 		$ssh->inSFTP = true;
 		$this->ssh = $ssh;
+		$this->Init($ssh);
+	}
+	
+	function Init(Connection $ssh){
 		$this->sftp = ssh2_sftp($ssh->getResource());
 	}
 	

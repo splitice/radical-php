@@ -32,9 +32,11 @@ abstract class System {
 					$this->onReceived($transaction);
 					die('Done');
 				}else{
+					header('Content-Type: text/plain',true,500);
 					die('Not IPN');
 				}
 			default:
+				header('Content-Type: text/plain',true,404);
 				die('Unknown Action');
 		}
 	}

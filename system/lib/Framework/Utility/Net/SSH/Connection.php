@@ -34,6 +34,10 @@ class Connection {
 		//Re-connection authentication
 		$this->authenticate->ssh = $this->ssh;
 		$this->authenticate->Authenticate($this->authenticate);
+		
+		if($this->sftp){
+			$this->sftp->Init($this);
+		}
 	}
 	
 	function Close(){
