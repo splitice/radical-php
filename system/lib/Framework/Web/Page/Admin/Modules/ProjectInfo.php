@@ -1,5 +1,7 @@
 <?php
 namespace Web\Page\Admin\Modules;
+
+use Web\Page\Controller\Special\Redirect;
 use Web\Page\Admin\MultiAdminModuleBase;
 use Web\Page\Handler;
 
@@ -15,15 +17,15 @@ class ProjectInfo extends MultiAdminModuleBase {
 		return $ret;
 	}
 	function actionInfo(){
-		return $this->index();
-	}
-	function index(){
 		$libs = array();
 		foreach(\Core\Libraries::getLibraries() as $libName=>$libPath){
 			$libs[$libName] = $this->getInfo($libPath);
 		}
 		
 		return $this->_T('ProjectInfo/info',array('libraries'=>$libs));
+	}
+	function index(){
+		return new Redirect(new static(new \Utility\Net\URL\Path('/Info')));//Temporary TODO
 	}
 	function actionUnitTest(){
 		$testResults = \Core\Debug\Test\Controller::RunUnitTests();
