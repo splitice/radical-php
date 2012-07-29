@@ -57,7 +57,7 @@ class RequireJS extends Script {
 				$updated = true;
 			}
 		}
-		
+
 		if($deps){
 			foreach($tree as $v){
 				if(is_array($v)){
@@ -79,7 +79,7 @@ class RequireJS extends Script {
 				if($pm->depends){
 					$deps = $pm->depends;
 					$depth = $this->findDepth($tree, $deps);
-					
+
 					$p = null;
 					$s = &$tree;
 					for($i=0;$i<$depth;$i++){
@@ -114,6 +114,7 @@ class RequireJS extends Script {
 			if(is_array($v)){
 				$callback = $this->buildRequire($v);
 			}else{
+				if($v == 'jQuery') $v = 'jquery';//Special jquery stuff
 				$temp[] = $v;
 			}
 		}

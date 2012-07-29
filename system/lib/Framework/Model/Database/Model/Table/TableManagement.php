@@ -5,6 +5,7 @@ use Model\Database\SQL;
 use Model\Database\DBAL\Fetch;
 
 class TableManagement extends \Core\Object {
+	public $SHOW_ADMIN = true;
 	protected $table;
 	function __construct(TableReferenceInstance $table){
 		$this->table = $table;

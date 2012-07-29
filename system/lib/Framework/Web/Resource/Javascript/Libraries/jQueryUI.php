@@ -11,6 +11,7 @@ class jQueryUI extends Shared\LibraryBase implements IJavascriptLibrary {
 			$version = (string)$version;
 			$version .= '.0';
 		}
+		$this->depends['jQuery'] = 'jQuery';
 		parent::__construct($version);
 	}
 }

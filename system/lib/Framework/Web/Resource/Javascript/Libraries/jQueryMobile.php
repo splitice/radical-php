@@ -11,7 +11,7 @@ class jQueryMobile extends Shared\LibraryBase implements IJavascriptLibrary {
 			$version = (string)$version;
 			$version .= '.0';
 		}
-		$this->depends['jquery'] = 'jquery';
+		$this->depends['jQuery'] = 'jQuery';
 		parent::__construct($version);
 	}
 }

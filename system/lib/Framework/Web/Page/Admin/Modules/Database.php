@@ -1,6 +1,8 @@
 <?php
 namespace Web\Page\Admin\Modules;
 
+use Web\Template;
+
 use Model\Database\Model\TableReference;
 
 use Model\Database\Model\Table\TableManagement;
@@ -30,6 +32,18 @@ class Database extends AdminModuleBase {
 				$this->action = isset($_REQUEST['action'])?$_REQUEST['action']:'view';
 			}
 		}
+	}
+	function getSubmodules(){
+		$classes = array();
+		foreach(\Core\Libraries::get(\Core\Libraries::getProjectSpace('DB\\*')) as $k=>$v){
+			$name = self::extractName($v);
+			$t = TableReference::getByTableClass($v);
+			$tm = $t->getTableManagement();
+			if($tm->SHOW_ADMIN)
+				$classes[] = new static(\Utility\Net\URL\Path::fromPath($name));
+		}
+		
+		return $classes;
 	}
 	function POST(){
 		switch($this->action){
@@ -69,11 +83,22 @@ class Database extends AdminModuleBase {
 				return new Redirect($this->table->getName());
 				
 		}
-		return $this->GET();
+		return $this->GET(true);
 	}
 	private static function extractName($name){
 		$prefix = \Core\Libraries::getProjectSpace('DB\\');
 		return substr($name,strlen($prefix));
+	}
+	
+	protected function _T($post,$template,$vars){
+		if($post){
+			if($_POST['_admin'] == 'outer'){
+				return new Templates\ContainerTemplate($template,$vars,'admin','Common/subwrapper');
+			}else{
+				return new Template($template,$vars,'admin');
+			}
+		}
+		return new Templates\ContainerTemplate($template,$vars,'admin');
 	}
 	
 	/**
@@ -81,7 +106,7 @@ class Database extends AdminModuleBase {
 	 *
 	 * @throws \Exception
 	 */
-	function GET(){
+	function GET($post = false){
 		if($this->action == 'list'){
 			$classes = array();
 			foreach(\Core\Libraries::get(\Core\Libraries::getProjectSpace('DB\\*')) as $k=>$v){
@@ -96,7 +121,7 @@ class Database extends AdminModuleBase {
 			$vars = array();
 			$vars['classes'] = $classes;
 			
-			return new Templates\ContainerTemplate('Database/admin_table_list',$vars,'admin');
+			return $this->_T($post,'Database/admin_table_list',$vars);
 		}else{
 			switch($this->action){
 				case 'delete':
@@ -113,7 +138,7 @@ class Database extends AdminModuleBase {
 					$form = $tm->fromId($id);
 					
 					$vars = array('form'=>$form,'relations'=>$this->table->getTableManagement()->getRelations());
-					return new Templates\ContainerTemplate('Database/admin_edit_single',$vars,'admin');
+					return $this->_T($post,'Database/admin_edit_single',$vars,'admin');
 				case 'edit_all':
 					$tm = new Form\Builder\Adapter\DatabaseTable($this->table);
 					$form = $tm->getAll();
@@ -133,7 +158,7 @@ class Database extends AdminModuleBase {
 					$tableManagement = $this->table->getTableManagement();
 					$vars['cols'] = $tableManagement->getColumns();
 					
-					return new Templates\ContainerTemplate('Database/admin_table_view',$vars,'admin');
+					return $this->_T($post,'Database/admin_table_view',$vars,'admin');
 					break;
 			}
 		}
@@ -145,5 +170,12 @@ class Database extends AdminModuleBase {
 			$url .= '/'.self::extractName($this->table->getClass());
 		}
 		return $url;
+	}
+	
+	function __toString(){
+		if($this->table){
+			return self::extractName($this->table->getClass());
+		}
+		return 'Database';
 	}
 }
