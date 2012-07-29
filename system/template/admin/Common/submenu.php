@@ -6,5 +6,5 @@ foreach($submodules as $s){
 	if((string)$s == $_->vars['selected']){
 		echo ' class="ui-tabs-selected"';
 	}
-	echo '><a href="',$_->u($s),'">',$s,'</a></li>';
+	echo '><a href="',$_->u($s),'" title="'.$s->toId().'">',$s,'</a></li>';
 }

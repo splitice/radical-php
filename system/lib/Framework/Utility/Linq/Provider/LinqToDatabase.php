@@ -204,7 +204,7 @@ class LinqToDatabase implements ILinqProvider {
 	 * @param ILinqProvider $parentProvider Optional parent ILinqProvider instance, used with join conditions
 	 * @return ILinqProvider
 	 */
-	public function __construct($name, Interfaces\ILinqProvider $parentProvider = null) {
+	public function __construct($name, ILinqProvider $parentProvider = null) {
 		if (is_null(self::$_internalFunctions)) {
 			$internalFunctions = get_defined_functions();
 			$internalFunctions['internal'][] = 'print'; // Add as PHP function
@@ -267,7 +267,7 @@ class LinqToDatabase implements ILinqProvider {
 	 *
 	 * @param ILinqProvider $provider
 	 */
-	public function addChildProvider(Interfaces\ILinqProvider $provider) {
+	public function addChildProvider(ILinqProvider $provider) {
 		$this->_childProviders[] = $provider;
 	}
 	

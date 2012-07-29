@@ -2,7 +2,7 @@
 namespace Utility\Net\External;
 
 class DownloadableItem {
-	public $link;
+	protected $link;
 	
 	function __construct($link){
 		$this->link = $link;
@@ -45,5 +45,9 @@ class DownloadableItem {
 			$this->filename = rtrim(trim($filename),'; ');
 		}
 		return strlen($header);
+	}
+	
+	function __toString(){
+		return $this->link;
 	}
 }

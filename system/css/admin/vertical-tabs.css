@@ -29,5 +29,5 @@
 	text-align: right;
 }
 .tabs-left > div {
-	height: 35em;
+	min-height: 35em;
 }

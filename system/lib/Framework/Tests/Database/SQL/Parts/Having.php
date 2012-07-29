@@ -8,6 +8,6 @@ class Having extends Where {
 	const PART_NAME = 'HAVING';
 	
 	protected function _class(){
-		return '\\Database\\SQL\\Parts\\Having';
+		return '\\Model\\Database\\SQL\\Parts\\Having';
 	}
 }

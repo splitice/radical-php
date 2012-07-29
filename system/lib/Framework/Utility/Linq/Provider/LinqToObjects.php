@@ -156,7 +156,7 @@ class LinqToObjects implements ILinqProvider {
 	 * @param ILinqProvider $parentProvider Optional parent ILinqProvider instance, used with join conditions
 	 * @return ILinqProvider
 	 */
-	public function __construct($name, Interfaces\ILinqProvider $parentProvider = null) {
+	public function __construct($name, ILinqProvider $parentProvider = null) {
 		$this->_from = $name;
 		
 		if (!is_null($parentProvider)) {
@@ -213,7 +213,7 @@ class LinqToObjects implements ILinqProvider {
 	 *
 	 * @param ILinqProvider $provider
 	 */
-	public function addChildProvider(Interfaces\ILinqProvider $provider) {
+	public function addChildProvider(ILinqProvider $provider) {
 		$this->_childProviders[] = $provider;
 	}
 	

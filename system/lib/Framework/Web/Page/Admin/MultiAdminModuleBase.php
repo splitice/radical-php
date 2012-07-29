@@ -56,6 +56,9 @@ abstract class MultiAdminModuleBase extends AdminModuleBase {
 	function toURL(){
 		return parent::toURL().'/'.$this->submodule;
 	}
+	function toId(){
+		return parent::toId().'-'.$this->submodule;
+	}
 	static function fromSub($submodule){
 		$class = array_pop(explode('\\',get_called_class()));
 		$url = new Path($submodule);

@@ -10,7 +10,7 @@ class Where extends Unit implements IUnitTest {
 	const PART_NAME = 'WHERE';
 	
 	protected function _class(){
-		return '\\Database\\SQL\\Parts\\Where';
+		return '\\Model\\Database\\SQL\\Parts\\Where';
 	}
 	
 	function testAssoc(){

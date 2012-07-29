@@ -2,5 +2,7 @@
 	<ul>
 		<?=$_->subrequest($_->vars['menu']);?>
 	</ul>
-	<? $_->body()?>
+	<div id="<?=$_->vars['this']->toId();?>">
+		<? $_->body()?>
+	</div>
 </div>
