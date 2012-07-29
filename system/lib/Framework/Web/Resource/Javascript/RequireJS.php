@@ -46,6 +46,11 @@ class RequireJS extends Script {
 	}
 	private function _buildConfig(){
 		$config = $this->_buildConfigArray();
+		foreach($config['paths'] as $k=>$v)
+			if($k == 'jQuery'){
+				unset($config['paths'][$k]);
+				$config['paths']['jquery'] = $v;//Special jquery stuff
+			}
 		if($config)	
 			return 'requirejs.config('.json_encode($config).');';
 	}

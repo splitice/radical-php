@@ -1,5 +1,9 @@
 <?php 
 foreach($_->vars['modules'] as $module){
-	echo '<li><a href="',$_->u($module),'">',$module,'</a></li>';
+	echo '<li';
+	if((string)$module == $_->vars['selected']){
+		echo ' class="ui-tabs-selected"';
+	}
+	echo '><a href="',$_->u($module),'">',$module,'</a></li>';
 }
 ?>

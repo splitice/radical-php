@@ -3,6 +3,8 @@ namespace Web\Page\Admin;
 
 use Web\Page\Handler\HTMLPageBase;
 use Web\Page\Handler;
+use Web\Template;
+use Web\Templates;
 
 abstract class AdminModuleBase extends HTMLPageBase implements Modules\IAdminModule {
 	function getName(){
@@ -24,5 +26,17 @@ abstract class AdminModuleBase extends HTMLPageBase implements Modules\IAdminMod
 	}
 	static function createLink(){
 		return new static();
+	}
+	protected function _T($template,$vars){
+		if($_POST['_admin'] == 'outer'){
+			$menu = new SubMenu($this);
+			$vars['menu'] = $menu;
+			return new Templates\ContainerTemplate($template,$vars,'admin','Common/subwrapper');
+		}elseif($_POST['_admin'] == 'inner'){
+			return new Template($template,$vars,'admin');
+		}
+		$menu = new Menu($this->getModuleName());
+		$vars['menu'] = $menu;
+		return new Templates\ContainerTemplate($template,$vars,'admin');
 	}
 }

@@ -1,7 +1,5 @@
 <div class="outer tabs">
 	<ul>
-		<?=$_->subrequest(new \Web\Page\Admin\Menu());?>
+		<?=$_->subrequest($_->vars['menu']);?>
 	</ul>
-	<div id="test">
-	</div>
 </div>

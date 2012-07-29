@@ -1,8 +1,6 @@
 <?php
 namespace Web\Page\Admin\Modules;
 
-use Web\Template;
-
 use Model\Database\Model\TableReference;
 
 use Model\Database\Model\Table\TableManagement;
@@ -12,7 +10,6 @@ use Model\Database\Model\TableReferenceInstance;
 use Web\Session\User\IUserAdmin;
 use Utility\Net\URL\Pagination\QueryMethod;
 use Web\Page\Controller\Special\Redirect;
-use Web\Templates;
 use Web\Form;
 
 class Database extends AdminModuleBase {
@@ -90,23 +87,12 @@ class Database extends AdminModuleBase {
 		return substr($name,strlen($prefix));
 	}
 	
-	protected function _T($post,$template,$vars){
-		if($post){
-			if($_POST['_admin'] == 'outer'){
-				return new Templates\ContainerTemplate($template,$vars,'admin','Common/subwrapper');
-			}else{
-				return new Template($template,$vars,'admin');
-			}
-		}
-		return new Templates\ContainerTemplate($template,$vars,'admin');
-	}
-	
 	/**
 	 * Handle GET request
 	 *
 	 * @throws \Exception
 	 */
-	function GET($post = false){
+	function GET(){
 		if($this->action == 'list'){
 			$classes = array();
 			foreach(\Core\Libraries::get(\Core\Libraries::getProjectSpace('DB\\*')) as $k=>$v){
@@ -121,7 +107,7 @@ class Database extends AdminModuleBase {
 			$vars = array();
 			$vars['classes'] = $classes;
 			
-			return $this->_T($post,'Database/admin_table_list',$vars);
+			return $this->_T('Database/admin_table_list',$vars);
 		}else{
 			switch($this->action){
 				case 'delete':
@@ -138,7 +124,7 @@ class Database extends AdminModuleBase {
 					$form = $tm->fromId($id);
 					
 					$vars = array('form'=>$form,'relations'=>$this->table->getTableManagement()->getRelations());
-					return $this->_T($post,'Database/admin_edit_single',$vars,'admin');
+					return $this->_T('Database/admin_edit_single',$vars,'admin');
 				case 'edit_all':
 					$tm = new Form\Builder\Adapter\DatabaseTable($this->table);
 					$form = $tm->getAll();
@@ -158,7 +144,7 @@ class Database extends AdminModuleBase {
 					$tableManagement = $this->table->getTableManagement();
 					$vars['cols'] = $tableManagement->getColumns();
 					
-					return $this->_T($post,'Database/admin_table_view',$vars,'admin');
+					return $this->_T('Database/admin_table_view',$vars,'admin');
 					break;
 			}
 		}

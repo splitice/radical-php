@@ -1,7 +1,8 @@
-define(["jQuery",'jqueryui/tabs'],function(a){
+define(["jquery",'jqueryui/tabs'],function(a){
 	var callback = function(){
 		var data = 
 			{
+				idPrefix: 'ui-tabs-outer',
 				ajaxOptions: {
 					error: function( xhr, status, index, anchor ) {
 						$( anchor.hash ).html(
@@ -16,7 +17,9 @@ define(["jQuery",'jqueryui/tabs'],function(a){
 			};
 		$('.tabs.outer').tabs(data);
 		
+		data = $.extend(true,{},data);
 		data.ajaxOptions.data._admin = 'inner';
+		data.idPrefix = 'ui-tabs-inner';
 		$('.tabs.inner').tabs(data);
 	};
 	$(callback);

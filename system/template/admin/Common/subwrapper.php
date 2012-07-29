@@ -1,8 +1,6 @@
 <div class="inner tabs tabs-left">
 	<ul>
-		<?=$_->subrequest(new \Web\Page\Admin\SubMenu(new \Web\Page\Admin\Modules\Database()));?>
+		<?=$_->subrequest($_->vars['menu']);?>
 	</ul>
-	<div id="tt">
-		<? $_->body()?>
-	</div>
+	<? $_->body()?>
 </div>

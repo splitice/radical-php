@@ -22,7 +22,11 @@ abstract class MultiAdminModuleBase extends AdminModuleBase {
 		return $modules;
 	}
 	function GET($data = array()){
-		$method = 'action'.$this->submodule;
+		if(!$this->submodule){
+			$method = 'index';
+		}else{
+			$method = 'action'.$this->submodule;
+		}
 		if(method_exists($this,$method)){
 			return $this->$method($data);
 		}

@@ -12,6 +12,11 @@ use Web\Template;
 use Web\Page\Handler\PageBase;
 
 class Menu extends PageBase {
+	private $selected;
+	function __construct($selected){
+		$this->selected = $selected;
+	}
+	
 	/**
 	 * Handle GET request
 	 *
@@ -27,6 +32,9 @@ class Menu extends PageBase {
 
 			//Create links to modules
 			$VARS['modules'] = Arr::map(array('*','createLink'), $modules);
+			
+			//The selected module
+			$VARS['selected'] = $this->selected;
 				
 			//Template to show
 			return new Template('Common/menu', $VARS,'admin');

@@ -15,14 +15,15 @@ class ProjectInfo extends MultiAdminModuleBase {
 		return $ret;
 	}
 	function actionInfo(){
+		return $this->index();
+	}
+	function index(){
+		$libs = array();
 		foreach(\Core\Libraries::getLibraries() as $libName=>$libPath){
-			echo '<h2>'.$libName.'</h2>';
-			echo '<p>';
-			$info = $this->getInfo($libPath);
-			echo '<b>Files: </b>'.$info['files'].'<br />';
-			echo '<b>Lines: </b>'.$info['lines'].'<br />';
-			echo '</p>';
+			$libs[$libName] = $this->getInfo($libPath);
 		}
+		
+		return $this->_T('ProjectInfo/info',array('libraries'=>$libs));
 	}
 	function actionUnitTest(){
 		$testResults = \Core\Debug\Test\Controller::RunUnitTests();
