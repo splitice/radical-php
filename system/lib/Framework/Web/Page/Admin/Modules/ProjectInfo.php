@@ -27,7 +27,7 @@ class ProjectInfo extends MultiAdminModuleBase {
 	}
 	function actionUnitTest(){
 		$testResults = \Core\Debug\Test\Controller::RunUnitTests();
-	
-		return $this->_T('ProjectInfo/unit',array('test_results'=>$libs));
+	die(var_dump($testResults));
+		return $this->_T('ProjectInfo/unit',array('test_results'=>$testResults));
 	}
 }

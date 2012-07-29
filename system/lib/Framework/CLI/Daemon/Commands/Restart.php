@@ -1,5 +1,5 @@
 <?php
-namespace CLI\DaemonCommands;
+namespace CLI\Daemon\Commands;
 
 class Restart extends Internal\StandardCommand {
 	const NAME = 'restart';

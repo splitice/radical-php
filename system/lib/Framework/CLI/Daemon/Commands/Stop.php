@@ -1,5 +1,5 @@
 <?php
-namespace CLI\DaemonCommands;
+namespace CLI\Daemon\Commands;
 
 class Stop extends Internal\StandardCommand {
 	const NAME = 'stop';

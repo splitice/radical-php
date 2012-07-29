@@ -1,5 +1,5 @@
 <?php
-namespace CLI\DaemonCommands;
+namespace CLI\Daemon\Commands;
 
 class ListCommand extends Internal\StandardCommand {
 	const NAME = 'list';

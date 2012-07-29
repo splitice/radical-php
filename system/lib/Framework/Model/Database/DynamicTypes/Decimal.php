@@ -29,8 +29,8 @@ class Decimal extends String implements IDynamicValidate {
 				if(is_numeric($value[0]) && is_numeric($value[1])) return true;
 		}
 	}
-	function DoValidate($value){
-		if(!$this->Validate($value)) throw new ValidationException();
+	function DoValidate($value,$field){
+		if(!$this->Validate($value)) throw new ValidationException($field);
 	}
 	
 	function getValue($asFloat = false){

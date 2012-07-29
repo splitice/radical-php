@@ -1,5 +1,5 @@
 <?php
-namespace CLI\DaemonCommands\Internal;
+namespace CLI\Daemon\Commands\Internal;
 
 abstract class StandardCommand extends BaseCommand {
 	const NAME = '';

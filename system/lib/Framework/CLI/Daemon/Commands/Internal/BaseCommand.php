@@ -1,5 +1,5 @@
 <?php
-namespace CLI\DaemonCommands\Internal;
+namespace CLI\Daemon\Commands\Internal;
 
 abstract class BaseCommand extends \Core\Object {
 	

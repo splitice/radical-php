@@ -16,7 +16,7 @@ use Core\Provider;
 class Controller {
 	static function RunUnitTests(){
 		$results = array();
-		$tests = Provider::Find('interface.Debug.Test.IUnitTest',true);
+		$tests = Provider::Find('interface.Core.Debug.Test.IUnitTest',true);
 		foreach($tests as $class){
 			$results[$class] = static::RunUnit($class);
 		}
