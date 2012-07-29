@@ -5,14 +5,14 @@ use Model\Database\Model\TableReference;
 
 use Model\Database\Model\Table\TableManagement;
 
-use Web\Page\Admin\AdminModuleBase;
+use Web\Page\Admin\MultiAdminModuleBase;
 use Model\Database\Model\TableReferenceInstance;
 use Web\Session\User\IUserAdmin;
 use Utility\Net\URL\Pagination\QueryMethod;
 use Web\Page\Controller\Special\Redirect;
 use Web\Form;
 
-class Database extends AdminModuleBase {
+class Database extends MultiAdminModuleBase {
 	protected $table;
 	protected $action = 'list';
 		

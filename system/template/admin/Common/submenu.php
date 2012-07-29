@@ -2,5 +2,9 @@
 $submodules = $_->vars['module']->getSubmodules();
 
 foreach($submodules as $s){
-	echo '<li><a href="',$_->u($s),'">',$s,'</a></li>';
+	echo '<li';
+	if((string)$s == $_->vars['selected']){
+		echo ' class="ui-tabs-selected"';
+	}
+	echo '><a href="',$_->u($s),'">',$s,'</a></li>';
 }

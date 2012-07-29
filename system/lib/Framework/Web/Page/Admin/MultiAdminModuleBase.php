@@ -3,12 +3,15 @@ namespace Web\Page\Admin;
 
 use Utility\Net\URL\Path;
 use Web\Page\Handler;
+use Web\Templates;
 
 abstract class MultiAdminModuleBase extends AdminModuleBase {
 	private $submodule;
 	function __construct(Path $url = null){
-		if($url !== null)
+		if($url !== null){
 			$this->submodule = $url->firstPathElement();
+			$url->removeFirstPathElement();
+		}
 	}
 	function getSubmodules(){
 		$r = new \ReflectionClass(get_called_class());
@@ -38,6 +41,17 @@ abstract class MultiAdminModuleBase extends AdminModuleBase {
 	function __toString(){
 		if($this->submodule === null) return parent::__toString();
 		return $this->submodule;
+	}
+	protected function _T($template,$vars){
+		if($_POST['_admin'] == 'outer'){
+			$menu = new SubMenu($this,$this->submodule);
+			$vars['menu'] = $menu;
+			return new Templates\ContainerTemplate($template,$vars,'admin','Common/subwrapper');
+		}else {
+			if($_POST['_admin'] == 'inner')
+				$_POST['_admin'] = 'outer';
+			return parent::_T($template, $vars);
+		}
 	}
 	function toURL(){
 		return parent::toURL().'/'.$this->submodule;

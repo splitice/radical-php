@@ -13,9 +13,11 @@ use Web\Page\Handler\PageBase;
 
 class SubMenu extends PageBase {
 	protected $module;
+	protected $selected;
 	
-	function __construct($module){
+	function __construct($module,$selected){
 		$this->module = $module;
+		$this->selected = $selected;
 	}
 	
 	/**
@@ -28,6 +30,7 @@ class SubMenu extends PageBase {
 
 			//Create links to modules
 			$VARS['module'] = $this->module;
+			$VARS['selected'] = $this->selected;
 				
 			//Template to show
 			return new Template('Common/submenu', $VARS,'admin');
