@@ -1,13 +1,13 @@
 .tabs-left {
 	position: relative;
-	padding-left: 6.5em;
+	padding-left: 12.5em;
 }
 .tabs-left .ui-tabs-nav {
 	position: absolute;
 	left: 0.25em;
 	top: 0.25em;
 	bottom: 0.25em;
-	width: 6em;
+	width: 12em;
 	padding: 0.2em 0 0.2em 0.2em;
 }
 .tabs-left .ui-tabs-nav li {

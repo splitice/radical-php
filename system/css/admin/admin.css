@@ -13,3 +13,7 @@ body {
 	font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
 }
 
+.outer.tabs>div {
+	padding: 0;
+	padding-top: 2px;
+}
