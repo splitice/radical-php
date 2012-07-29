@@ -1,6 +1,8 @@
 <?php
 namespace Web\Page\Controller;
 
+use Web\Page\Admin\Menu;
+
 use Web\Page\Handler\HTMLPageBase;
 use Web\Templates;
 use Web\Session\User\IUserAdmin;
@@ -54,7 +56,7 @@ class Admin extends HTMLPageBase {
 		
 		//If no module specified then we are listing modules to load
 		if($this->module === null){
-			return new Templates\ContainerTemplate('index', array(),'admin');
+			return new Templates\ContainerTemplate('index', array('menu'=>new Menu()),'admin');
 		}else{
 			//Class path to the module
 			$class = Page\Admin\Constants::CLASS_PATH.$this->module;

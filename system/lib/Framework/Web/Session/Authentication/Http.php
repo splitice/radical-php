@@ -18,12 +18,13 @@ class Http extends ModuleBase implements IAuthenticator {
 		//@todo complete
 	}
 	function Init(ISessionSource $handler){
-		if(isset($_SERVER['PHP_AUTH_USER']) && $_SERVER['PHP_AUTH_PW']){
+		if(!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW'])){
+
 			$username = $_SERVER['PHP_AUTH_USER'];
 			$password = $_SERVER['PHP_AUTH_PW'];
 			
 			$success = $handler->Login($username,$password);
-			
+			//die(var_dump($success));
 			if(!$success){
 				return $this->AuthenticationError();
 			}

@@ -13,7 +13,7 @@ use Web\Page\Handler\PageBase;
 
 class Menu extends PageBase {
 	private $selected;
-	function __construct($selected){
+	function __construct($selected = null){
 		$this->selected = $selected;
 	}
 	
