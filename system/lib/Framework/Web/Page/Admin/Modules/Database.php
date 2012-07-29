@@ -27,6 +27,7 @@ class Database extends MultiAdminModuleBase {
 				
 				$this->table = new TableReferenceInstance($model);
 				$this->action = isset($_REQUEST['action'])?$_REQUEST['action']:'view';
+				$this->submodule = self::extractName($this->table->getClass());
 			}
 		}
 	}
@@ -124,6 +125,7 @@ class Database extends MultiAdminModuleBase {
 					$form = $tm->fromId($id);
 					
 					$vars = array('form'=>$form,'relations'=>$this->table->getTableManagement()->getRelations());
+
 					return $this->_T('Database/admin_edit_single',$vars,'admin');
 				case 'edit_all':
 					$tm = new Form\Builder\Adapter\DatabaseTable($this->table);
@@ -156,12 +158,5 @@ class Database extends MultiAdminModuleBase {
 			$url .= '/'.self::extractName($this->table->getClass());
 		}
 		return $url;
-	}
-	
-	function __toString(){
-		if($this->table){
-			return self::extractName($this->table->getClass());
-		}
-		return 'Database';
 	}
 }

@@ -6,7 +6,7 @@ use Web\Page\Handler;
 use Web\Templates;
 
 abstract class MultiAdminModuleBase extends AdminModuleBase {
-	private $submodule;
+	protected $submodule;
 	function __construct(Path $url = null){
 		if($url !== null){
 			$this->submodule = $url->firstPathElement();
@@ -36,19 +36,20 @@ abstract class MultiAdminModuleBase extends AdminModuleBase {
 		throw new \Exception('Admin submodule '.$this->submodule.' doesnt exist');
 	}
 	function POST(){
-		return $this->GET($data);
+		return $this->GET($_POST);
 	}
 	function __toString(){
 		if($this->submodule === null) return parent::__toString();
 		return $this->submodule;
 	}
 	protected function _T($template,$vars){
-		if($_POST['_admin'] == 'outer'){
+		if(isset($_POST['_admin']) && $_POST['_admin'] == 'outer'){
 			$menu = new SubMenu($this,$this->submodule);
+			$vars['this'] = $this;
 			$vars['menu'] = $menu;
 			return new Templates\ContainerTemplate($template,$vars,'admin','Common/subwrapper');
 		}else {
-			if($_POST['_admin'] == 'inner')
+			if(isset($_POST['_admin']) && $_POST['_admin'] == 'inner')
 				$_POST['_admin'] = 'outer';
 			return parent::_T($template, $vars);
 		}
@@ -58,8 +59,9 @@ abstract class MultiAdminModuleBase extends AdminModuleBase {
 	}
 	function toId(){
 		$id = parent::toId();
-		if($this->submodule)
+		if($this->submodule && isset($_POST['_admin']) && $_POST['_admin'] == 'outer'){
 			$id .= '-'.$this->submodule;
+		}
 		return $id;
 	}
 	static function fromSub($submodule){

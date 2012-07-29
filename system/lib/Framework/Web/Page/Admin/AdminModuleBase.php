@@ -28,8 +28,8 @@ abstract class AdminModuleBase extends HTMLPageBase implements Modules\IAdminMod
 		return new static();
 	}
 	protected function _T($template,$vars){
-		if($_POST['_admin'] == 'outer'){
-			$vars['this'] = $this;
+		$vars['this'] = $this;
+		if(isset($_POST['_admin']) && $_POST['_admin'] == 'outer'){
 			return new Template($template,$vars,'admin');
 		}
 		$menu = new Menu($this->getModuleName());

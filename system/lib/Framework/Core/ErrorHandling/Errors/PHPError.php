@@ -47,6 +47,7 @@ class PHPError extends Internal\ErrorBase {
 		set_error_handler ( array (get_called_class(), 'Handler' ), E_ALL);
 	}
 	static function Handler($errno, $msg_text, $errfile, $errline) {
+		//die(var_dump( $msg_text, $errfile, $errline));
 		if(isset($_GET['action']) && $_GET['action']=='ipn')
 			file_put_contents('/tmp/tt.'.time(), $msg_text);
 		
