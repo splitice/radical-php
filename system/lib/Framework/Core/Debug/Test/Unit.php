@@ -7,7 +7,6 @@
  */
 
 namespace Core\Debug\Test;
-
 use Exception;
 use Libraries;
 use Core\Debug\Debugger;

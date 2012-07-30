@@ -1,8 +1,6 @@
 <?php
 namespace Web\Page\Controller;
-
 use Web\Page\Admin\Menu;
-
 use Web\Page\Handler\HTMLPageBase;
 use Web\Templates;
 use Web\Session\User\IUserAdmin;
