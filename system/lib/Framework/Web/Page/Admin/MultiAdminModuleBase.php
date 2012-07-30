@@ -1,6 +1,8 @@
 <?php
 namespace Web\Page\Admin;
 
+use Web\Page\Controller\Special\Redirect;
+
 use Utility\Net\URL\Path;
 use Web\Page\Handler;
 use Web\Templates;
@@ -14,6 +16,13 @@ abstract class MultiAdminModuleBase extends AdminModuleBase {
 		}
 	}
 	function getSubmodules(){
+		$modules = array();
+		//Default module
+		if(method_exists($this, 'index')){
+			$modules['Overview'] = static::fromSub(null);
+		}
+		
+		//Submodules
 		$r = new \ReflectionClass(get_called_class());
 		foreach($r->getMethods() as $method){
 			$method = $method->getName();
@@ -27,6 +36,10 @@ abstract class MultiAdminModuleBase extends AdminModuleBase {
 	function GET($data = array()){
 		if(!$this->submodule){
 			$method = 'index';
+			if(method_exists($this,$method)){
+				$sub = array_shift($this->getSubmodules());
+				return new Redirect(new static(new Path($sub)));
+			}
 		}else{
 			$method = 'action'.$this->submodule;
 		}

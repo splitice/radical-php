@@ -5,6 +5,10 @@ use Web\Page\Controller\Special\Redirect;
 use Web\Page\Admin\MultiAdminModuleBase;
 use Web\Page\Handler;
 
+/**
+ * @author SplitIce
+ *
+ */
 class ProjectInfo extends MultiAdminModuleBase {	
 	protected function getInfo($path){
 		$ret = array('files'=>0,'lines'=>0);
