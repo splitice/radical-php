@@ -23,9 +23,16 @@ abstract class Handler {
 			Handler::getInstance()->Exception($ex);
 		}
 	}
-	static function Handle($callback,$argument = array()){
+	/**
+	 * Execute $callback from within the scope of the error handling system.
+	 * Any errors will be handled by the correct error handler.
+	 * 
+	 * @param callback $callback to execute
+	 * @param array $arguments to pass to $callback
+	 */
+	static function Handle($callback,$arguments = array()){
 		try {
-			call_user_func_array($callback, $argument);
+			call_user_func_array($callback, $arguments);
 		}
 		catch(ErrorException $ex){
 			self::handleException($ex,true);
