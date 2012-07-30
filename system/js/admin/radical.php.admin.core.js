@@ -6,8 +6,7 @@ define(["jquery",'jqueryui/tabs'],function(a){
 				ajaxOptions: {
 					error: function( xhr, status, index, anchor ) {
 						$( anchor.hash ).html(
-							"Couldn't load this tab. We'll try to fix this as soon as possible. " +
-							"If this wouldn't be a demo." 
+							"Couldn't load this tab. We'll try to fix this as soon as possible."
 						);
 					},
 					type: 'post',
