@@ -7,11 +7,19 @@ use Core\ErrorHandling\Handler;
 
 abstract class ErrorHandlerBase extends Handler {
 	/**
+	 * The namespaces for all error trackers.
+	 * 
+	 * @radical ns-expr
+	 * @var string
+	 */
+	const ERRORS_EXPR = '\\Core\\ErrorHandling\\Errors\\*';
+	
+	/**
 	 * Calls the init functions for all the error modules
 	 */
 	function __construct(){
-		//Itterate
-		foreach(\Core\Libraries::get('\\Core\\ErrorHandling\\Errors\\*') as $class){
+		//Itterate all error trackers
+		foreach(\Core\Libraries::get(self::ERRORS_EXPR) as $class){
 			$class::Init();
 		}
 		
