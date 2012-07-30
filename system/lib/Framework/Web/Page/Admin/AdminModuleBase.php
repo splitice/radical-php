@@ -29,7 +29,7 @@ abstract class AdminModuleBase extends HTMLPageBase implements Modules\IAdminMod
 	}
 	protected function _T($template,$vars){
 		$vars['this'] = $this;
-		if(isset($_POST['_admin']) && $_POST['_admin'] == 'outer'){
+		if(Request::Context() == Request::CONTEXT_OUTER){
 			return new Template($template,$vars,'admin');
 		}
 		$menu = new Menu($this->getModuleName());

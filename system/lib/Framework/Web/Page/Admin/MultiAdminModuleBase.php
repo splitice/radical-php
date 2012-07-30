@@ -56,14 +56,15 @@ abstract class MultiAdminModuleBase extends AdminModuleBase {
 		return $this->submodule;
 	}
 	protected function _T($template,$vars){
-		if(isset($_POST['_admin']) && $_POST['_admin'] == 'outer'){
+		if(Request::Context() == Request::CONTEXT_OUTER){
 			$menu = new SubMenu($this,$this->submodule);
 			$vars['this'] = $this;
 			$vars['menu'] = $menu;
 			return new Templates\ContainerTemplate($template,$vars,'admin','Common/subwrapper');
 		}else {
-			if(isset($_POST['_admin']) && $_POST['_admin'] == 'inner')
-				$_POST['_admin'] = 'outer';
+			if(Request::Context() == Request::CONTEXT_INNER)
+				Request::Context(Request::CONTEXT_OUTER);
+			
 			return parent::_T($template, $vars);
 		}
 	}
@@ -72,7 +73,7 @@ abstract class MultiAdminModuleBase extends AdminModuleBase {
 	}
 	function toId(){
 		$id = parent::toId();
-		if($this->submodule && isset($_POST['_admin']) && $_POST['_admin'] == 'outer'){
+		if($this->submodule && Request::Context() == Request::CONTEXT_OUTER){
 			$id .= '-'.$this->submodule;
 		}
 		return $id;
