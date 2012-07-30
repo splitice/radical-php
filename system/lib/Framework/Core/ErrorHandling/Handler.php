@@ -7,10 +7,18 @@ use Core\ErrorHandling\Errors\Internal\ErrorException;
 abstract class Handler {
 	static $instance;
 	
+	/**
+	 * Create instance and store in singleton
+	 */
 	function __construct(){
 		self::$instance = $this;
 	}
 	
+	/**
+	 * Get instance (singleton type pattern)
+	 * 
+	 * @return \Core\ErrorHandling\Handler instance of
+	 */
 	static function getInstance(){
 		if(!self::$instance){
 			self::$instance = new Handlers\OutputErrorHandler();
@@ -18,21 +26,29 @@ abstract class Handler {
 		return self::$instance;
 	}
 	
+	/**
+	 * Is called when an unhandled exception is received.
+	 * 
+	 * @param ErrorException $ex the error exception defining the unhandled exception
+	 * @param bool $fatal usually is true (fatal)
+	 */
 	static private function handleException(ErrorException $ex, $fatal = false){
 		if($ex->isFatal() || $fatal){
 			Handler::getInstance()->Exception($ex);
 		}
 	}
+	
 	/**
 	 * Execute $callback from within the scope of the error handling system.
 	 * Any errors will be handled by the correct error handler.
 	 * 
 	 * @param callback $callback to execute
 	 * @param array $arguments to pass to $callback
+	 * @returns mixed the result of $callback(...)
 	 */
 	static function Handle($callback,$arguments = array()){
 		try {
-			call_user_func_array($callback, $arguments);
+			return call_user_func_array($callback, $arguments);
 		}
 		catch(ErrorException $ex){
 			self::handleException($ex,true);
