@@ -32,6 +32,7 @@ abstract class AdminModuleBase extends HTMLPageBase implements Modules\IAdminMod
 		if(Request::Context() == Request::CONTEXT_OUTER){
 			return new Template($template,$vars,'admin');
 		}
+		
 		$menu = new Menu($this->getModuleName());
 		$vars['menu'] = $menu;
 		return new Templates\ContainerTemplate($template,$vars,'admin');

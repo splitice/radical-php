@@ -133,17 +133,22 @@ class Database extends MultiAdminModuleBase {
 					echo $form->toHTML();
 					break;
 				case 'view':
+					//Get Table Management
+					$tableManagement = $this->table->getTableManagement();
+
 					$vars = array();
 					$per_page = 30;
-					$vars['count']  = ceil($this->table->getAll()->getCount()/$per_page);
+					$where = $tableManagement->getWhere();
+					$vars['count']  = ceil($this->table->getAll($where)->getCount()/$per_page);
 					
 					$pagination = new \Utility\Net\URL\Pagination\QueryMethod();
 					$vars['pagination'] = $pagination;
 					
-					$vars['data'] = $this->table->getAll($pagination->getLimit($per_page));
+					$sql = $pagination->getLimit($per_page);
+					if($where) $sql->where($where);
+					$vars['data'] = $this->table->getAll($sql);
 
 					//Get Columns
-					$tableManagement = $this->table->getTableManagement();
 					$vars['cols'] = $tableManagement->getColumns();
 					
 					return $this->_T('Database/admin_table_view',$vars,'admin');

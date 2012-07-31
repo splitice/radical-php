@@ -32,6 +32,11 @@ class TableManagement extends \Core\Object {
 		$ct = $this->getCreateTable();
 		return $ct->toArray();
 	}
+	
+	function getWhere(){
+		if(isset($this->where)) return $this->where;
+	}
+	
 	/**
 	 * @return the $table
 	 */
