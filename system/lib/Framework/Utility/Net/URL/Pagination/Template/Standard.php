@@ -20,6 +20,7 @@ class Standard extends \Core\Object implements IPaginationTemplate {
 	function pageLink(IPaginator $paginator,$page,$isCurrent=false){
 		$url = '';
 		$url = $paginator->toURL($page);
+		$ret = '';
 		if($this->firstPage == null){
 			$this->firstPage = $page;
 			$ret = '<a href="'.$paginator->toURL(1).'">1</a> ... ';
