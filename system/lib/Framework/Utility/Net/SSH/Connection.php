@@ -21,7 +21,7 @@ class Connection {
 		$this->port = $port;
 		
 		//Setup Auth
-		$this->authenticate = new Authenticate(&$this->ssh);
+		$this->authenticate = new Authenticate($this->ssh);
 		
 		//Connect
 		$this->Connect($methods);

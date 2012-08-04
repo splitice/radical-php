@@ -3708,26 +3708,29 @@ class pChart {
 	/*
 	 * Validate data contained in the data array
 	 */
-	function validateData($FunctionName, &$Data) {
-		$DataSummary = array ();
-		
-		foreach ( $Data as $key => $Values ) {
-			foreach ( $Values as $key2 => $Value ) {
-				if (! isset ( $DataSummary [$key2] ))
-					$DataSummary [$key2] = 1;
-				else
-					$DataSummary [$key2] ++;
+	function validateData($FunctionName, $Data) {
+		if(!$Data){
+			$DataSummary = array ();
+			
+			foreach ( $Data as $key => $Values ) {
+				foreach ( $Values as $key2 => $Value ) {
+					if (! isset ( $DataSummary [$key2] ))
+						$DataSummary [$key2] = 1;
+					else
+						$DataSummary [$key2] ++;
+				}
 			}
-		}
-		
-		if (max ( $DataSummary ) == 0)
+			
+			if (max ( $DataSummary ) == 0)
+				$this->Errors [] = "[Warning] " . $FunctionName . " - No data set.";
+			
+			foreach ( $DataSummary as $key => $Value ) {
+				if ($Value < max ( $DataSummary )) {
+					$this->Errors [] = "[Warning] " . $FunctionName . " - Missing data in serie " . $key . ".";
+				}
+			}
+		}else
 			$this->Errors [] = "[Warning] " . $FunctionName . " - No data set.";
-		
-		foreach ( $DataSummary as $key => $Value ) {
-			if ($Value < max ( $DataSummary )) {
-				$this->Errors [] = "[Warning] " . $FunctionName . " - Missing data in serie " . $key . ".";
-			}
-		}
 	}
 	
 	/*
