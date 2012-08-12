@@ -10,6 +10,7 @@ class Path {
 		if(empty($path)){
 			$path = '/';
 		}
+		$path = (string)$path;
 		if($path{0} == '/')
 			$path = substr($path,1);
 		

@@ -11,6 +11,8 @@ table {
 
 body {
 	font-family: "Trebuchet MS", "Helvetica", "Arial",  "Verdana", "sans-serif";
+	background: url("http://cdn1.editmysite.com/images/404background.jpg") repeat scroll 0 0 transparent;
+    color: #CCCCCC;
 }
 
 .outer.tabs>div {

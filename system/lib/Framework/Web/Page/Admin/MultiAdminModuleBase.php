@@ -15,10 +15,10 @@ abstract class MultiAdminModuleBase extends AdminModuleBase {
 			$url->removeFirstPathElement();
 		}
 	}
-	function getSubmodules(){
+	function getSubmodules($inclIndex = true){
 		$modules = array();
 		//Default module
-		if(method_exists($this, 'index')){
+		if($inclIndex && method_exists($this, 'index')){
 			$modules['Overview'] = static::fromSub(null);
 		}
 		
@@ -36,9 +36,10 @@ abstract class MultiAdminModuleBase extends AdminModuleBase {
 	function GET($data = array()){
 		if(!$this->submodule){
 			$method = 'index';
-			if(method_exists($this,$method)){
-				$sub = array_shift($this->getSubmodules());
-				return new Redirect(new static(new Path($sub)));
+			if(!method_exists($this,$method)){
+				$sub = array_shift($this->getSubmodules(false));
+				$r = new static(new Path($sub));
+				return new Redirect($r->toURL());
 			}
 		}else{
 			$method = 'action'.$this->submodule;

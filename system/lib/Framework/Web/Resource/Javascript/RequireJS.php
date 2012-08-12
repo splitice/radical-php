@@ -66,7 +66,7 @@ class RequireJS extends Script {
 		if($deps){
 			foreach($tree as $v){
 				if(is_array($v)){
-					$depth = $this->findDepth($tree, &$deps, $depth+1);
+					$depth = $this->findDepth($tree, $deps, $depth+1);
 					if($depth){
 						return $depth;
 					}

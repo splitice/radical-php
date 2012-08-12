@@ -28,9 +28,6 @@ class ProjectInfo extends MultiAdminModuleBase {
 		
 		return $this->_T('ProjectInfo/info',array('libraries'=>$libs));
 	}
-	function index(){
-		return new Redirect(new static(new \Utility\Net\URL\Path('/Info')));//Temporary TODO
-	}
 	function actionUnitTest(){
 		$testResults = \Core\Debug\Test\Controller::RunUnitTests();
 
