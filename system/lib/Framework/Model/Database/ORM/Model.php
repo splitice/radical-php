@@ -38,7 +38,7 @@ class Model extends ModelData {
 				$this->relations[$r->getField()] = $r->getReference();
 			}
 		}elseif($this->engine == 'myisam'){
-			$this->relations = MyIsam::fieldReferences($structure);
+			$this->relations = MyIsam::fieldReferences($structure,$this->table);
 		}else{
 			throw new \Exception('Unknown database engine type: '.$this->engine);
 		}
@@ -46,13 +46,15 @@ class Model extends ModelData {
 		//Work out reverse references
 		$tableName = $this->tableInfo['name'];
 		foreach(TableReference::getAll() as $ref){
-			$rStruct = CreateTable::fromTable($ref->getTable());
-			foreach($rStruct->relations as $relation){
-				$reference = $relation->getReference();
-				$rTable = $reference->getTable();
-				
-				if($rTable == $tableName){
-					$this->references[] = array('from_table'=>$ref,'from_field'=>$relation->getField(),'to_field'=>$reference->getColumn());
+			if($ref->exists()){
+				$rStruct = CreateTable::fromTable($ref->getTable());
+				foreach($rStruct->relations as $relation){
+					$reference = $relation->getReference();
+					$rTable = $reference->getTable();
+					
+					if($rTable == $tableName){
+						$this->references[] = array('from_table'=>$ref,'from_field'=>$relation->getField(),'to_field'=>$reference->getColumn());
+					}
 				}
 			}
 		}

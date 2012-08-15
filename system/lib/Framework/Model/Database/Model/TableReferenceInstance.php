@@ -95,11 +95,21 @@ class TableReferenceInstance extends \Core\Object {
 		$sql = new UnLockTable();
 		$sql->Execute();
 	}
+	function exists(){
+		$sql = 'show tables like '.\DB::E($this->getTable());
+		$res = \DB::Q($sql);
+		if($res->Fetch()) {
+			return true;
+		}
+
+		return false;
+	}
 	/**
 	 * @return \Model\Database\SQL\SelectStatement
 	 */
-	function select($fields = '*'){
-		return new SelectStatement($this->getTable(),$fields);
+	function select($fields = '*',$type = ''){
+		$class = '\\Model\\Database\\SQL\\'.$type.'SelectStatement';
+		return new $class($this->getTable(),$fields);
 	}
 	
 	function update($values = array(),$where = array()){

@@ -376,8 +376,12 @@ abstract class Table implements ITable, \JsonSerializable {
 		return new SQL\SelectStatement(static::TABLE);
 	}
 	private static function _fromFields(array $fields){
-		$orm = ORM\Manager::getModel(TableReference::getByTableClass(get_called_class()));
+		$table = TableReference::getByTableClass(get_called_class());
+		$orm = ORM\Manager::getModel($table);
 
+		if(!$orm)
+			throw new \Exception('Table doesnt exist: '.$table->getName());
+			
 		//prefix
 		$prefixedFields = array();
 		foreach($fields as $k=>$f){
