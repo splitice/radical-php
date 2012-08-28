@@ -21,12 +21,12 @@ abstract class HostBase extends \Core\Object {
 		return $ret;
 	}
 	
-	protected function UploadStart($file){
+	protected function uploadStart($file){
 		if (! file_exists ( $file )) {
 			throw new Exception\UploadException ( "The file <b>$file</b> does not exist" );
 		}
 	}
-	protected static function CH($url){
+	protected static function cH($url){
 		$ch = curl_init($url);
 		curl_setopt_array ( $ch, array ( CURLOPT_RETURNTRANSFER => true, CURLOPT_COOKIEFILE => 'cookies.txt', CURLOPT_COOKIEJAR => 'cookies.txt', CURLOPT_FOLLOWLOCATION=>true) );
 		return $ch;

@@ -74,7 +74,7 @@ class CLI extends CurlBase {
 		return implode('\n',$ret);
 	}
 	
-	function Execute($data = null){
+	function execute($data = null){
 		$cmd = $this->buildCall();
 		
 		$process = new System\Execute($cmd);
@@ -101,7 +101,7 @@ class CLI extends CurlBase {
 	}
 	
 	private $error;
-	function Error(){
+	function error(){
 		return $this->error;
 	}
 }

@@ -100,7 +100,7 @@ class Fetch {
              $this->curl[CURLOPT_RANGE] = $this->_formatRanges($ranges);
         }
                 
-	function Post($data){
+	function post($data){
 		//Store previous post state
 		$post = $data = null;
 		if(isset($this->curl[CURLOPT_POST])){
@@ -132,7 +132,7 @@ class Fetch {
 		return $ret;
 	}
 	
-	function Get(){
+	function get(){
 		//Store previous post state
 		$post = $data = null;
 		if(isset($this->curl[CURLOPT_POST])){
@@ -165,7 +165,7 @@ class Fetch {
 		return $ret;
 	}
 	
-	function CH(){
+	function cH(){
 		$ch = $this->curl->CH();
 		return $ch;
 	}
@@ -188,7 +188,7 @@ class Fetch {
 	$headers[] = 'Accept-Language: en-US,en;q=0.8,en-GB;q=0.6';
 	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);*/
 
-	function Execute($data = null){
+	function execute($data = null){
 		return $this->curl->Execute($data);
 	}
 }

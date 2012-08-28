@@ -7,7 +7,7 @@ class Imgur extends _BASE implements IUploadHost {
 	static $ch = array();
 	static $cookies;
 	
-	static function Test(){
+	static function test(){
 		$ch = curl_init('http://imagetwist.com/');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 3);
@@ -16,7 +16,7 @@ class Imgur extends _BASE implements IUploadHost {
 		}
 		return false;
 	}
-	static function Login($username = null, $password = null){		
+	static function login($username = null, $password = null){		
 		$ch = parent::Login();
 		//Setup CURL
 		curl_setopt($ch, CURLOPT_URL, 'http://imagetwist.com/');
@@ -69,7 +69,7 @@ class Imgur extends _BASE implements IUploadHost {
 		
 		return $m[2];
 	}
-	function Upload($file,$file_type,$size='500x500'){
+	function upload($file,$file_type,$size='500x500'){
 		//Only family safe uploads
 		//if($file_type == Image\File::TYPE_ADULT){
 		//	throw new UploadException('ImageTwist doesnt allow adult image uploads');

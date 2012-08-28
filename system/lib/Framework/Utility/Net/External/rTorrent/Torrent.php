@@ -12,10 +12,10 @@ class Torrent extends _CORE {
 		$this->host = $host;
 	}
 	
-	function Stop() {
+	function stop() {
 		$this->POST ( 'd.stop', array ($this->hash ) );
 	}
-	function Close() {
+	function close() {
 		$this->POST ( 'd.close', array ($this->hash ) );
 	}
 	function eraseData() {
@@ -23,7 +23,7 @@ class Torrent extends _CORE {
 		$this->POST ( 'd.erase', array ($this->hash ) );
 	}
 	
-	function Start() {
+	function start() {
 		$this->POST ( 'd.start', array ($this->hash ) );
 	}
 	

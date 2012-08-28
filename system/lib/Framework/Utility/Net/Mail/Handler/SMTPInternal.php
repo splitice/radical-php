@@ -14,7 +14,7 @@ class SMTPInternal extends Internal {
 		$this->host = $host;
 		$this->port = $port;
 	}
-	function Send(Message $message,$body){
+	function send(Message $message,$body){
 		//Read INI
 		$smtp = ini_get("SMTP");
 		$port = ini_get("smtp_port");

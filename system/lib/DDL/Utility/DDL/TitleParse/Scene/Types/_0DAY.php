@@ -23,15 +23,15 @@ class _0DAY extends Internal\SceneBase {
 		parent::__construct($string);
 		$this->Parse();
 	}
-	protected function Split($string){
+	protected function split($string){
 		return explode(static::DELIMITER,$string);
 	}
-	static function CleanString($str){
+	static function cleanString($str){
 		$str = str_replace('.', ' ', $str);
 		return trim($str);
 	}
 	
-	function Parse(){
+	function parse(){
 		if(!$this->parts){
 			return;
 		}

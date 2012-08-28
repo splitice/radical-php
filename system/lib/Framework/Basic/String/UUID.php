@@ -29,7 +29,7 @@ class UUID {
 	 * @return string The string representation of an RFC 4122-compliant, version 4 UUID.
 	 * @link http://www.ietf.org/rfc/rfc4122.txt RFC 4122: UUID URN Namespace
 	 */
-	public static function Generate() {
+	public static function generate() {
 		$uuid = Random::GenerateBytes(16);
 		$uuid[6] = chr(ord($uuid[6]) & static::UUID_CLEAR_VER | static::UUID_VERSION_4);
 		$uuid[8] = chr(ord($uuid[8]) & static::UUID_CLEAR_VAR | static::UUID_VAR_RFC);

@@ -12,7 +12,7 @@ class WeakRef {
 			$this->weakrefSupport = $support;
 		}
 	}
-	function Get($key){
+	function get($key){
 		if(is_object($key)){
 			$key = (string)$key;
 		}
@@ -28,7 +28,7 @@ class WeakRef {
 		}
 		return $ret;
 	}
-	function Set($key,$value,$ttl = null){
+	function set($key,$value,$ttl = null){
 		if($this->weakrefSupport){
 			$value = new \WeakRef($value);
 		}
@@ -53,7 +53,7 @@ class WeakRef {
 			}
 		}
 	}
-	function Delete($key){
+	function delete($key){
 		if(isset($this->data[$key])){
 			unset($this->data[$key]);
 		}

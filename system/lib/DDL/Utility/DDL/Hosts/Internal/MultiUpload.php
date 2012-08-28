@@ -48,7 +48,7 @@ class MultiUpload {
 		return $this->module->getHost();
 	}
 
-	function Upload(){
+	function upload(){
 		return $this->module->getModule()->Upload($this->file);
 	}
 	
@@ -69,7 +69,7 @@ class MultiUpload {
 		$this->module->onFailure($this, $this->data);
 	}
 	
-	function Clear(){
+	function clear(){
 		$this->module = null;
 	}
 }

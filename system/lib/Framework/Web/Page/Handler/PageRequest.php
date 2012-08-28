@@ -3,7 +3,7 @@ namespace Web\Page\Handler;
 use Web\Page\Handler as PH;
 
 class PageRequest extends PageRequestBase {	
-	function Execute($method){
+	function execute($method){
 		parent::Execute($method);
 		
 		//Flush Output

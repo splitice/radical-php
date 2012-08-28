@@ -2,6 +2,6 @@
 namespace CLI\Daemon\Module\Interfaces;
 
 interface IModuleJob {
-	function Execute(array $arguments);
+	function execute(array $arguments);
 	function getName();
 }

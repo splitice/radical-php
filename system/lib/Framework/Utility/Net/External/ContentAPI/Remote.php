@@ -11,7 +11,7 @@ class Remote {
 		$this->server = $server;
 		$this->module = $module;
 	}
-	function Fetch($id){
+	function fetch($id){
 		$query = array('module'=>$this->module,'id'=>$id);
 		
 		$api = new API\APICall($this->server);

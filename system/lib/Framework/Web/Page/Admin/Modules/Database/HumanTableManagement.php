@@ -5,7 +5,7 @@ use Model\Database\Model\Table\TableManagement;
 
 class HumanTableManagement extends TableManagement {
 	public $SHOW_ADMIN = true;
-	function RenameColumn($k){
+	function renameColumn($k){
 		$orm = $this->table->getORM();
 		if(count($orm->id) == 1){
 			if($orm->id[0] == $k){

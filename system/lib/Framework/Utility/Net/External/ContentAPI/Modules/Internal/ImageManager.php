@@ -16,10 +16,10 @@ class ImageManager extends ArrayObject implements Interfaces\IExportable {
 	function Add($v,$tags){
 		return parent::Add($this->_encode($v,$tags));
 	}
-	function Set($v,$tags){
+	function set($v,$tags){
 		return parent::Set($this->_encode($v,$tags));
 	}
-	function Get($k){
+	function get($k){
 		return $this->_decode(parent::Get($k));
 	}
 	function getByTag($tag){

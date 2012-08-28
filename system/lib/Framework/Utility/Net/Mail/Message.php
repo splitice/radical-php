@@ -89,7 +89,7 @@ class Message {
 		return $body;
 	}
 
-	function Send($body){
+	function send($body){
 		$body = self::body($body);
 		return $this->handler->Send($this,$body);
 	}

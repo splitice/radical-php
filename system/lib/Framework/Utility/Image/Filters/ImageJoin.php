@@ -15,7 +15,7 @@ class ImageJoin extends Internal\FilterBase implements Interfaces\IInternalFilte
 		$this->image = $image;
 	}
 	
-	function Process($gd){
+	function process($gd){
 		if(!is_string($this->type)){
 			return null;
 		}

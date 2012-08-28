@@ -14,7 +14,7 @@ class File {
 	 * @param string $file
 	 * @return number
 	 */
-	static function Size($file){
+	static function size($file){
 		$file = new File\Instance($file);
 		return $file->Size();
 	}
@@ -26,7 +26,7 @@ class File {
 	 * @param string $data
 	 * @return \Utility\File
 	 */
-	static function Temporary($filename,$data = ''){
+	static function temporary($filename,$data = ''){
 		$filename = '/tmp/'.$filename;
 		file_put_contents($filename, $data);
 		return new static($filename);

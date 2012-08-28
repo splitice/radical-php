@@ -9,11 +9,11 @@ class Lock {
 		$this->file = $file;
 	}
 	
-	function Release(){
+	function release(){
 		fclose($this->lock);
 	}
 	
-	function Lock($mode = LOCK_EX,$block = true){
+	function lock($mode = LOCK_EX,$block = true){
 		if($this->lock){
 			return flock($handle, $mode, $block);
 		}
@@ -23,7 +23,7 @@ class Lock {
 		return $status;
 	}
 	
-	function Check($mode = LOCK_EX){
+	function check($mode = LOCK_EX){
 		$handle = $this->file->fopen('r');
 		$status = flock($handle, $mode, $block);
 		fclose($handle);

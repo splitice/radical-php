@@ -22,7 +22,7 @@ class Menu extends PageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function GET(){
+	function gET(){
 			$VARS = array();
 				
 			//Get admin modules
@@ -44,7 +44,7 @@ class Menu extends PageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function POST(){
+	function pOST(){
 		return $this->GET();
 	}
 }

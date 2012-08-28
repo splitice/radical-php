@@ -35,7 +35,7 @@ class Session extends \Core\Object {
 	 * 
 	 * @return \Utility\Net\IP
 	 */
-	static function IP(){
+	static function iP(){
 		if(\Core\Server::isCLI()){
 			return new IP(static::DEFAULT_IP);
 		}
@@ -51,7 +51,7 @@ class Session extends \Core\Object {
 	/**
 	 * Initializes the session system
 	 */
-	static function Init(){
+	static function init(){
 		//Create the session authentication controller and internal data storage
 		if(!static::$auth){
 			static::$auth = new Authenticator();

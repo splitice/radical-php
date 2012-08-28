@@ -4,7 +4,7 @@ namespace CLI\Output;
 class OutputHandler {
 	private static $handler;
 	
-	static function Output($string){
+	static function output($string){
 		if(self::$handler instanceof Handler\IOutputHandler){
 			self::$handler->Output($string);
 		}
@@ -14,7 +14,7 @@ class OutputHandler {
 		static::$handler = $handler;
 	}
 	
-	static function Init(){
+	static function init(){
 		self::$handler = new Handler\EchoOutput();
 	}
 }

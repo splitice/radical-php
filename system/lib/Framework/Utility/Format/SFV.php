@@ -13,7 +13,7 @@ class SFV {
 		return hash_file('crc32b', $filename);
 	}
 	
-	private function Parse(){
+	private function parse(){
 		$entries = array();
 		
 		foreach(explode("\n",$this->data) as $line){
@@ -45,7 +45,7 @@ class SFV {
 		$this->entries = $entries;
 	}
 	
-	function Validate(){
+	function validate(){
 		$ok = true;
 		foreach($this->entries as $file=>$hash){
 			$full_file = dirname($this->file).DIRECTORY_SEPARATOR.$file;

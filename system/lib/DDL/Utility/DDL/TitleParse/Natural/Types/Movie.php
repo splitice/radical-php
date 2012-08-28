@@ -11,7 +11,7 @@ class Movie extends Internal\NaturalBase {
 		$this->Parse();
 	}
 	
-	function Parse(){
+	function parse(){
 		$m = array();
 		if(
 			preg_match('#(.+)\s*\(([1-3][0-9]{3})\)(?:\s*([a-z0-9]+))?#i', $this->rls,$m) ||

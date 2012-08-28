@@ -4,7 +4,7 @@ namespace Model\Database\ORM;
 use Model\Database\Model\TableReference;
 
 class ModelReference {
-	static function Find($field){
+	static function find($field){
 		$prefixLen = 0;
 		$ref = null;
 		foreach(TableReference::getAll() as $table){

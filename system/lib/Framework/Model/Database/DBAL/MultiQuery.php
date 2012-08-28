@@ -20,7 +20,7 @@ class MultiQuery {
 		return $this;
 	}
 	
-	function BuildQuery(){
+	function buildQuery(){
 		$sql = '';
 		foreach($this->sql as $s){
 			$s = rtrim(trim($s),static::DELIMETER);
@@ -29,7 +29,7 @@ class MultiQuery {
 		return $sql;
 	}
 	
-	function Execute(){
+	function execute(){
 		$sql = $this->BuildQuery();
 		
 		if(!$this->con->multi_query($sql)){

@@ -15,7 +15,7 @@ class AdultDVDEmpire extends Internal\ModuleBase implements \Utility\Net\Externa
 		return self::URL.'/'.$this->id.'/';
 	}
 	
-	function Fetch() {
+	function fetch() {
 		$ret = array();
 		
 		//Curl Fetch

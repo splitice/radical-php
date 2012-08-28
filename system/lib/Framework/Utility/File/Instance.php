@@ -16,7 +16,7 @@ class Instance {
 	 * @param array $vars
 	 * @return string
 	 */
-	function Compact($vars){
+	function compact($vars){
 		//Setup
 		$path = $this->file;
 		$pLen = strlen($path);
@@ -36,31 +36,31 @@ class Instance {
 	function getExtension(){
 		return pathinfo($this->file,PATHINFO_EXTENSION);
 	}
-	function Exists(){
+	function exists(){
 		return file_exists($this->file);
 	}
-	function Contents($data = null){
+	function contents($data = null){
 		if($data === null)
 			return file_get_contents($this->file);
 		
 		return file_put_contents($this->file, $data);
 	}
-	function Rename($to) {
+	function rename($to) {
 		rename ( $this->file, $to );
 		$this->file = $to;
 	}
-	static function SantizeName($str) {
+	static function santizeName($str) {
 		$str = str_replace ( array ('/', '\\', '\'', '"' ), array (' ', ' ', '', '' ), $str );
 		return $str;
 	}
-	static function NiceName($str) {
+	static function niceName($str) {
 		$str = self::SantizeName ( $str );
 		$str = preg_replace ( '#([^(a-zA-Z0-9\-\.)])#', ' ', $str );
 		$str = preg_replace ( '#\s+#', ' ', $str );
 		$str = str_replace ( ' ', '_', $str );
 		return $str;
 	}
-	function Size() {
+	function size() {
 		if(!file_exists($this->file)){
 			return null;
 		}
@@ -106,10 +106,10 @@ class Instance {
 	function __toString(){
 		return $this->file;
 	}
-	function Delete(){
+	function delete(){
 		unlink($this->file);
 	}
-        function Handle($mode){
+        function handle($mode){
 		return fopen($this->file, $mode);
 	}
 }

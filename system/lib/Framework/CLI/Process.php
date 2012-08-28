@@ -4,7 +4,7 @@ namespace CLI;
 use CLI\Threading\Thread;
 
 class Process {
-	static function Title($title){
+	static function title($title){
 		self::getThread()->setName($title);
 	}
 	static function getThread(){

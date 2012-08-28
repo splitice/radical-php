@@ -13,7 +13,7 @@ abstract class HostBase implements IDDLHostCheck {
 	const HOST_REGEX = null;
 	const IMAGE_ORDER = null;
 	
-	function Recognise($data){
+	function recognise($data){
 		$links = array();
 		
 		//Parse HTML
@@ -39,7 +39,7 @@ abstract class HostBase implements IDDLHostCheck {
 		return $links;
 	}
 	
-	function RecogniseSingle($link){
+	function recogniseSingle($link){
 		if(static::HOST_REGEX === null){
 			return false;
 		}
@@ -48,7 +48,7 @@ abstract class HostBase implements IDDLHostCheck {
 			return $m[0];
 		}
 	}
-	function RecogniseAll($data){
+	function recogniseAll($data){
 		if(static::HOST_REGEX === null){
 			return false;
 		}
@@ -58,11 +58,11 @@ abstract class HostBase implements IDDLHostCheck {
 		}
 	}
 	
-	function ScoreValue(){
+	function scoreValue(){
 		return static::HOST_SCORE;
 	}
 	
-	function CompressURL($url) {
+	function compressURL($url) {
 		if(substr($url,0,4) != 'http'){
 			$url = 'http://'.$url;
 		}
@@ -76,13 +76,13 @@ abstract class HostBase implements IDDLHostCheck {
 	static function addWWW($url){
 		return 'http://www.'.$url;
 	}
-	function ExtractURL($url) {
+	function extractURL($url) {
 		return static::addWWW(static::HOST_DOMAIN.$url);
 	}
 	function AppendFilename($url,$filename){
 		return $url;
 	}
-	function Check($url){
+	function check($url){
 		$F = new HTTP\Fetch($url);
 		$F->setTimeout(5);
 		$F->setModule('Link Checker');
@@ -103,7 +103,7 @@ abstract class HostBase implements IDDLHostCheck {
 		
 		return $status;
 	}
-	function CheckURLs(array $urls){
+	function checkURLs(array $urls){
 		$obj = $this;
 		$links = array();
 		$callback = function($status,$url) use(&$links,$obj){
@@ -124,7 +124,7 @@ abstract class HostBase implements IDDLHostCheck {
 		
 		return $links;
 	}
-	function CheckMulti($mh,$url,$callback){
+	function checkMulti($mh,$url,$callback){
 		$F = new HTTP\Fetch($url);
 		$F->setTimeout(5);
 		$F->setModule('Link Checker');

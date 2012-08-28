@@ -16,7 +16,7 @@ class DynamicTableReference extends TableReferenceInstance {
 		$this->class = $class;
 	}
 	
-	function Info(){
+	function info(){
 		$info = array();
 		$info['name'] = $this->_tableName;
 		$info['prefix'] = $this->_tablePrefix;
@@ -103,11 +103,11 @@ class DynamicTableReference extends TableReferenceInstance {
 	return $class::getCount($sql);
 	}*/
 	
-	function Exists(){
+	function exists(){
 		return \DB::TableExists($this->_tableName);
 	}
 	
-	function Definition($setup){
+	function definition($setup){
 		if(!$this->Exists()){
 			$createTable = new CreateTable($this->_tableName);
 			
@@ -122,7 +122,7 @@ class DynamicTableReference extends TableReferenceInstance {
 		}
 	}
 	
-	function ValidateFields(){
+	function validateFields(){
 		$table = CreateTable::fromTable($this->_tableName);
 		$data = $table->toArray();
 	
@@ -141,7 +141,7 @@ class DynamicTableReference extends TableReferenceInstance {
 		return true;
 	}
 	
-	function EnsureExists($drop = false){
+	function ensureExists($drop = false){
 		//Check if we need to do anything
 		if($this->Exists()){
 			if($this->ValidateFields()){

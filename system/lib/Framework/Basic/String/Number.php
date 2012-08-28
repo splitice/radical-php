@@ -2,7 +2,7 @@
 namespace Basic\String;
 
 class Number extends \Core\Object {
-	static function Ordinal($number){
+	static function ordinal($number){
 		$ends = array('th','st','nd','rd','th','th','th','th','th','th');
 		if (($number %100) >= 11 && ($number%100) <= 13)
 			$abbreviation = $number. 'th';
@@ -11,7 +11,7 @@ class Number extends \Core\Object {
 		
 		return $abbreviation;
 	}
-	static function Natural($int, $plurals = false) {
+	static function natural($int, $plurals = false) {
 		$readable = array ("", "thousand", "million", "billion" );
 		$index = 0;
 		while ( $int > 1000 ) {

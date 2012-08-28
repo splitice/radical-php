@@ -42,7 +42,7 @@ class TVBase extends SceneBase {
 		return false;
 	}
 	
-	static function CleanString($str) {
+	static function cleanString($str) {
 		$str = implode ( ' ', $str );
 		return trim ( $str );
 	}
@@ -69,7 +69,7 @@ class TVBase extends SceneBase {
 		return false;
 	}
 	
-	function ParseEpisode($ref_pos) {
+	function parseEpisode($ref_pos) {
 		$str = $this->extractPart($ref_pos);
 		$season = $episode = null;
 		$str = strtoupper ( $str );
@@ -107,7 +107,7 @@ class TVBase extends SceneBase {
 		}
 		$this->episode = $episode;
 	}
-	function ParseSeason($ref_pos) {
+	function parseSeason($ref_pos) {
 		$str = $this->extractPart($ref_pos);
 		if (preg_match ( '#S([0-9]+)#', $str, $m )) {
 			$season = (int)$m[1];
@@ -131,7 +131,7 @@ class TVBase extends SceneBase {
 			$this->season = $season;
 		}
 	}
-	function ParseDate($ref_pos) {
+	function parseDate($ref_pos) {
 		$date = array();
 		$date[] = $this->extractPart($ref_pos-1);
 		$date[] = $this->extractPart($ref_pos-1);
@@ -143,7 +143,7 @@ class TVBase extends SceneBase {
 		$this->date =  implode('/',$date);
 	}
 	
-	function Parse() {
+	function parse() {
 		$this->encoding = $this->extractPart ( - 1 );
 		$this->source = $this->extractPart ( - 1 );
 		

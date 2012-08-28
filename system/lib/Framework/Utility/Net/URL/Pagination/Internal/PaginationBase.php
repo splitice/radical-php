@@ -39,7 +39,7 @@ abstract class PaginationBase extends \Core\Object implements IPaginator {
 		}
 		return '';
 	}
-	function Output($last,IPaginationTemplate $template){
+	function output($last,IPaginationTemplate $template){
 		if($last == 1){
 			echo $template->onePage();
 			return;

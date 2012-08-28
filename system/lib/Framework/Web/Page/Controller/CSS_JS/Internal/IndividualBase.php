@@ -37,7 +37,7 @@ abstract class IndividualBase extends \Web\Page\Handler\PageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function GET(){
+	function gET(){
 		$file = $this->getFile();
 		$this->sendHeaders($file);
 		$ret = file_get_contents($file);

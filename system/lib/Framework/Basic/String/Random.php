@@ -66,7 +66,7 @@ class Random {
 	 * @param integer $bytes The number of random bytes to generate.
 	 * @return string Returns a string of random bytes.
 	 */
-	static function GenerateBytes($bytes){
+	static function generateBytes($bytes){
 		$source = static::$_source ?: static::_source();
 		return $source($bytes);
 	}
@@ -90,7 +90,7 @@ class Random {
 	 * @param integer $bytes The number of random bytes to generate.
 	 * @return string Returns a base64 encoded string of random bytes.
 	 */
-	static function GenerateBase64($bytes){
+	static function generateBase64($bytes){
 		$result = static::GenerateBytes($bytes);
 		return strtr(rtrim(base64_encode($result), '='), '+', '.');
 	}
@@ -109,7 +109,7 @@ class Random {
 	 * @param integer $bytes The number of random bytes to generate.
 	 * @return string Returns a hex encoded string of random bytes.
 	 */
-	static function GenerateHex($bytes){
+	static function generateHex($bytes){
 		$result = static::GenerateBytes($bytes);
 		return bin2hex($result);
 	}

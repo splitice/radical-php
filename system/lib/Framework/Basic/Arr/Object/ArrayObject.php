@@ -11,7 +11,7 @@ class ArrayObject extends CollectionObject {
 	/* (non-PHPdoc)
 	 * @see \Basic\Arr\Object\CollectionObject::Set()
 	 */
-	function Set($v){
+	function set($v){
 		return parent::Set(null, $v);
 	}
 	
@@ -25,18 +25,18 @@ class ArrayObject extends CollectionObject {
 	/* (non-PHPdoc)
 	 * @see \Basic\Arr\Object\CollectionObject::Remove()
 	 */
-	function Remove($k){
+	function remove($k){
 		parent::Remove($k);
 		
 		//Reorder over gap
 		$this->data = array_values($this->data);
 	}
 	
-	function UnShift($value){
+	function unShift($value){
 		array_unshift ($this->data,$value);
 	}
 	
-	function Pop(){
+	function pop(){
 		return array_pop($this->data);
 	}
 }

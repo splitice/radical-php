@@ -30,7 +30,7 @@ class Container extends \Core\Object {
 		return $output;
 	}
 	
-	protected function Close(){
+	protected function close(){
 		//debug_print_backtrace();
 		echo $this->eraseLine();
 		
@@ -43,7 +43,7 @@ class Container extends \Core\Object {
 		static::$instance = null;
 	}
 	
-	function PushProgress($barId,$progress){
+	function pushProgress($barId,$progress){
 		if($this->masterThread(__FUNCTION__,array($barId,$progress))){
 			foreach($this->bars as $b){
 				if($b->getId() == $barId){
@@ -82,7 +82,7 @@ class Container extends \Core\Object {
 		}
 	}
 	
-	function Done(Bar $bar){
+	function done(Bar $bar){
 		if($this->masterThread(__FUNCTION__,array($bar))){		
 			//Remove
 			foreach($this->bars as $k=>$v){
@@ -125,7 +125,7 @@ class Container extends \Core\Object {
 		
 	}
 	
-	function Render(){
+	function render(){
 		if($this->masterThread(__FUNCTION__)){			
 			//Render Bars
 			$bars = $this->_Render();

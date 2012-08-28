@@ -18,7 +18,7 @@ abstract class CombineBase extends IndividualBase {
 		}
 		$this->name = $n;
 	}
-	static function Link($name){
+	static function link($name){
 		$cache = PooledCache::Get(get_called_class(), 'Memory');
 		
 		$version = (int)$cache->Get($name);
@@ -42,7 +42,7 @@ abstract class CombineBase extends IndividualBase {
 	protected function sendHeaders(){
 		parent::sendHeaders($this->getFiles());
 	}
-	function Optimize($code){
+	function optimize($code){
 		return $code;
 	}
 	/**
@@ -50,7 +50,7 @@ abstract class CombineBase extends IndividualBase {
 	 *
 	 * @throws \Exception
 	 */
-	function GET(){
+	function gET(){
 		$key = static::EXTENSION.'_'.$this->name.'_'.$this->version;
 		
 		$this->sendHeaders();

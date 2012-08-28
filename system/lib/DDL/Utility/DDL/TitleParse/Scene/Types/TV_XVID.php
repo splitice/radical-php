@@ -2,7 +2,7 @@
 namespace Utility\DDL\TitleParse\Scene\Types;
 
 class TV_XVID extends Internal\TVBase {
-	function Parse(){
+	function parse(){
 		if(!$this->parts){
 			return;
 		}

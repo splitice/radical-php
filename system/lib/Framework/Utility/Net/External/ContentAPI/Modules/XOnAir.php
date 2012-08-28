@@ -15,7 +15,7 @@ class XOnAir extends Internal\ModuleBase implements \Utility\Net\External\Conten
 		return self::URL.'/detail.cfm?id='.$this->id;
 	}
 	
-	function Fetch() {
+	function fetch() {
 		$ret = array();
 		
 		//Curl Fetch

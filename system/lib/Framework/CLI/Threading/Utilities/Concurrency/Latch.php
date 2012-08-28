@@ -7,11 +7,11 @@ class Latch {
 	function __construct() {
 		$this->turnstile = new Semaphore ();
 	}
-	function Wait() {
+	function wait() {
 		$this->turnstile->Acquire ();
 		$this->turnstile->Release ();
 	}
-	function Open() {
+	function open() {
 		$this->turnstile->Release ();
 	}
 }

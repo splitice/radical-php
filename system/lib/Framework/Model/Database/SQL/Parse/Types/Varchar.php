@@ -7,7 +7,7 @@ use Web\Form\Element;
 class Varchar extends ZZ_Unknown implements IValidator {
 	const TYPE = 'varchar';
 	
-	function Validate($value){
+	function validate($value){
 		return (strlen($value) <= $this->size) || $this->_Validate($value);
 	}
 }

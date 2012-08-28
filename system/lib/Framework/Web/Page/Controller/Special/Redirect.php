@@ -14,7 +14,7 @@ class Redirect extends Handler\PageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function GET(){
+	function gET(){
 		$headers = \Web\Page\Handler::$stack->top()->headers;
 		$headers->Status(301);
 		$headers->Add('Location',$this->url);
@@ -25,7 +25,7 @@ class Redirect extends Handler\PageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function POST(){
+	function pOST(){
 		return $this->GET();
 	}
 }

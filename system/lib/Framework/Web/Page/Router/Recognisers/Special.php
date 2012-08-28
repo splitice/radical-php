@@ -7,7 +7,7 @@ use Web\Page\Controller;
 use Web\Page\Handler;
 
 class Special implements IPageRecognise {
-	static function Recognise(URL $url){
+	static function recognise(URL $url){
 		$url = $url->getPath();
 		$path = $url->getPath(true);
 		$ext = pathinfo($path,PATHINFO_EXTENSION);

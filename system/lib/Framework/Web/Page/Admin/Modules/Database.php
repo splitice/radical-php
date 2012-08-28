@@ -43,7 +43,7 @@ class Database extends MultiAdminModuleBase {
 		
 		return $classes;
 	}
-	function POST(){
+	function pOST(){
 		switch($this->action){
 			case 'edit':
 				$data = array();
@@ -93,7 +93,7 @@ class Database extends MultiAdminModuleBase {
 	 *
 	 * @throws \Exception
 	 */
-	function GET(){
+	function gET(){
 		if($this->action == 'list'){
 			$classes = array();
 			foreach(\Core\Libraries::get(\Core\Libraries::getProjectSpace('DB\\*')) as $k=>$v){

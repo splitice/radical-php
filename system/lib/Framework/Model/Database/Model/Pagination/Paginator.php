@@ -54,7 +54,7 @@ class Paginator implements IDatabasePaginator {
 		return $o;
 	}
 	
-	function OutputLinks(IPaginator $paginator,IPaginationTemplate $template){
+	function outputLinks(IPaginator $paginator,IPaginationTemplate $template){
 		$paginator->Output(ceil($this->totalRows/$this->perPage), $template);
 	}
 }

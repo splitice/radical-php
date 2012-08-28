@@ -16,22 +16,22 @@ class TableSet extends \Basic\Arr\Object\IncompleteObject {
 		$this->sql = $sql;
 		$this->tableClass = $tableClass;
 	}
-	function Search($text,ISearchAdapter $adapter){
+	function search($text,ISearchAdapter $adapter){
 		$sql = clone $this->sql;
 		$table = constant($this->tableClass.'::TABLE');//TODO: Cleanup
 		$adapter->Filter($text, $sql, $table);
 		return new static($sql,$this->tableClass);
 	}
-	function Filter(IStatement $merge){
+	function filter(IStatement $merge){
 		$sql = clone $this->sql;
 		$merge->mergeTo($sql);
 		return new static($sql,$this->tableClass);
 	}
-	function Delete(){
+	function delete(){
 		$sql = $this->sql->mergeTo(new SQL\DeleteStatement());
 		$sql->Execute();
 	}
-	function Update($value){
+	function update($value){
 		$sql = $this->sql->mergeTo(new SQL\UpdateStatement());
 		$sql->values($value);
 		$sql->Execute();
@@ -43,7 +43,7 @@ class TableSet extends \Basic\Arr\Object\IncompleteObject {
 		//Table'ify
 		return $res->FetchCallback(array($this->tableClass,'fromSQL'));
 	}
-	function Reset(){
+	function reset(){
 		$this->data = null;
 	}
 	public function count(){

@@ -21,14 +21,14 @@ class Messanger extends AtomicClass {
 		$this->sem = new Semaphore ( 0 );
 		$this->_atomic ( 'data', $id );
 	}
-	function Put($item) {
+	function put($item) {
 		$this->data->update ( function ($var) use($item) {
 			return $item;
 		} );
 		
 		$this->sem->Release ();
 	}
-	function Take() {
+	function take() {
 		$ret = null;
 		
 		$this->sem->Acquire ();

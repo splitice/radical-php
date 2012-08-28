@@ -18,7 +18,7 @@ class Int extends ZZ_Unknown implements IValidator {
 		return false;
 	}
 	
-	function Validate($value){
+	function validate($value){
 		if(is_numeric($value)){
 			return ((float)(int)$value === (float)$value) || $this->_Validate($value);
 		}

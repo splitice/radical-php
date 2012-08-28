@@ -2,7 +2,7 @@
 namespace Core;
 
 class Provider {
-	static function Find($id,$array = false){
+	static function find($id,$array = false){
 		$idExpanded = explode('.',$id);
 		if($idExpanded[0] == 'php'){//php dependency -- simple check
 			$phpClass = str_replace('.',DIRECTORY_SEPARATOR,substr($id,4));

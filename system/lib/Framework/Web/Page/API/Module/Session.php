@@ -16,7 +16,7 @@ class Session extends APIBase {
 		}
 		return $output;
 	}
-	function Login(){
+	function login(){
 		$success = \Web\Session::$auth->Login($this->data['username'],$this->data['password']);
 		return $success;
 	}

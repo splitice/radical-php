@@ -28,7 +28,7 @@ class Resize extends Internal\FilterBase implements Interfaces\IExternalFilter {
 	 * @param array $data
 	 * @return resource
 	 */
-	static function Filter($gd,$data){
+	static function filter($gd,$data){
 		if(!isset($data['w']) || !isset($data['h']) || (!is_numeric($data['w']) && $data['w'] != 'auto') || (!is_numeric($data['h']) && $data['h'] != 'auto')){
 			return $gd;
 		}

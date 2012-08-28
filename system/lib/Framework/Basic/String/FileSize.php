@@ -10,7 +10,7 @@ class FileSize {
 	 * @version     0.3
 	 * @link        http://www.jonasjohn.de/snippets/php/readable-filesize.htm
 	 */
-	static function HumanReadableFilesize($size) {
+	static function humanReadableFilesize($size) {
 		$mod = 1024;
 	
 		$units = explode(' ','B KB MB GB TB PB');

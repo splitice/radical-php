@@ -17,7 +17,7 @@ class MultipleDatabase extends NullSource {
 		return array(static::FIELD_USERNAME=>$username);
 	}
 
-	function Login($username,$inPassword){
+	function login($username,$inPassword){
 		foreach($this->tables as $table){
 			$class = $table->getClass();
 	

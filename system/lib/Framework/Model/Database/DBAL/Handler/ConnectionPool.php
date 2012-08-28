@@ -5,11 +5,11 @@ use Model\Database\DBAL\Adapter\Connection;
 class ConnectionPool {
 	public $pool = array();
 	
-	function Free(Connection $connection){
+	function free(Connection $connection){
 		$this->pool[] = $connection;
 	}
 	
-	function GetInstanceIWish(Connection $connection){
+	function getInstanceIWish(Connection $connection){
 		$connectionString = (string)$connection;
 		foreach($this->pool as $k=>$p){
 			if(((string)$p) == $connectionString){
@@ -22,7 +22,7 @@ class ConnectionPool {
 		return $connection->toInstance();
 	}
 	
-	function GetInstance(Connection $connection){
+	function getInstance(Connection $connection){
 		$connectionString = (string)$connection;
 		if(isset($this->pool[$connectionString])){
 			return $this->pool[$connectionString];
@@ -33,7 +33,7 @@ class ConnectionPool {
 		return $connection;
 	}
 	
-	function CloseAll(){
+	function closeAll(){
 		foreach($this->pool as $connection){
 			if($connection instanceof Connection){
 				$connection->Close();

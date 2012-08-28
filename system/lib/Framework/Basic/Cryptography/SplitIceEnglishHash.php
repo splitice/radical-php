@@ -21,7 +21,7 @@ class SplitIceEnglishHash extends HashBase implements HashTypes\IOneWayHash {
 	);
 	
 	static $roman_cache = array();
-	static function Hash($str){
+	static function hash($str){
 		$string = '';
 	
 		//Pre Filter

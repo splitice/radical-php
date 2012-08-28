@@ -11,7 +11,7 @@ function apc_store(){
 function apc_exists(){
 	
 }
-function CDN(){
+function cDN(){
 	
 }
 function mysqli_fetch_all(){

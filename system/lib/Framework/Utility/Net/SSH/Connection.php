@@ -27,7 +27,7 @@ class Connection {
 		$this->Connect($methods);
 	}
 	
-	function Connect($methods = array()){
+	function connect($methods = array()){
 		//Connect Resource
 		$this->ssh = ssh2_connect($this->host,$this->port,$methods,array('disconnect'=>array($this,'onDisconnect')));
 		
@@ -40,7 +40,7 @@ class Connection {
 		}
 	}
 	
-	function Close(){
+	function close(){
 		if($this->ssh !== null){
 			$this->exec('exit');
 			$this->ssh = null;
@@ -62,7 +62,7 @@ class Connection {
 		return is_resource($this->ssh);
 	}
 	
-	function Execute($command, $pty = null, array $env = array(), $width = 80, $height = 25, $width_height_type = SSH2_TERM_UNIT_CHARS){
+	function execute($command, $pty = null, array $env = array(), $width = 80, $height = 25, $width_height_type = SSH2_TERM_UNIT_CHARS){
 		$stream = ssh2_exec($this->ssh,$command,$env,$width,$height,$width_height_type);
 		
 		if(false === $stream){
@@ -74,14 +74,14 @@ class Connection {
 		return stream_get_contents($stream);
 	}
 	
-	function Exec($command){
+	function exec($command){
 		return $this->Execute($command);
 	}
 	
 	/**
 	 * @return \Utility\Net\SSH\SFTP
 	 */
-	function SFTP(){
+	function sFTP(){
 		if(!$this->sftp){
 			//Store SFTP channel
 			$this->sftp = new SFTP($this);

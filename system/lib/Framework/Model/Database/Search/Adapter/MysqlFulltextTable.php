@@ -52,7 +52,7 @@ class MysqlFulltextTable extends MysqlFulltext {
 		
 		\DB::Q($sql);
 	}
-	function Filter($text, SelectStatement $sql, $table){
+	function filter($text, SelectStatement $sql, $table){
 		$table = TableReference::getByTableName($table);
 		if($table === null){
 			throw new \Exception('Couldnt find table model "'.$table.'" to search');
@@ -83,7 +83,7 @@ class MysqlFulltextTable extends MysqlFulltext {
 			$sql->where_and($in);
 		}
 	}
-	function Search($text, TableReferenceInstance $table){
+	function search($text, TableReferenceInstance $table){
 		$mTable = $this->_createTable($table);
 		$ret = parent::Search($text, $mTable);
 		return $ret;

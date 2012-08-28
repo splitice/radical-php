@@ -27,7 +27,7 @@ class FSapi {
 		$request = new HTTP\Fetch($url);
 		return $request;
 	}
-	static function Execute($module, $method, $data){
+	static function execute($module, $method, $data){
 		$request = self::buildRequest($module,$method,$data);
 		$data = $request->Execute()->getPage()->getContent();
 		$data = json_decode($data);
@@ -36,7 +36,7 @@ class FSapi {
 	static function readResponse($data,$method){
 		return $data->$method->response;
 	}
-	static function UploadURL($user,$pass){
+	static function uploadURL($user,$pass){
 		$request = array('u'=>$user,'p'=>$pass);
 		$data = self::Execute('upload', 'getUploadUrl', $request);
 		if(self::isError($data)){
@@ -55,7 +55,7 @@ class FSapi {
 	static function isError($data){
 		return (isset($data->FSApi->methodName->errors) && count($data->FSApi->methodName->errors));
 	}
-	static function LinkCheck($ids,$mh=null,$callback=null){
+	static function linkCheck($ids,$mh=null,$callback=null){
 		$request = array();
 		if(is_array($ids)){
 			$request['ids'] = implode(',',$ids);

@@ -32,7 +32,7 @@ class Crop extends Internal\FilterBase implements Interfaces\IExternalFilter {
 	 * @param array $data
 	 * @return resource
 	 */
-	static function Filter($gd,$data){
+	static function filter($gd,$data){
 		if(!isset($data['x']) || !isset($data['y']) || !isset($data['w']) || !isset($data['h']) || 
 			!is_numeric($data['x']) || !is_numeric($data['y']) || !is_numeric($data['w']) || !is_numeric($data['h'])){
 			return $gd;

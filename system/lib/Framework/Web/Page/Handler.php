@@ -13,7 +13,7 @@ class Handler extends \Core\Object {
 	 */
 	static $stack;
 	
-	static function Init(){
+	static function init(){
 		if(!static::$stack){
 			static::$stack = new \SplStack();
 		}
@@ -43,7 +43,7 @@ class Handler extends \Core\Object {
 		}
 	}
 	
-	static function Objectify($object,$data = null){
+	static function objectify($object,$data = null){
 		$class = '\\Web\\Page\\Controller\\'.$object;
 		return new $class($data);
 	}

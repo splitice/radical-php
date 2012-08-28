@@ -39,7 +39,7 @@ class XXX_0DAY extends XXX_X264 {
 		return $this->isImageset();
 	}
 	
-	function ParseDate($ref_pos) {
+	function parseDate($ref_pos) {
 		$date = array();
 		$date[] = $this->extractPart($ref_pos);
 		$date[] = $this->extractPart($ref_pos);
@@ -50,11 +50,11 @@ class XXX_0DAY extends XXX_X264 {
 		}
 		$this->date =  implode('.',$date);
 	}
-	function FillSD($i){
+	function fillSD($i){
 		$this->site = implode('.',array_slice($this->parts,0,$i));
 		$this->title = implode(' ',array_slice($this->parts,$i,100));
 	}
-	function Parse(){
+	function parse(){
 		if(!$this->parts){
 			return;
 		}
@@ -99,7 +99,7 @@ class XXX_0DAY extends XXX_X264 {
 		}
 	}
 	
-	function TitleBuild($include_date=false){
+	function titleBuild($include_date=false){
 		$ret = '';
 		if($this->isImageset()){
 			$ret .= '[iMAGESET] ';

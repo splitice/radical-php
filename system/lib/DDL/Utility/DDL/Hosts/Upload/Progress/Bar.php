@@ -3,7 +3,7 @@ namespace Utility\DDL\Hosts\Upload\Progress;
 use CLI\Console\Progress\Bar as CLI_Bar;
 
 class Bar extends CLI_Bar {
-	function ProgressFunction($download_size, $downloaded, $upload_size, $uploaded){
+	function progressFunction($download_size, $downloaded, $upload_size, $uploaded){
 		//Calculate Decimal Percent
 		$percent = 0;
 		if($download_size > $upload_size){
@@ -23,7 +23,7 @@ class Bar extends CLI_Bar {
 		$this->setProgress($percent);
 	}
 	
-	static function Callback(){
+	static function callback(){
 		return array(new static(),'ProgressFunction');
 	}
 }

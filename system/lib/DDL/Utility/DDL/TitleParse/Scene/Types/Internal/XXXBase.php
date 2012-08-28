@@ -27,7 +27,7 @@ class XXXBase extends MovieBase {
 		return parent::isScene($s);
 	}
 	
-	function Parse() {
+	function parse() {
 		$this->encoding = $this->extractPart ( - 1 );
 		do{
 			$next = $this->extractPart ( - 1 );

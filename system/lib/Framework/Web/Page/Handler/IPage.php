@@ -2,6 +2,6 @@
 namespace Web\Page\Handler;
 
 interface IPage {
-	function Execute();
+	function execute();
 	function can($m);
 }

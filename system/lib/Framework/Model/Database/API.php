@@ -8,7 +8,7 @@ class API {
 	function __construct(TableReferenceInstance $table){
 		$this->table = $table;
 	}
-	function Select($where){
+	function select($where){
 		$class = $this->table->getClass();
 		if(is_array($where)){
 			return $class::getAll($where);
@@ -16,11 +16,11 @@ class API {
 			return $class::fromId($where);
 		}
 	}
-	function Insert($data){
+	function insert($data){
 		$class = $this->table->getClass();
 		return $class::create($data,true);
 	}
-	function Delete($where){
+	function delete($where){
 		$obj = $this->_get($where);
 		if($obj){
 			foreach($obj as $o){
@@ -47,7 +47,7 @@ class API {
 		}
 		return $obj;
 	}
-	function Update($where,$set){
+	function update($where,$set){
 		$obj = $this->_get($where);
 		if($obj){
 			foreach($obj as $o){

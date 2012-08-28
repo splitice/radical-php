@@ -4,7 +4,7 @@ namespace Utility\Image\Upload;
 class PixHost extends _BASE implements IUploadHost {
 	static $ch = array();
 	
-	static function Test(){
+	static function test(){
 		$ch = curl_init('http://www.pixhost.org/');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 3);
@@ -13,13 +13,13 @@ class PixHost extends _BASE implements IUploadHost {
 		}
 		return false;
 	}
-	static function Login($username = null, $password = null){		
+	static function login($username = null, $password = null){		
 		$ch = parent::Login();
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_USERAGENT, 'msie');
 		return $ch;
 	}
-	function Upload($file,$file_type,$size='500x500'){
+	function upload($file,$file_type,$size='500x500'){
 		$ch = self::Login();
 			
 		//Get upload url

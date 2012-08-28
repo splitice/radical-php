@@ -2,6 +2,6 @@
 namespace Utility\Image\Upload;
 
 interface IUploadHost {
-	static function Login($username = null,$password = null);
-	function Upload($file,$file_type,$size='500x500');
+	static function login($username = null,$password = null);
+	function upload($file,$file_type,$size='500x500');
 }

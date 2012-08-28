@@ -23,7 +23,7 @@ class Result {
 	 * @throws \DB\Exception\FetchNotAResult
 	 * @return mixed
 	 */
-	function Fetch($format = Fetch::ASSOC, ICast $cast=null) {
+	function fetch($format = Fetch::ASSOC, ICast $cast=null) {
 		//Do something for each format
 		switch($format){
 			case Fetch::ASSOC:
@@ -94,7 +94,7 @@ class Result {
 		return $return;
 	}
 	
-	function FetchAll($mode = Fetch::ALL_ASSOC){
+	function fetchAll($mode = Fetch::ALL_ASSOC){
 		return $this->Fetch($mode);
 	}
 	
@@ -104,7 +104,7 @@ class Result {
 	 * @param DB\Fetch:: $format
 	 * @return Array <int, mixed>
 	 */
-	function FetchCallback($callback, $format = Fetch::ALL_ASSOC) {
+	function fetchCallback($callback, $format = Fetch::ALL_ASSOC) {
 		return array_map($callback,$this->Fetch ( $format ));
 	}
 	

@@ -2,7 +2,7 @@
 namespace Utility\SSL;
 
 class X509 {
-	static function CheckPair($cert, $key, $passphrase = null){
+	static function checkPair($cert, $key, $passphrase = null){
 		if(openssl_pkey_get_private($key,$passphrase) === false){
 			return false;
 		}
@@ -13,7 +13,7 @@ class X509 {
 		return openssl_pkey_new();
 	}
 	
-	static function Generate(SigningDetails $dn, $privateKey = null, $privkeypass = null, $numberofdays = 365){
+	static function generate(SigningDetails $dn, $privateKey = null, $privkeypass = null, $numberofdays = 365){
 		if($privateKey === null){
 			$privkey = self::generatePrivateKey();
 		}elseif(is_string($privateKey)){

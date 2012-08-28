@@ -4,7 +4,7 @@ namespace Utility\DDL\TitleParse\Scene\Types;
 class TV_X264 extends Internal\TVBase {
 	protected $quality;
 	
-	function Parse(){
+	function parse(){
 		if(!$this->parts){
 			return;
 		}

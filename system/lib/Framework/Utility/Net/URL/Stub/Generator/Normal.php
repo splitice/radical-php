@@ -8,7 +8,7 @@ namespace Utility\Net\URL\Stub\Generator;
  * @author SplitIce
  */
 class Normal implements IStubGenerator {
-	static function Generate($value){
+	static function generate($value){
 		$value = preg_replace('#(^[a-zA-Z0-9])+#', '-', $value);
 		return $value;
 	}

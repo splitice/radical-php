@@ -2,5 +2,5 @@
 namespace Web\Page\Router;
 
 interface IPageRecognise {
-	static function Recognise(\Utility\Net\URL $url);
+	static function recognise(\Utility\Net\URL $url);
 }

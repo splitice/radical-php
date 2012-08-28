@@ -11,12 +11,12 @@ use Core\ErrorHandling\Errors;
 class OutputErrorHandler extends ErrorHandlerBase {
 	const CLI_START = "[%s]%s\n";
 	
-	function Error(ErrorBase $error) {
+	function error(ErrorBase $error) {
 		if($error->isFatal()){
 			throw $error;
 		}
 	}
-	function Exception(ErrorException $error){
+	function exception(ErrorException $error){
 		if(\Core\Server::isCLI()){
 			$c = Colors::getInstance();
 			

@@ -35,7 +35,7 @@ class MultiSet {
 		}
 	}
 	
-	function Execute(){
+	function execute(){
 		$links = array();
 		
 		//Run loop
@@ -94,7 +94,7 @@ class MultiSet {
 		
 		return $handleObjects;
 	}
-	function ExecuteRun() {
+	function executeRun() {
 		global $_CONFIG;
 		$links = array ();
 	
@@ -164,7 +164,7 @@ class MultiSet {
 		//Return the fruits of our labour
 		return $links;
 	}
-	function Clear(){
+	function clear(){
 		foreach($this->set as $s){
 			$s->Clear();
 		}

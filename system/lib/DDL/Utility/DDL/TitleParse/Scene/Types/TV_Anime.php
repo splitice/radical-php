@@ -15,7 +15,7 @@ class TV_Anime extends Internal\BasicBase {
 	
 	static $_qualities = array(240,480,720,1080);
 	
-	function Split($str){
+	function split($str){
 		$ret = array();
 		$active = '';
 		$in_bracket = false;//false,']' or ')'
@@ -70,7 +70,7 @@ class TV_Anime extends Internal\BasicBase {
 		
 		return $ret;
 	}
-	function Parse(){
+	function parse(){
 		if(!$this->parts){
 			return;
 		}
@@ -157,7 +157,7 @@ class TV_Anime extends Internal\BasicBase {
 		return $this->quality;
 	}
 
-	function TitleBuild(){
+	function titleBuild(){
 		$ret = $this->title;
 		if($this->title_sub){
 			$ret .= ': '.$this->title_sub;

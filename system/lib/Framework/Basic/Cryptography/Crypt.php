@@ -66,7 +66,7 @@ class Crypt extends HashBase implements HashTypes\IOneWayHash {
 	 * @see lithium\security\Password::check()
 	 * @see lithium\security\Password::salt()
 	 */
-	public static function Hash($password, $salt = null) {
+	public static function hash($password, $salt = null) {
 		return crypt($password, $salt ?: static::salt());
 	}
 
@@ -81,7 +81,7 @@ class Crypt extends HashBase implements HashTypes\IOneWayHash {
 	 * @see lithium\security\Password::hash()
 	 * @see lithium\security\Password::salt()
 	 */
-	public static function Compare($password, $hash) {
+	public static function compare($password, $hash) {
 		$password = crypt($password, $hash);
 		$result = true;
 

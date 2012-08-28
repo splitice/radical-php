@@ -62,7 +62,7 @@ class Mysql extends DynamicTableInstance {
 		$dt->EnsureExists(true);
 		return $dt;
 	}
-	static function Get($url){
+	static function get($url){
 		$table = static::getTable();
 		$obj = $table->fromId(md5($url));
 		if($obj){
@@ -71,7 +71,7 @@ class Mysql extends DynamicTableInstance {
 			return $data;
 		}
 	}
-	static function Set(\Utility\Net\HTTP\Curl\Response $data,$url,$ttl = 0){
+	static function set(\Utility\Net\HTTP\Curl\Response $data,$url,$ttl = 0){
 		$table = static::getTable();
 		
 		$data = $data->toSQL();
@@ -87,7 +87,7 @@ class Mysql extends DynamicTableInstance {
 		
 		$obj->Insert();
 	}
-	static function TTL(){
+	static function tTL(){
 		$table = static::getTable();
 		if($table->Exists()){
 			foreach($table->getAll(' WHERE hc_ttl<='.time()) as $k){

@@ -7,14 +7,14 @@ class Host {
 		$this->id = $id;
 	}
 	
-	function Upload(){
+	function upload(){
 		$class = '\\Utility\\DDL\\Hosts\\Upload\\'.$this->id;
 		if(class_exists($class)){
 			return new $class();
 		}
 	}
 	
-	function Check(){
+	function check(){
 		$class = '\\Utility\\DDL\\Hosts\\Check\\'.$this->id;
 		if(class_exists($class)){
 			return new $class();

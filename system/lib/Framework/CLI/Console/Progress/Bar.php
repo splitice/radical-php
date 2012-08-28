@@ -57,14 +57,14 @@ class Bar extends \Core\Object implements \Serializable {
 		}
 	}
 	
-	function Done(){
+	function done(){
 		if($this->container){
 			$this->container->Done($this);
 			$this->container = null;
 		}
 	}
 	
-	function Render($width){
+	function render($width){
 		//Desperation
 		if(!$width){
 			return '';

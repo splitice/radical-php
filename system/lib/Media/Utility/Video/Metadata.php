@@ -27,7 +27,7 @@ class Metadata {
 		return false;
 	}
 	
-	function Execute(){
+	function execute(){
 		$cmd = 'ffmpeg -i '.escapeshellarg($this->file).' -vcodec copy -acodec copy -y -map_metadata 0:0';
 		
 		foreach($this->metadata as $k=>$m){

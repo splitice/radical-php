@@ -32,7 +32,7 @@ class API extends PageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function GET(){
+	function gET(){
 		$ret = array();
 		
 		if($this->error){

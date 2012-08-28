@@ -46,7 +46,7 @@ abstract class Handler {
 	 * @param array $arguments to pass to $callback
 	 * @returns mixed the result of $callback(...)
 	 */
-	static function Handle($callback,$arguments = array()){
+	static function handle($callback,$arguments = array()){
 		try {
 			return call_user_func_array($callback, $arguments);
 		}

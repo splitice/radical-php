@@ -9,7 +9,7 @@ class MegaUpload extends Internal\HostBase {
 	const HOST_DOMAIN = 'megaupload.com';
 	const HOST_REGEX = 'megaupload\.com/\?d=([a-zA-Z0-9]+)';
 	
-	function ValidateCheck($data) {
+	function validateCheck($data) {
 		$ret = new Internal\CheckReturn('unknown');
 		
 		if(strpos($data,'Unfortunately, the link you have clicked is not available.')){

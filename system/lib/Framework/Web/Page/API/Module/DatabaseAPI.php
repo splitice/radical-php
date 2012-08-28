@@ -14,31 +14,31 @@ abstract class DatabaseAPI extends APIBase {
 		$this->table = new TableReferenceInstance($this->class);
 		$this->api = new Database\API($this->table);
 	}
-	abstract function Validate($method,$data);
-	abstract function ValidateSelect($ret);
+	abstract function validate($method,$data);
+	abstract function validateSelect($ret);
 	
-	function Insert(){
+	function insert(){
 		$data = $this->data['data'];
 		if($this->Validate('insert',$data)){
 			return $this->api->Insert($data);
 		}
 		$this->ValidationException('Insert not allowed due to unauthorised elements in set or in changes');
 	}
-	function Update(){
+	function update(){
 		$objs = $this->api->Select($this->data['where']);
 		if($this->Validate('update',array('where'=>$this->data['where'],'on'=>$objs,'set'=>$this->data['set']))){
 			return $this->api->Update($objs,$this->data['set']);
 		}
 		$this->ValidationException('Update not allowed due to unauthorised elements in set or in changes');
 	}
-	function Delete(){
+	function delete(){
 		$objs = $this->api->Select($this->data['where']);
 		if($this->Validate('delete',array('on'=>$objs))){
 			return $this->api->Delete($objs);
 		}
 		$this->ValidationException('Delete not allowed due to unauthorised elements in set');
 	}
-	function Select(){
+	function select(){
 		if($this->Validate('select',array('where'=>$this->data['where']))){
 			$objs = $this->api->Select($this->data['where']);
 			if($this->ValidateSelect($objs)){
@@ -52,7 +52,7 @@ abstract class DatabaseAPI extends APIBase {
 		}
 		$this->ValidationException('Select not allowed due to unauthorised query (WHERE)');
 	}
-	private function ValidationException($message){
+	private function validationException($message){
 		throw new \Exception($message);
 	}
 }

@@ -4,7 +4,7 @@ namespace Utility\Cache;
 class PooledCache {
 	protected static $cache = array();
 	
-	static function Get($pool, $object){
+	static function get($pool, $object){
 		if(isset(static::$cache[$object])){
 			return static::$cache[$object];
 		}

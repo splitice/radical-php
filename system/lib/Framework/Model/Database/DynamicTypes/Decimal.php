@@ -19,7 +19,7 @@ class Decimal extends String implements IDynamicValidate {
 		
 	}
 	
-	function Validate($value){
+	function validate($value){
 		if(is_float($value) || is_int($value)) return true;
 		if(is_string($value)){
 			$value = explode('.',$value);
@@ -29,7 +29,7 @@ class Decimal extends String implements IDynamicValidate {
 				if(is_numeric($value[0]) && is_numeric($value[1])) return true;
 		}
 	}
-	function DoValidate($value,$field){
+	function doValidate($value,$field){
 		if(!$this->Validate($value)) throw new ValidationException($field);
 	}
 	

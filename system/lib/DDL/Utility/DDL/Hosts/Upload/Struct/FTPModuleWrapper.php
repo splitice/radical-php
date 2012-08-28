@@ -9,7 +9,7 @@ class FTPModuleWrapper implements IUploadHost {
 	function __construct(FTPHostBase $ftp){
 		$this->ftp = $ftp;
 	}
-	function Upload($file){
+	function upload($file){
 		return $this->ftp->FTPUpload($file);
 	}
 }

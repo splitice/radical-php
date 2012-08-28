@@ -41,7 +41,7 @@ class Boolean extends String implements IDynamicValidate {
 	function isFalse(){
 		return $this->false();
 	}
-	function Validate($value){
+	function validate($value){
 		return in_array($value, $this->extra);
 	}
 	

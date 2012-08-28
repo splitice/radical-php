@@ -23,12 +23,12 @@ class CDUniverse extends Internal\ModuleBase implements Interfaces\IFromURL {
 		return self::URL.'/productinfo.asp?pid='.$this->id;
 	}
 	
-	static function CH($url=null) {
+	static function cH($url=null) {
 		$ch = parent::CH($url);
 		curl_setopt ( $ch, CURLOPT_COOKIE, 'IAmAnAdult=yes' );//Allow 18+ material
 		return $ch;
 	}
-	function Fetch() {
+	function fetch() {
 		$ret = array();
 		
 		//Curl Fetch
@@ -115,7 +115,7 @@ class CDUniverse extends Internal\ModuleBase implements Interfaces\IFromURL {
 		
 		return $ret;
 	}
-	function Parse($want = null,$export = true){
+	function parse($want = null,$export = true){
 		if($this->_cache !== null){
 			if($want){
 				$ret = isset($this->_cache[$want])?$this->_cache[$want]:null;

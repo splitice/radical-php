@@ -19,7 +19,7 @@ class Post extends ModuleBase implements IAuthenticator {
 	function AuthenticationError($msg = 'Username or Password Invalid'){
 		
 	}
-	function Init(ISessionSource $handler){
+	function init(ISessionSource $handler){
 		if($this->authenticate && isset($_POST[static::FIELD_USERNAME]) && $_POST[static::FIELD_PASSWORD]){
 			$username = $_POST[static::FIELD_USERNAME];
 			$password = $_POST[static::FIELD_PASSWORD];

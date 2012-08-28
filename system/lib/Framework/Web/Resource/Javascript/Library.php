@@ -20,7 +20,7 @@ class Library extends Tag\Script {
 	}
 	
 	
-	static function Find($library,$version = null){
+	static function find($library,$version = null){
 		$library = strtolower($library);
 		$libs = Libraries::get('Web\\Resource\\Javascript\\Libraries\\*');
 		foreach($libs as $l){

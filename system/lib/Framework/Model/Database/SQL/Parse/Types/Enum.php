@@ -24,7 +24,7 @@ class Enum extends Internal\TypeBase implements IValidator {
 		return new Element\SelectBox($name,$options);
 	}
 	
-	function Validate($value){
+	function validate($value){
 		return in_array($value,$this->getOptions()) || $this->_Validate($value);
 	}
 }

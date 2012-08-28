@@ -7,7 +7,7 @@ use Web\Page\Controller;
 use Web\Page\Handler;
 
 class Admin implements IPageRecognise {
-	static function Recognise(URL $url){
+	static function recognise(URL $url){
 		$url = $url->getPath();
 		if($url->firstPathElement() == 'admin'){
 			$url->removeFirstPathElement();

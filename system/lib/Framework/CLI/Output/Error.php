@@ -6,10 +6,10 @@ class Error extends Internal\OutputBase {
 	const FORMAT = "[%s] %s\r\n";
 	
 	static $ERROR_LEVEL = E_ALL;
-	static function Init(){
+	static function init(){
 		//self::$ERROR_LEVEL = E_ALL & ~E_NOTICE & ~E_WARNING;
 	}
-	static function Output($code, $str, $error){
+	static function output($code, $str, $error){
 		$str = static::E($str);
 		
 		if(self::$ERROR_LEVEL & $error){
@@ -22,16 +22,16 @@ class Error extends Internal\OutputBase {
 			}
 		}
 	}
-	static function Notice($str){
+	static function notice($str){
 		static::Output('NOTICE',$str,E_NOTICE);
 	}
-	static function Warning($str){
+	static function warning($str){
 		static::Output('WARN',$str,E_NOTICE);
 	}
-	static function Error($str){
+	static function error($str){
 		static::Output('ERROR',$str,E_NOTICE);
 	}
-	static function Fatal($str,$exit=true){
+	static function fatal($str,$exit=true){
 		static::Output('FATAL',$str,E_NOTICE);
 		if($exit){
 			exit;

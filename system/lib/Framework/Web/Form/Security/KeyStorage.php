@@ -22,7 +22,7 @@ class KeyStorage extends CollectionObject {
 	 * @param string $key the id of the key to get
 	 * @return HTML\Form\Security\Key
 	 */
-	static function GetKey($key){
+	static function getKey($key){
 		if(!isset(Session::$data['form_security'])){
 			throw new \Exception('No security keys in session');
 		}

@@ -13,7 +13,7 @@ class Between extends Internal\PartBase implements IComparison {
 		$this->a = $a;
 		$this->b = $b;
 	}
-	function E(Connection $db,$value){
+	function e(Connection $db,$value){
 		if(is_object($value)){
 			if($value instanceof IToSQL){
 				$value = $value->toSQL();

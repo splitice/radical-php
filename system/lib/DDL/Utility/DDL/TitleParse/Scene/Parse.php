@@ -2,7 +2,7 @@
 namespace Utility\DDL\TitleParse\Scene;
 
 class Parse {
-	static function NS(){
+	static function nS(){
 		//Build namespace
 		$ns = explode('\\',__CLASS__);
 		array_pop($ns);
@@ -10,7 +10,7 @@ class Parse {
 		$ns = implode('\\',$ns);
 		return $ns;
 	}
-	static function Load($s,$rls){
+	static function load($s,$rls){
 		$s = str_replace(array('/','\\'),'_',$s);
 		$s = strtoupper($s);
 		
@@ -20,7 +20,7 @@ class Parse {
 		
 		return new $class($rls);
 	}
-	static function Classes(){
+	static function classes(){
 		$ret = array();
 		$ns = self::NS();
 		foreach(glob(__DIR__.DIRECTORY_SEPARATOR.'Types'.DIRECTORY_SEPARATOR.'*.php') as $file){
@@ -34,7 +34,7 @@ class Parse {
 	 * Returns false - Did not match expression
 	 * Returns true - Matched expression
 	 */
-	static function ExprMatch($type,$class){
+	static function exprMatch($type,$class){
 		if(is_string($type)){
 			$class = ltrim($class,'_');
 			
@@ -54,7 +54,7 @@ class Parse {
 		}
 		return false;
 	}
-	static function ParseRelease($release,$type = false){
+	static function parseRelease($release,$type = false){
 		//Itterate and check
 		foreach(static::Classes() as $class){
 			$type_temp = $type;

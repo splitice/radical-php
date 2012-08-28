@@ -35,11 +35,11 @@ class IP {
 		return filter_var ( $this->ip, FILTER_VALIDATE_IP );
 	}
 	
-	function Hash(){
+	function hash(){
 		return CRC32::Hash($this->ip);
 	}
 	
-	function Ping($timeout = 1) {
+	function ping($timeout = 1) {
 		/* ICMP ping packet with a pre-calculated checksum */
 		$package = "\x08\x00\x7d\x4b\x00\x00\x00\x00PingHost";
 		$socket  = socket_create(AF_INET, SOCK_RAW, 1);

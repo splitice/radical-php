@@ -189,7 +189,7 @@ abstract class AdapterAbstract {
 	/**
 	 * Execute a custom function (outside of Adapter package).
 	 *
-	 * @param array $function Function to call
+	 * @param array $function function to call
 	 */
 	public function custom() {
 		$arguments = func_get_args();

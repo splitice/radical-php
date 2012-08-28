@@ -56,7 +56,7 @@ class RAR {
 		$this->comment = $temp_file;
 	}
 	
-	function Compress(){
+	function compress(){
 		global $_CONFIG;
 		
 		$cmd = 'rar a ';

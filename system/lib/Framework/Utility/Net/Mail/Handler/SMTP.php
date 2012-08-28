@@ -86,7 +86,7 @@ class SMTP implements IMailHandler {
 	}
 	
 	/* send the email message */
-	function Send(Message $m, $message) {
+	function send(Message $m, $message) {
 		$from = $m->getFrom ();
 		$to = $m->getTo ();
 		$subject = $m->getSubject ();

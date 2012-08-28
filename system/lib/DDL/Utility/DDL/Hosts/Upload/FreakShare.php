@@ -23,7 +23,7 @@ class FreakShare extends Internal\HostBase implements Interfaces\IUploadHost {
 		
 		return compact('ch','cookie');
 	}
-	public function Upload($file) {
+	public function upload($file) {
 		$this->UploadStart($file);
 		
 		extract($this->prepare());

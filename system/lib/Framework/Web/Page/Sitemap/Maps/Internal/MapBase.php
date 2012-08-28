@@ -32,7 +32,7 @@ abstract class MapBase {
 	static function isKey($k){
 		return ($k==static::KEY);
 	}
-	static function U($u){
+	static function u($u){
 		return _U($u);
 	}
 	function toXML(){

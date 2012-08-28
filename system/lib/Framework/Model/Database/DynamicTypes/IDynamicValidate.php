@@ -12,5 +12,5 @@ interface IDynamicValidate extends IValidator {
 	 * @param mixed $value
 	 * @param string $field
 	 */
-	function DoValidate($value,$field);
+	function doValidate($value,$field);
 }

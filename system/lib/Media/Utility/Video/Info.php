@@ -7,7 +7,7 @@ class Info {
 		$this->info = static::Process($video);
 	}
 	
-	static function Process($video){
+	static function process($video){
 		$cmd = 'ffmpeg -i '.escapeshellarg($video).' 2>&1';
 
 		$output = array();

@@ -23,7 +23,7 @@ class DB extends Adapter\SQLUtils {
 		throw new \BadMethodCallException('DB is an abstract class');
 	}
 	
-	static function Init(){
+	static function init(){
 		if(!static::$query_log){
 			static::$query_log = new Handler\QueryLog ();
 		}
@@ -41,7 +41,7 @@ class DB extends Adapter\SQLUtils {
 	 * @param string $db
 	 * @throws \Model\Database\Exception\ConnectionException
 	 */
-	static function Connect(Adapter\Connection $connection) {
+	static function connect(Adapter\Connection $connection) {
 		static::Init();
 		
 		static::$connectionDetails = $connection;
@@ -77,7 +77,7 @@ class DB extends Adapter\SQLUtils {
 		static::getInstance()->Connect();
 	}
 	
-	static function MultiQuery(){
+	static function multiQuery(){
 		return new DBAL\MultiQuery(self::$con);
 	}
 	
@@ -87,7 +87,7 @@ class DB extends Adapter\SQLUtils {
 	 * @param string $d
 	 * @return number
 	 */
-	static function TimeStamp($d) {
+	static function timeStamp($d) {
 		return strtotime ( $d );
 	}
 
@@ -95,7 +95,7 @@ class DB extends Adapter\SQLUtils {
 		return date ( "Y-m-d H:i:s", $i );
 	}
 
-	static function BIN($x) {
+	static function bIN($x) {
 		return new DBAL\Binary($s);
 	}
 
@@ -114,11 +114,11 @@ class DB extends Adapter\SQLUtils {
 	
 	/* Predefined Methods */
 	
-	static function Close(){
+	static function close(){
 		//Close all connections
 	}
 	
-	static function TableExists() {
+	static function tableExists() {
 		return static::__callStatic(__FUNCTION__, func_get_args());
 	}
 	
@@ -135,7 +135,7 @@ class DB extends Adapter\SQLUtils {
 	 * @throws \Model\Database\Exception\QueryError
 	 * @return \Model\Database\DBAL\Result
 	 */
-	static function Query($sql,$timeout=Adapter\Instance::QUERY_TIMEOUT,$is_retry=false) {
+	static function query($sql,$timeout=Adapter\Instance::QUERY_TIMEOUT,$is_retry=false) {
 		return static::__callStatic(__FUNCTION__, func_get_args());
 	}
 	
@@ -146,11 +146,11 @@ class DB extends Adapter\SQLUtils {
 	 * @param int $timeout
 	 * @return Ambigous <resource, \Model\Database\NOT_A_RESULT, string, unknown>
 	 */
-	static function Q($sql,$timeout=Adapter\Instance::QUERY_TIMEOUT){
+	static function q($sql,$timeout=Adapter\Instance::QUERY_TIMEOUT){
 		return static::__callStatic(__FUNCTION__, func_get_args());
 	}
 	
-	static function MultipleInsert($tbl, $cols, $data, $ignore = false){
+	static function multipleInsert($tbl, $cols, $data, $ignore = false){
 		return static::__callStatic(__FUNCTION__, func_get_args());
 	}
 	
@@ -160,7 +160,7 @@ class DB extends Adapter\SQLUtils {
 	 * @param string $data unescaped data in key=>value format
 	 * @return boolean
 	 */
-	static function Insert($tbl, $data, $ignore = false) {
+	static function insert($tbl, $data, $ignore = false) {
 		return static::__callStatic(__FUNCTION__, func_get_args());
 	}
 	
@@ -171,11 +171,11 @@ class DB extends Adapter\SQLUtils {
 	 * @param array $where Where conditions
 	 * @return boolean
 	 */
-	static function Update($tbl, $data, $where) {
+	static function update($tbl, $data, $where) {
 		return static::__callStatic(__FUNCTION__, func_get_args());
 	}
 	
-	static function FOUND_ROWS() {
+	static function fOUND_ROWS() {
 		return static::__callStatic(__FUNCTION__, func_get_args());
 	}
 	
@@ -184,7 +184,7 @@ class DB extends Adapter\SQLUtils {
 	 * @param string $tbl table name
 	 * @param string $where where condition
 	 */
-	static function Delete($tbl, $where) {
+	static function delete($tbl, $where) {
 		return static::__callStatic(__FUNCTION__, func_get_args());
 	}
 	
@@ -193,29 +193,29 @@ class DB extends Adapter\SQLUtils {
 	 * @param string|int $str
 	 * @return string
 	 */
-	static function Escape($str) {
+	static function escape($str) {
 		return static::__callStatic(__FUNCTION__, func_get_args());
 	}
 	
-	static function E($str){
+	static function e($str){
 		return static::__callStatic(__FUNCTION__, func_get_args());
 	}
 	
 	/**
 	 * Return the last MySQL error
 	 */
-	static function Error() {
+	static function error() {
 		return static::__callStatic(__FUNCTION__, func_get_args());
 	}
 	
 	/**
 	 * Return the AUTO_INCREMENT value of the last MySQL insert
 	 */
-	static function InsertId() {
+	static function insertId() {
 		return static::__callStatic(__FUNCTION__, func_get_args());
 	}
 	
-	static function Fetch(DBAL\Result $res, $format = DBAL\Fetch::ASSOC, $cast=null){
+	static function fetch(DBAL\Result $res, $format = DBAL\Fetch::ASSOC, $cast=null){
 		return static::__callStatic(__FUNCTION__, func_get_args());
 	}
 	
@@ -226,7 +226,7 @@ class DB extends Adapter\SQLUtils {
 	 * @param Database\Fetch:: $format
 	 * @return Array <int, mixed>
 	 */
-	static function FetchCallback($res, $callback, $format = DBAL\Fetch::ALL_ASSOC) {
+	static function fetchCallback($res, $callback, $format = DBAL\Fetch::ALL_ASSOC) {
 		return static::__callStatic(__FUNCTION__, func_get_args());
 	}
 	
@@ -236,10 +236,10 @@ class DB extends Adapter\SQLUtils {
 	}
 	
 	/* Start / End transaction */
-	static function TransactionStart(){
+	static function transactionStart(){
 		return static::__callStatic(__FUNCTION__, func_get_args());
 	}
-	static function TransactionCommit(){
+	static function transactionCommit(){
 		return static::__callStatic(__FUNCTION__, func_get_args());
 	}
 	

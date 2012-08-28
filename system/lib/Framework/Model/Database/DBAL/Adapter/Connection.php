@@ -30,7 +30,7 @@ class Connection {
 	 * @throws Exception\ConnectionException
 	 * @return \mysqli
 	 */
-	function Connect(){
+	function connect(){
 		if($this->isConnected()){
 			return $this->mysqli;
 		}
@@ -49,7 +49,7 @@ class Connection {
 		return $this->mysqli;
 	}
 	
-	function Ping(\mysqli $mysqli=null){
+	function ping(\mysqli $mysqli=null){
 		if(!$mysqli){
 			$mysqli = $this->Connect();
 		}
@@ -97,7 +97,7 @@ class Connection {
 		$this->Connect();
 	}
 	
-	function Close(){
+	function close(){
 		if($this->mysqli){
 			mysqli_close($this->mysqli);
 			$this->mysqli = null;
@@ -110,7 +110,7 @@ class Connection {
 		//\DB::$connectionPool->Free($this);
 	}
 	
-	function Query($sql){
+	function query($sql){
 		$sql = trim($sql);
 		if(!$sql){
 			throw new \Exception('Empty Query');
@@ -119,7 +119,7 @@ class Connection {
 		return $this->Connect()->query ( $sql );
 	}
 	
-	function Prepare($sql){
+	function prepare($sql){
 		$sql = trim($sql);
 		if(!$sql){
 			throw new \Exception('Empty Query');
@@ -128,14 +128,14 @@ class Connection {
 		return new PreparedStatement($sql);
 	}
 	
-	function Escape($string){
+	function escape($string){
 		return $this->Connect()->real_escape_string($string);
 	}
 	
 	/**
 	 * Return the last MySQL error
 	 */
-	function Error() {
+	function error() {
 		return $this->mysqli->error;
 	}
 	

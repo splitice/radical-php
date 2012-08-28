@@ -5,7 +5,7 @@ use Web\Page\Handler\HTMLPageBase;
 use Web\Page\Handler;
 
 class FileNotFound extends HTMLPageBase {
-	function Title(){
+	function title(){
 		return parent::Title('404 - File Not Found');
 	}
 
@@ -14,7 +14,7 @@ class FileNotFound extends HTMLPageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function GET() {
+	function gET() {
 		$headers = \Web\Page\Handler::$stack->top()->headers;
 		$headers->Status(404);
 
@@ -32,7 +32,7 @@ class FileNotFound extends HTMLPageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function POST() {
+	function pOST() {
 		return $this->GET ();
 	}
 }

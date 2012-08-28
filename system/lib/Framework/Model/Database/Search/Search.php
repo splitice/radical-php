@@ -10,7 +10,7 @@ class Search {
 		$this->adapter = $adapter;
 	}
 	
-	function Execute(){
+	function execute(){
 		return $this->adapter->Search($this->text);
 	}
 }

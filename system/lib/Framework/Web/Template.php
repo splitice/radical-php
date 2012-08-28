@@ -130,7 +130,7 @@ class Template extends Page\Handler\PageBase {
 	 * @param unknown_type $output
 	 * @return boolean
 	 */
-	static function Exists($name,$output='HTML'){
+	static function exists($name,$output='HTML'){
 		return file_exists(static::getPath($name,$output));
 	}
 	
@@ -164,7 +164,7 @@ class Template extends Page\Handler\PageBase {
 	 * 
 	 * @throws \Exception
 	 */
-	function GET() {		
+	function gET() {		
 		$adapter = $this->adapter();
 		if($adapter == null){
 			throw new \Exception('Template file couldnt be found');
@@ -188,7 +188,7 @@ class Template extends Page\Handler\PageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function POST() {
+	function pOST() {
 		return $this->GET ();
 	}
 }

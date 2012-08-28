@@ -12,7 +12,7 @@ class Memory extends Internal\CacheBase implements ICache {
 	 * @param string $key Key the value is stored as
 	 * @return mixed
 	 */
-	function Get($key) {
+	function get($key) {
 		$key = $this->key($key);
 		if (function_exists ( 'apc_fetch' )) {
 			if(function_exists ( 'apc_exists' ) && apc_exists($key)){
@@ -33,7 +33,7 @@ class Memory extends Internal\CacheBase implements ICache {
 	 * @param mixed $value The Value to store
 	 * @param int $ttl Time to cache in memory for
 	 */
-	function Set($key, $value, $ttl = 3600) {
+	function set($key, $value, $ttl = 3600) {
 		$key = $this->key($key);
 		if (function_exists ( 'apc_store' )) {
 			return apc_store ( $key, $value, $ttl );
@@ -43,7 +43,7 @@ class Memory extends Internal\CacheBase implements ICache {
 		}
 	}
 	
-	function Delete($key){
+	function delete($key){
 		$key = $this->key($key);
 		if (function_exists ( 'apc_delete' )) {
 			return apc_delete ( $key );

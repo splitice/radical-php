@@ -51,7 +51,7 @@ class FilePost extends Internal\FTPHostBase implements Interfaces\IUploadHost {
 		
 		return compact('ch','page','sid');
 	}
-	public function Upload($file) {
+	public function upload($file) {
 		$this->UploadStart($file);
 		
 		extract($this->prepare());

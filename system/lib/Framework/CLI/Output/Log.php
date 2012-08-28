@@ -8,7 +8,7 @@ class Log {
 	static $main;
 	static $group;
 	
-	static function Init($name){		
+	static function init($name){		
 		self::$main = self::Create($name);
 	}
 	static function getPath(){
@@ -16,7 +16,7 @@ class Log {
 		@mkdir($path);
 		return $path;
 	}
-	static function CreateGroup($name){
+	static function createGroup($name){
 		self::$group = $name;
 		$file = static::getPath().self::$group.'/';
 		if(!file_exists($file)){
@@ -24,7 +24,7 @@ class Log {
 		}
 		self::$main = self::Create();
 	}
-	static function Create($name = 'main'){
+	static function create($name = 'main'){
 		$file = static::getPath();
 		if(self::$group){
 			$file .= self::$group.'/';
@@ -36,14 +36,14 @@ class Log {
 		return $ret;
 	}
 	
-	static function Get(){
+	static function get(){
 		if(!self::$main){
 			return self::Create();
 		}
 		return self::$main;
 	}
 	
-	static function End(){
+	static function end(){
 		self::$group = null;
 	}
 }

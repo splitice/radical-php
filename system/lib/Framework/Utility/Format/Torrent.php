@@ -346,7 +346,7 @@ class Torrent {
 	}
 
 	/**** Save and Send ****/
-	private function Filtered(){
+	private function filtered(){
 		$ret = (array)$this;
 		foreach($ret as $k=>$v){
 			if(substr($k,0,3) == "\0*\0"){

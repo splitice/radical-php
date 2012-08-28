@@ -5,7 +5,7 @@ class Request {
 	const CONTEXT_OUTER = 'outer';
 	const CONTEXT_INNER = 'inner';
 	
-	static function Context($to = null){
+	static function context($to = null){
 		if($to !== null)
 			$_POST['_admin'] = $to;
 		

@@ -77,7 +77,7 @@ class Thread {
 		return self::$current;
 	}
 	
-	function Sleep($time){
+	function sleep($time){
 		Sleep($time);
 	}
 }

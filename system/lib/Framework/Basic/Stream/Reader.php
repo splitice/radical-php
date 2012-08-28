@@ -15,7 +15,7 @@ class Reader {
 		$this->chunk_size = $chunk_size;
 	}
 	
-	function ReadAll(){
+	function readAll(){
 		stream_set_blocking($this->stream, false);
 		
 		$ret = '';

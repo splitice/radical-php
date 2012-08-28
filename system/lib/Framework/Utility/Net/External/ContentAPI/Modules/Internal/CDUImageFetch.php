@@ -10,7 +10,7 @@ class CDUImageFetch implements IFetch {
 	function __construct($ch){
 		$this->ch = $ch;
 	}
-	function Fetch(){
+	function fetch(){
 		$data = curl_exec($this->ch);
 		$ch = $this->ch;
 		HTML\Simple_HTML_DOM::LoadS ();

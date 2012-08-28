@@ -9,7 +9,7 @@ class NotModified extends Handler\PageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function GET() {
+	function gET() {
 		$headers = \Web\Page\Handler::$stack->top()->headers;
 		$headers->Status(304);
 
@@ -21,7 +21,7 @@ class NotModified extends Handler\PageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function POST() {
+	function pOST() {
 		return $this->GET ();
 	}
 }

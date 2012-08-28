@@ -57,7 +57,7 @@ class Processor {
 		return $this->extractResponse ( $response );
 	}
 	
-	private static function FixUTF8($s) {
+	private static function fixUTF8($s) {
 		return htmlspecialchars(@iconv ( "UTF-8", "UTF-8//IGNORE", $s ));
 	}
 	

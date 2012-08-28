@@ -73,7 +73,7 @@ class Document {
 		return $xml_parser;
 	}
 	
-	function Parse() {
+	function parse() {
 		$xml_parser = $this->_xmlParser ();
 
 		while ( $data = fread ( $this->file, 4096 ) ) {

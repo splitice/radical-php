@@ -13,10 +13,10 @@ class QueuePulse {
 			throw new \Exception ( "Couldnt create message queue" );
 		}
 	}
-	function Pulse() {
+	function pulse() {
 		msg_send ( $this->queue, 1, "", false );
 	}
-	function Wait() {
+	function wait() {
 		msg_receive ( $this->queue, 1, $type, 3, $message, false );
 	}
 	function __destruct() {

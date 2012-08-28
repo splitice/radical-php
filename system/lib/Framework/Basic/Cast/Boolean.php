@@ -9,7 +9,7 @@ class Boolean extends Internal\CastBase implements ICast {
 		$this->yes = $yes;
 		$this->no = $no;
 	}
-	function Cast($value){
+	function cast($value){
 		if($this->yes){
 			return ($value == $this->yes);
 		}

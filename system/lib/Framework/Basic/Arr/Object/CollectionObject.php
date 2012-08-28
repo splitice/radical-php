@@ -81,7 +81,7 @@ class CollectionObject extends \Core\Object implements \IteratorAggregate, \Arra
 	 * @param mixed $k key
 	 * @param mixed $v value
 	 */
-	function Set($k,$v){
+	function set($k,$v){
 		$this->_Set($k,$v);
 	}
 	
@@ -101,7 +101,7 @@ class CollectionObject extends \Core\Object implements \IteratorAggregate, \Arra
 	 * 
 	 * @param mixed $k key
 	 */
-	function Get($k){
+	function get($k){
 		return $this->_Get($k);
 	}
 	
@@ -110,7 +110,7 @@ class CollectionObject extends \Core\Object implements \IteratorAggregate, \Arra
 	 * 
 	 * @param mixed $k key
 	 */
-	function Remove($k){
+	function remove($k){
 		unset($this->data[$k]);
 	}
 	
@@ -122,7 +122,7 @@ class CollectionObject extends \Core\Object implements \IteratorAggregate, \Arra
 	 * @param mixed $value a value or callback to compare with
 	 * @param bool $strict use strict logic to remove
 	 */
-	function RemoveWhere($value,$strict = false){
+	function removeWhere($value,$strict = false){
 		if(is_callable($value) && $strict === false){
 			foreach($this as $k=>$v){
 				if($value($v,$k)){
@@ -165,22 +165,22 @@ class CollectionObject extends \Core\Object implements \IteratorAggregate, \Arra
      * @param boolean $strict
      * @return array
      */
-    function Where($callback,$strict = false){
+    function where($callback,$strict = false){
     	return Arr::where($callback, $this, $strict);
     }
     
     /**
      * Empty the array
      */
-    function Clear(){
+    function clear(){
     	$this->data = array();
     }
     
     /* TODO: Find better names */
-    function GetAll(){
+    function getAll(){
     	return $this->data;
     }
-    function SetAll($array){
+    function setAll($array){
     	$this->data = $array;
     	return $this;
     }
@@ -194,7 +194,7 @@ class CollectionObject extends \Core\Object implements \IteratorAggregate, \Arra
      * @return mixed The filtered items. Will be an array unless $return is true in the,
      *  then an instance of this class will be returned.
      */
-    public function Map($filter, $return = false) {
+    public function map($filter, $return = false) {
     	$data = array_map($filter, $this->data);
     
     	if ($return) {

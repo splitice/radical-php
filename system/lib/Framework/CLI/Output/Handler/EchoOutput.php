@@ -2,7 +2,7 @@
 namespace CLI\Output\Handler;
 
 class EchoOutput implements IOutputHandler {
-	function Output($string){
+	function output($string){
 		echo $string;
 	}
 }

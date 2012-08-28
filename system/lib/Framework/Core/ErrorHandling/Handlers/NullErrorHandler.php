@@ -6,9 +6,9 @@ use Core\ErrorHandling\Errors\Internal\ErrorException;
 use CLI\Console\Colors;
 
 class NullErrorHandler extends ErrorHandlerBase {
-	function Error(ErrorBase $error) {
+	function error(ErrorBase $error) {
 	}
-	function Exception(ErrorException $error){
+	function exception(ErrorException $error){
 	}
 	function isNull(){
 		return true;

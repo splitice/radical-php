@@ -2,6 +2,6 @@
 namespace CLI\Cron\Jobs\Interfaces;
 
 interface ICronJob {
-	function Execute(array $arguments);
+	function execute(array $arguments);
 	function getName();
 }

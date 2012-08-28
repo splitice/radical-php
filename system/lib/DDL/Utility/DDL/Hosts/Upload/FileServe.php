@@ -33,7 +33,7 @@ class FileServe extends Internal\FTPHostBase implements Interfaces\IUploadHost {
 		
 		return compact('ch');
 	}
-	public function Upload($file) {
+	public function upload($file) {
 		$this->UploadStart($file);
 		
 		extract($this->prepare());

@@ -2,7 +2,7 @@
 namespace Utility;
 
 class Folder {
-	static function ListDir($path, $recursive = false) {
+	static function listDir($path, $recursive = false) {
 		if ($recursive) {
 			if(is_file($path)){
 				return array($path);
@@ -31,7 +31,7 @@ class Folder {
 		}
 	}
 	
-	static function CreatePath($a) {
+	static function createPath($a) {
 		if (is_array ( $a )) {
 			foreach ( $a as $v ) {
 				self::SaneCreate ( $v );
@@ -44,7 +44,7 @@ class Folder {
 			self::Create($path);
 		}
 	}
-	static function Create($path){
+	static function create($path){
 		if(static::Exists($path)){
 			if(is_file($path)){
 				throw new \Exception('Folder to create is actually a file!');
@@ -54,11 +54,11 @@ class Folder {
 		@mkdir ( $path );
 	}
 	
-	static function Exists($file){
+	static function exists($file){
 		return (file_exists($file) && is_dir($file));
 	}
 	
-	static function Copy($from,$to){
+	static function copy($from,$to){
 		if(!file_exists($from)){
 			throw new \Exceptions\FileNotExists($from);
 		}
@@ -88,7 +88,7 @@ class Folder {
 		
 		rmdir($folder);
 	} 
-	static function Remove($folder) {
+	static function remove($folder) {
 		$folder = realpath($folder);
 		if(!$folder){
 			return;//Invalid

@@ -4,7 +4,7 @@ namespace Utility\DDL\TitleParse\Scene\Types;
 class X264 extends Internal\MovieBase {
 	protected $quality;
 	
-	function Parse(){
+	function parse(){
 		if(!$this->parts){
 			return;
 		}

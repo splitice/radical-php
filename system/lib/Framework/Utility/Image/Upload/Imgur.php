@@ -6,7 +6,7 @@ use Utility\Image;
 class Imgur extends _BASE implements IUploadHost {
 	static $ch = array();
 	
-	static function Test(){
+	static function test(){
 		$ch = curl_init('http://imgur.com/');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 3);
@@ -15,7 +15,7 @@ class Imgur extends _BASE implements IUploadHost {
 		}
 		return false;
 	}
-	static function Login($username = null /* used as key */, $password = null){		
+	static function login($username = null /* used as key */, $password = null){		
 		$ch = parent::Login();
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_USERAGENT, 'msie');
@@ -40,7 +40,7 @@ class Imgur extends _BASE implements IUploadHost {
 		
 		return $m[1];
 	}
-	function Upload($file,$file_type,$size='500x500'){
+	function upload($file,$file_type,$size='500x500'){
 		//Only family safe uploads
 		//if($file_type == Image\File::TYPE_ADULT){
 		//	throw new UploadException('Imgur doesnt allow adult image uploads');

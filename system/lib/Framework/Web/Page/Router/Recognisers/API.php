@@ -8,10 +8,10 @@ use Web\Page\Handler;
 
 class API implements IPageRecognise {
 	const DEFAULT_TYPE = 'json';
-	static function Error($string,$type){
+	static function error($string,$type){
 		return Handler::Objectify ( 'API', array('error'=>$string,'type'=>$type) );
 	}
-	static function Recognise(URL $url){
+	static function recognise(URL $url){
 		$url = $url->getPath();
 		if($url->firstPathElement() == 'api'){
 			$url->removeFirstPathElement();

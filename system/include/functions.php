@@ -17,7 +17,7 @@ function oneof($object, $class){
 	}
 	return false;
 }
-/*function CDN($url){
+/*function cDN($url){
 	if(!\Server::isProduction()){
 		return U($url);
 	}
@@ -28,7 +28,7 @@ function oneof($object, $class){
 function _U($url,$param=null){
 	return (string)\Utility\Net\URL::fromRequest(U($url,$param));
 }
-function U($url,$param=null) {
+function u($url,$param=null) {
 	global $BASEPATH;
 	
 	$length = strlen($_SERVER['DOCUMENT_ROOT']);
@@ -42,7 +42,7 @@ function U($url,$param=null) {
 	//Return
 	return $base . ltrim ( $url, '/' );
 }
-/*function R($resource_id,$filters=array()) {
+/*function r($resource_id,$filters=array()) {
 	$url = CDN('resource/' . $resource_id);
 	if(!$filters){
 		return $url;
@@ -100,7 +100,7 @@ function array_sort($array, $on, $order = 'SORT_DESC') {
 	}
 	return $new_array;
 } 
-function H($string){
+function h($string){
 	return htmlspecialchars($string,ENT_COMPAT);//,'UTF-8'
 }
 if(!function_exists('mysqli_fetch_all')){

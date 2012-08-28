@@ -78,7 +78,7 @@ class Colors extends \Core\Object {
 		return array_keys($this->background_colors);
 	}
 	
-	public function Output($string){
+	public function output($string){
 		echo $string;
 	}
 }

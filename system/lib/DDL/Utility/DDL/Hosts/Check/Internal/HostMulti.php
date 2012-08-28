@@ -12,7 +12,7 @@ class HostMulti {
 		$this->callback = $callback;
 	}
 	
-	function Callback($result){
+	function callback($result){
 		$status = 'unknown';
 		
 		if($result->hasContent()){

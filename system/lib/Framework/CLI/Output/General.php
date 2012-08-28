@@ -2,7 +2,7 @@
 namespace CLI\Output;
 
 class General extends Internal\OutputBase {
-	static function Header($str){
+	static function header($str){
 		echo static::E('====[ ',$str," ]====\r\n");
 	}
 

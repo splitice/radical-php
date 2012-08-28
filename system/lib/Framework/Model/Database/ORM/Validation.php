@@ -15,7 +15,7 @@ class Validation {
 		}
 	}
 	
-	function Validate($field,$value){
+	function validate($field,$value){
 		if(!isset($this->data[$field])){
 			return true;//No validation
 		}

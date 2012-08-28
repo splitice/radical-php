@@ -27,7 +27,7 @@ class IMDB extends Internal\ModuleBase implements IFromURL {
 	 * Internal: Parse the Secondary Image Page
 	 * @return Array <integer, \DDL\Bot\Resource>
 	 */
-	private function PARSE_SECONDARY_IMG() {
+	private function pARSE_SECONDARY_IMG() {
 		return array();
 		$url = $this->toURL() . '/mediaindex';
 		$request = new HTTP\Fetch ( $url );
@@ -49,7 +49,7 @@ class IMDB extends Internal\ModuleBase implements IFromURL {
 		return $ret;
 	}
 	
-	private function PARSE_TRIVIA(){
+	private function pARSE_TRIVIA(){
 		$url = $this->toURL() . '/trivia';
 		$request = new HTTP\Fetch ( $url );
 		$data = $request->Execute ();
@@ -94,7 +94,7 @@ class IMDB extends Internal\ModuleBase implements IFromURL {
 		return trim($plot);
 	}
 	
-	private function PARSE_AKA(){
+	private function pARSE_AKA(){
 		$url = $this->toURL() . '/releaseinfo';
 		$request = new HTTP\Fetch ( $url );
 		$data = $request->Execute ();
@@ -138,7 +138,7 @@ class IMDB extends Internal\ModuleBase implements IFromURL {
 		return $href;
 	}
 	
-	static function LookupId($imdbid) {
+	static function lookupId($imdbid) {
 		$ret = array();
 	
 		$request = new HTTP\Fetch ( self::getUrl($imdbid) );
@@ -155,7 +155,7 @@ class IMDB extends Internal\ModuleBase implements IFromURL {
 		$data = array('search_hash'=>$hash,'search_date'=>\DB::toTimeStamp(time()));
 		\DB::Insert('movie_search_log', $data, -1);
 	}	
-	function Fetch() {
+	function fetch() {
 		$ret = array();
 		
 		//Curl Fetch

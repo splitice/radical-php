@@ -9,7 +9,7 @@ abstract class PageBase extends \Core\Object implements IPage {
 		return method_exists($this,$method);
 	}
 	
-	function Execute($method = 'GET'){
+	function execute($method = 'GET'){
 		$request = new PageRequest($this);
 		ErrorHandling\Handler::Handle(array($request,'Execute'),array($method));
 	}

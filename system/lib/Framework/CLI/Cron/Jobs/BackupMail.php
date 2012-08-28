@@ -37,7 +37,7 @@ class BackupMail extends \Core\Object implements Interfaces\ICronJob {
 	function getName(){
 		return 'BackupMail';
 	}
-	function Execute(array $arguments){
+	function execute(array $arguments){
 		$backup = $this->getBackupConfig();
 		switch($backup['frequency']){
 			case 'daily':
@@ -60,7 +60,7 @@ class BackupMail extends \Core\Object implements Interfaces\ICronJob {
 			$doneBackup->Email($backup['to']);
 		}
 	}
-	function DoBackup($files = false){
+	function doBackup($files = false){
 		$dBackup = new Database\Backup\BackupAll();
 		$dBackup->Execute();
 	}

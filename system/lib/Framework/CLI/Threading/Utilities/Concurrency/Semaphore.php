@@ -41,7 +41,7 @@ class Semaphore extends SemaphoreHelpers {
 				return;
 		}
 	}
-	function Release($tickets = 1) {
+	function release($tickets = 1) {
 		$this->tickets->inc ( $tickets );
 		while ( $tickets ) {
 			$this->message->Pulse ();

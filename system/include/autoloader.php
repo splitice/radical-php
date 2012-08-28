@@ -46,7 +46,7 @@ class AutoLoader {
 		
 		return $pathCache;
 	}
-	static function InitPathCache(){
+	static function initPathCache(){
 		global $BASEPATH;
 		
 		//Build Cache

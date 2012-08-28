@@ -116,7 +116,7 @@ class Multi {
 	/**
 	 * Process incomming data but do not Execute callbacks, queue for later
 	 */
-	function Execute($execute = false) {
+	function execute($execute = false) {
 		$running = count($this->transfers);
 		do {
 			$old_running = $running;
@@ -157,7 +157,7 @@ class Multi {
 	/**
 	 * Process incomming data and execute callbacks
 	 */
-	function ExecuteAndProcess() {
+	function executeAndProcess() {
 		//Queued responses
 		foreach ( $this->queue as $qk => $q ) {
 			$q->Call ();
@@ -167,7 +167,7 @@ class Multi {
 		$this->Execute ( true );
 	}
 
-	function ShortExecute($execute = true) {
+	function shortExecute($execute = true) {
 		//Exec until there's no more data in this iteration. This function has a bug, it
 		do{
 			$execrun = curl_multi_exec ( $this->mh, $running );	

@@ -31,7 +31,7 @@ class Profile extends HTMLPageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function GET(){
+	function gET(){
 		// Make sure we have a timezone for date functions.
 		if (ini_get('date.timezone') == '')
 			date_default_timezone_set( WebGrind\Config::$defaultTimezone );

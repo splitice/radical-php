@@ -9,7 +9,7 @@ class Execute {
 		$this->command = $cmd;
 		$this->max_execution_time = $max_execution_time;
 	}
-	function Run(){
+	function run(){
         $descriptorspec    = array(
             0 => array('pipe', 'r'),
             1 => array('pipe', 'w'),

@@ -9,7 +9,7 @@ class CachedFetch extends Fetch {
 		$this->cache = '\\HTTP\\Cache\\Mysql';
 	}
 	
-	function Execute($data = null){
+	function execute($data = null){
 		if(isset($this->curl[CURLOPT_POST]) && $this->curl[CURLOPT_POST]){
 			return parent::Execute();
 		}

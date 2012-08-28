@@ -3,7 +3,7 @@ namespace Basic\String;
 use Basic\Arr;
 
 class Truncate {
-	static function Trim($value, $max_length, $is_html = false) {
+	static function trim($value, $max_length, $is_html = false) {
 		if (UTF8::len ( $value ) > $max_length) {
 			$value = UTF8::sub ( $value, 0, $max_length );
 			

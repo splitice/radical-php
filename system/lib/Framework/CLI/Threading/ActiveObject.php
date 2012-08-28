@@ -3,7 +3,7 @@ namespace CLI\Threading;
 
 abstract class ActiveObject {
 	protected $thread;
-	function Run($complete = null) {
+	function run($complete = null) {
 		$this->thread = new Thread ();
 		if ($this->thread->isThis ()) {
 			$this->PerformWork ();
@@ -13,8 +13,8 @@ abstract class ActiveObject {
 		}
 		return $this->thread;
 	}
-	abstract function Work();
-	static function Start() {
+	abstract function work();
+	static function start() {
 		$rc = new \ReflectionClass ( get_called_class () );
 		$object = $rc->newInstanceArgs ( func_get_args () );
 		return $object->Run ();

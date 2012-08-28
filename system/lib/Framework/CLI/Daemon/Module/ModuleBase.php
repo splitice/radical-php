@@ -19,8 +19,8 @@ abstract class ModuleBase {
 	 * 
 	 * @param array $parameters
 	 */
-	abstract function Loop($parameters);
-	function Execute(array $parameters){
+	abstract function loop($parameters);
+	function execute(array $parameters){
 		while(true){
 			if($this->autoRestart && pcntl_fork()){
 				do{

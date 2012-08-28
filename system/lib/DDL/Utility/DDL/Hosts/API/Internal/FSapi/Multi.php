@@ -35,7 +35,7 @@ class Multi {
 
 		$post = array('recaptcha_challenge_field'=>'','recaptcha_response_field'=>'');
 	}
-	function Callback($data){
+	function callback($data){
 		$page = $data->getPage()->getContent();
 		$page = @json_decode($page);
 		if(!$page){//Error

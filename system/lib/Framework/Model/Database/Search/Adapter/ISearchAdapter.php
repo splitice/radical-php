@@ -6,6 +6,6 @@ use Model\Database\Model\ITable;
 use Model\Database\SQL\SelectStatement;
 
 interface ISearchAdapter {
-	function Filter($text, SelectStatement $sql, $table);
-	function Search($text, TableReferenceInstance $table);
+	function filter($text, SelectStatement $sql, $table);
+	function search($text, TableReferenceInstance $table);
 }

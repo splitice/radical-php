@@ -6,7 +6,7 @@ class Set extends ArrayObject {
 	function Add(Instance $v){
 		parent::Add($v);
 	}
-	function TotalSize(){
+	function totalSize(){
 		$sum = 0;
 		foreach($this->data as $f){
 			if($f instanceof Instance){

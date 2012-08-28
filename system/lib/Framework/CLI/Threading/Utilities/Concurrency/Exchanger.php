@@ -15,7 +15,7 @@ class Exchanger extends AtomicClass {
 		$this->_atomic ( 'isFirst' );
 		$this->_atomic ( 'item' );
 	}
-	function Exchange($object) {
+	function exchange($object) {
 		$item = $this->item;
 		$turnstile = $this->turnstile;
 		$handshake = $this->handshake;

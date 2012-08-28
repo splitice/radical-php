@@ -1,6 +1,6 @@
 <?php 
 if(!function_exists('UU')){
-	function UU($url){
+	function uU($url){
 		$base = \Utility\Net\URL::fromRequest();
 		$base->getPath()->setQuery(array());
 		$base = (string)$base.$url;

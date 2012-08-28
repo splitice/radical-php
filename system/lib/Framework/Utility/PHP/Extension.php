@@ -34,7 +34,7 @@ class Extension {
 		return true;
 	}
 	
-	function Load(){
+	function load(){
 		//Can load and needs to be loaded...
 		if(!$this->canLoad() || $this->isLoaded()){
 			return false;

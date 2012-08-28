@@ -2,5 +2,5 @@
 namespace Basic\Cast;
 
 interface ICast {
-	function Cast($value);
+	function cast($value);
 }

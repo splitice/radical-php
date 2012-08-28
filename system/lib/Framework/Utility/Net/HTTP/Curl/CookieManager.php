@@ -15,7 +15,7 @@ class CookieManager {
 			file_put_contents($this->file, '');
 		}
 	}
-	function CH($ch){
+	function cH($ch){
 		curl_setopt($ch, CURLOPT_COOKIEJAR, $this->file);
 		curl_setopt($ch, CURLOPT_COOKIEFILE, $this->file);
 		return $ch;
@@ -30,7 +30,7 @@ class CookieManager {
 	}
 	
 	private static $_cache;
-	static function Create($file = null){
+	static function create($file = null){
 		//File not set, make it
 		if($file === null){
 			$file = '/tmp/'.getmypid().'.cookie';

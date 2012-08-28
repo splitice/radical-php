@@ -9,12 +9,12 @@ class LogFile {
 		fseek($this->file,0,SEEK_END);
 	}
 	
-	function Write($line){
+	function write($line){
 		$line = rtrim($line,"\r\n")."\r\n";
 		$line = date(self::DATE_FORMAT).' '.$line;
 		fwrite($this->file,$line);
 	}
-	function ErrorCheck($line){
+	function errorCheck($line){
 		$start_pos = ftell($this->file);
 		self::Write($line);
 		$end_pos = ftell($this->file);

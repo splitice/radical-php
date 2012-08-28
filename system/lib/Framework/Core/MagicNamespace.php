@@ -43,7 +43,7 @@ class MagicNamespace {
 		return 'namespace '.$this->getNamespace().';';
 	}
 	
-	function CreateCode(){
+	function createCode(){
 		$file = $this->getFile();
 		$data = file_get_contents($file);
 
@@ -63,7 +63,7 @@ class MagicNamespace {
 		return $BASEPATH.DIRECTORY_SEPARATOR.'system'.DIRECTORY_SEPARATOR.'magic'.DIRECTORY_SEPARATOR.$file.'.php';
 	}
 	
-	function Load(){
+	function load(){
 		$path = $this->getCachePath();
 		if(file_exists($path)){
 			if(filemtime($path) == filemtime(\AutoLoader::resolve($this->class))){

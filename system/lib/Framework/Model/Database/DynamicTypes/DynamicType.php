@@ -4,7 +4,7 @@ namespace Model\Database\DynamicTypes;
 use Exceptions\ValidationException;
 
 abstract class DynamicType {
-	function DoValidate($value, $field){
+	function doValidate($value, $field){
 		if(!method_exists($this, 'Validate'))
 			return false;
 		

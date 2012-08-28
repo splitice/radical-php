@@ -25,7 +25,7 @@ class Runner extends \Core\Object {
 	}
 	
 	
-	function Run(array $arguments){
+	function run(array $arguments){
 		$class = $this->getClass();
 		$instance = new $class();
 		if($instance instanceof Module\Interfaces\IModuleJob){

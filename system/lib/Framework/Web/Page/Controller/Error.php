@@ -19,7 +19,7 @@ class Error extends HTMLPageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function GET(){
+	function gET(){
 		return new Template('error',array('error'=>$this->error),'framework');
 	}
 	
@@ -28,7 +28,7 @@ class Error extends HTMLPageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function POST(){
+	function pOST(){
 		return $this->GET();
 	}
 	

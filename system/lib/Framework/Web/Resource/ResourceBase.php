@@ -6,11 +6,11 @@ use Core\Server;
 abstract class ResourceBase {
 	const PATH = '|';
 	
-	static function Path($name){
+	static function path($name){
 		global $BASEPATH;
 		return $BASEPATH.DIRECTORY_SEPARATOR.'*'.DIRECTORY_SEPARATOR.static::PATH.DIRECTORY_SEPARATOR.$name;
 	}
-	static function FileTime($name){
+	static function fileTime($name){
 		$filemtime = 0;
 		foreach(glob(static::Path($name)) as $dirs){
 			foreach(glob($dirs.DIRECTORY_SEPARATOR.'*') as $file){
@@ -19,11 +19,11 @@ abstract class ResourceBase {
 		}
 		return $filemtime;
 	}
-	static function Exists($name){
+	static function exists($name){
 		return (count(glob(static::Path($name))) > 0);
 	}
 	protected static abstract function _HTML($path);
-	static function HTML($name){
+	static function hTML($name){
 		return static::_HTML(Server::getSiteRoot().$name.'.'.static::FileTime($name).'.'.static::PATH);
 	}
 }

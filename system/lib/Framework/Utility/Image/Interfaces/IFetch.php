@@ -2,5 +2,5 @@
 namespace Utility\Image\Interfaces;
 
 interface IFetch {
-	function Fetch();
+	function fetch();
 }

@@ -25,7 +25,7 @@ class RoundedCorners extends Internal\FilterBase implements Interfaces\IExternal
 	 * @param array $data
 	 * @return resource
 	 */
-	static function Filter($gd,$data){
+	static function filter($gd,$data){
 		if(!is_numeric($data)){
 			return $gd;
 		}

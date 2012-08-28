@@ -43,7 +43,7 @@ abstract class SceneBase extends BasicBase {
 			$this->Parse();
 		}
 	}
-	protected function Split($string){
+	protected function split($string){
 		$string = str_replace('_','.',$string);//BAD group
 		return parent::Split($string);
 	}

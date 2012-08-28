@@ -13,7 +13,7 @@ class Group {
 		$this->set = $set;
 	}
 	
-	function Group($function){
+	function group($function){
 		if(!is_callable($function)){
 			throw new \Exception('Callback isnt callable, cant group');
 		}

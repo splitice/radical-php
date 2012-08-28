@@ -11,7 +11,7 @@ class Callback extends \Core\Object {
 		$this->failure = $failure;
 	}
 	
-	function Call(){
+	function call(){
 		if($this->object->valid()){
 			$object = $this->object->get();
 			$method = $this->method;
@@ -21,7 +21,7 @@ class Callback extends \Core\Object {
 		
 	}
 	
-	static function Callback($object, $method,$failure = Failure::NOTHING){
+	static function callback($object, $method,$failure = Failure::NOTHING){
 		$object = new static($object,$method,$failure);
 		return array($object,'Call');
 	}

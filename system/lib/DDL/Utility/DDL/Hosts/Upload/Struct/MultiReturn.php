@@ -12,7 +12,7 @@ class MultiReturn {
 		$this->file = $file;
 	}
 	
-	function Callback($page){
+	function callback($page){
 		$c = $this->callback;
 		if(is_array($c)){
 			return call_user_func($c,$page,$this);
@@ -21,7 +21,7 @@ class MultiReturn {
 		}
 	}
 	
-	function CH(){
+	function cH(){
 		return $this->ch;
 	}
 }

@@ -37,7 +37,7 @@ class Cache {
 	 * @param string|TableReferenceInstance $table the key
 	 * @return ModelData
 	 */
-	static function Get($table){
+	static function get($table){
 		$table = self::key($table);
 		if(isset(self::$data[$table])){
 			return self::$data[$table];
@@ -50,7 +50,7 @@ class Cache {
 	 * @param string|TableReferenceInstance $table the key
 	 * @param ModelData $orm the value to store
 	 */
-	static function Set($table, ModelData $orm){
+	static function set($table, ModelData $orm){
 		$table = self::key($table);
 		if($orm instanceof Model){
 			//Dumb down the class, we dont need to store any additional data

@@ -9,7 +9,7 @@ use Web\Page\Handler;
 
 class Standard implements IPageRecognise {
 	static $match = array();
-	static function Recognise(URL $url){
+	static function recognise(URL $url){
 		$path = $url->getPath()->getPath(true);
 		foreach(static::$match as $expr=>$class){
 			$match = Format::Consume($path, $expr);

@@ -18,7 +18,7 @@ class DelayReturn {
 		}
 		return false;
 	}
-	function Call(){
+	function call(){
 		$this->multi->Callback($this->page);
 	}
 }

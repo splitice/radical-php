@@ -18,7 +18,7 @@ class Instance extends Connection {
 		parent::__construct($host, $user, $pass, $db, $port, $compression);
 	}
 	
-	function Close(){
+	function close(){
 		\DB::$connectionPool->Free($this);
 	}
 	
@@ -46,7 +46,7 @@ class Instance extends Connection {
 	 * @throws \DB\Exception\QueryError
 	 * @return resource|NOT_A_RESULT
 	 */
-	function Query($sql,$timeout=self::QUERY_TIMEOUT,$is_retry=false) {
+	function query($sql,$timeout=self::QUERY_TIMEOUT,$is_retry=false) {
 		$mysqli = $this->Connect();
 		
 		//We are now in-query
@@ -98,11 +98,11 @@ class Instance extends Connection {
 	 * @param int $timeout
 	 * @return Ambigous <resource, \DB\NOT_A_RESULT, string, unknown>
 	 */
-	function Q($sql,$timeout=self::QUERY_TIMEOUT){
+	function q($sql,$timeout=self::QUERY_TIMEOUT){
 		return $this->Query($sql,$timeout);
 	}
 	
-	function MultipleInsert($tbl, $cols, $data, $ignore = false){
+	function multipleInsert($tbl, $cols, $data, $ignore = false){
 		$append = array();
 		foreach($data as $d){
 			$append[] = '(' . $this->A ( $d ) . ')';
@@ -119,7 +119,7 @@ class Instance extends Connection {
 	 * @param array $data unescaped data in key=>value format
 	 * @return boolean
 	 */
-	function Insert($tbl, $data, $ignore = false) {
+	function insert($tbl, $data, $ignore = false) {
 		$insert = new SQL\InsertStatement($tbl, $data, $ignore);
 		//die(var_dump($insert->toSQL()));
 		//Execute
@@ -137,14 +137,14 @@ class Instance extends Connection {
 	 * @param array $where Where conditions
 	 * @return boolean
 	 */
-	function Update($tbl, $data, $where) {
+	function update($tbl, $data, $where) {
 		$update = new SQL\UpdateStatement($tbl, $data, $where);
 		
 		//Execute
 		return ( bool ) $this->Query ( $update );
 	}
 	
-	function FOUND_ROWS() {
+	function fOUND_ROWS() {
 		$res = $this->Query ( 'SELECT FOUND_ROWS()' );
 		return $this->Fetch ( $res, DBAL\Fetch::FIRST );
 	}
@@ -154,12 +154,12 @@ class Instance extends Connection {
 	 * @param string $tbl table name
 	 * @param string $where where condition
 	 */
-	function Delete($tbl, $where) {
+	function delete($tbl, $where) {
 		$delete = new SQL\DeleteStatement($tbl, $where);
 		$this->Query ( $delete );
 	}
 	
-	function TableExists($table){
+	function tableExists($table){
 		$sql = 'show tables like '.\DB::E($table);
 		$res = \DB::Q($sql);
 		if($res->Fetch()) return true;
@@ -171,7 +171,7 @@ class Instance extends Connection {
 	 * @param string|int $str
 	 * @return string
 	 */
-	function Escape($str) {
+	function escape($str) {
 		if ($str === null) {
 			return 'NULL';
 		}
@@ -195,19 +195,19 @@ class Instance extends Connection {
 		return '\'' . parent::Escape ( $str ) . '\'';
 	}
 	
-	function E($str){
+	function e($str){
 		return $this->Escape($str);
 	}
 	
 	/**
 	 * Return the AUTO_INCREMENT value of the last MySQL insert
 	 */
-	function InsertId() {
+	function insertId() {
 		$mysqli = $this->Connect();
 		return $mysqli->insert_id;
 	}
 	
-	function Fetch(DBAL\Result $res, $format = DBAL\Fetch::ASSOC, $cast=null){
+	function fetch(DBAL\Result $res, $format = DBAL\Fetch::ASSOC, $cast=null){
 		return $res->Fetch($format,$cast);
 	}
 	
@@ -218,7 +218,7 @@ class Instance extends Connection {
 	 * @param DB\Fetch:: $format
 	 * @return Array <int, mixed>
 	 */
-	function FetchCallback($res, $callback, $format = DBAL\Fetch::ALL_ASSOC) {
+	function fetchCallback($res, $callback, $format = DBAL\Fetch::ALL_ASSOC) {
 		return $res->FetchCallback($callback,$format);
 	}
 	
@@ -228,10 +228,10 @@ class Instance extends Connection {
 	}
 	
 	/* Start / End transaction */
-	function TransactionStart(){
+	function transactionStart(){
 		$this->Query('START TRANSACTION');
 	}
-	function TransactionCommit(){
+	function transactionCommit(){
 		$this->Query('COMMIT');
 	}
 }

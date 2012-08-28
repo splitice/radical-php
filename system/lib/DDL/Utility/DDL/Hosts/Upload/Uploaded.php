@@ -37,7 +37,7 @@ class Uploaded extends Internal\FTPHostBase implements Interfaces\IUploadHost, I
 		
 		return compact('ch');
 	}
-	public function Upload($file) {
+	public function upload($file) {
 		return;
 	}
 }

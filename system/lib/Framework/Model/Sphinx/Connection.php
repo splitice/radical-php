@@ -11,7 +11,7 @@ class Connection extends Adapter\Connection {
 		parent::__construct($host,static::USERNAME,static::PASSWORD,static::DATABASE,$port,$compression);
 	}
 
-	function Escape($string,$allow_wild = true){
+	function escape($string,$allow_wild = true){
 		$chars = array ('!', '-', '/', '\\', '|', '&', '^', '$', '#', '@', '(', ')', '~', '"', "'", '<', '>', '+', '.', '%', ':' );
 		if(!$allow_wild){
 			$chars[] = '*';
@@ -23,7 +23,7 @@ class Connection extends Adapter\Connection {
 		return $str;
 	}
 	
-	function Search($sql, $ranker = 'bm25', $max_matches = 10000, $cutoff = 10000) {
+	function search($sql, $ranker = 'bm25', $max_matches = 10000, $cutoff = 10000) {
 		return $this->Query ( $sql . ' OPTION ranker=' . $ranker . ',max_matches=' . $max_matches );
 	}
 

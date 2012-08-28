@@ -20,7 +20,7 @@ abstract class DelayedDaemon extends ModuleBase implements Interfaces\IModuleJob
 	/**
 	 *  The function that does work, this is implemented in the main class.
 	 */
-	abstract protected function PerformWork();
+	abstract protected function performWork();
 	
 	/**
 	 * The time in seconds to wait
@@ -56,7 +56,7 @@ abstract class DelayedDaemon extends ModuleBase implements Interfaces\IModuleJob
 	/* (non-PHPdoc)
 	 * @see \CLI\Daemon\Module\ModuleBase::Loop()
 	 */
-	function Loop($parameters){
+	function loop($parameters){
 		$start = time();
 
 		$this->PerformWork();

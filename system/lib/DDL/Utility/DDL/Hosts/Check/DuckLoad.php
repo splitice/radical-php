@@ -7,7 +7,7 @@ class DuckLoad extends Internal\HostBase {
 	const HOST_DOMAIN = 'duckload.com';
 	const HOST_REGEX = 'duckload\.com\/download\/([0-9]+)\/([A-Za-z0-9\-_\.]+)';
 	
-	function Check($url){
+	function check($url){
 		return new Internal\CheckReturn('dead');
 	}
 }

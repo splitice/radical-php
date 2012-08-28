@@ -3,10 +3,10 @@ namespace Model\Database\Model;
 
 interface ITable {
 	function toSQL($in = null);
-	function Update();
-	function Delete();
+	function update();
+	function delete();
 	function getIdentifyingSQL();
-	function Insert();
+	function insert();
 	
 	/* Static Functions */
 	static function getAll($sql = '');
@@ -14,6 +14,6 @@ interface ITable {
 	static function fromId($id);
 	static function fromSQL($res);
 	
-	static function Exists();
-	static function Create($data,$prefix=false);
+	static function exists();
+	static function create($data,$prefix=false);
 }

@@ -2,7 +2,7 @@
 namespace Basic\Object;
 
 class Serialize {
-	function Serialize() {
+	function serialize() {
 		return serialize ( $this );
 	}
 }

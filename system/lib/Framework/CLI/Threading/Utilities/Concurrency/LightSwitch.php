@@ -15,7 +15,7 @@ class LightSwitch extends AtomicClass {
 		$this->sem = $sem;
 		$this->count = $this->_atomic ( 'count' );
 	}
-	function Enter() {
+	function enter() {
 		$count = null;
 		$this->count->update ( function ($val) use(&$count) {
 			$count = $val;
@@ -25,7 +25,7 @@ class LightSwitch extends AtomicClass {
 			$this->sem->Acquire ();
 		}
 	}
-	function Leave() {
+	function leave() {
 		$sem = $this->sem;
 		$this->count->update ( function ($val) use($sem) {
 			if ($val == 0)

@@ -39,7 +39,7 @@ namespace Utility\Image\Graph\pChart;
 		$this->DataDescription ["Unit"] ["Y"] = NULL;
 	}
 	
-	function ImportFromCSV($FileName, $Delimiter = ",", $DataColumns = -1, $HasHeader = FALSE, $DataName = -1) {
+	function importFromCSV($FileName, $Delimiter = ",", $DataColumns = -1, $HasHeader = FALSE, $DataName = -1) {
 		$handle = @fopen ( $FileName, "r" );
 		if ($handle) {
 			$HeaderParsed = FALSE;
@@ -142,7 +142,7 @@ namespace Utility\Image\Graph\pChart;
 		}
 	}
 	
-	function RemoveSerie($SerieName = "Serie1") {
+	function removeSerie($SerieName = "Serie1") {
 		if (! isset ( $this->DataDescription ["Values"] ))
 			return (0);
 		
@@ -153,39 +153,39 @@ namespace Utility\Image\Graph\pChart;
 		}
 	}
 	
-	function SetAbsciseLabelSerie($SerieName = "Name") {
+	function setAbsciseLabelSerie($SerieName = "Name") {
 		$this->DataDescription ["Position"] = $SerieName;
 	}
 	
-	function SetSerieName($Name, $SerieName = "Serie1") {
+	function setSerieName($Name, $SerieName = "Serie1") {
 		$this->DataDescription ["Description"] [$SerieName] = $Name;
 	}
 	
-	function SetXAxisName($Name = "X Axis") {
+	function setXAxisName($Name = "X Axis") {
 		$this->DataDescription ["Axis"] ["X"] = $Name;
 	}
 	
-	function SetYAxisName($Name = "Y Axis") {
+	function setYAxisName($Name = "Y Axis") {
 		$this->DataDescription ["Axis"] ["Y"] = $Name;
 	}
 	
-	function SetXAxisFormat($Format = "number") {
+	function setXAxisFormat($Format = "number") {
 		$this->DataDescription ["Format"] ["X"] = $Format;
 	}
 	
-	function SetYAxisFormat($Format = "number") {
+	function setYAxisFormat($Format = "number") {
 		$this->DataDescription ["Format"] ["Y"] = $Format;
 	}
 	
-	function SetXAxisUnit($Unit = "") {
+	function setXAxisUnit($Unit = "") {
 		$this->DataDescription ["Unit"] ["X"] = $Unit;
 	}
 	
-	function SetYAxisUnit($Unit = "") {
+	function setYAxisUnit($Unit = "") {
 		$this->DataDescription ["Unit"] ["Y"] = $Unit;
 	}
 	
-	function SetSerieSymbol($Name, $Symbol) {
+	function setSerieSymbol($Name, $Symbol) {
 		$this->DataDescription ["Symbol"] [$Name] = $Symbol;
 	}
 	
@@ -199,11 +199,11 @@ namespace Utility\Image\Graph\pChart;
 			unset ( $this->DataDescription ["Values"] [$Key] );
 	}
 	
-	function GetData() {
+	function getData() {
 		return ($this->Data);
 	}
 	
-	function GetDataDescription() {
+	function getDataDescription() {
 		return ($this->DataDescription);
 	}
 }

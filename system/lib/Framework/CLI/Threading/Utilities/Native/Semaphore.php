@@ -17,7 +17,7 @@ class Semaphore extends SemaphoreHelpers {
 	function Acquire() {
 		sem_acquire ( $this->sem );
 	}
-	function Release() {
+	function release() {
 		sem_release ( $this->sem );
 	}
 	function __destruct() {

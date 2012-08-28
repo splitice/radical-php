@@ -63,7 +63,7 @@ abstract class Table implements ITable, \JsonSerializable {
 		return $keys;
 	}
 	
-	function RefreshTableData(){
+	function refreshTableData(){
 		return static::fromId(static::getIdentifyingSQL());
 	}
 	function setSQLField($field,$value){
@@ -196,7 +196,7 @@ abstract class Table implements ITable, \JsonSerializable {
 		return $this->toSQL();
 	}
 	
-	function Update(){
+	function update(){
 		$this->Validate();
 		$identifying = $this->getIdentifyingSQL();
 		$values = $this->toSQL();
@@ -209,7 +209,7 @@ abstract class Table implements ITable, \JsonSerializable {
 		\DB::Update($this->orm->tableInfo['name'], $values, $identifying);
 	}
 	
-	function Delete(){
+	function delete(){
 		\DB::Delete($this->orm->tableInfo['name'], $this->getIdentifyingSQL());
 	}
 	
@@ -476,7 +476,7 @@ abstract class Table implements ITable, \JsonSerializable {
 		}
 	}
 	
-	function Validate(){
+	function validate(){
 		foreach($this->orm->dynamicTyping as $k=>$v){
 			$v = $this->$k;
 			if($v instanceof IDynamicValidate)
@@ -499,7 +499,7 @@ abstract class Table implements ITable, \JsonSerializable {
 	/* (non-PHPdoc)
 	 * @see \Model\Database\Model\ITable::Insert()
 	 */
-	function Insert($ignore = -1){
+	function insert($ignore = -1){
 		$this->Validate();
 		
 		//Build & Do SQL
@@ -526,10 +526,10 @@ abstract class Table implements ITable, \JsonSerializable {
 		}
 	}
 	
-	static function Exists(){
+	static function exists(){
 		return \DB::tableExists($this->orm->tableInfo['name']);
 	}
-	static function Create($data,$prefix=false){
+	static function create($data,$prefix=false){
 		$res = static::fromSQL($data,$prefix);
 		return $res->Insert();
 	}

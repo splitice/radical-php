@@ -17,7 +17,7 @@ class HeaderManager extends CollectionObject {
 		$this->setExpires(time()+self::DEFAULT_EXPIRE);
 		
 	}
-	function Status($code){
+	function status($code){
 		$this->status = $code;
 	}
 	function getHeaders(){
@@ -45,7 +45,7 @@ class HeaderManager extends CollectionObject {
 	function setContentType($mime){
 		$this->Add('Content-Type',$mime);
 	}
-	function Output(){
+	function output(){
 		if(!$this->data){
 			header($this->status.' A', true, $this->status);
 		}

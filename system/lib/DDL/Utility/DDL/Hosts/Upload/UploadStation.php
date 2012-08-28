@@ -40,7 +40,7 @@ class UploadStation extends Internal\FTPHostBase implements Interfaces\IUploadHo
 		
 		return compact('ch','page');
 	}
-	public function Upload($file) {
+	public function upload($file) {
 		$this->UploadStart($file);
 		
 		extract($this->prepare());

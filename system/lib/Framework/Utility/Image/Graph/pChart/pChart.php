@@ -3581,7 +3581,7 @@ class pChart {
 	/*
 	 * Render the current picture to a file
 	 */
-	function Render($FileName = null) {
+	function render($FileName = null) {
 		/*
 		 * Save image map if requested
 		 */
@@ -3594,7 +3594,7 @@ class pChart {
 	/*
 	 * Render the current picture to STDOUT
 	 */
-	function Stroke() {
+	function stroke() {
 		if ($this->ErrorReporting)
 			$this->printErrors ( "GD" );
 			
@@ -3815,7 +3815,7 @@ class pChart {
 	/*
 	 * Convert seconds to a time format string
 	 */
-	function ToTime($Value) {
+	function toTime($Value) {
 		if (! ($Value instanceof Timestamp)) {
 			$Value = new Timestamp ( $Value );
 		}
@@ -3826,7 +3826,7 @@ class pChart {
 	/*
 	 * Convert to metric system
 	 */
-	function ToMetric($Value) {
+	function toMetric($Value) {
 		$Go = ( int ) ($Value / 1000000000);
 		$Mo = ( int ) (($Value - $Go * 1000000000) / 1000000);
 		$Ko = ( int ) (($Value - $Go * 1000000000 - $Mo * 1000000) / 1000);
@@ -3847,7 +3847,7 @@ class pChart {
 	/*
 	 * Convert to curency
 	 */
-	function ToCurrency($Value) {
+	function toCurrency($Value) {
 		$Go = ( int ) ($Value / 1000000000);
 		$Mo = ( int ) (($Value - $Go * 1000000000) / 1000000);
 		$Ko = ( int ) (($Value - $Go * 1000000000 - $Mo * 1000000) / 1000);
@@ -3884,7 +3884,7 @@ class pChart {
 	/*
 	 * Convert TS to a date format string
 	 */
-	function ToDate($Value) {
+	function toDate($Value) {
 		$f = $this->DateFormat;
 		if (is_callable ( $f )) {
 			return $f ( $Value );

@@ -2,7 +2,7 @@
 namespace Basic\Cast;
 
 class Integer extends Internal\CastBase implements ICast {
-	function Cast($value){
+	function cast($value){
 		//If is 64bit just return cast int
 		if(PHP_INT_SIZE == 8){
 			return (int)$value;

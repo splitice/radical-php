@@ -4,10 +4,10 @@ namespace Basic\Cryptography\Internal;
 use Basic\Cryptography\HashTypes\IOneWayHash;
 
 abstract class HashBase {
-	static function Encode($text,$key = null){
+	static function encode($text,$key = null){
 		return static::Hash($text);
 	}
-	static function Compare($password,$hash){
+	static function compare($password,$hash){
 		return ($password == $hash);
 	}
 }

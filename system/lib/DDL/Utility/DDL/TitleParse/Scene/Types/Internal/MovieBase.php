@@ -14,7 +14,7 @@ class MovieBase extends SceneBase {
 		$this->Parse ();
 	}
 	
-	static function CleanString($str) {
+	static function cleanString($str) {
 		$str = implode ( ' ', $str );
 		return trim ( $str );
 	}
@@ -90,7 +90,7 @@ class MovieBase extends SceneBase {
 		return false;
 	}
 	
-	function Parse() {
+	function parse() {
 		if(!$this->parts){
 			return;
 		}
@@ -149,7 +149,7 @@ class MovieBase extends SceneBase {
 		return false;
 	}
 	
-	function BackupParse(){
+	function backupParse(){
 		$this->valid = false;
 		foreach($this->parts as $pk=>$p){
 			if(static::isYear($p)){
@@ -185,7 +185,7 @@ class MovieBase extends SceneBase {
 		}while($this->parts);
 	}
 	
-	function TitleBuild(){
+	function titleBuild(){
 		$ret = $this->title;
 		if($this->year){
 			$ret .= ' ('.$this->year.')';

@@ -23,7 +23,7 @@ class Application extends Internal\NaturalBase {
 		return implode(' ',$a);
 	}
 	
-	function Parse(){
+	function parse(){
 		$parts = preg_split('#([\s|/.]+)#', $this->rls);
 		foreach($parts as $pk=>$p){
 			if(

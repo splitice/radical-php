@@ -4,7 +4,7 @@ namespace Utility\Net\External;
 class SCC {
 	static $ch;
 	
-	private static function CookieFile($ch){
+	private static function cookieFile($ch){
 		$file = '/tmp/SCC.cookie';
 		if(!file_exists($file)){
 			file_put_contents($file, '');
@@ -14,7 +14,7 @@ class SCC {
 		curl_setopt($ch,CURLOPT_COOKIEJAR,$file);
 		curl_setopt($ch,CURLOPT_COOKIEFILE,$file);
 	}
-	static function Login($username,$password){
+	static function login($username,$password){
 		if(self::$ch){
 			return new self(self::$ch);
 		}
@@ -42,7 +42,7 @@ class SCC {
 		$this->curl = $ch;
 	}
 	
-	function SendInvite($channels = array('announce')){
+	function sendInvite($channels = array('announce')){
 		$ch = $this->curl;
 		
 		curl_setopt($ch,CURLOPT_URL,'http://www.sceneaccess.org/irc');

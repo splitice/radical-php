@@ -5,7 +5,7 @@ class XXX_X264 extends Internal\XXXBase {
 	protected $quality;
 	protected $_x264 = true;
 	
-	function Parse(){
+	function parse(){
 		if(!$this->parts){
 			return;
 		}
@@ -32,7 +32,7 @@ class XXX_X264 extends Internal\XXXBase {
 		return $this->quality;
 	}
 
-	function TitleBuild(){
+	function titleBuild(){
 		$ret = $this->title;
 		if($this->year){
 			$ret .= ' ('.$this->year.')';

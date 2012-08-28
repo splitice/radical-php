@@ -8,7 +8,7 @@ class AdultImageDetection
     const NEW_SIZE = 200;
     const MAX_AREA = 15000;
     
-    private static function Resize($img,$x,$y){
+    private static function resize($img,$x,$y){
     	if($x>$y){
     		$width = self::NEW_SIZE;
     		$height = floor($y*self::NEW_SIZE/$x);
@@ -23,7 +23,7 @@ class AdultImageDetection
     	return array($width,$height,$im2);
     }
     
-    static function GetScore($img,$x,$y)
+    static function getScore($img,$x,$y)
     {
     	static $arA = -1;
     	static $arB = -1;

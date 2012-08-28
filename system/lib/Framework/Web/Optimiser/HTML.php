@@ -32,7 +32,7 @@ class HTML implements IOptimiser {
 	}
 	
 
-	static function Optimise($body){
+	static function optimise($body){
 		$body = self::process_data_jmr1($body);
 		return $body;
 	}

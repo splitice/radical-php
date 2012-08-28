@@ -37,7 +37,7 @@ class LastFM_Album extends Internal\ModuleBase implements Interfaces\IFromURL {
 		return self::URL.'/music/'.$this->toURL();
 	}
 	
-	function Fetch() {
+	function fetch() {
 		$ret = array();
 		
 		//Get Album
@@ -81,7 +81,7 @@ class LastFM_Album extends Internal\ModuleBase implements Interfaces\IFromURL {
 		
 		return $ret;
 	}
-	function Parse($want = null,$export = true){
+	function parse($want = null,$export = true){
 		if($this->_cache !== null){
 			if($want){
 				$ret = isset($this->_cache[$want])?$this->_cache[$want]:null;

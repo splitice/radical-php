@@ -8,7 +8,7 @@ class Combine extends CombineBase {
 	const EXTENSION = 'js';
 	const MIME_TYPE = 'text/javascript';
 	
-	function Optimize($code){
+	function optimize($code){
 		return $code;
 		return Optimiser\Javascript\JSMin::minify($ret);
 	}

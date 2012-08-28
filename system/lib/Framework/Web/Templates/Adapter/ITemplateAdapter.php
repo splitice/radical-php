@@ -24,7 +24,7 @@ interface ITemplateAdapter {
 	 * 
 	 * @param Scope $_ the scope (variables, helper functions)
 	 */
-	function Output(Scope $_);
+	function output(Scope $_);
 	
 	/**
 	 * Does this adapter know how to handle the passed in type

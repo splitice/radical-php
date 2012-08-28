@@ -6,7 +6,7 @@ class UrlStub extends \Core\Object {
 		$this->title = $title;
 	}
 	
-	function Filter(){
+	function filter(){
 		//Split it into words
 		$seoit = explode(' ',mb_strtolower($this->title,'UTF-8'));
 		

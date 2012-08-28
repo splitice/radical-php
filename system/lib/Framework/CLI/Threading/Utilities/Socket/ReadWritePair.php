@@ -3,10 +3,10 @@
 namespace CLI\Threading\Utilities\Socket;
 
 class ReadWritePair extends BiDirectionalPair {
-	function Write($msg) {
+	function write($msg) {
 		return parent::Write ( 0, $msg );
 	}
-	function Read($len) {
+	function read($len) {
 		return parent::Read ( 1, $len );
 	}
 }

@@ -25,7 +25,7 @@ class SubMenu extends PageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function GET(){
+	function gET(){
 			$VARS = array();
 
 			//Create links to modules
@@ -40,7 +40,7 @@ class SubMenu extends PageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function POST(){
+	function pOST(){
 		return $this->GET();
 	}
 }

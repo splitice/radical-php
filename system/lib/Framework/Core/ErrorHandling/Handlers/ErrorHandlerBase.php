@@ -26,6 +26,6 @@ abstract class ErrorHandlerBase extends Handler {
 		parent::__construct();
 	}
 	
-	abstract function Error(ErrorBase $error);
-	abstract function Exception(ErrorException $error);
+	abstract function error(ErrorBase $error);
+	abstract function exception(ErrorException $error);
 }

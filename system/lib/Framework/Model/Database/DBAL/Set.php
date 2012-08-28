@@ -2,7 +2,7 @@
 namespace Model\Database\DBAL;
 
 class Set extends \Basic\Arr\Object\ArrayObject {
-	function OrderBy($field,$order='ASC'){
+	function orderBy($field,$order='ASC'){
 		$method = 'get'.ucfirst($field);
 		if(strtoupper($order) == 'ASC'){
 			$order = 1;
@@ -27,7 +27,7 @@ class Set extends \Basic\Arr\Object\ArrayObject {
 		});
 		return $this;
 	}
-	function Limit($offset,$limit = null){
+	function limit($offset,$limit = null){
 		if($limit === null){
 			$limit = $offset;
 			$offset = 0;

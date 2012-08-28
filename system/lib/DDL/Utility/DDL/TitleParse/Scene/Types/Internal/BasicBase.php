@@ -7,12 +7,12 @@ abstract class BasicBase extends TitleParseBase {
 	const DELIMITER = ' ';
 	protected $parts = array();
 	
-	static function CleanString($str) {
+	static function cleanString($str) {
 		$str = implode ( ' ', $str );
 		return trim ( $str );
 	}
 	
-	protected function Split($string){
+	protected function split($string){
 		return explode(static::DELIMITER,$string);
 	}
 	

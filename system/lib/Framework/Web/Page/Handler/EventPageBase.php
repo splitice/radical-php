@@ -29,7 +29,7 @@ abstract class EventPageBase extends HTMLPageBase {
 	 * 
 	 * @see Web\Page\Handler.PageBase::Execute()
 	 */
-	function Execute($method = 'GET'){
+	function execute($method = 'GET'){
 		//Check for an event
 		if($method == 'POST'){
 			$r = $this->_processEvent();

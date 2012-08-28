@@ -23,7 +23,7 @@ abstract class _BASE {
         }
 	}
 	
-	static function Login(){
+	static function login(){
 		$ch = curl_init();
 		curl_setopt($ch,CURLOPT_TIMEOUT,30);
 		return $ch;

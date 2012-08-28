@@ -24,7 +24,7 @@ class Graph extends Internal\SchemaBase {
 		$this->type = $type;
 	}
 	
-	function Render(IRenderable $renderer){
+	function render(IRenderable $renderer){
 		return $renderer->Output($this);
 	}
 }

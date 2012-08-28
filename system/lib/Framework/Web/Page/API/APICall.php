@@ -59,7 +59,7 @@ class APICall {
 		}
 		return $output;
 	}
-	function Call($module,$method,$argument,$type='ps'){
+	function call($module,$method,$argument,$type='ps'){
 		$url = rtrim($this->server,'/').'/'.$module.'/'.$method.'.'.$type.'?'.http_build_query($argument);
 		
 		$ch = curl_init($url);

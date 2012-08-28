@@ -16,7 +16,7 @@ class CropSquare extends Internal\FilterBase implements Interfaces\IExternalFilt
 	 * @param array $data
 	 * @return resource
 	 */
-	static function Filter($gd,$data){		
+	static function filter($gd,$data){		
 		$width = imagesx($gd);
 		$height = imagesy($gd);
 		

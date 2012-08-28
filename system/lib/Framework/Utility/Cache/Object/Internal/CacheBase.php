@@ -24,7 +24,7 @@ abstract class CacheBase {
 	 * @param int $ttl
 	 * @return mixed
 	 */
-	function CachedValue($key_sem, $function, $ttl = 3600) {
+	function cachedValue($key_sem, $function, $ttl = 3600) {
 		if ($data = $this->Get ( $key_sem )) {
 			return $data;
 		}

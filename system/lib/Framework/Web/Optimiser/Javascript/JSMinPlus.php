@@ -627,7 +627,7 @@ class JSParser
 		return $n;
 	}
 
-	private function Script($x)
+	private function script($x)
 	{
 		$n = $this->Statements($x);
 		$n->type = JS_SCRIPT;
@@ -637,7 +637,7 @@ class JSParser
 		return $n;
 	}
 
-	private function Statements($x)
+	private function statements($x)
 	{
 		$n = new JSNode($this->t, JS_BLOCK);
 		array_push($x->stmtStack, $n);
@@ -650,7 +650,7 @@ class JSParser
 		return $n;
 	}
 
-	private function Block($x)
+	private function block($x)
 	{
 		$this->t->mustMatch(OP_LEFT_CURLY);
 		$n = $this->Statements($x);
@@ -659,7 +659,7 @@ class JSParser
 		return $n;
 	}
 
-	private function Statement($x)
+	private function statement($x)
 	{
 		$tt = $this->t->get();
 		$n2 = null;
@@ -977,7 +977,7 @@ class JSParser
 		return $n;
 	}
 
-	private function FunctionDefinition($x, $requireName, $functionForm)
+	private function functionDefinition($x, $requireName, $functionForm)
 	{
 		$f = new JSNode($this->t);
 
@@ -1018,7 +1018,7 @@ class JSParser
 		return $f;
 	}
 
-	private function Variables($x)
+	private function variables($x)
 	{
 		$n = new JSNode($this->t);
 
@@ -1047,7 +1047,7 @@ class JSParser
 		return $n;
 	}
 
-	private function Expression($x, $stop=false)
+	private function expression($x, $stop=false)
 	{
 		$operators = array();
 		$operands = array();
@@ -1433,7 +1433,7 @@ class JSParser
 		return array_pop($operands);
 	}
 
-	private function ParenExpression($x)
+	private function parenExpression($x)
 	{
 		$this->t->mustMatch(OP_LEFT_PAREN);
 		$n = $this->Expression($x);

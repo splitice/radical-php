@@ -10,7 +10,7 @@ namespace Utility\Net\External;
             $this->host = $host;
         }
         
-        function Ping(){
+        function ping(){
         	if(count($this->Post('system.listMethods', array()))){
         		return true;
         	}
@@ -30,7 +30,7 @@ namespace Utility\Net\External;
         	return $ret;
         }
         
-        static function CreateInstance(){
+        static function createInstance(){
         	global $_CONFIG;
         	$r = new rTorrent($_CONFIG['torrent']['RPC_URL']);
         	if(!$r->Ping()){

@@ -203,7 +203,7 @@ class TV extends Internal\NaturalBase {
 			}
 		}
 	}
-	function Parse(){
+	function parse(){
 		$rls = $this->rls;
 		
 		$this->parsePrefix($rls);

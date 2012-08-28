@@ -2,11 +2,11 @@
 namespace Web\Page\Handler;
 
 abstract class HTMLPageBase extends PageBase {
-	function Title($part = null){
+	function title($part = null){
 		return $part;
 	}
 	private $_meta;
-	function Meta($what = null){
+	function meta($what = null){
 		if(!$this->_meta){
 			$this->_meta = new MetaManager();
 		}

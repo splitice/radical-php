@@ -32,7 +32,7 @@ class EventFormInstance extends FormInstance {
 		$this->method('post');
 	}
 	
-	function Execute($data = null){
+	function execute($data = null){
 		//data from post
 		if($data === null){
 			$data = Key::getData();

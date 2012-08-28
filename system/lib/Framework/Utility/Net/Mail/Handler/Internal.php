@@ -3,7 +3,7 @@ namespace Utility\Net\Mail\Handler;
 use Utility\Net\Mail\Message;
 
 class Internal implements IMailHandler {
-	function Send(Message $message,$body){
+	function send(Message $message,$body){
 		$headers = '';
 		
 		// To send HTML mail, the Content-type header must be set

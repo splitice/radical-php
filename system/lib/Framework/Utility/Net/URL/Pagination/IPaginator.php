@@ -4,5 +4,5 @@ use Utility\Net\URL\Pagination\Template\IPaginationTemplate;
 
 interface IPaginator {
 	function toURL($page = 1);
-	function Output($last,IPaginationTemplate $template);
+	function output($last,IPaginationTemplate $template);
 }

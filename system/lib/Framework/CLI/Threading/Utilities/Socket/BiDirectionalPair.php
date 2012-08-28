@@ -10,10 +10,10 @@ class BiDirectionalPair {
 		$this->sockets = socket_create ( AF_UNIX, SOCK_STREAM, SOL_TCP );
 		$this->ref = new ThreadReference ();
 	}
-	function Write($socket, $msg) {
+	function write($socket, $msg) {
 		socket_write ( $this->sockets [$socket], $msg );
 	}
-	function Read($socket, $len) {
+	function read($socket, $len) {
 		return socket_read ( $this->sockets [$socket], $len );
 	}
 	function __destruct() {

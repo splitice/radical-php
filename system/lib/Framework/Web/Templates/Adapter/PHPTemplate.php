@@ -17,7 +17,7 @@ class PHPTemplate implements ITemplateAdapter {
 	function __construct(\File $file){
 		$this->file = $file;
 	}
-	function Output(Scope $_){
+	function output(Scope $_){
 		global $_CONFIG;
 		include($this->file);
 	}

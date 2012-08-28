@@ -10,7 +10,7 @@ abstract class ErrorBase extends ErrorException {
 		$errorHandler = Handler::getInstance();
 		$errorHandler->Error($this);
 	}
-	static function Init(){
+	static function init(){
 		
 	}
 }

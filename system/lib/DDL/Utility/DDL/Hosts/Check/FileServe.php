@@ -9,7 +9,7 @@ class FileServe extends Internal\HostBase {
 	const HOST_DOMAIN = 'fileserve.com';
 	const HOST_REGEX = 'fileserve\.com/file/([0-9A-Za-z]+)';
 	
-	function ValidateCheck($data) {
+	function validateCheck($data) {
 		$ret = new Internal\CheckReturn('unknown');
 		
 		if(strpos($data,'<h1>File not available</h1>')){

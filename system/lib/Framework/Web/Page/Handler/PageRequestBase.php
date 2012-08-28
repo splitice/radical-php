@@ -25,7 +25,7 @@ abstract class PageRequestBase {
 	}
 	
 	
-	function Execute($method){
+	function execute($method){
 		//Add to Page\Handler Stack
 		PH::Push($this);
 	

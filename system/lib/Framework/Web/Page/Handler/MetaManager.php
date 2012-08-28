@@ -8,7 +8,7 @@ class MetaManager extends \Basic\Arr\Object\CollectionObject {
 		}
 		parent::__construct($data);
 	}
-	function Get($k){
+	function get($k){
 		$r = parent::Get($k);
 		if(is_array($r)) $r = implode(',',$r);
 		return $r;

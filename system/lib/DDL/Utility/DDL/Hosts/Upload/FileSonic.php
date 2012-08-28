@@ -48,7 +48,7 @@ class FileSonic extends Internal\FTPHostBase implements Interfaces\IUploadHost {
 	}
 	
 	// function that upload file
-	public function Upload($file) {
+	public function upload($file) {
 		$this->UploadStart($file);
 		
 		$url = API\FileSonic::UploadURL($this->login->getUsername(),$this->login->getPassword());

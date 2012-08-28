@@ -11,7 +11,7 @@ exit;
 
 $_CONFIG_FILES = array('config.php','include/config.php');
 
-function ListDir($expr, $recursive = false) {
+function listDir($expr, $recursive = false) {
 	if ($recursive) {
 		$items = glob ( $expr . '/*' );
 

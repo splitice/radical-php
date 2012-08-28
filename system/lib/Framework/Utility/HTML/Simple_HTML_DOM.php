@@ -164,7 +164,7 @@ class native_simple_html_dom_node {
 		}
 		array_push($parts, $exp);
 	}
-	static function CSStoXpath($rule) {
+	static function cSStoXpath($rule) {
 		$reg ['element'] = "/^([#.]?)([a-z0-9\\*_-]*)((\\|)([a-z0-9\\*_-]*))?/is";
 		$reg ['attr1'] = "/^\\[([^\\]]*)\\]/i";
 		$reg ['attr2'] = '/^\[\s*([^\*^\^^~=\s]+)\s*((?:\*|\^|~)?=)\s*"?([^"^\]]+)"?\s*\]/is';
@@ -465,7 +465,7 @@ class native_Simple_HTML_DOM {
 	private $root;
 	private $document;
 	
-	static function LoadS() {
+	static function loadS() {
 	
 	}
 	
@@ -1104,7 +1104,7 @@ class Simple_HTML_DOM {
 	protected $block_tags = array ('root' => 1, 'body' => 1, 'form' => 1, 'div' => 1, 'span' => 1, 'table' => 1 );
 	protected $optional_closing_tags = array ('tr' => array ('tr' => 1, 'td' => 1, 'th' => 1 ), 'th' => array ('th' => 1 ), 'td' => array ('td' => 1 ), 'li' => array ('li' => 1 ), 'dt' => array ('dt' => 1, 'dd' => 1 ), 'dd' => array ('dd' => 1, 'dt' => 1 ), 'dl' => array ('dd' => 1, 'dt' => 1 ), 'p' => array ('p' => 1 ), 'nobr' => array ('nobr' => 1 ) );
 	
-	static function LoadS() {
+	static function loadS() {
 	
 	}
 	

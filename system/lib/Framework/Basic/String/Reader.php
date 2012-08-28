@@ -14,15 +14,15 @@ class Reader {
 		$this->movePosition = $mode;
 	}
 	
-	function String() {
+	function string() {
 		return substr ( $this->string, $this->pos );
 	}
 	
-	function Length() {
+	function length() {
 		return (strlen ( $this->string ) - $this->pos) - 1;
 	}
 	
-	function ReadUntil($chars) {
+	function readUntil($chars) {
 		if (is_string ( $chars )) {
 			if (strlen ( $chars ) == 1) {
 				$chars = array ($chars );

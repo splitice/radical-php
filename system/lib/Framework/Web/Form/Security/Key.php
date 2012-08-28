@@ -23,17 +23,17 @@ class Key {
 	function getId(){
 		return $this->id;
 	}
-	function Store($data){
+	function store($data){
 		$this->storage[] = $data;
 		return count($this->storage);
 	}
-	function Take($key){
+	function take($key){
 		return $this->storage[$key-1];
 	}
-	function Encrypt($data){
+	function encrypt($data){
 		return Blowfish::Encode($data, $this->key);
 	}
-	function Decrypt($data){
+	function decrypt($data){
 		return Blowfish::Decode($data, $this->key);
 	}
 	function getElement(){
@@ -47,7 +47,7 @@ class Key {
 		unset($data[self::FIELD_NAME]);
 		return $data;
 	}
-	function Callback(){
+	function callback(){
 		if($this->callback){
 			return call_user_func($this->callback);
 		}

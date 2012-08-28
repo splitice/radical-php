@@ -5,7 +5,7 @@ class TokenizerDebug {
 	function __construct($source){
 		$this->tokens = token_get_all($source);
 	}
-	function Output(){
+	function output(){
 		echo '<table>';
 		echo '<tr><th>Token</th><th>Text</th></tr>';
 		foreach($this->tokens as $t){

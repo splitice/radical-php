@@ -2,5 +2,5 @@
 namespace Web\Optimiser\Interfaces;
 
 interface IOptimiser {
-	static function Optimise($buffer);
+	static function optimise($buffer);
 }

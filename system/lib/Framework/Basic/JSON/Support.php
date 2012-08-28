@@ -132,7 +132,7 @@ class Support
     *                                   bubble up with an error, so all return values
     *                                   from encode() should be checked with isError()
     */
-    function Services_JSON($use = 0)
+    function services_JSON($use = 0)
     {
         $this->use = $use;
     }

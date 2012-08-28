@@ -7,13 +7,13 @@ use Web\Session\ModuleBase;
 use Model\Database\Model\TableReferenceInstance;
 
 class NullSource extends ModuleBase implements ISessionSource {
-	function Login($username,$password){
+	function login($username,$password){
 		
 	}
 	function isLoggedIn(){
 		return isset(\Web\Session::$data['user']);
 	}
-	function Logout(){
+	function logout(){
 		unset(\Web\Session::$data['user']);
 	}
 }

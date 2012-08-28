@@ -114,7 +114,7 @@ class Format extends \Core\Object {
 	 * @param string $format sprintf format string, with any number of named arguments
 	 * @return array result of scanf call with arguments as their key
 	 */
-	static function Consume($str,$format){
+	static function consume($str,$format){
 		return static::sscanfn($str, $format);
 	}
 	
@@ -132,7 +132,7 @@ class Format extends \Core\Object {
 	 * @param array $args array of [ 'arg_name' => 'arg value', ... ] replacements to be made
 	 * @return string|false result of sprintf call, or bool false on error
 	 */
-	static function Format($format, array $args = array()){
+	static function format($format, array $args = array()){
 		return static::sprintfn($format,$args);
 	}
 }

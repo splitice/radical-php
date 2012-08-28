@@ -10,7 +10,7 @@ class AuthenticatedDetails {
 		$this->arguments = $arguments;
 	}
 	
-	function Execute(Authenticate $object){
+	function execute(Authenticate $object){
 		call_user_func_array(array($object,$this->method), $this->arguments);
 	}
 }

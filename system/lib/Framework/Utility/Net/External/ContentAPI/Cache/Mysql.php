@@ -72,7 +72,7 @@ class Mysql extends DynamicTableInstance {
 		$dt->EnsureExists(true);
 		return $dt;
 	}
-	static function Get($class, $id){
+	static function get($class, $id){
 		$table = static::getTable($class);
 		$obj = $table->fromId($id);
 		if($obj){
@@ -81,7 +81,7 @@ class Mysql extends DynamicTableInstance {
 			return $data;
 		}
 	}
-	static function Set(\Utility\Net\External\ContentAPI\Modules\Internal\ModuleBase $module, array $data){
+	static function set(\Utility\Net\External\ContentAPI\Modules\Internal\ModuleBase $module, array $data){
 		$id = $module->getId();
 		
 		$table = static::getTable(get_class($module));
@@ -91,7 +91,7 @@ class Mysql extends DynamicTableInstance {
 		
 		$obj->Insert();
 	}
-	static function TTL(){
+	static function tTL(){
 		foreach(\Core\Libraries::get('\\Utility\Net\External\\ContentAPI\\Modules\\*') as $module){
 			$table = static::getTable($module);
 			if($table->Exists()){

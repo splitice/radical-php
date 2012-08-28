@@ -1,7 +1,7 @@
 <?php
 namespace Utility\Format;
 class XML {
-	static function Repair($str){
+	static function repair($str){
 		// Specify configuration
 		$config = array(
 		           'indent'     => true,

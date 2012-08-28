@@ -69,7 +69,7 @@ class TableReferenceInstance extends \Core\Object {
 		return $this->class;
 	}
 	
-	function Info(){
+	function info(){
 		$class = $this->class;
 		$info = array();
 		$info['name'] = $class::TABLE;

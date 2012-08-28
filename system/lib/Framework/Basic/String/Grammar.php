@@ -648,7 +648,7 @@ class Grammar extends \Core\Object {
 		return $string;
 	}
 	
-	static function ListOf($array){
+	static function listOf($array){
 		$ret = '';
 		$temp = count($array)-1;
 		foreach($array as $k=>$v){

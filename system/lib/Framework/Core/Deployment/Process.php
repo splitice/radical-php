@@ -89,7 +89,7 @@ class Process {
 		$file = ltrim(substr($file,strlen(\Core\Libraries::$webDir)),'\\');
 		return $file;
 	}
-	function Execute(IRemoteLocation $to){
+	function execute(IRemoteLocation $to){
 		$files = $this->getFiles();
 		foreach($files as $file){
 			if($file){

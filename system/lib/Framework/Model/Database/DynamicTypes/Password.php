@@ -12,7 +12,7 @@ class Password extends String implements INullable {
 		}
 		return '\\Basic\\Cryptography\\'.$algo;
 	}
-	function Compare($with){
+	function compare($with){
 		$class = $this->getAlgo();
 		return $class::Compare($with,$this->value);
 	}

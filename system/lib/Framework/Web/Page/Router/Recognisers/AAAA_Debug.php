@@ -19,7 +19,7 @@ class AAAA_Debug implements IPageRecognise {
 		}
 		ob_end_clean();
 	}
-	static function Recognise(URL $url){
+	static function recognise(URL $url){
 		//Just incase disabling debug doesnt work.
 		if(!self::$enable){
 			return;

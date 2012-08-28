@@ -12,7 +12,7 @@ class HandleDebug {
 		$this->files [] = $file;
 	}
 	
-	static function OutputUploading($to_run) {
+	static function outputUploading($to_run) {
 		$links = array ();
 		foreach ( $to_run as $f ) {
 			if (! isset ( $links [$f ['file']] )) {
@@ -26,7 +26,7 @@ class HandleDebug {
 		}
 	}
 	
-	function Execute() {
+	function execute() {
 		$to_run = array (); //The run queue, should contain modules * files instances.
 		$links = array (); //Links returned
 		

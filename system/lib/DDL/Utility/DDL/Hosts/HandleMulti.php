@@ -30,7 +30,7 @@ class HandleMulti {
 		return $this->progress;
 	}
 
-	function RunValidate($to_run,$attempt) {
+	function runValidate($to_run,$attempt) {
 		global $_CONFIG;
 		
 		if (! $to_run) {
@@ -44,7 +44,7 @@ class HandleMulti {
 		return true;
 	}
 	
-	function Execute() {
+	function execute() {
 		//The run queue, should contain modules * files instances.
 		$toRun = array();
 		
@@ -89,7 +89,7 @@ class HandleMulti {
 		return $links;
 	}
 	
-	function Clear(){
+	function clear(){
 		$this->modules = $this->files = array();
 	}
 }

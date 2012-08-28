@@ -33,7 +33,7 @@ abstract class MultiAdminModuleBase extends AdminModuleBase {
 		}
 		return $modules;
 	}
-	function GET($data = array()){
+	function gET($data = array()){
 		if(!$this->submodule){
 			$method = 'index';
 			if(!method_exists($this,$method)){
@@ -49,7 +49,7 @@ abstract class MultiAdminModuleBase extends AdminModuleBase {
 		}
 		throw new \Exception('Admin submodule '.$this->submodule.' doesnt exist');
 	}
-	function POST(){
+	function pOST(){
 		return $this->GET($_POST);
 	}
 	function __toString(){

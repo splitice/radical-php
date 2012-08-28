@@ -17,7 +17,7 @@ class Http extends ModuleBase implements IAuthenticator {
 		die('Login Failed: '.$error);
 		//@todo complete
 	}
-	function Init(ISessionSource $handler){
+	function init(ISessionSource $handler){
 		if(!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW'])){
 
 			$username = $_SERVER['PHP_AUTH_USER'];

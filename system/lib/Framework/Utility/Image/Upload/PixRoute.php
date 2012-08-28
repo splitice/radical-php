@@ -4,7 +4,7 @@ namespace Utility\Image\Upload;
 class PixRoute extends _BASE implements IUploadHost {
 	static $ch = array();
 	
-	static function Test(){
+	static function test(){
 		$ch = curl_init('http://www.pixroute.com/');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 3);
@@ -13,7 +13,7 @@ class PixRoute extends _BASE implements IUploadHost {
 		}
 		return false;
 	}
-	static function Login($username = null, $password = null){
+	static function login($username = null, $password = null){
 		global $_CONFIG;
 		
 		$key = $username.'_'.$password;
@@ -53,7 +53,7 @@ class PixRoute extends _BASE implements IUploadHost {
 		
 		return $ch;
 	}
-	function Upload($file,$file_type,$size='500x500'){
+	function upload($file,$file_type,$size='500x500'){
 		
 		if($size === null || !is_string($size)){
 			$size = '500x500';

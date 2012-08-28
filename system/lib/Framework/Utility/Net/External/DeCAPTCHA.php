@@ -1,10 +1,10 @@
 <?php
 namespace Utility\Net\External;
 class DeCAPTCHA {
-	private static function Status($e){
+	private static function status($e){
 		
 	}
-	static function Solve($file_data) {
+	static function solve($file_data) {
 
 		require_once (__DIR__.'/DeCAPTCHA/api/ccproto_client.php');
 		

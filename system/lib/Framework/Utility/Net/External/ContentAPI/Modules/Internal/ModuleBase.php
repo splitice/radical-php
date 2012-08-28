@@ -28,7 +28,7 @@ abstract class ModuleBase {
 		$this->id = $id;
 	}
 	
-	static function CH($url=null){
+	static function cH($url=null){
 		$ch = curl_init ( $url );
 		curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
 		curl_setopt ( $ch, CURLOPT_FOLLOWLOCATION, true );
@@ -36,7 +36,7 @@ abstract class ModuleBase {
 		return $ch;
 	}
 	
-	static function RecogniseURL($url){
+	static function recogniseURL($url){
 		if(static::URL_RULE){
 			return preg_match(static::URL_RULE,$url);
 		}
@@ -56,7 +56,7 @@ abstract class ModuleBase {
 		return $ret;
 	}
 	
-	abstract function Fetch();
+	abstract function fetch();
 	abstract static function getFields();
 	
 	private function _moduleName(){
@@ -74,7 +74,7 @@ abstract class ModuleBase {
 			return $this->Fetch();
 		}
 	}
-	function Parse($want = null,$export = true){
+	function parse($want = null,$export = true){
 		if($this->_cache !== null){
 			if($want){
 				$ret = isset($this->_cache[$want])?$this->_cache[$want]:null;
@@ -113,7 +113,7 @@ abstract class ModuleBase {
 		return $this->_cache;
 	}
 	
-	static function HTMLDecode($v) {
+	static function hTMLDecode($v) {
 		$v = str_replace('&nbsp;', ' ', $v);
 		$ret = mb_convert_encoding ( $v, "utf-8", "HTML-ENTITIES" );
 	

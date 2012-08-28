@@ -2,7 +2,7 @@
 namespace Web\Page\API\Module;
 
 class _Psudeo extends APIBase {
-	function Test(){
+	function test(){
 		return 'OK';
 	}
 }

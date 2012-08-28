@@ -4,7 +4,7 @@ namespace CLI\Daemon\Commands;
 class Start extends Internal\StandardCommand {
 	const NAME = 'start';
 	
-	function Execute($pid,$script) {
+	function execute($pid,$script) {
 		global $_SCRIPT_NAME;
 		
 		$line = false;

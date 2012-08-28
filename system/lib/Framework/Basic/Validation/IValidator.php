@@ -9,5 +9,5 @@ interface IValidator {
 	 * 
 	 * @param mixed $value
 	 */
-	function Validate($value);
+	function validate($value);
 }

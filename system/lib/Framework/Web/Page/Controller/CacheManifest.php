@@ -34,7 +34,7 @@ class CacheManifest extends HTMLPageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function GET(){
+	function gET(){
 		\Web\Page\Handler::$stack->top()->headers->Add('Content-Type','text/cache-manifest');
 		echo "CACHE MANIFEST\r\n\r\n";
 		

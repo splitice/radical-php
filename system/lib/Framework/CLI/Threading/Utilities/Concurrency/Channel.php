@@ -16,7 +16,7 @@ class Channel extends AtomicClass {
 		$this->sem = new Semaphore ( 0 );
 		$this->_atomic ( 'queue', array () );
 	}
-	function Put($item) {
+	function put($item) {
 		$this->queue->update ( function ($var) use($item) {
 			$var [] = $item;
 			return $var;
@@ -24,7 +24,7 @@ class Channel extends AtomicClass {
 		
 		$this->sem->Release ();
 	}
-	function Take() {
+	function take() {
 		$ret = null;
 		
 		$this->sem->Acquire ();

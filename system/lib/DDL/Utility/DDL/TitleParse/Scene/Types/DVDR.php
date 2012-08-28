@@ -5,7 +5,7 @@ class DVDR extends Internal\MovieBase {
 	function sourceValidate(){
 		return true;
 	}
-	function Parse(){
+	function parse(){
 		if(!$this->parts){
 			return;
 		}

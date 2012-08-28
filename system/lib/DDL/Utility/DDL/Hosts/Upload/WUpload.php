@@ -50,7 +50,7 @@ class WUpload extends Internal\FTPHostBase implements Interfaces\IUploadHost {
 	
 	
 	// function that upload file
-	public function Upload($file) {
+	public function upload($file) {
 		$this->UploadStart($file);
 		
 		$url = API\WUpload::UploadURL($this->username,$this->password);

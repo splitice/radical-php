@@ -2,7 +2,7 @@
 namespace Utility\DDL\TitleParse\Scene\Types;
 
 class XXX_XVID extends Internal\XXXBase {
-	function Parse(){
+	function parse(){
 		if(!$this->parts){
 			return;
 		}
@@ -15,7 +15,7 @@ class XXX_XVID extends Internal\XXXBase {
 		}
 	}
 	
-	function TitleBuild(){
+	function titleBuild(){
 		$ret = $this->title;
 		if($this->year){
 			$ret .= ' ('.$this->year.')';

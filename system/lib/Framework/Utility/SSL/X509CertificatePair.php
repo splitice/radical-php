@@ -10,7 +10,7 @@ class X509CertificatePair {
 		$this->private = $private;
 	}
 	
-	function Validate($passphrase = null){
+	function validate($passphrase = null){
 		return X509::CheckPair($this->public, $this->private, $passphrase);
 	}
 }

@@ -11,7 +11,7 @@ abstract class IncompleteObject implements \IteratorAggregate, \ArrayAccess, \Se
 	protected $data = null;
 	abstract function getData();
 	
-	function Init(){
+	function init(){
 		if($this->data === null){
 			$this->data = $this->getData();
 		}
@@ -76,16 +76,16 @@ abstract class IncompleteObject implements \IteratorAggregate, \ArrayAccess, \Se
 			return $this->data[$k];
 		}
 	}
-	function Set($k,$v){
+	function set($k,$v){
 		$this->_Set($k,$v);
 	}
 	function Add($k,$v){
 		return $this->_Add($k,$v);
 	}
-	function Get($k){
+	function get($k){
 		return $this->_Get($k);
 	}
-	function Remove($k){
+	function remove($k){
 		$this->Init();
 		unset($this->data[$k]);
 	}
@@ -98,7 +98,7 @@ abstract class IncompleteObject implements \IteratorAggregate, \ArrayAccess, \Se
 		$arr = $this->data;
         return (is_array($arr) && (!count($arr) || count(array_filter(array_keys($arr),'is_string')) == count($arr)));
     }
-    function GetAll(){
+    function getAll(){
     	$this->Init();
     	return $this->data;
     }

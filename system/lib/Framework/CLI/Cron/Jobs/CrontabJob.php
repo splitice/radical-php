@@ -31,7 +31,7 @@ abstract class CrontabJob extends \Core\Object implements Interfaces\ICronJob {
 		return $time;
 	}
 	
-	function Execute(array $arguments){
+	function execute(array $arguments){
 		if(!isset($_SERVER['REQUEST_URI'])){
 			$this->_Execute($arguments);
 		}else{

@@ -5,7 +5,7 @@ use Utility\HTML\Tag\Meta;
 use Utility\HTML\Tag\Link;
 
 class HTML extends Config {
-	static function Build(){
+	static function build(){
 		$ret = array();
 		
 		//Only do this stuff if we are developing a webapp
@@ -86,7 +86,7 @@ class HTML extends Config {
 		
 		return $string;
 	}
-	static function Output(){
+	static function output(){
 		echo static::Build();
 	}
 }

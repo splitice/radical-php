@@ -15,7 +15,7 @@ class Curl extends CurlBase {
 		}
 	}
 	
-	function CH(){
+	function cH(){
 		$ret = curl_setopt_array($this->ch, $this->data);
 		if(!$ret){
 			throw new \Exception('Could not set all curl options');
@@ -29,7 +29,7 @@ class Curl extends CurlBase {
 		return $this->ch;
 	}
 	
-	function Execute($data = null){
+	function execute($data = null){
 		$ch = $this->CH();
 		if($data === null){
 			$ret = curl_exec($ch);
@@ -43,7 +43,7 @@ class Curl extends CurlBase {
 		return new Curl\Response($this->ch, $ret);
 	}
 	
-	function Error(){
+	function error(){
 		return curl_error($this->ch);
 	}
 }

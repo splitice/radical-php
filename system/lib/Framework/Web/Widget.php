@@ -9,7 +9,7 @@ abstract class Widget {
 		$this->vars = $vars;
 	}
 	
-	abstract function Render();
+	abstract function render();
 	
 	function __toString(){
 		try {
@@ -24,7 +24,7 @@ abstract class Widget {
 		}
 	}
 	
-	static function Load($name,array $vars){
+	static function load($name,array $vars){
 		if($name{0} != '\\'){
 			$name = '\\Web\\Widgets\\'.$name;
 		}

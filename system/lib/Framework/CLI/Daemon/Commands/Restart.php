@@ -4,7 +4,7 @@ namespace CLI\Daemon\Commands;
 class Restart extends Internal\StandardCommand {
 	const NAME = 'restart';
 	
-	function Execute($pid,$script) {
+	function execute($pid,$script) {
 		$s = new Stop();
 		$s->Execute($pid, $script);
 		$s = new Start();

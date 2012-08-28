@@ -3,7 +3,7 @@ namespace Web\Optimiser;
 use Web\Optimiser\Interfaces\IOptimiser;
 
 class JS implements IOptimiser {
-	private static function GoogleMin($script){
+	private static function googleMin($script){
 		return $script;
 		$ch = curl_init('http://closure-compiler.appspot.com/compile');
 		 
@@ -15,7 +15,7 @@ class JS implements IOptimiser {
 		
 		return $output;
 	}
-	static function Optimise($buffer){
+	static function optimise($buffer){
 		try{
 			$j = Javascript\JSMinPlus::minify($buffer,'');
 			if(strlen($j) < strlen($buffer)){

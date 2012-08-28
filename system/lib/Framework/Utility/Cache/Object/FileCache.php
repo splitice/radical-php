@@ -18,7 +18,7 @@ class FileCache extends Internal\FileCacheBase implements ICache {
 		}
 		return $dir.DS.substr($hash,4);
 	}
-	function Get($key){
+	function get($key){
 		if($path = $this->path($key)){
 			if(!@file_exists($path)){
 				return null;
@@ -26,7 +26,7 @@ class FileCache extends Internal\FileCacheBase implements ICache {
 			return file_get_contents($path);
 		}
 	}
-	function Set($key,$value,$ttl = null){
+	function set($key,$value,$ttl = null){
 		$path = $this->path($key);
 		if($path){
 			$success = (@file_put_contents($path, $value) !== false);
@@ -34,7 +34,7 @@ class FileCache extends Internal\FileCacheBase implements ICache {
 				throw new \Exception('Couldnt Write file for cache: '.$path);
 		}
 	}
-	function Delete($key){
+	function delete($key){
 		$path = $this->path($key);
 		if($path){
 			@unlink($path);

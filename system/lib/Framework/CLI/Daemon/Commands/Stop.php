@@ -4,7 +4,7 @@ namespace CLI\Daemon\Commands;
 class Stop extends Internal\StandardCommand {
 	const NAME = 'stop';
 	
-	function Execute($pid,$script) {
+	function execute($pid,$script) {
 		global $_SCRIPT_NAME;
 	
 		exec('screen -D '.escapeshellarg($_SCRIPT_NAME),$lines);

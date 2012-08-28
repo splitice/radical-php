@@ -12,7 +12,7 @@ class OutputFilter {
 	}
 	
 	static $filters = array();
-	static function Register(OutputFilter $filter){
+	static function register(OutputFilter $filter){
 		if(!static::$filters){
 			ob_start(array(get_called_class(),'obFilter'));
 		}

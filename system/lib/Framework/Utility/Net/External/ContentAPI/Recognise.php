@@ -16,7 +16,7 @@ class Recognise {
 	    }
 	    return false;
 	} 
-	private static function Classes(){
+	private static function classes(){
 		$ret = array();
 		
 		$dir = __DIR__.DIRECTORY_SEPARATOR.'Modules'.DIRECTORY_SEPARATOR.'*.php';
@@ -28,7 +28,7 @@ class Recognise {
 		}
 		return $ret;
 	}
-	static function URL($url){
+	static function uRL($url){
 		$ret = array();
 		foreach(self::Classes() as $class){
 			if(self::oneof($class,'\\ContentAPI\\Interfaces\\IFromURL')){
@@ -39,7 +39,7 @@ class Recognise {
 		}
 		return $ret;
 	}
-	static function RecogniseAll($data){
+	static function recogniseAll($data){
 		return self::URL($data);//Nothing more needed
 	}
 }

@@ -48,7 +48,7 @@ class SABnzbd {
 		
 		return $data;
 	}
-	static function ListHistory($start=0,$limit=50,$complete=true){
+	static function listHistory($start=0,$limit=50,$complete=true){
 		$url = static::getUrl('history');
 		$url .= '&start='.(int)$start.'&limit='.(int)$limit;
 

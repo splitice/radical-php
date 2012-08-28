@@ -2,7 +2,7 @@
 namespace Utility\DDL\TitleParse\Scene\Types;
 
 class XVID extends Internal\MovieBase {
-	function Parse(){
+	function parse(){
 		if(!$this->parts){
 			return;
 		}

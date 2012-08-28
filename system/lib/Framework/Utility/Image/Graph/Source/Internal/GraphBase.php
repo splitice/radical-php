@@ -16,11 +16,11 @@ abstract class GraphBase implements IGraphSource {
 	
 	abstract function getData();
 	
-	function Setup($width,$height){	
+	function setup($width,$height){	
 		$this->schema->box->width = $width;
 		$this->schema->box->height = $height;
 	}
-	function Draw(IRenderable $R){
+	function draw(IRenderable $R){
 		$this->schema->data->SetAll($this->getData());
 		
 		return $R->Output($this->schema);

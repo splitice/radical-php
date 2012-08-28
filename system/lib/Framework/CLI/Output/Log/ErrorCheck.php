@@ -11,7 +11,7 @@ class ErrorCheck{
 		$this->start = $start;
 		$this->end = $end;
 	}
-	function OK(){
+	function oK(){
 		fseek($this->fh,$this->end);
 		$data = fread($this->fh,10000000);
 		fseek($this->fh,0);

@@ -19,7 +19,7 @@ class Transfer {
 		$this->curl = $obj->CH();
 	}
 	
-	function Expired(){
+	function expired(){
 		$timeout_when = $this->time+$this->obj->getTimeout();
 		if($timeout_when<time()){
 			return true;
@@ -64,7 +64,7 @@ class Transfer {
 	}
 
 	private $isError = false;
-	function Call($err=null){	
+	function call($err=null){	
 		if($err){
 			$this->isError = true;	
 		}

@@ -10,7 +10,7 @@ class TransparentGif extends PageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function GET(){
+	function gET(){
 		\Web\Page\Handler::top()->headers['Content-Type'] = 'image/gif';
 		echo base64_decode('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
 	}

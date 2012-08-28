@@ -8,10 +8,10 @@ class SocketPulse {
 	function __construct() {
 		$this->communication = new Socket\ReadWritePair ();
 	}
-	function Pulse() {
+	function pulse() {
 		$this->communication->Write ( '.' );
 	}
-	function Wait() {
+	function wait() {
 		$this->communication->Read ( 1 );
 	}
 }

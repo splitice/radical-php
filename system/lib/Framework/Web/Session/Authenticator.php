@@ -75,10 +75,10 @@ class Authenticator {
 		$this->authenticator = $authenticator;
 		$this->source = $source;
 	}
-	function Login($username,$password){
+	function login($username,$password){
 		return $this->_source()->Login($username, $password);
 	}
-	function LoggedInArea(){
+	function loggedInArea(){
 		if($this->isLoggedIn()) return true;
 		$this->_authenticator()->Init($this->_source());
 		$this->_authenticator()->Authenticate();
@@ -99,7 +99,7 @@ class Authenticator {
 	function getUser(){
 		return \Web\Session::$data['user'];
 	}
-	function Logout(){
+	function logout(){
 		return $this->_source()->Logout();
 	}
 }

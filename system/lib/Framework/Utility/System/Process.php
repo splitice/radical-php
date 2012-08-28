@@ -30,7 +30,7 @@ class Process {
 		return ($this->start_time+$this->max_execution_time<mktime());
 	}
 	
-	function Read($stream = self::STDOUT){
+	function read($stream = self::STDOUT){
 		$ret = '';
 		$stream = $this->pipes[$stream];
 		stream_set_blocking($stream, false);
@@ -40,7 +40,7 @@ class Process {
 		return $ret;
 	}
 	
-	function ReadAll($stream = self::STDOUT){
+	function readAll($stream = self::STDOUT){
 		$stream = $this->pipes[$stream];
 		$stream_reader = new Stream\Reader($stream);
 		return $stream_reader->ReadAll();

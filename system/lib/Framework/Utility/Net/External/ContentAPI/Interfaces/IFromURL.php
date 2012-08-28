@@ -2,6 +2,6 @@
 namespace Utility\Net\External\ContentAPI\Interfaces;
 
 interface IFromURL {
-	static function RecogniseURL($url);
+	static function recogniseURL($url);
 	static function fromURL($url);
 }

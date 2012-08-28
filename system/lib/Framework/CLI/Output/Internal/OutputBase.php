@@ -4,7 +4,7 @@ use CLI\Output\OutputHandler;
 use CLI\Output;
 
 abstract class OutputBase extends OutputHandler {
-	static function E(){
+	static function e(){
 		$s = '';
 		foreach(func_get_args() as $a){
 			$s .= $a;

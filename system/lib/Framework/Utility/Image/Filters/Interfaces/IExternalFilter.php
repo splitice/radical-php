@@ -3,5 +3,5 @@ namespace Utility\Image\Filters\Interfaces;
 
 interface IExternalFilter {
 	function toData();
-	static function Filter($gd,$data);
+	static function filter($gd,$data);
 }

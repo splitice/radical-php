@@ -8,7 +8,7 @@ class TableCache {
 	const MAX_ENTRIES = 500;
 	static $cache;
 	
-	private static function Init(){
+	private static function init(){
 		if(!self::$cache){
 			self::$cache = new WeakRef();
 		}
@@ -30,7 +30,7 @@ class TableCache {
 		}
 		return $object;
 	}
-	static function Get($key){
+	static function get($key){
 		self::Init();
 		return self::$cache->Get($key);
 	}

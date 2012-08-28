@@ -9,7 +9,7 @@ class RapidShare extends Internal\HostBase {
 	const HOST_DOMAIN = 'rapidshare.com';
 	const HOST_REGEX = 'rapidshare\.com/files/([0-9]+)/([a-zA-Z0-9_\-\.]+)';
 	
-	function Check($url){
+	function check($url){
 		preg_match('#'.self::HOST_REGEX.'#i', $url, $m);
 		$F = new HTTP\Fetch('http://api.rapidshare.com/cgi-bin/rsapi.cgi?sub=checkfiles&files='.urlencode($m[1]).'&filenames='.urlencode($m[2]));
 		$F->setModule('Link Checker');
@@ -22,7 +22,7 @@ class RapidShare extends Internal\HostBase {
 		
 		return new Internal\CheckReturn('unknown');
 	}
-	function CheckMulti($mh,$url,$callback){
+	function checkMulti($mh,$url,$callback){
 		preg_match('#'.self::HOST_REGEX.'#i', $url, $m);
 		$F = new HTTP\Fetch('http://api.rapidshare.com/cgi-bin/rsapi.cgi?sub=checkfiles&files='.urlencode($m[1]).'&filenames='.urlencode($m[2]));
 		
@@ -33,7 +33,7 @@ class RapidShare extends Internal\HostBase {
 		
 		$mh->Add($F,array($obj,'Callback'));
 	}
-	function ValidateCheck($data) {
+	function validateCheck($data) {
 		$ret = new Internal\CheckReturn('unknown');
 		
 		$content = explode(',',trim($data));

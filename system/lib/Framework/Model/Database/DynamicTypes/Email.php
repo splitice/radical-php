@@ -5,7 +5,7 @@ use Exceptions\ValidationException;
 use Model\Database\Model\ITable;
 
 class Email extends String implements IDynamicValidate {
-	function Validate($value){
+	function validate($value){
 		$email = \Utility\Net\eMail::fromAddress($value);
 		if(!$email)
 			return false;

@@ -12,7 +12,7 @@ class BackupAll {
 		}
 	}
 	
-	function Execute(){
+	function execute(){
 		$data = $this->_Execute();
 		fwrite($this->file,$data);
 	}

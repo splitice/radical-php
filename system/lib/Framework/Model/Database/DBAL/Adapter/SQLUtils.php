@@ -2,7 +2,7 @@
 namespace Model\Database\DBAL\Adapter;
 
 abstract class SQLUtils extends \Core\Object {
-	abstract static function E($str);
+	abstract static function e($str);
 	abstract static function getInstance(Connection $connection = null);
 		
 	static function oField($col,$fields){
@@ -69,7 +69,7 @@ abstract class SQLUtils extends \Core\Object {
 		return implode ( ',', $array );
 	}
 	
-	static function SelectFields($fields){
+	static function selectFields($fields){
 		$ret = array();
 		foreach($fields as $k=>$f){
 			if(!is_numeric($k)){

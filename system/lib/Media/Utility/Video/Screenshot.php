@@ -59,7 +59,7 @@ class Screenshot {
 		$this->width = $w;
 	}
 	
-	function Execute() {
+	function execute() {
 		global $_CONFIG;
 		
 		//Build CMD with options
@@ -120,7 +120,7 @@ class Screenshot {
 		}
 	}
 	
-	static function I($img) {
+	static function i($img) {
 		return new \Utility\Image\File ( $img );
 	}
 }

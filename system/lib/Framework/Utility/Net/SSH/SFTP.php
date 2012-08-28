@@ -16,7 +16,7 @@ class SFTP {
 		$this->Init($ssh);
 	}
 	
-	function Init(Connection $ssh){
+	function init(Connection $ssh){
 		$this->sftp = ssh2_sftp($ssh->getResource());
 	}
 	
@@ -62,7 +62,7 @@ class SFTP {
 		return (int)$ret;
 	}
 	
-	function Close(){
+	function close(){
 		$this->ssh->inSFTP = false;
 	}
 	

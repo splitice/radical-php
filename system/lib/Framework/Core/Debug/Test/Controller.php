@@ -14,7 +14,7 @@ use Core\Provider;
  *
  */
 class Controller {
-	static function RunUnitTests(){
+	static function runUnitTests(){
 		$results = array();
 		$tests = Provider::Find('interface.Core.Debug.Test.IUnitTest',true);
 		foreach($tests as $class){
@@ -22,7 +22,7 @@ class Controller {
 		}
 		return $results;
 	}
-	static function RunUnit($class){
+	static function runUnit($class){
 		$r = new \ReflectionClass($class);
 		$methods = array();
 		foreach($r->getMethods() as $m){
@@ -37,7 +37,7 @@ class Controller {
 		}
 		return $ret;
 	}
-	static function RunTest($class,$method){
+	static function runTest($class,$method){
 		$obj = new $class;
 		try {
 			$return = $obj->run($method);

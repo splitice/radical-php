@@ -9,7 +9,7 @@ class MediaFire extends Internal\HostBase {
 	const HOST_DOMAIN = 'mediafire.com';
 	const IMAGE_ORDER = 2;
 	
-	function ValidateCheck($data) {
+	function validateCheck($data) {
 		$ret = new Internal\CheckReturn('dead');
 		
 		if(preg_match('#<input type="hidden" id="sharedtabsfileinfo1-fn" value="([^"]+)">#',$data,$m)){

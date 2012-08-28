@@ -6,7 +6,7 @@ use Utility\Image;
 class LulzImg extends _BASE implements IUploadHost {
 	static $ch = array();
 	
-	static function Test(){
+	static function test(){
 		$ch = curl_init('http://lulzimg.com/');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 3);
@@ -15,7 +15,7 @@ class LulzImg extends _BASE implements IUploadHost {
 		}
 		return false;
 	}
-	static function Login($username = null, $password = null){		
+	static function login($username = null, $password = null){		
 		$ch = parent::Login();
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_USERAGENT, 'msie');
@@ -45,7 +45,7 @@ class LulzImg extends _BASE implements IUploadHost {
 		
 		return $m[0];
 	}
-	function Upload($file,$file_type,$size='500x500'){
+	function upload($file,$file_type,$size='500x500'){
 		//Only family safe uploads
 		if($file_type == Image\File::TYPE_ADULT){
 			throw new UploadException('LulzImg doesnt allow adult image uploads');
