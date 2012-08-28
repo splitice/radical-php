@@ -32,8 +32,8 @@ if(!function_exists('UU')){
 		
 		//Actions
 		echo '<td>';
-		echo '<a href="'.UU('?action=edit&id='.urlencode(serialize($v->getId()))).'">Edit</a> | ';
-		echo '<a href="'.UU('?action=delete&id='.urlencode(serialize($v->getId()))).'">Delete</a>';
+		echo '<a href="'.UU('?action=edit&id='.urlencode(serialize($v->getIdentifyingSQL()))).'">Edit</a> | ';
+		echo '<a href="'.UU('?action=delete&id='.urlencode(serialize($v->getIdentifyingSQL()))).'">Delete</a>';
 		echo '</td>';
 		
 		echo '</tr>';

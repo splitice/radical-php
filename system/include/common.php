@@ -24,17 +24,18 @@ if(!isset($BASEPATH)){
 		$BASEPATH = $_SERVER['DOCUMENT_ROOT'];
 	}elseif(php_sapi_name() == 'cli'){
 		if(isset($argv) && isset($argv[0])){
-			$BASEPATH = dirname(dirname(dirname($argv[0])));
+			$ap = $argv[0];
+			$BASEPATH = dirname(dirname(dirname($ap)));
+			unset($ap);
 		}else{
 			$BASEPATH = getcwd();//We guess
 		}
 	}else{	
-		$BASEPATH = realpath(__DIR__ . DS . '..');
+		$BASEPATH = realpath(__DIR__ . DS . '..'. DS . '..');
 	}
 	$BASEPATH .= DS;
-}else{
-	if(!isset($WEBPATH)) $WEBPATH = '';
 }
+if(!isset($WEBPATH)) $WEBPATH = '';
 
 //Check PHP Version
 if (version_compare (PHP_VERSION, '5.3.3') < 0)
@@ -47,7 +48,7 @@ if (version_compare (PHP_VERSION, '5.3.3') < 0)
 //Path to user directory
 $application_dir = $BASEPATH.'app'.DS;
 if(!($application_dir = realpath($application_dir))){
-	die('Application directory not provided.');
+	die('Application directory not provided. Base: '.$BASEPATH);
 }
 $application_include = $application_dir . DS . 'include' . DS;
 

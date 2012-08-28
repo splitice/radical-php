@@ -14,10 +14,21 @@ class Standard implements IPageRecognise {
 		foreach(static::$match as $expr=>$class){
 			$match = Format::Consume($path, $expr);
 			if($match){
-				if($class{0} != '\\'){
-					$class = '\\Web\\Page\\Controller\\'.$class;
+				if(is_array($class) || is_string($class)){
+					if(is_array($class)){
+						$data = isset($class['data'])?$class['data']:$match;
+						$class = $class['class'];
+					}else{
+						$data = $match;
+					}
+					if(is_string($class)){
+						if($class{0} != '\\'){
+							$class = '\\Web\\Page\\Controller\\'.$class;
+						}
+						return new $class($data);
+					}
 				}
-				return new $class($match);
+				return $class;
 			}
 		}
 	}

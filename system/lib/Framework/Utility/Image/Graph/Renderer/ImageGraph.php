@@ -36,7 +36,7 @@ abstract class ImageGraph {
 		
 		$dataSet->AddAllSeries();
 		
-		if($graph->type == 'line'){
+		if($graph->type == 'line' || $graph->type == 'plot'){
 			if(isset($graph->data['X']))
 				$dataSet->SetAbsciseLabelSerie("X");
 		}elseif($graph->type == 'pie'){
@@ -48,7 +48,7 @@ abstract class ImageGraph {
 		}
 		//die(var_dump($dataSet));
 		// Initialise the graph
-		if($graph->type == 'line'){
+		if($graph->type == 'line' || $graph->type == 'plot'){
 			$pChart->setFontProperties("tahoma.ttf",8);
 			$pChart->setGraphArea(70,30,$graph->box->width-static::BORDER,$graph->box->height-static::BORDER);
 		}
@@ -60,7 +60,7 @@ abstract class ImageGraph {
 		//Get Data
 		$data = $dataSet->GetData();
 		
-		if($graph->type == 'line'){
+		if($graph->type == 'line' || $graph->type == 'plot'){
 			//Remove X
 			if(isset($data[0]) && isset($data[0]['X'])){
 				$dataSet->RemoveSerie('X');
@@ -69,7 +69,9 @@ abstract class ImageGraph {
 			
 			if($data)
 				$pChart->drawScale($data,$dataSet->GetDataDescription(),pChart::SCALE_NORMAL,150,150,150,TRUE,0,2);
-			$pChart->drawGrid(4,TRUE,230,230,230,50);
+			
+			if($graph->grid)
+				$pChart->drawGrid(4,TRUE,230,230,230,50,(int)$graph->grid);
 		}
 		
 		// Draw the 0 line
@@ -85,9 +87,10 @@ abstract class ImageGraph {
 		}
 		
 		// Draw the line graph
-		if($graph->type == 'line'){
+		if($graph->type == 'line' || $graph->type == 'plot'){
 			$pChart->drawLineGraph($data,$dataSet->GetDataDescription());
-			$pChart->drawPlotGraph($data,$dataSet->GetDataDescription(),3,2,255,255,255);
+			if($graph->type == 'plot')
+				$pChart->drawPlotGraph($data,$dataSet->GetDataDescription(),3,2,255,255,255);
 		}elseif($graph->type == 'pie'){
 			try {
 				$radius = max($graph->box->width/2, $graph->box->height/2) - (self::BORDER);

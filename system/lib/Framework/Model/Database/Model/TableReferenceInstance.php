@@ -101,7 +101,6 @@ class TableReferenceInstance extends \Core\Object {
 		if($res->Fetch()) {
 			return true;
 		}
-
 		return false;
 	}
 	/**

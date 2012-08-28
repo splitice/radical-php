@@ -32,16 +32,20 @@ abstract class CrontabJob extends \Core\Object implements Interfaces\ICronJob {
 	}
 	
 	function Execute(array $arguments){
-		$key = '__cron__'.$this->getName();//because pool isnt working for file
-		$fileCache = PooledCache::Get('cron', 'FileCache');
-		$lastExecute = (int)$fileCache->Get($key);
-		$lastWantTo = time() - $this->getTime();
-		if(!$lastExecute || $lastExecute < $lastWantTo){
+		if(!isset($_SERVER['REQUEST_URI'])){
 			$this->_Execute($arguments);
-			$fileCache->Set($key,time());
-			return true;
 		}else{
-			return false;
+			$key = '__cron__'.$this->getName();//because pool isnt working for file
+			$fileCache = PooledCache::Get('cron', 'FileCache');
+			$lastExecute = (int)$fileCache->Get($key);
+			$lastWantTo = time() - $this->getTime();
+			if(!$lastExecute || $lastExecute < $lastWantTo){
+				$this->_Execute($arguments);
+				$fileCache->Set($key,time());
+				return true;
+			}else{
+				return false;
+			}
 		}
 	}
 }

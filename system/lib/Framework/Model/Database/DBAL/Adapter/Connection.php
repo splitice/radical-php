@@ -119,6 +119,15 @@ class Connection {
 		return $this->Connect()->query ( $sql );
 	}
 	
+	function Prepare($sql){
+		$sql = trim($sql);
+		if(!$sql){
+			throw new \Exception('Empty Query');
+		}
+	
+		return new PreparedStatement($sql);
+	}
+	
 	function Escape($string){
 		return $this->Connect()->real_escape_string($string);
 	}

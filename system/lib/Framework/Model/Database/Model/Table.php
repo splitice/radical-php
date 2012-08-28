@@ -198,7 +198,15 @@ abstract class Table implements ITable, \JsonSerializable {
 	
 	function Update(){
 		$this->Validate();
-		\DB::Update($this->orm->tableInfo['name'], $this->toSQL(), $this->getIdentifyingSQL());
+		$identifying = $this->getIdentifyingSQL();
+		$values = $this->toSQL();
+		foreach($identifying as $k=>$v){
+			if(isset($values[$k]) && $values[$k] == $v){
+				unset($values[$k]);
+			}
+		}
+		//die(var_dump($values));
+		\DB::Update($this->orm->tableInfo['name'], $values, $identifying);
 	}
 	
 	function Delete(){

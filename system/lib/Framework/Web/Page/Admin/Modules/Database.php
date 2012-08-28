@@ -63,7 +63,7 @@ class Database extends MultiAdminModuleBase {
 				
 				foreach($data as $id=>$d){
 					$id = unserialize($_GET['id']);
-					$o = $class::fromSQL($id,true);
+					$o = $class::fromFields($id,true);
 					foreach($d as $k=>$v){
 						$o->setSQLField($k,$v);
 					}

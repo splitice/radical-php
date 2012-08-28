@@ -4,7 +4,7 @@ use Web\Form\Element;
 use Model\Database\SQL\Parse\CreateTable\ColumnReference;
 
 class ZZ_Unknown extends Internal\TypeBase {
-	const MAX_RELATED = 100;
+	const MAX_RELATED = 500;
 	
 	static function is(){
 		return true;

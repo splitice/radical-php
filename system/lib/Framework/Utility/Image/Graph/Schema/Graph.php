@@ -9,14 +9,14 @@ class Graph extends Internal\SchemaBase {
 	public $title;
 	public $hover;
 	public $font;
-	public $grid;
+	public $grid = 1;
 	public $color;
 	public $box;
 	public $legend;
 	public $symbol = 'circle';
-	public $type = 'line';
+	public $type = 'plot';
 	
-	function __construct($data = array(),$type = 'line'){
+	function __construct($data = array(),$type = 'plot'){
 		$this->data = new Dataset($data);
 		$this->axis['X'] = new Axis();
 		$this->axis['Y'] = new Axis();
