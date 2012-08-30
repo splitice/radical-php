@@ -10,7 +10,7 @@ class Graph extends Internal\SchemaBase {
 	public $hover;
 	public $font;
 	public $grid = 1;
-	public $color;
+	public $color = array('BCE02E','E0642E','2E97E0','E0D62E','B02EE0','E02E75','5CE02E','E0B02E');
 	public $box;
 	public $legend;
 	public $symbol = 'circle';

@@ -1,5 +1,7 @@
 <?php
 namespace Utility\Image\Graph\Renderer;
+
+use Utility\Image\Graph\pChart\Color;
 use Utility\Image\Graph\Source\Internal\GraphBase;
 use Utility\PHP\Extension;
 use Utility\Image\Graph\pChart\pChart;
@@ -15,6 +17,10 @@ abstract class ImageGraph {
 		}
 		
 		$pChart = new pChart($graph->box->width,$graph->box->height);
+		
+		foreach($graph->color as $color){
+			$pChart->Palette[] = Color::fromHex($color);
+		}
 		
 		$dataSet = new pData;
 		$dataSet->SetXAxisFormat($graph->axis['X']->format);
