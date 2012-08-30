@@ -24,7 +24,7 @@ class Color {
 	}
 	
 	function __toString(){
-		return $this->toHex();
+		return $this->toHex(true);
 	}
 	
 	static function fromHex($color){
