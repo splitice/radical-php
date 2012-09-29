@@ -54,7 +54,8 @@ class Paypal implements IPaymentModule {
 		
 	}
 	function ipn(){
-		if ($this->p->validate_ipn () && $this->p->ipn_data['payment_status'] == 'Completed') {
+		if ($this->p->validate_ipn () && 
+				(isset($this->p->ipn_data['payment_status']) && ($this->p->ipn_data['payment_status'] == 'Completed' || $this->p->ipn_data['payment_status'] == 'Reversed'))) {
 			$transaction = new Transaction();
 			$transaction->id = $this->p->ipn_data['txn_id'];
 			

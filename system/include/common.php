@@ -71,6 +71,7 @@ if(isset($_SQL)){
 	DB::Connect ( $_SQL );
 }
 
+
 //Session Init
 if(php_sapi_name() != 'cli')
 	Web\Session::Init ();

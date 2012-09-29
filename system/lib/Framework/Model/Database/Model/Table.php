@@ -49,8 +49,13 @@ abstract class Table implements ITable, \JsonSerializable {
 	}
 	function getIdentifyingSQL(){
 		$id = array();
+		if(!$this->orm->id){
+			return $this->_store;
+		}
 		foreach($this->orm->id as $k=>$v){
-			$id[$v] = $this->_store[$this->orm->mappings[$v]];
+			$mapped = $this->orm->mappings[$v];
+			if(isset($this->_store[$mapped]))
+				$id[$v] = $this->_store[$mapped];
 		}
 		if($id) return $id;
 		throw new \Exception('Invalid ID SQL');
@@ -225,7 +230,13 @@ abstract class Table implements ITable, \JsonSerializable {
 		$this->orm = $table->getORM();
 
 		//Re-get data
-		$this->_handleResult($this->RefreshTableData()->toSQL());
+		$table = $this->RefreshTableData();
+		if($table)
+			$this->_handleResult($table->toSQL());
+		//else
+			//throw new \Exception("Init Error");
+		
+		//Initialize dynamic types
 		$this->_dynamicType();
 	}
 	
@@ -292,7 +303,7 @@ abstract class Table implements ITable, \JsonSerializable {
 					$this->$actionPart = $value;
 				}elseif($value !== null || oneof($this->orm->dynamicTyping[$actionPart]['var'], 'Model\Database\DynamicTypes\INullable')){
 					$var = $this->orm->dynamicTyping[$actionPart]['var'];
-					$this->$actionPart = $var::fromUserModel($a[0],$this->orm->dynamicTyping[$actionPart]['extra'],$this);
+					$this->$actionPart = $var::fromUserModel($value,$this->orm->dynamicTyping[$actionPart]['extra'],$this);
 				}else{//else set to null
 					$this->$actionPart = null;
 				}
@@ -415,8 +426,8 @@ abstract class Table implements ITable, \JsonSerializable {
 	 * @param array $fields
 	 * @return \Model\Database\Model\Table
 	 */
-	static function fromFields(array $fields){
-		$res = \DB::Query(static::_fromFields($fields));
+	static function fromFields(array $fields, $prefix = false){
+		$res = \DB::Query(static::_fromFields($fields, $prefix));
 		if($row = $res->Fetch()){
 			return static::fromSQL($row);
 		}

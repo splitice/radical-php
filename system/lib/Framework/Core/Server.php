@@ -15,7 +15,6 @@ class Server {
 	 */
 	static function isProduction(){
 		//TODO: Deployment
-		return false;//for beta
 		if(!isset($_SERVER['SERVER_ADDR'])) return true;
 		return (substr($_SERVER['SERVER_ADDR'],0,4) !== '192.' && $_SERVER['SERVER_ADDR'] !== '::1' && $_SERVER['SERVER_ADDR'] !== '127.0.0.1');
 	}

@@ -16,6 +16,7 @@ class Message {
 	private $to;
 	private $from;
 	private $subject;
+	private $reply_to;
 	private $html = false;
 	
 	function __construct(Handler\IMailHandler $handler = null){
@@ -25,6 +26,20 @@ class Message {
 		$this->handler = $handler;
 	}
 	
+	/**
+	 * @return the $reply_to
+	 */
+	public function getReplyTo() {
+		return $this->reply_to;
+	}
+
+	/**
+	 * @param field_type $reply_to
+	 */
+	public function setReplyTo($reply_to) {
+		$this->reply_to = $reply_to;
+	}
+
 	/**
 	 * @return the $to
 	 */

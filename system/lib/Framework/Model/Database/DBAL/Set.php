@@ -13,9 +13,9 @@ class Set extends \Basic\Arr\Object\ArrayObject {
 			$a = $a->$method();
 			$b = $b->$method();
 			
-			//TODO:
-			$a = strtotime($a);
-			$b = strtotime($b);
+			//TODO: understanding
+			//$at = strtotime($a);
+			//$bt = strtotime($b);
 			
 			if($a>$b){
 				return 1*$order;
@@ -25,6 +25,7 @@ class Set extends \Basic\Arr\Object\ArrayObject {
 			}
 			return 0;
 		});
+
 		return $this;
 	}
 	function limit($offset,$limit = null){

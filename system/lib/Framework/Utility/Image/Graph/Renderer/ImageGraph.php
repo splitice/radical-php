@@ -108,9 +108,9 @@ abstract class ImageGraph {
 		
 		// Finish the graph
 		$pChart->setFontProperties("tahoma.ttf",8);
-		if($graph->type == 'line'){
+		if($graph->type == 'line' || $graph->type == 'plot'){
 			$pChart->drawLegend(75,35,$dataSet->GetDataDescription(),255,255,255);
-		}else{
+		}elseif($graph->type == 'pie'){
 			$pChart->drawPieLegend(20,35,$dataSet->GetData(),$dataSet->GetDataDescription(),250,250,250);
 		}
 
