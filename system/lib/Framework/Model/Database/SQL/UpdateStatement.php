@@ -1,7 +1,7 @@
 <?php
 namespace Model\Database\SQL;
 
-use Model\Database\DBAL\Adapter\Instance;
+use Model\Database\DBAL\Instance;
 
 class UpdateStatement extends Internal\StatementBase {
 	protected $table;

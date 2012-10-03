@@ -1,6 +1,7 @@
 <?php
 namespace Model\Database\SQL\Parts\Expression;
 
+use Model\Database\DBAL\Instance;
 use Model\Database\IToSQL;
 use Model\Database\DBAL\Adapter\IConnection;
 use Model\Database\SQL\Parts\Internal;
@@ -13,7 +14,7 @@ class Between extends Internal\PartBase implements IComparison {
 		$this->a = $a;
 		$this->b = $b;
 	}
-	function e(Connection $db,$value){
+	function e(Instance $db,$value){
 		if(is_object($value)){
 			if($value instanceof IToSQL){
 				$value = $value->toSQL();

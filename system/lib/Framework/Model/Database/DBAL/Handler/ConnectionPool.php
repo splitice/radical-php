@@ -5,7 +5,7 @@ use Model\Database\DBAL\Adapter\IConnection;
 class ConnectionPool {
 	public $pool = array();
 	
-	function free(Connection $connection){
+	function free(IConnection $connection){
 		$this->pool[] = $connection;
 	}
 	

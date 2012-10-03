@@ -17,9 +17,24 @@ abstract class Table implements ITable, \JsonSerializable {
 	
 	private $_db;
 	
+	/**
+	 * @return \Database\IConnection
+	 */
 	private static function _adapter(){
 		$adapter = '\\Model\\Database\\DBAL\\Adapter\\'.static::ADAPTER;
 		return \DB::getConnection($adapter);
+	}
+	
+	private static $_instance;
+	private static function _instance(){
+		if(self::$_instance !== null)
+			return self::$_instance;
+		
+		$adapter = static::_adapter();
+		if($adapter === null) return null;
+		self::$_instance = $adapter->toInstance();
+		
+		return self::$_instance;
 	}
 	
 	protected $_id;

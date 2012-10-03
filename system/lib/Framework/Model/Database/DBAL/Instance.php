@@ -13,12 +13,16 @@ class Instance {
 	const NOT_A_RESULT = null;
 	
 	private $adapter;
-	function __construct(IConnection $adapter, $host, $user, $pass, $db = null, $port = 3306, $compression=true){
+	function __construct(Adapter\IConnection $adapter, $host, $user, $pass, $db = null, $port = 3306, $compression=true){
 		$this->adapter = new $adapter($host, $user, $pass, $db, $port, $compression);
 	}
 	
 	function close(){
 		\DB::$connectionPool->Free($this);
+	}
+	
+	function __call($func,$args){
+		return call_user_func_array(array($this->adapter,$func), $args);
 	}
 	
 	/**
@@ -49,7 +53,7 @@ class Instance {
 		
 		//Do Query
 		//echo $sql,"\r\n";
-		$res = parent::Query($sql);
+		$res = $this->adapter->Query($sql);
 		
 		//Query Done
 		$this->isInQuery = false;
@@ -107,12 +111,11 @@ class Instance {
 	 */
 	function insert($tbl, $data, $ignore = false) {
 		$insert = new SQL\InsertStatement($tbl, $data, $ignore);
-		//die(var_dump($insert->toSQL()));
+
 		//Execute
 		$success = ( bool ) $this->Query ( $insert );
 		
-		//if(!$success) return false;
-		//echo var_dump($this->InsertId());
+		if(!$success) return false;
 		return $this->InsertId();
 	}
 	
@@ -178,7 +181,7 @@ class Instance {
 				throw new \BadMethodCallException('cant escape this object, non escapable');
 			}
 		}
-		return '\'' . parent::Escape ( $str ) . '\'';
+		return '\'' . $this->adapter->Escape ( $str ) . '\'';
 	}
 	
 	function e($str){

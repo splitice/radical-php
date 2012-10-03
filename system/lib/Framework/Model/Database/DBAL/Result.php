@@ -8,7 +8,7 @@ class Result {
 	public $affected_rows;
 	static $fetchAllSupport;
 	
-	function __construct(\MySQLi_Result $result,Adapter\Instance $db){
+	function __construct(\MySQLi_Result $result,Instance $db){
 		$this->result = $result;
 		$this->affected_rows = $db->AffectedRows();
 		if(null === static::$fetchAllSupport){

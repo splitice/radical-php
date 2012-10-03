@@ -3,7 +3,7 @@ namespace Model\Database\DBAL;
 
 abstract class SQLUtils extends \Core\Object {
 	abstract static function e($str);
-	abstract static function getInstance(Connection $connection = null);
+	abstract static function getInstance(Adapter\IConnection $connection = null);
 		
 	static function oField($col,$fields){
 		$ret = 'FIELD('.$col;

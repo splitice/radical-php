@@ -2,6 +2,7 @@
 namespace Model;
 use Model\Database\SQL\SelectStatement;
 use Model\Database\DBAL;
+use Model\Database\DBAL\Adapter;
 use Model\Database\DBAL\Handler;
 
 /**
