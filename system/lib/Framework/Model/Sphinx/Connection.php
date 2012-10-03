@@ -2,7 +2,7 @@
 namespace Model\Sphinx;
 use Model\Database\DBAL\Adapter;
 
-class Connection extends Adapter\Connection {
+class Connection extends Adapter\MySQLConnection {
 	const USERNAME = 'root';
 	const PASSWORD = '';
 	const DATABASE = null;

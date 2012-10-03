@@ -1,5 +1,5 @@
 <?php
-namespace Model\Database\DBAL\Adapter;
+namespace Model\Database\DBAL;
 
 abstract class SQLUtils extends \Core\Object {
 	abstract static function e($str);

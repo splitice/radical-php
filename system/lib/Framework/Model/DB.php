@@ -1,7 +1,6 @@
 <?php
 namespace Model;
 use Model\Database\SQL\SelectStatement;
-use Model\Database\DBAL\Adapter;
 use Model\Database\DBAL;
 use Model\Database\DBAL\Handler;
 
@@ -10,7 +9,7 @@ use Model\Database\DBAL\Handler;
  * @author SplitIce
  *
  */
-class DB extends Adapter\SQLUtils {	
+class DB extends DBAL\SQLUtils {	
 	static $connectionPool;
 
 	static $query_log;
@@ -41,7 +40,7 @@ class DB extends Adapter\SQLUtils {
 	 * @param string $db
 	 * @throws \Model\Database\Exception\ConnectionException
 	 */
-	static function connect(Adapter\Connection $connection) {
+	static function connect(Adapter\IConnection $connection) {
 		static::Init();
 		
 		static::$connectionDetails = $connection;
@@ -53,7 +52,7 @@ class DB extends Adapter\SQLUtils {
 	 * @param Database\Connection $connection
 	 * @return DB
 	 */
-	static function getInstance(Adapter\Connection $connection = null){
+	static function getInstance(Adapter\IConnection $connection = null){
 		if($connection === null){
 			if(static::$connectionDetails === null){
 				global $_SQL;
@@ -135,7 +134,7 @@ class DB extends Adapter\SQLUtils {
 	 * @throws \Model\Database\Exception\QueryError
 	 * @return \Model\Database\DBAL\Result
 	 */
-	static function query($sql,$timeout=Adapter\Instance::QUERY_TIMEOUT,$is_retry=false) {
+	static function query($sql,$timeout=DBAL\Instance::QUERY_TIMEOUT,$is_retry=false) {
 		return static::__callStatic(__FUNCTION__, func_get_args());
 	}
 	
@@ -146,7 +145,7 @@ class DB extends Adapter\SQLUtils {
 	 * @param int $timeout
 	 * @return Ambigous <resource, \Model\Database\NOT_A_RESULT, string, unknown>
 	 */
-	static function q($sql,$timeout=Adapter\Instance::QUERY_TIMEOUT){
+	static function q($sql,$timeout=DBAL\Instance::QUERY_TIMEOUT){
 		return static::__callStatic(__FUNCTION__, func_get_args());
 	}
 	

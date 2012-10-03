@@ -1,6 +1,6 @@
 <?php
 namespace Model\Database\DBAL\Handler;
-use Model\Database\DBAL\Adapter\Connection;
+use Model\Database\DBAL\Adapter\IConnection;
 
 class ConnectionPool {
 	public $pool = array();
@@ -9,7 +9,7 @@ class ConnectionPool {
 		$this->pool[] = $connection;
 	}
 	
-	function getInstanceIWish(Connection $connection){
+	function getInstanceIWish(IConnection $connection){
 		$connectionString = (string)$connection;
 		foreach($this->pool as $k=>$p){
 			if(((string)$p) == $connectionString){
@@ -22,7 +22,7 @@ class ConnectionPool {
 		return $connection->toInstance();
 	}
 	
-	function getInstance(Connection $connection){
+	function getInstance(IConnection $connection){
 		$connectionString = (string)$connection;
 		if(isset($this->pool[$connectionString])){
 			return $this->pool[$connectionString];
@@ -35,7 +35,7 @@ class ConnectionPool {
 	
 	function closeAll(){
 		foreach($this->pool as $connection){
-			if($connection instanceof Connection){
+			if($connection instanceof IConnection){
 				$connection->Close();
 			}
 		}

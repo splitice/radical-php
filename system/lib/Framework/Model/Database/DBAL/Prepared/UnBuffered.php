@@ -1,11 +1,11 @@
 <?php
-namespace Model\Database\DBAL\Adapter\Prepared;
+namespace Model\Database\DBAL\Prepared;
 
 use Model\Database\DBAL\Adapter\PreparedStatement;
 
-class Buffered extends Common {
+class UnBuffered extends Common {
 	function __construct($statement,PreparedStatement $p){
-		$statement->store_result();
+		//Register with $this->db using weakmap
 		parent::__construct($statement,$p);
 	}
 }

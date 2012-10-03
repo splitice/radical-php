@@ -1,6 +1,5 @@
 <?php
-
-namespace Model\Database\DBAL\Adapter;
+namespace Model\Database\DBAL\Adapter\MySQL;
 
 class PreparedStatement implements \ArrayAccess {
 	const UNBUFFERED = 0;

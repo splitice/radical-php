@@ -27,7 +27,10 @@ abstract class ModuleBase {
 					$pid = pcntl_wait($status);
 				}while($pid == -1);
 			}else{
-				$this->Loop($parameters);
+				while(true){
+					$this->Loop($parameters);
+				}
+				exit;
 			}
 		}
 	}

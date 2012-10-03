@@ -1,5 +1,5 @@
 <?php
-namespace Model\Database\DBAL\Adapter\Prepared;
+namespace Model\Database\DBAL\Prepared;
 
 use Model\Database\DBAL\Adapter\PreparedStatement;
 

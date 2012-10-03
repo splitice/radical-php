@@ -1,21 +1,20 @@
 <?php
-namespace Model\Database\DBAL\Adapter;
+namespace Model\Database\DBAL;
 use Model\Database\IToSQL;
 use Model\Database\SQL;
 use Basic\Weakref\Callback as WeakrefCallback;
 use Model\Database\DBAL;
 use Model\Database\Exception;
 
-class Instance extends Connection {
+class Instance {
 	const QUERY_TIMEOUT = 30;
 	
 	/* Psudeo Returns */
 	const NOT_A_RESULT = null;
 	
-	
-	function __construct($host, $user, $pass, $db = null, $port = 3306, $compression=true){
-		//register_shutdown_function(WeakrefCallback::Callback($this,'_exit'));
-		parent::__construct($host, $user, $pass, $db, $port, $compression);
+	private $adapter;
+	function __construct(IConnection $adapter, $host, $user, $pass, $db = null, $port = 3306, $compression=true){
+		$this->adapter = new $adapter($host, $user, $pass, $db, $port, $compression);
 	}
 	
 	function close(){
@@ -26,19 +25,6 @@ class Instance extends Connection {
 	 * @var \mysqli
 	 */
 	public $isInQuery = false;
-	
-	function _exit(){
-		if($this->isInQuery){
-			//Display secific error page?
-		}
-	}
-	
-	/**
-	 * Return the number of affected rows of the last MySQL query
-	 */
-	function AffectedRows() {
-		return mysqli_affected_rows ( $this->Connect() );
-	}
 	
 	/**
 	 * Execute MySQL query

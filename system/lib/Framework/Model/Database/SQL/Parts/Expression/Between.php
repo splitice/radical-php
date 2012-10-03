@@ -2,7 +2,7 @@
 namespace Model\Database\SQL\Parts\Expression;
 
 use Model\Database\IToSQL;
-use Model\Database\DBAL\Adapter\Connection;
+use Model\Database\DBAL\Adapter\IConnection;
 use Model\Database\SQL\Parts\Internal;
 
 class Between extends Internal\PartBase implements IComparison {

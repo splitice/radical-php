@@ -1,8 +1,10 @@
 <?php
 namespace Model\Database\DBAL\Adapter;
+use Model\Database\DBAL\Instance;
+
 use Model\Database\Exception;
 
-class Connection {
+class MySQLConnection implements IConnection {
 	/**
 	 * @var \mysqli
 	 */
@@ -89,7 +91,7 @@ class Connection {
 	}
 	
 	function toInstance(){
-		return new Instance($this->host,$this->user,$this->pass,$this->db,$this->port,$this->compression);
+		return new Instance($this,$this->host,$this->user,$this->pass,$this->db,$this->port,$this->compression);
 	}
 	
 	function reConnect(){
@@ -125,7 +127,7 @@ class Connection {
 			throw new \Exception('Empty Query');
 		}
 	
-		return new PreparedStatement($sql);
+		return new MySQL\PreparedStatement($sql);
 	}
 	
 	function escape($string){
@@ -137,6 +139,13 @@ class Connection {
 	 */
 	function error() {
 		return $this->mysqli->error;
+	}
+	
+	/**
+	 * Return the number of affected rows of the last MySQL query
+	 */
+	function affectedRows() {
+		return mysqli_affected_rows ( $this->Connect() );
 	}
 	
 	/**

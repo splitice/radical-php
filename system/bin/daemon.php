@@ -3,6 +3,9 @@ use Core\ErrorHandling\Handler;
 
 include(__DIR__.'/../include/common.php');
 
+if(!isset($argv[1])){
+	die('No Daemon Specified'."\r\n");
+}
 $daemon = $argv[1];
 
 //Get Arguments
