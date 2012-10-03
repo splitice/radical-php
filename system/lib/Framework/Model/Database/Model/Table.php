@@ -13,6 +13,15 @@ use Model\Database\SQL;
 use Model\Database\SQL\Parts;
 
 abstract class Table implements ITable, \JsonSerializable {	
+	const ADAPTER = "MySQL";
+	
+	private $_db;
+	
+	private static function _adapter(){
+		$adapter = '\\Model\\Database\\DBAL\\Adapter\\'.static::ADAPTER;
+		return \DB::getConnection($adapter);
+	}
+	
 	protected $_id;
 	function getId(){
 		//Check if already done

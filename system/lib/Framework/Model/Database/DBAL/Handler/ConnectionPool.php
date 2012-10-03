@@ -33,6 +33,13 @@ class ConnectionPool {
 		return $connection;
 	}
 	
+	function getAdapter($adapter){
+		foreach($this->pool as $p){
+			if(oneof($p,$adapter))
+				return $p;
+		}
+	}
+	
 	function closeAll(){
 		foreach($this->pool as $connection){
 			if($connection instanceof IConnection){

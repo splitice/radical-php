@@ -49,7 +49,7 @@ class DB extends DBAL\SQLUtils {
 	}
 	
 	/**
-	 * @param Database\Connection $connection
+	 * @param Database\IConnection $connection
 	 * @return DB
 	 */
 	static function getInstance(Adapter\IConnection $connection = null){
@@ -69,6 +69,13 @@ class DB extends DBAL\SQLUtils {
 		
 		//Get Database Instance from connection details
 		return static::$connectionPool->GetInstance($connection);
+	}
+	
+	/**
+	 * @return Database\IConnection
+	 */
+	static function getConnection($adapter_string = null){
+		
 	}
 
 	static function reConnect(){
