@@ -8,10 +8,12 @@ class DatabaseZeroDatefill extends DatabaseZeroed {
 	const DAY = 86400;
 	
 	protected $dateRange;
+	protected $fill;
 	
-	function __construct(Result $res,$title = null,$date_range = null){
+	function __construct(Result $res,$title = null,$date_range = null, $fill = 0){
 		parent::__construct($res,'date',$title);
 		$this->dateRange = $date_range;
+		$this->fill = $fill;
 	}
 	private function minDate(array $data){
 		if(!$this->dateRange) return min($data);
@@ -36,7 +38,7 @@ class DatabaseZeroDatefill extends DatabaseZeroed {
 			foreach($array as $key=>$value){
 				foreach($data as $k2 => $array2){
 					if(!isset($data[$k2][$key])){
-						$data[$k2][$key] = 0;
+						$data[$k2][$key] = $this->fill;
 					}
 				}
 			}
