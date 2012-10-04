@@ -4,6 +4,9 @@ namespace Utility\Image\Graph\Schema;
 use Utility\Image\Graph\Renderer\IRenderable;
 
 class Graph extends Internal\SchemaBase {
+	/**
+	 * @var Dataset
+	 */
 	public $data;
 	public $axis = array();
 	public $title;
