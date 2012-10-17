@@ -27,12 +27,16 @@ class API extends PageBase {
 		return $xml->asXML();
 	}
 	
+	function POST(){
+		return $this->GET();
+	}
+	
 	/**
 	 * Handle GET request
 	 *
 	 * @throws \Exception
 	 */
-	function gET(){
+	function GET(){
 		$ret = array();
 		
 		if($this->error){

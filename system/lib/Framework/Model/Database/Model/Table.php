@@ -2,7 +2,6 @@
 namespace Model\Database\Model;
 
 use Model\Database\DynamicTypes\IDynamicValidate;
-
 use Model\Database\DynamicTypes\INullable;
 use Exceptions\ValidationException;
 use Model\Database\DynamicTypes\IDynamicType;
@@ -76,6 +75,7 @@ abstract class Table implements ITable, \JsonSerializable {
 		if(!$this->orm->id){
 			return $this->_store;
 		}
+		//die(var_dump($this->_store));
 		foreach($this->orm->id as $k=>$v){
 			$mapped = $this->orm->mappings[$v];
 			if(isset($this->_store[$mapped]))
@@ -545,7 +545,6 @@ abstract class Table implements ITable, \JsonSerializable {
 			}
 		}
 		$id = \DB::Insert($this->orm->tableInfo['name'],$data,$ignore);
-		
 		//Is an auto incrememnt returned?
 		if($id){
 			$autoInc = $this->orm->autoIncrement;
@@ -556,7 +555,7 @@ abstract class Table implements ITable, \JsonSerializable {
 				$this->$autoInc = $id;
 				
 				//Set store
-				$this->_store[$this->orm->autoIncrementField] = $id;
+				$this->_store[$autoInc] = $id;
 			}
 		}
 	}

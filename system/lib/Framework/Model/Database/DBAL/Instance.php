@@ -113,9 +113,11 @@ class Instance {
 		$insert = new SQL\InsertStatement($tbl, $data, $ignore);
 
 		//Execute
-		$success = ( bool ) $this->Query ( $insert );
+		$success = $this->Query ( $insert );
+
+		if($success === false) return false;
 		
-		if(!$success) return false;
+		//NOT_A_RESULT
 		return $this->InsertId();
 	}
 	

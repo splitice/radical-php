@@ -29,6 +29,7 @@ class Boolean extends String implements IDynamicValidate {
 	function getFalseValue(){
 		return $this->extra[1];
 	}
+	
 	function true(){
 		return ($this->value == $this->getTrueValue());
 	}

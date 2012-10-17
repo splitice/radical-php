@@ -20,6 +20,10 @@ class SFTP {
 		$this->sftp = ssh2_sftp($ssh->getResource());
 	}
 	
+	function getSftp(){
+		return $this->sftp;
+	}
+	
 	function getFile($path,$mustExist = false){
 		$file = $this->newFile($path);
 		if($mustExist && !$file->Exists()){
