@@ -113,3 +113,6 @@ function ssh2_sftp_stat(){
 class Memcache{
 	
 }
+class WeakMap {
+	
+}

@@ -95,8 +95,7 @@ abstract class ImageGraph {
 		// Draw the line graph
 		if($graph->type == 'line' || $graph->type == 'plot'){
 			$pChart->drawLineGraph($data,$dataSet->GetDataDescription());
-			if($graph->type == 'plot')
-				$pChart->drawPlotGraph($data,$dataSet->GetDataDescription(),3,2,255,255,255);
+			$pChart->drawPlotGraph($data,$dataSet->GetDataDescription(),3,2,255,255,255);
 		}elseif($graph->type == 'pie'){
 			try {
 				$radius = max($graph->box->width/2, $graph->box->height/2) - (self::BORDER);

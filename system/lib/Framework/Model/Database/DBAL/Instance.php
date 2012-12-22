@@ -135,7 +135,7 @@ class Instance {
 		return ( bool ) $this->Query ( $update );
 	}
 	
-	function fOUND_ROWS() {
+	function found_rows() {
 		$res = $this->Query ( 'SELECT FOUND_ROWS()' );
 		return $this->Fetch ( $res, DBAL\Fetch::FIRST );
 	}

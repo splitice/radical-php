@@ -15,7 +15,8 @@ class TableReference extends \Core\Object {
 	static function getByTableName($tableName){
 		if(!self::$_name){
 			foreach(static::getClasses() as $class){
-				self::$_name[$class::TABLE] = $class;
+				if(class_exists($class))
+					self::$_name[$class::TABLE] = $class;
 			}
 		}
 		if(isset(self::$_name[$tableName])){
@@ -47,7 +48,8 @@ class TableReference extends \Core\Object {
 	static function getAll(){
 		$ret = array();
 		foreach(static::getClasses() as $class){
-			$ret[] = static::_create($class);
+			if(class_exists($class))
+				$ret[] = static::_create($class);
 		}
 		return $ret;
 	}

@@ -1,4 +1,7 @@
 <?php
+$e = error_reporting();
+error_reporting($e & ~E_STRICT & ~E_WARNING);
+
 define ( 'DS', DIRECTORY_SEPARATOR );
 
 //Work out base path
@@ -82,4 +85,4 @@ if($application_include && file_exists($application_include.'onload.php')){
 }
 
 //Cleanup
-unset($application_include, $application_dir);
+unset($application_include);

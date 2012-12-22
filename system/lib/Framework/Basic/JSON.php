@@ -213,7 +213,7 @@ class JSON extends \Core\Object {
 	 * @return array stdClass PHP equivalent of the JSON string
 	 *        
 	 */
-	static public function decode($json, $assoc = FALSE) {
+	static public function decode($json, $assoc = FALSE, $use_php = true) {
 		if (! is_string ( $json ) && ! is_numeric ( $json )) {
 			return NULL;
 		}
@@ -226,7 +226,7 @@ class JSON extends \Core\Object {
 		
 		$is_scalar = (! $json [0] == '[' && ! $json [0] == '{');
 		
-		if (function_exists ( 'json_decode' )) {
+		if (function_exists ( 'json_decode' ) && $use_php) {
 			//
 			// If the json is an array or object, we can rely on the php
 			// function
@@ -400,7 +400,7 @@ null| # Null
 			$last = $type;
 			unset ( $match );
 		}
-		
+
 		if ($matched_length != strlen ( $json ) || sizeof ( $stack ) > 0) {
 			return NULL;
 		}

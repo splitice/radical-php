@@ -73,6 +73,13 @@ define(["jquery"],
 			
 			return true;
 		};
+		
+		window.a = function(module,method,args,c){
+			var o = new API(module,method);
+			o.onComplete(c);
+			return o.Request(args);
+		};
+		
 		return API;
     }
 );

@@ -1427,7 +1427,7 @@ class pChart {
 									$this->drawFilledCircle ( $XPos + 2, $YPos + 2, $BigRadius, $R3, $G3, $B3 );
 								}
 							}
-							
+
 							$this->drawFilledCircle ( $XPos + 1, $YPos + 1, $BigRadius, $R, $G, $B );
 							
 							if ($SmallRadius != 0) {

@@ -112,6 +112,20 @@ class URL extends \Core\Object {
 	}
 	
 	/**
+	 * @return the $port
+	 */
+	public function getPort() {
+		return $this->port;
+	}
+
+	/**
+	 * @param number $port
+	 */
+	public function setPort($port) {
+		$this->port = $port;
+	}
+
+	/**
 	 * @return \Utility\Net\URL\Path $path
 	 */
 	public function getPath() {

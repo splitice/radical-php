@@ -8,6 +8,7 @@ namespace Core;
  *
  */
 class Server {
+	static $production = true;
 	/**
 	 * Is this site running in a production environment?
 	 * 
@@ -15,8 +16,12 @@ class Server {
 	 */
 	static function isProduction(){
 		//TODO: Deployment
+		if(php_sapi_name() == 'cli') return false;
 		if(!isset($_SERVER['SERVER_ADDR'])) return true;
-		return (substr($_SERVER['SERVER_ADDR'],0,4) !== '192.' && $_SERVER['SERVER_ADDR'] !== '::1' && $_SERVER['SERVER_ADDR'] !== '127.0.0.1');
+		if(substr($_SERVER['SERVER_ADDR'],0,4) !== '192.' && $_SERVER['SERVER_ADDR'] !== '::1' && $_SERVER['SERVER_ADDR'] !== '127.0.0.1')
+			return self::$production;
+		
+		return false;
 	}
 	
 	/**

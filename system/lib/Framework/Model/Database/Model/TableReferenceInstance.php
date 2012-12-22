@@ -22,6 +22,7 @@ class TableReferenceInstance extends \Core\Object {
 				if(class_exists($class2)){
 					$class = $class2;
 				}else{
+					debug_print_backtrace();
 					throw new \Exception($class.' class does not exist');
 				}
 			}

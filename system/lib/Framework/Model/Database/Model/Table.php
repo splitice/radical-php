@@ -173,6 +173,8 @@ abstract class Table implements ITable, \JsonSerializable {
 		}elseif(is_array($in)){
 			foreach($in as $k=>$v){
 				$this->$k = $v;
+				if(is_object($v))
+					$in[$k] = $v->getId();
 			}
 			$this->_store = $in;
 		}else{
@@ -450,8 +452,8 @@ abstract class Table implements ITable, \JsonSerializable {
 	 * @param array $fields
 	 * @return \Model\Database\Model\Table
 	 */
-	static function fromFields(array $fields, $prefix = false){
-		$res = \DB::Query(static::_fromFields($fields, $prefix));
+	static function fromFields(array $fields){
+		$res = \DB::Query(static::_fromFields($fields));
 		if($row = $res->Fetch()){
 			return static::fromSQL($row);
 		}

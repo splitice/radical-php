@@ -39,6 +39,9 @@ function u($url,$param=null) {
 		$url = $url->toURL($param);
 	}
 	
+	if(substr($url,0,5) == 'http:')
+		return $url;
+	
 	//Return
 	return $base . ltrim ( $url, '/' );
 }

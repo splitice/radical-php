@@ -22,7 +22,6 @@ class ExceptionError extends Internal\ErrorBase {
 		$header = sprintf(static::HEADER,ltrim(get_class($ex),'\\'));
 		parent::__construct($message,$header,$fatal);
 	}
-	
 	function getTraceOutput(){
 		return $this->ex->getTraceAsString();
 	}

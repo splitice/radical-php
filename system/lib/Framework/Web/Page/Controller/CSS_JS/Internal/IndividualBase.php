@@ -29,7 +29,7 @@ abstract class IndividualBase extends \Web\Page\Handler\PageBase {
 	}
 	private function getFile(){
 		global $BASEPATH;
-		$expr = $BASEPATH.'{app,system}'.DS.$this->getPath();
+		$expr = $BASEPATH.'{system,app}'.DS.$this->getPath();
 		return array_pop(glob($expr,GLOB_BRACE ));
 	}
 	/**
@@ -37,7 +37,7 @@ abstract class IndividualBase extends \Web\Page\Handler\PageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function gET(){
+	function GET(){
 		$file = $this->getFile();
 		$this->sendHeaders($file);
 		$ret = file_get_contents($file);

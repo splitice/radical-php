@@ -34,11 +34,13 @@ class Database extends MultiAdminModuleBase {
 	function getSubmodules(){
 		$classes = array();
 		foreach(\Core\Libraries::get(\Core\Libraries::getProjectSpace('DB\\*')) as $k=>$v){
-			$name = self::extractName($v);
-			$t = TableReference::getByTableClass($v);
-			$tm = $t->getTableManagement();
-			if($tm->SHOW_ADMIN)
-				$classes[] = new static(\Utility\Net\URL\Path::fromPath($name));
+			if(class_exists($v)){
+				$name = self::extractName($v);
+				$t = TableReference::getByTableClass($v);
+				$tm = $t->getTableManagement();
+				if($tm->SHOW_ADMIN)
+					$classes[] = new static(\Utility\Net\URL\Path::fromPath($name));
+			}
 		}
 		
 		return $classes;
@@ -97,11 +99,13 @@ class Database extends MultiAdminModuleBase {
 		if($this->action == 'list'){
 			$classes = array();
 			foreach(\Core\Libraries::get(\Core\Libraries::getProjectSpace('DB\\*')) as $k=>$v){
-				$name = self::extractName($v);
-				$t = TableReference::getByTableClass($v);
-				$tm = $t->getTableManagement();
-				if($tm->SHOW_ADMIN)
-					$classes[$name] = self::toURL().'/'.$name;
+				if(class_exists($v)){
+					$name = self::extractName($v);
+					$t = TableReference::getByTableClass($v);
+					$tm = $t->getTableManagement();
+					if($tm->SHOW_ADMIN)
+						$classes[$name] = self::toURL().'/'.$name;
+				}
 			}
 				
 			

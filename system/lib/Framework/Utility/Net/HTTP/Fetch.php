@@ -100,7 +100,7 @@ class Fetch {
              $this->curl[CURLOPT_RANGE] = $this->_formatRanges($ranges);
         }
                 
-	function post($data){
+	function post($post_data){
 		//Store previous post state
 		$post = $data = null;
 		if(isset($this->curl[CURLOPT_POST])){
@@ -112,8 +112,7 @@ class Fetch {
 		
 		//Setup Post
 		$this->curl[CURLOPT_POST] = true;
-		$this->curl[CURLOPT_POSTFIELDS] = $data;
-		
+		$this->curl[CURLOPT_POSTFIELDS] = $post_data;
 		//Execute
 		$ret = $this->Execute();
 		

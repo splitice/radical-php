@@ -22,6 +22,7 @@ class CookieManager {
 	}
 	
 	function __destruct(){
+		//Cleanup
 		if($this->deleteOnDone){
 			if(file_exists($this->file)){
 				unlink($this->file);
@@ -33,7 +34,7 @@ class CookieManager {
 	static function create($file = null){
 		//File not set, make it
 		if($file === null){
-			$file = '/tmp/'.getmypid().'.cookie';
+			$file = tempnam('/tmp/', 'cookie_');
 		}
 		
 		//Setup instance cache if it isnt already
