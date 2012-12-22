@@ -159,10 +159,10 @@ class From extends Internal\MergePartBase {
 			if(is_string($where)){
 				$where = array($where);
 			}
-			if(is_array($where)){
-				$where = new Where($where);
-			}
-			$this->where = $where;
+			if(is_array($where) || !($where instanceof Where)){
+				$this->where = new Where($where);
+			}else
+				$this->where = $where;
 		}
 		return $this;
 	}

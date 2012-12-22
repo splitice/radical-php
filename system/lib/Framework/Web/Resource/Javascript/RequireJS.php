@@ -28,7 +28,7 @@ class RequireJS extends Script {
 		$this->inner = $this->_buildInner();
 	}
 	protected function _buildConfigArray(){
-		$config = array();
+		$config = array('baseUrl'=>'/js/');
 		
 		//If we have defined paths add to config;
 		if($this->paths){

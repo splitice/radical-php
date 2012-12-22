@@ -10,5 +10,20 @@ class FunctionalSelectStatement extends SelectStatement {
 		
 		return $this;
 	}
+	function min($field,$name = null){
+		if($name === null)
+			$name = $field;
 	
+		$this->fields[] = 'MIN('.$name.') as '.$field;
+	
+		return $this;
+	}
+	function max($field,$name = null){
+		if($name === null)
+			$name = $field;
+	
+		$this->fields[] = 'MAX('.$name.') as '.$field;
+	
+		return $this;
+	}
 }
