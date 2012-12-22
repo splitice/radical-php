@@ -39,6 +39,11 @@ class IP {
 		return CRC32::Hash($this->ip);
 	}
 	
+	function reverse(){
+		$e = array_reverse(explode('.',$this->ip));
+		return new static(implode('.',$e));
+	}
+	
 	function ping($timeout = 1) {
 		/* ICMP ping packet with a pre-calculated checksum */
 		$package = "\x08\x00\x7d\x4b\x00\x00\x00\x00PingHost";
