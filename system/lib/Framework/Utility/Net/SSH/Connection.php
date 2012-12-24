@@ -31,13 +31,19 @@ class Connection {
 		//Connect Resource
 		$this->ssh = ssh2_connect($this->host,$this->port,$methods,array('disconnect'=>array($this,'onDisconnect')));
 		
-		//Re-connection authentication
-		$this->authenticate->ssh = $this->ssh;
-		$this->authenticate->Authenticate($this->authenticate);
-		
-		if($this->sftp){
-			$this->sftp->Init($this);
+		if($this->ssh){
+			//Re-connection authentication
+			$this->authenticate->ssh = $this->ssh;
+			$this->authenticate->Authenticate($this->authenticate);
+			
+			if($this->sftp){
+				$this->sftp->Init($this);
+			}
+			
+			return true;
 		}
+		
+		return false;
 	}
 	
 	function close(){
