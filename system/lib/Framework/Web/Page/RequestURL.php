@@ -25,4 +25,8 @@ class RequestURL extends \Utility\Net\URL {
 	function getRealPath(){
 		return parent::getPath();
 	}
+	function __clone(){
+		$this->localPath = clone $this->localPath;
+		parent::__clone();
+	}
 }
