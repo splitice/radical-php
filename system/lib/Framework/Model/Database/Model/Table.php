@@ -357,7 +357,7 @@ abstract class Table implements ITable, \JsonSerializable {
 				
 				return $this->call_get_related($className);
 			}else{
-				throw new \Exception('Cant get an array of something that isnt a model');
+				throw new \Exception('Cant get an array of something that isnt a model - '.get_called_class().'::'.$actionPart);
 			}
 		}elseif(0 === substr_compare($m,'set',0,3)){
 			$actionPart = substr($m,3);

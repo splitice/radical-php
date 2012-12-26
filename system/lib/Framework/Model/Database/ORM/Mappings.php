@@ -69,8 +69,8 @@ class Mappings {
 					throw new \Exception('No table for reference');
 				}
 				$rInfo = $rTableRef->Info();
-				
-				$translated = rtrim($rInfo['prefix'],'_');
+				if($rInfo['name'] == $this->model->tableInfo['name']) $translated = $this->stripPrefix($databaseField);
+				else $translated = rtrim($rInfo['prefix'],'_');
 			}else{
 				//Not reference, process normally.
 				$translated = $this->stripPrefix($databaseField);
