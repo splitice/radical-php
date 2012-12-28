@@ -87,7 +87,7 @@ class Connection {
 	/**
 	 * @return \Utility\Net\SSH\SFTP
 	 */
-	function sFTP(){
+	function SFTP(){
 		if(!$this->sftp){
 			//Store SFTP channel
 			$this->sftp = new SFTP($this);
@@ -97,6 +97,10 @@ class Connection {
 	
 	function onDisconnect(){
 		$this->ssh = null;
+	}
+	
+	function __toString(){
+		return (string)$this->sftp;
 	}
 	
 	static function fromArray(array $in){
