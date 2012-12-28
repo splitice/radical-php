@@ -24,10 +24,10 @@ abstract class WherePart extends PartBase {
 		return $ret;
 	}
 	
-	static function fromAssign($a,$b,$op = '='){
+	static function fromAssign($a,$b,$op = '=',$autoNull = true){
 		if(is_array($a)){
 			$a = new TableExpression($a[1],$a[0]);
 		}
-		return new static(new Comparison($a, $b,$op));
+		return new static(new Comparison($a, $b,$op,$autoNull));
 	}
 }

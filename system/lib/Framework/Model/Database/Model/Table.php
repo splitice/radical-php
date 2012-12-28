@@ -200,6 +200,7 @@ abstract class Table implements ITable, \JsonSerializable {
 	function toSQL($in = null){
 		$ret = array();
 		foreach($this->orm->mappings as $k=>$mapped){
+			$v = null;
 			if(isset($this->$mapped)){
 				$v = $this->$mapped;
 				if(is_object($v) && isset($this->orm->relations[$k])){
@@ -208,8 +209,8 @@ abstract class Table implements ITable, \JsonSerializable {
 				if(is_object($v) && $v instanceof IDynamicType){
 					$v = (string)$v;
 				}
-				$ret[$k] = $v;
 			}
+			$ret[$k] = $v;
 		}
 		return $ret;
 	}

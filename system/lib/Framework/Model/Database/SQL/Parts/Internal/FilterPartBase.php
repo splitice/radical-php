@@ -15,6 +15,7 @@ use Basic\Arr;
 
 abstract class FilterPartBase extends ArrayPartBase {
 	const PART_NAME = '*INVALID*';
+	const AUTO_NULL = true;
 	
 	function _Set($k,$v){
 		if($k === null || Number::is($k) ){			
@@ -51,7 +52,7 @@ abstract class FilterPartBase extends ArrayPartBase {
 					if($op === null){
 						throw new \Exception('Invalid array format');
 					}
-					$this->data[] = new Comparison($v[0],$v[1],$op);
+					$this->data[] = new Comparison($v[0],$v[1],$op,static::AUTO_NULL);
 				}
 			}else{
 				throw new \Exception('Unknown format for add');
@@ -62,7 +63,7 @@ abstract class FilterPartBase extends ArrayPartBase {
 			if($v instanceof IComparison){
 				$op = '';
 			}
-			$this->data[] = WhereAND::fromAssign($k,$v,$op);
+			$this->data[] = WhereAND::fromAssign($k,$v,$op,static::AUTO_NULL);
 		}
 	}
 	function toSQL(){
