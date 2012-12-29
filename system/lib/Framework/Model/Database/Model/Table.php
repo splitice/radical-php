@@ -1,6 +1,8 @@
 <?php
 namespace Model\Database\Model;
 
+use Model\Database\SQL\IMergeStatement;
+
 use Model\Database\DynamicTypes\IDynamicValidate;
 use Model\Database\DynamicTypes\INullable;
 use Exceptions\ValidationException;
@@ -237,8 +239,17 @@ abstract class Table implements ITable, \JsonSerializable {
 				unset($values[$k]);
 			}
 		}
-		//die(var_dump($values));
-		\DB::Update($this->orm->tableInfo['name'], $values, $identifying);
+		foreach($values as $k=>$v){
+			$mapped = $this->orm->mappings[$k];
+			if(!isset($this->_store[$mapped])){
+				if($v === null)
+					unset($values[$k]);
+			}elseif((string)$v == $this->_store[$mapped]){
+				unset($values[$k]);
+			}
+		}
+		if(count($values))
+			\DB::Update($this->orm->tableInfo['name'], $values, $identifying);
 	}
 	
 	function delete(){
@@ -259,7 +270,7 @@ abstract class Table implements ITable, \JsonSerializable {
 		//Re-get data
 		$table = $this->RefreshTableData();
 		if($table)
-			$this->_handleResult($table->toSQL());
+			$this->_handleResult($table->toSQL(true));
 		//else
 			//throw new \Exception("Init Error");
 		
@@ -379,7 +390,11 @@ abstract class Table implements ITable, \JsonSerializable {
 			$obj = static::_select()
 				->where($sql);
 		}elseif($sql instanceof IToSQL){
-			$obj = $sql->mergeTo(static::_select());
+			if($sql instanceof IMergeStatement){
+				$obj = $sql->mergeTo(static::_select());
+			}else{
+				$obj = static::_select()->where($sql);
+			}
 		}elseif($sql){
 			throw new \Exception('Invalid SQL Type');
 		}

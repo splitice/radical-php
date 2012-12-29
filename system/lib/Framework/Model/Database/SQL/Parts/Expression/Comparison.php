@@ -28,7 +28,10 @@ class Comparison extends Internal\PartBase implements IComparison {
 			}else if($op == '!=' || $op == '<>'){
 				$op = 'IS NOT';
 			}else{
-				throw new \Exception("Invalid operation with NULL");
+				$op = trim(strtoupper($op));
+				if($op != 'IS' && $op != 'IS NOT'){
+					throw new \Exception("Invalid operation with NULL");
+				}
 			}
 		}
 		
