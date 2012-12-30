@@ -95,7 +95,7 @@ class Database extends MultiAdminModuleBase {
 	 *
 	 * @throws \Exception
 	 */
-	function gET(){
+	function GET(){
 		if($this->action == 'list'){
 			$classes = array();
 			foreach(\Core\Libraries::get(\Core\Libraries::getProjectSpace('DB\\*')) as $k=>$v){

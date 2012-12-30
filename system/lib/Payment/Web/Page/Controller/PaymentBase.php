@@ -31,7 +31,7 @@ abstract class PaymentBase extends HTMLPageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function gET(){
+	function GET(){
 		$this->_GET();
 	}
 

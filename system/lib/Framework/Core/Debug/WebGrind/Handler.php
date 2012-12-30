@@ -12,7 +12,7 @@ class Handler extends PageBase {
 		$this->template = $template;
 		$this->filename = $filename;
 	}
-	function gET(){
+	function GET(){
 		$template = new Template($this->template,array(),'webgrind');
 		$template->vars['filename'] = $this->filename;
 		return $template;

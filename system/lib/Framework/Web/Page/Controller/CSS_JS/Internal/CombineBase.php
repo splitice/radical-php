@@ -1,6 +1,8 @@
 <?php
 namespace Web\Page\Controller\CSS_JS\Internal;
 
+use Web\Page\Controller\CSS_JS\CSS\Individual;
+
 use Utility\Cache\PooledCache;
 
 abstract class CombineBase extends IndividualBase {
@@ -50,7 +52,7 @@ abstract class CombineBase extends IndividualBase {
 	 *
 	 * @throws \Exception
 	 */
-	function gET(){
+	function GET(){
 		$key = static::EXTENSION.'_'.$this->name.'_'.$this->version;
 		
 		$this->sendHeaders();
@@ -66,7 +68,7 @@ abstract class CombineBase extends IndividualBase {
 				$fn = basename($f);
 				//$url = \Utility\Net\URL::fromRequest('/'.static::EXTENSION.'/'.$this->name.'/'.$f);
 				//$data[$f] = \Web\Page\Handler\SubRequest::fromURL($url)->Execute('GET');
-				$data[$fn] = file_get_contents($f);
+				$data[$fn] = Individual::get_file($f);
 			}
 			
 			$ret = '';

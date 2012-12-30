@@ -48,7 +48,7 @@ class Admin extends HTMLPageBase {
 	 *
 	 * @throws \Exception
 	 */
-	 function gET(){
+	 function GET(){
 		$page = $this->checkAdmin();
 		if($page) return $page;
 		

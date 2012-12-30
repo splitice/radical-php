@@ -25,7 +25,7 @@ class SubMenu extends PageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function gET(){
+	function GET(){
 			$VARS = array();
 
 			//Create links to modules

@@ -36,7 +36,7 @@ class Log {
 		return $ret;
 	}
 	
-	static function get(){
+	static function GET(){
 		if(!self::$main){
 			return self::Create();
 		}

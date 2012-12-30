@@ -22,7 +22,7 @@ class Menu extends PageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function gET(){
+	function GET(){
 			$VARS = array();
 				
 			//Get admin modules

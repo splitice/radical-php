@@ -5,3 +5,5 @@ Currently pre-alpha, not recomended for public use unless you know what you are 
 Inspired by lithium, kohana and django. Currently looking for team members.
 
 An example application using this framework can be found at https://github.com/splitice/radical-blog
+
+Code from phpsass falls under the phpsass licence.

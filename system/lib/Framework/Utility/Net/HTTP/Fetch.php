@@ -131,7 +131,7 @@ class Fetch {
 		return $ret;
 	}
 	
-	function get(){
+	function GET(){
 		//Store previous post state
 		$post = $data = null;
 		if(isset($this->curl[CURLOPT_POST])){
