@@ -16,7 +16,9 @@ Currently beta, not recomended for public use unless you know what you are doing
 
 ## Infomation
 Inspired by lithium, kohana and django. Currently looking for team members.
+
 An example application using this framework can be found at https://github.com/splitice/radical-blog
+
 Care should be taken howeaver as it hasnt been updated in a while and may be out of date.
 
 License: <http://www.opensource.org/licenses/bsd-license.php>
