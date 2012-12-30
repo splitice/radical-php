@@ -1,5 +1,7 @@
 <?php
 namespace Web\Page\Controller\CSS_JS\CSS;
+use Core\Server;
+
 use Web\Page\Controller\CSS_JS\Internal\IndividualBase;
 
 class Individual extends IndividualBase {
@@ -7,6 +9,7 @@ class Individual extends IndividualBase {
 	const EXTENSION = 'css';
 	
 	static function get_file($file){
+		$ext = pathinfo($file,PATHINFO_EXTENSION);
 		if($ext == 'scss' || $ext == 'sass'){
 			$options = array(
 					'style' => 'nested',
@@ -18,6 +21,10 @@ class Individual extends IndividualBase {
 							'debug' => 'cb_debug',
 					),
 			);
+			
+			if(Server::isProduction())
+				$options['style'] = 'compressed';
+			
 			// Execute the compiler.
 			$parser = new \Web\Sass\SassParser($options);
 			return $parser->toCss($file);

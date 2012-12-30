@@ -1,8 +1,6 @@
 <?php
 namespace Web\Page\Controller\CSS_JS\Internal;
-
 use Web\Page\Controller\CSS_JS\CSS\Individual;
-
 use Utility\Cache\PooledCache;
 
 abstract class CombineBase extends IndividualBase {
@@ -26,13 +24,17 @@ abstract class CombineBase extends IndividualBase {
 		$version = (int)$cache->Get($name);
 		if(!$version){
 			$path = new \Core\Resource(static::EXTENSION.DS.$name);
-			foreach($path->getFiles('*.'.static::EXTENSION) as $f){
+			foreach($path->getFiles() as $f){
 				$version = max($version,filemtime($f));
 			}
 			$cache->Set($name, $version, 10);
 		}
 		
 		return '/'.$name.'.'.$version.'.'.static::EXTENSION;
+	}
+	static function exists($name){
+		$path = new \Core\Resource(static::EXTENSION.DS.$name);
+		return $path->exists();
 	}
 	protected function getPath(){
 		return static::EXTENSION.DS.parent::getPath();
@@ -64,11 +66,13 @@ abstract class CombineBase extends IndividualBase {
 			$data = array();
 			$files = $this->getFiles();
 			foreach($files as $f){
-				//die(var_dump($f));
-				$fn = basename($f);
-				//$url = \Utility\Net\URL::fromRequest('/'.static::EXTENSION.'/'.$this->name.'/'.$f);
-				//$data[$f] = \Web\Page\Handler\SubRequest::fromURL($url)->Execute('GET');
-				$data[$fn] = Individual::get_file($f);
+				if(is_file($f)){//Ignore folders
+					//die(var_dump($f));
+					$fn = basename($f);
+					//$url = \Utility\Net\URL::fromRequest('/'.static::EXTENSION.'/'.$this->name.'/'.$f);
+					//$data[$f] = \Web\Page\Handler\SubRequest::fromURL($url)->Execute('GET');
+					$data[$fn] = Individual::get_file($f);
+				}
 			}
 			
 			$ret = '';

@@ -41,6 +41,18 @@ class Resource {
 		
 		return $files;
 	}
+	function exists(){
+		global $BASEPATH;
+	
+		foreach($this->dirs as $dir){
+			$file = $BASEPATH.$dir.DS.$this->path;
+			if(file_exists($file) && is_dir($file)){
+				return true;
+			}
+		}
+	
+		return false;
+	}
 	function getFile(){
 		return new \File($this->getFullPath());
 	}
