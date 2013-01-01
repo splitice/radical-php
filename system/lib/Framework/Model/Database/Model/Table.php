@@ -223,7 +223,7 @@ abstract class Table implements ITable, \JsonSerializable {
 		foreach($this->orm->mappings as $k=>$v){
 			$ret[$v] = $data[$k];
 		}
-		return $v;
+		return $ret;
 	}
 	
 	public function jsonSerialize(){
@@ -563,6 +563,11 @@ abstract class Table implements ITable, \JsonSerializable {
 			}
 		}
 		$id = \DB::Insert($this->orm->tableInfo['name'],$data,$ignore);
+		
+		foreach($data as $k=>$v){
+			$this->_store[$this->orm->mappings[$k]] = $v;
+		}
+		
 		//Is an auto incrememnt returned?
 		if($id){
 			$autoInc = $this->orm->autoIncrement;
