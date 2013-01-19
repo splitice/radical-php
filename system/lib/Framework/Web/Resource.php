@@ -66,12 +66,12 @@ class Resource {
 		}elseif($type == 'require.js'){
 			$scripts = $paths = array();
 			foreach(self::$javascript as $scriptName=>$script){
-				$scripts[] = $script->getModule();
+				$scripts[] = $script->name;
 				
 				//Is it a CDN hosted library?
 				$extLib = Resource\Javascript\Library::Find($script->name,$script->version);
 				if($extLib instanceof IJavascriptLibrary){
-					$paths[$script->getModule()] = $extLib;
+					$paths[$script->name] = $extLib;
 				}
 			}
 			return new RequireJS($scripts,$paths);
