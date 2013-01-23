@@ -40,7 +40,7 @@ abstract class PaymentBase extends HTMLPageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function pOST(){
+	function POST(){
 		return $this->_GET();
 	}
 }
