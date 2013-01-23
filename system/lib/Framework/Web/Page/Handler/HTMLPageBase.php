@@ -1,16 +1,17 @@
 <?php
 namespace Web\Page\Handler;
 
-abstract class HTMLPageBase extends PageBase {
+abstract class HTMLPageBase extends PageBase implements IMeta {
+	protected $_meta;
+	function __construct(){
+		$this->_meta = new MetaManager();
+	}
 	function title($part = null){
 		return $part;
 	}
-	private $_meta;
 	function meta($what = null){
-		if(!$this->_meta){
-			$this->_meta = new MetaManager();
-		}
 		if($what === null) return $this->_meta;
-		return $this->_meta[$what];
+		if(isset($this->_meta[$what]))
+			return $this->_meta->toTag($what,$this->_meta[$what]);
 	}
 }

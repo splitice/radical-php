@@ -24,7 +24,7 @@ class CollectionObject extends \Core\Object implements \IteratorAggregate, \Arra
 	
 	/* ArrayAccess */
 	public function offsetSet($offset, $v) {
-		if (is_null($offset)) {
+		if ($offset === null) {
 			$this->_Set($this->Count(),$v);
 		} else {
 			$this->_Set($offset,$v);

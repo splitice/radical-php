@@ -6,14 +6,10 @@ class MetaManager extends \Basic\Arr\Object\CollectionObject {
 		if(!isset($data['keywords'])){
 			$data['keywords'] = array();
 		}
+		$data['charset'] = 'utf-8';
 		parent::__construct($data);
 	}
-	function get($k){
-		$r = parent::Get($k);
-		if(is_array($r)) $r = implode(',',$r);
-		return $r;
-	}
-	function AddA($k,$v, $unique = true){
+	function add_array($k,$v, $unique = true){
 		$a = $this->Get($k);
 		if(is_array($a)){
 			$a[] = $v;
@@ -21,7 +17,16 @@ class MetaManager extends \Basic\Arr\Object\CollectionObject {
 		}
 		$this->Set($k,$a);
 	}
-	function toTag($k){
-		return '<meta name="'.$k.'" content="'.$this->Get($k).'" />';
+	function add_keyword($v, $unique = true){
+		$this->add_array('keywords', $v, $unique);
+	}
+	function toTag($k,$v = null){
+		if($v === null)
+			$v = $this->get($k);
+		if($v){
+			if(is_array($v)) $v = implode(',',$v);
+			
+			return '<meta name="'.$k.'" content="'.$v.'" />'."\r\n";
+		}
 	}
 }
