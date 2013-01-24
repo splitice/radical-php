@@ -51,7 +51,7 @@ class Alertpay implements IPaymentModule {
 	function subscribe($ammount){
 		
 	}
-	function ipn(){			
+	function ipn(){	
 		if ($this->p->validate_ipn () && $this->p->ipn_data['ap_status'] == 'Success') {
 			$transaction = new Transaction();
 			$transaction->id = $this->p->ipn_data['ap_referencenumber'];

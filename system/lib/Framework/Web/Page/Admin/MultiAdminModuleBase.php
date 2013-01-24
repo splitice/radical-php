@@ -33,7 +33,7 @@ abstract class MultiAdminModuleBase extends AdminModuleBase {
 		}
 		return $modules;
 	}
-	function gET($data = array()){
+	function GET($data = array()){
 		if(!$this->submodule){
 			$method = 'index';
 			if(!method_exists($this,$method)){
@@ -49,14 +49,14 @@ abstract class MultiAdminModuleBase extends AdminModuleBase {
 		}
 		throw new \Exception('Admin submodule '.$this->submodule.' doesnt exist');
 	}
-	function pOST(){
+	function POST(){
 		return $this->GET($_POST);
 	}
 	function __toString(){
 		if($this->submodule === null) return parent::__toString();
 		return $this->submodule;
 	}
-	protected function _T($template,$vars){
+	protected function _T($template,$vars = array()){
 		if(Request::Context() == Request::CONTEXT_OUTER){
 			$menu = new SubMenu($this,$this->submodule);
 			$vars['this'] = $this;

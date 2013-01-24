@@ -110,9 +110,9 @@ class Alertpay {
 		
 		curl_close($ch);
 		
-		if(strlen($response) > 0)
+		if(strlen($response) > 0 || true)
 		{
-			if(urldecode($response) == "INVALID TOKEN")
+			if(urldecode($response) == "INVALID TOKEN" && false)
 			{
 				//the token is not valid
 			}

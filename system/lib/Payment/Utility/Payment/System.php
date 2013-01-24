@@ -33,7 +33,7 @@ abstract class System {
 					die('Done');
 				}else{
 					header('Content-Type: text/plain',true,500);
-					die('Not IPN');
+					die('Not IPN request');
 				}
 			default:
 				header('Content-Type: text/plain',true,404);

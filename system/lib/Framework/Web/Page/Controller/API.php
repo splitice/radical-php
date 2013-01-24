@@ -54,7 +54,7 @@ class API extends PageBase {
 		
 		$headers = \Web\Page\Handler::$stack->top()->headers;
 		
-		switch($this->type){
+		switch($this->object->output_type($this->type)){
 			case 'json':
 				if(isset($_GET['callback'])){
 					echo $_GET['callback'],'(';

@@ -14,4 +14,7 @@ abstract class APIBase extends \Core\Object implements IAPIModule {
 	function can($method){
 		return method_exists($this, $method);
 	}
+	function output_type($type){
+		return $type;
+	}
 }

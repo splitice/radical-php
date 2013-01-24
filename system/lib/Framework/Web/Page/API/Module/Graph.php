@@ -22,8 +22,13 @@ class Graph extends APIBase {
 		
 		parent::__construct($data,$type);
 	}
+	function output_type($type){
+		if($type == 'kendo') return 'json';
+		return $type;
+	}
 	static function canType($type){
 		switch($type){
+			case 'kendo':
 			case 'png':
 				return true;
 		}
@@ -46,6 +51,8 @@ class Graph extends APIBase {
 				ob_start();
 				if($this->type == 'json'){
 					$ret = $graph->Draw(new Renderer\JSON());
+				}elseif($this->type == 'kendo'){
+					$ret = $graph->Draw(new Renderer\Kendo());
 				}else{
 					$ret = $graph->Draw(new Renderer\Output());
 				}
