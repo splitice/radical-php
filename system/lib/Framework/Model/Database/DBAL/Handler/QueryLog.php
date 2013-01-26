@@ -11,11 +11,9 @@ class QueryLog {
 	}
 	
 	function addQuery($sql) {
-		if(class_exists('Server')){
-			if ($this->explain) {
-				$this->queries[] = $sql;
-				$this->backtraces[] = debug_backtrace(false);
-			}
+		if (!\Core\Server::isProduction() && $this->explain) {
+			$this->queries[] = $sql;
+			$this->backtraces[] = debug_backtrace(false);
 		}
 	}
 	
