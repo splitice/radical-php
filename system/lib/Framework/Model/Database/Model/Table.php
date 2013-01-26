@@ -549,6 +549,10 @@ abstract class Table implements ITable, \JsonSerializable {
 		return new static($res,$prefix);
 	}
 	
+	static function new_empty(){
+		return new static(array());
+	}
+	
 	/* (non-PHPdoc)
 	 * @see \Model\Database\Model\ITable::Insert()
 	 */
