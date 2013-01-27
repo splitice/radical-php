@@ -30,11 +30,19 @@ class Process {
 		return ($this->start_time+$this->max_execution_time<mktime());
 	}
 	
+	function write($data,$stream = self::STDIN){
+		$stream = $this->pipes[$stream];
+		return fwrite($stream, $data);
+	}
+	
 	function read($stream = self::STDOUT){
 		$ret = '';
-		$stream = $this->pipes[$stream];
-		stream_set_blocking($stream, false);
-		while($data = fread($stream)){
+		$stream = array($this->pipes[$stream]);
+		stream_set_blocking($stream[0],true);
+		$nr = array();
+		while(stream_select($stream, $nr, $nr, 0)){
+			$data = fread($stream[0],1);
+			if(strlen($data) == 0) return $ret;
 			$ret .= $data;
 		}
 		return $ret;
@@ -44,5 +52,9 @@ class Process {
 		$stream = $this->pipes[$stream];
 		$stream_reader = new Stream\Reader($stream);
 		return $stream_reader->ReadAll();
+	}
+	
+	function close(){
+		proc_terminate($this->resource);
 	}
 }
