@@ -14,6 +14,14 @@ class Database extends ModuleBase implements ISessionStorage {
 		parent::__construct();
 	}
 	
+	function lock_open(){
+		throw new \Exception('Not supported');
+	}
+	
+	function lock_close(){
+		throw new \Exception('Not supported');
+	}
+	
 	/**
 	 * @return the $id
 	 */

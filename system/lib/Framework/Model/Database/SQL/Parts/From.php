@@ -241,6 +241,10 @@ class From extends Internal\MergePartBase {
 		return $this;
 	}
 	
+	function remove_limit(){
+		$this->limit = null;
+	}
+	
 	function toSQL(){
 		//FROM
 		$ret = 'FROM ';

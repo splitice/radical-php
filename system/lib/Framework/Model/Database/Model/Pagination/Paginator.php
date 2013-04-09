@@ -25,7 +25,7 @@ class Paginator implements IDatabasePaginator {
 	/**
 	 * Internal method to get a result set
 	 */
-	private function _get(){
+	function _get(){
 		$sql = clone $this->sql;
 		$sql->limit(($this->page-1)*$this->perPage, $this->perPage);
 		

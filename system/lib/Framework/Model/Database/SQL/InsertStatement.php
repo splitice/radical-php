@@ -56,8 +56,19 @@ class InsertStatement extends Internal\StatementBase {
 		
 		//Build Query
 		$sql = 'INSERT ' . (($this->ignore===true) ? 'IGNORE ' : '');
-		$sql .= 'INTO `' . $this->table . '` (`' . implode ( '`,`', array_keys ( $this->values ) ) . '`) ';
-		$sql .= 'VALUES(' . \DB::A ( $this->values ) . ')';
+		if(isset($this->values[0]) && is_array($this->values[0])){
+			$keys = array_keys ($this->values[0]);
+			$values = $this->values;
+		}else{
+			$keys = array_keys ( $this->values );
+			$values = array($this->values);
+		}
+		$sql .= 'INTO `' . $this->table . '` (`' . implode ( '`,`', $keys) . '`) VALUES';
+		
+		foreach($values as $k=>$v){
+			$sql .= ($k!=0?',':'').'(' . \DB::A ( $v ) . ')';
+		}
+		
 		$sql .= $append;
 		
 		$this->sql = $sql;

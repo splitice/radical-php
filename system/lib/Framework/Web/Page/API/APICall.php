@@ -3,17 +3,15 @@ namespace Web\Page\API;
 
 class APICall {
 	protected $server;
+	protected $ch;
 	
-	function __construct($server){
+	function __construct($server = null){
+		if($server == null){
+			$server = 'http://'.$_SERVER['HTTP_HOST'].'/api';
+		}
 		$this->server = $server;
+		$this->ch = curl_init();
 	}
-	/**
-	 * convert xml string to php array - useful to get a serializable value
-	 *
-	 * @param string $xmlstr
-	 * @return array
-	 * @author Adrien aka Gaarf
-	 */
 	static function xmlstr_to_array($xmlstr) {
 		$doc = new \DOMDocument();
 		$doc->loadXML($xmlstr);
@@ -59,10 +57,14 @@ class APICall {
 		}
 		return $output;
 	}
+	function transfer_session_id(){
+		curl_setopt($this->ch, CURLOPT_COOKIE, session_name().'='.$_COOKIE[session_name()]);
+	}
 	function call($module,$method,$argument,$type='ps'){
 		$url = rtrim($this->server,'/').'/'.$module.'/'.$method.'.'.$type.'?'.http_build_query($argument);
 		
-		$ch = curl_init($url);
+		$ch = $this->ch;
+		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		$text = curl_exec($ch);
 		
@@ -79,6 +81,10 @@ class APICall {
 			case 'ps':
 				$data = unserialize($text);
 				break;
+		}
+		
+		if($data === false){
+			throw new \Exception($text);
 		}
 		
 		if(isset($data['response'])){

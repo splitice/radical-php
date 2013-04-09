@@ -12,10 +12,10 @@ class Recognise extends \Core\Object {
 		return static::fromURL($url);
 	}
 	
-	static function fromURL(URL $url){
+	static function fromURL(URL $url, $excluding = array()){
 		$recognisers = \Core\Libraries::get('Web\\Page\\Router\\Recognisers\\*');
 		foreach($recognisers as $class){
-			if(\oneof($class,'Web\\Page\\Router\\IPageRecognise')){
+			if(\oneof($class,'Web\\Page\\Router\\IPageRecognise') && !in_array($class, $excluding)){
 				$r = $class::Recognise(clone $url);
 				if($r){
 					return $r;

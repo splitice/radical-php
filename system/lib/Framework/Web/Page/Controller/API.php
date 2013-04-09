@@ -49,12 +49,20 @@ class API extends PageBase {
 			}catch(\Exception $ex){
 				if(ob_get_level()) ob_clean();
 				$ret['error'] = $ex->getMessage();
+				if($ex->getCode()){
+					$ret['code'] = $ex->getCode();
+				}
 			}
 		}
 		
 		$headers = \Web\Page\Handler::$stack->top()->headers;
 		
-		switch($this->object->output_type($this->type)){
+		$type = 'json';
+		if($this->object){
+			$type = $this->object->output_type($this->type);
+		}
+		
+		switch($type){
 			case 'json':
 				if(isset($_GET['callback'])){
 					echo $_GET['callback'],'(';

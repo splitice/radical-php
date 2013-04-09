@@ -116,10 +116,19 @@ class SelectStatement extends Internal\StatementBase {
 		return $this->_R($this->from->limit($start,$end));
 	}
 	
+	function remove_limit(){
+		return $this->_R($this->from->remove_limit());
+	}
+	
+	function __clone(){
+		$this->from = clone $this->from;
+	}
+	
 	function getCount(){
 		//Check for entry
 		$count = clone $this;
 		$count->fields('COUNT(*)');
+		$count->remove_limit();
 	
 		$res = \DB::Query($count);
 		return $res->Fetch(DBAL\Fetch::FIRST,new Cast\Integer());

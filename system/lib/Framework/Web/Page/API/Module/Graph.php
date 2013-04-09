@@ -33,36 +33,44 @@ class Graph extends APIBase {
 				return true;
 		}
 	}
-	private function _getModule($module){
-		return \Core\Libraries::getProjectSpace('DB\\'.ucfirst($module));
+	private function _getModule($module,$ns = 'DB'){
+		return \Core\Libraries::getProjectSpace($ns.'\\'.ucfirst($module));
 	}
 	function can($module){		
-		return class_exists($this->_getModule($module));
+		return class_exists($this->_getModule($module)) || class_exists($this->_getModule($module,'Graph'));
 	}
 	function __call($module,$arguments){
-		$module = $this->_getModule($module);
-
-		$method = 'graph'.$this->graph;
-		if(method_exists($module, $method)){
-			$graph = $module::$method($this->data);
-
-			if($graph instanceof IGraphSource){
-				$graph->Setup($this->width,$this->height);
-				ob_start();
-				if($this->type == 'json'){
-					$ret = $graph->Draw(new Renderer\JSON());
-				}elseif($this->type == 'kendo'){
-					$ret = $graph->Draw(new Renderer\Kendo());
-				}else{
-					$ret = $graph->Draw(new Renderer\Output());
-				}
-				if($ret === null){
-					$ret = ob_get_contents();
-				}
-				ob_end_clean();
-				
-				return $ret;
+		//Work out what we are going to display
+		$class = $this->_getModule($module);
+		$graph = null;
+		if(class_exists($class)){
+			$method = 'graph'.$this->graph;
+			if(method_exists($class, $method)){
+				$graph = $class::$method($this->data);
 			}
+		}else{
+			$class = $this->_getModule($module,'Graph');
+			$module = new $class($arguments);
+			$graph = $module->{$this->graph}();
+		}
+		
+		//Do the rendering
+		if($graph instanceof IGraphSource){
+			$graph->Setup($this->width,$this->height);
+			ob_start();
+			if($this->type == 'json'){
+				$ret = $graph->Draw(new Renderer\JSON());
+			}elseif($this->type == 'kendo'){
+				$ret = $graph->Draw(new Renderer\Kendo());
+			}else{
+				$ret = $graph->Draw(new Renderer\Output());
+			}
+			if($ret === null){
+				$ret = ob_get_contents();
+			}
+			ob_end_clean();
+		
+			return $ret;
 		}
 	}
 }

@@ -12,10 +12,19 @@ class KeyStorage extends CollectionObject {
 	}
 	
 	static function AddKey(Key $key){
+		$data = Session::$data;
+		
+		$data->lock_open();
+		
+		if($data instanceof \Web\Session\Storage\Internal)
+			$data->refresh();
+		
 		if(!isset(Session::$data['form_security'])){
-			Session::$data['form_security'] = new static();
+			$data['form_security'] = new static();
 		}
-		Session::$data['form_security']->Add($key);
+		$data['form_security']->Add($key);
+
+		$data->lock_close();
 	}
 	
 	/**

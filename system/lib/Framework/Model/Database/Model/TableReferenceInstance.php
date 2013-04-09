@@ -1,5 +1,7 @@
 <?php
 namespace Model\Database\Model;
+use Model\Database\SQL\InsertStatement;
+
 use Model\Database\SQL\UpdateStatement;
 
 use Model\Database\SQL\UnLockTable;
@@ -114,6 +116,9 @@ class TableReferenceInstance extends \Core\Object {
 	
 	function update($values = array(),$where = array()){
 		return new UpdateStatement($this->getTable(),$values,$where);
+	}
+	function insert($values = array()){
+		return new InsertStatement($this->getTable(),$values);
 	}
 	
 	function __call($method,$arguments){

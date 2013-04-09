@@ -1,5 +1,9 @@
 <?php
 namespace Model\Database\Model\Table;
+use Model\Database\DBAL\Fetch;
+
+use Model\Database\SQL\SelectStatement;
+
 use Model\Database\Search\Adapter\ISearchAdapter;
 use Model\Database\SQL\IStatement;
 use Model\Database\SQL;
@@ -51,8 +55,14 @@ class TableSet extends \Basic\Arr\Object\IncompleteObject {
 	}
 	
 	private $count;
+	function setSQLCount(SelectStatement $sql){
+		$this->count = $sql;
+	}
 	function getCount(){
 		if($this->count !== null){
+			if($this->count instanceof SelectStatement){
+				$this->count = $this->count->query()->fetch(Fetch::FIRST);
+			}
 			return $this->count;
 		}
 		if($this->data){

@@ -327,6 +327,9 @@ abstract class Table implements ITable, \JsonSerializable {
 		
 		throw new \BadMethodCallException('Relationship doesnt exist: unkown table');
 	}
+	public function fields(){
+		return array_keys($this->orm->reverseMappings);
+	}
 	private function call_set_value($actionPart,$value){
 		if(isset($this->orm->reverseMappings[$actionPart])){		
 			//Is this key a dynamic type?
@@ -559,6 +562,11 @@ abstract class Table implements ITable, \JsonSerializable {
 	function insert($ignore = -1){
 		$this->Validate();
 		
+		if($ignore instanceof InsertBuffer){
+			$ignore->add($this);
+			return;
+		}
+		
 		//Build & Do SQL
 		$data = $this->toSQL();
 		foreach($data as $k=>$v){
@@ -566,6 +574,7 @@ abstract class Table implements ITable, \JsonSerializable {
 				unset($data[$k]);
 			}
 		}
+		
 		$id = \DB::Insert($this->orm->tableInfo['name'],$data,$ignore);
 		
 		foreach($data as $k=>$v){

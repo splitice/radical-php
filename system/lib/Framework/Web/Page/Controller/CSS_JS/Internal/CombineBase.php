@@ -39,7 +39,7 @@ abstract class CombineBase extends IndividualBase {
 	protected function getPath(){
 		return static::EXTENSION.DS.parent::getPath();
 	}
-	private function getFiles($expr = '*'){
+	protected function getFiles($expr = '*'){
 		$path = new \Core\Resource($this->getPath());
 		return $path->getFiles($expr);
 	}
@@ -90,7 +90,6 @@ abstract class CombineBase extends IndividualBase {
 		}
 		
 		echo $ret;
-		//return new \Page\Handler\GZIP($ret);
 		
 		$headers = \Web\Page\Handler::top()->headers;
 		$headers->setContentLength(strlen($ret));

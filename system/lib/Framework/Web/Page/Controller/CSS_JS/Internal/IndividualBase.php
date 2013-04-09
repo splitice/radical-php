@@ -17,6 +17,7 @@ abstract class IndividualBase extends \Web\Page\Handler\PageBase {
 		
 		$headers = \Web\Page\Handler::current()->headers;
 		$headers->Add('Content-Type',static::MIME_TYPE);
+		$headers->Add('Cache-Control','public');
 		$headers->setCache(60*60*24);
 		$headers->Add('Pragma','cache');
 		

@@ -28,6 +28,7 @@ class Session extends \Core\Object {
 	 */
 	
 	public static $auth;
+	
 	private static $extras = array();
 	
 	/**
@@ -35,7 +36,7 @@ class Session extends \Core\Object {
 	 * 
 	 * @return \Utility\Net\IP
 	 */
-	static function iP(){
+	static function IP(){
 		if(\Core\Server::isCLI()){
 			return new IP(static::DEFAULT_IP);
 		}
