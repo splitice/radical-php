@@ -20,13 +20,16 @@ class MetaManager extends \Basic\Arr\Object\CollectionObject {
 	function add_keyword($v, $unique = true){
 		$this->add_array('keywords', $v, $unique);
 	}
-	function toTag($k,$v = null){
+	function toTag($k,$v = null, $type='meta'){
 		if($v === null)
 			$v = $this->get($k);
 		if($v){
 			if(is_array($v)) $v = implode(',',$v);
 			
-			return '<meta name="'.$k.'" content="'.$v.'" />'."\r\n";
+			if($type == 'meta')
+				return '<meta name="'.$k.'" content="'.$v.'" />'."\r\n";
+			if($type == 'link')
+				return '<link rel="'.$k.'" href="'.$v.'" />'."\r\n";
 		}
 	}
 }

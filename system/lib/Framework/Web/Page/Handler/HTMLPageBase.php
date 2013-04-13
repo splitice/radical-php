@@ -9,9 +9,9 @@ abstract class HTMLPageBase extends PageBase implements IMeta {
 	function title($part = null){
 		return $part;
 	}
-	function meta($what = null){
+	function meta($what = null, $type = 'meta'){
 		if($what === null) return $this->_meta;
 		if(isset($this->_meta[$what]))
-			return $this->_meta->toTag($what,$this->_meta[$what]);
+			return $this->_meta->toTag($what,$this->_meta[$what], $type);
 	}
 }
