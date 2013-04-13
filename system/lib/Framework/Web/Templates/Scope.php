@@ -30,6 +30,13 @@ class Scope {
 		$this->handler = $handler;
 	}
 	
+	function __call($method, $args){
+		if(isset($this->$method)){
+			return call_user_func_array($this->$method, $args);
+		}
+		throw new \BadMethodCallException($method);
+	}
+	
 	/**
 	 * Bind variables to this scope.
 	 * 
