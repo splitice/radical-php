@@ -6,6 +6,7 @@ use Web\Page\Router\Recognise;
 use Web\Page\Router\IPageRecognise;
 use Utility\Net\HTTP;
 use Web\Page\Controller;
+use Model\Database\DBAL\Handler\QueryLog;
 
 class AAAA_Debug implements IPageRecognise {
 	private static $enable = true;
@@ -30,7 +31,7 @@ class AAAA_Debug implements IPageRecognise {
 		if(isset($query['XDEBUG_PROFILE'])){
 			ob_start(function(){
 				return xdebug_get_profiler_filename();
-			});
+			},0);
 		}
 		if(isset($query['debug'])){
 			$mode = $query['debug'];
@@ -48,22 +49,34 @@ class AAAA_Debug implements IPageRecognise {
 				case 'profile':
 					//Build new URL
 					$new_url = clone $url;
+					$query = $url->getPath()->getQuery();
 					$query['XDEBUG_PROFILE'] = '1';
-					$new_url->getPath()->setQuery($query);
+					$new_url->getRealPath()->setQuery($query);
 					$host = $new_url->getHost();
 					$new_url->setHost($_SERVER['SERVER_ADDR']);
-					
+
 					//Execute debug request
 					$http = new HTTP\Fetch((string)$new_url);
 					$http->setHeader('Host',$host);
+					if(isset($_COOKIE[session_name()])){
+						$http->curl[CURLOPT_COOKIE] = session_name().'='.$_COOKIE[session_name()];
+					}
 					$r = $http->Execute();
-					
 					//Execute WebGrind
 					$filename = /*'cachegrind.out.5503';//*/basename((string)$r);
 					return new Controller\Debug\Profile($filename);
 					break;
 					
 				case 'sql':
+					\DB::$query_log->explain = true;
+					ob_start(function(){
+						$sql = '';
+						foreach(\DB::$query_log->getQueries() as $q){
+							$sql .= $q.'<br />';
+						}
+						
+						return $sql;
+					});
 					break;
 					
 				case 'explain':

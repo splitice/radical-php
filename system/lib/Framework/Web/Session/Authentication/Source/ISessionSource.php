@@ -5,4 +5,5 @@ interface ISessionSource {
 	function login($username,$password);
 	function isLoggedIn();
 	function logout();
+	function user();
 }

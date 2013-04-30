@@ -42,6 +42,13 @@ class Server {
 		return (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN');
 	}
 	
+	static function scheme(){
+		if(empty($_SERVER['HTTPS'])){
+			return 'http://';
+		}
+		return 'https://';
+	}
+	
 	/**
 	 * Get the directory root for the site.
 	 * 

@@ -4,7 +4,7 @@
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <?php 
-echo '<script src="',\Web\Resource\Javascript\Library::Find('jquery'),'" type="text/javascript"></script>';
+echo '<script src="',\Web\Resource\Javascript\Library::Find('jquery',1.6),'" type="text/javascript"></script>';
 echo \Web\Resource\Javascript::HTML('webgrind');
 echo \Web\Resource\CSS::HTML('webgrind');
 ?>

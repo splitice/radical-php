@@ -3,12 +3,12 @@ namespace Utility\Payment;
 
 abstract class System {
 	protected $module;
-	function __construct($module,$arg = null){
+	function __construct($module,$arg = null,$arg2=null){
 		$class = 'Utility\\Payment\\Modules\\'.$module;
 		if(!class_exists($class)){
 			throw new \Exception('Payment module "'.$module.'" doesnt exist');
 		}
-		$this->module = new $class($this->toUrl(),$arg);
+		$this->module = new $class($this->toUrl(),$arg,$arg2);
 	}
 	
 	function bill($ammount){

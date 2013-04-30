@@ -16,4 +16,8 @@ class NullSource extends ModuleBase implements ISessionSource {
 	function logout(){
 		unset(\Web\Session::$data['user']);
 	}
+	function user(){
+		if(isset(\Web\Session::$data['user']))
+			return \Web\Session::$data['user'];
+	}
 }

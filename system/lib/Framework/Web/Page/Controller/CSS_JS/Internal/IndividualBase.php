@@ -20,6 +20,7 @@ abstract class IndividualBase extends \Web\Page\Handler\PageBase {
 		$headers->Add('Cache-Control','public');
 		$headers->setCache(60*60*24);
 		$headers->Add('Pragma','cache');
+		$headers['Vary'] = 'Accept-Encoding';
 		
 		$filemtime = max(array_map('filemtime',$file));
 		//die(var_dump($file));

@@ -20,7 +20,7 @@
 		function update(specificFile){
 			vars = getOptions(specificFile);
 			vars.op = 'function_list';
-			$.getJSON("index.php",
+			$.getJSON("/?",
 				vars,
 				function(data){
 					callInfoLoaded = new Array();
@@ -60,7 +60,7 @@
 		}
 		
 		function loadCallInfo(functionNr){			
-			$.getJSON("index.php",
+			$.getJSON("/?",
 				{'debug':'webgrind', 'op':'callinfo_list', 'file':currentDataFile, 'functionNr':functionNr, 'costFormat':$("#costFormat").val()},
 				function(data){
 					

@@ -8,10 +8,12 @@ class Alertpay implements IPaymentModule {
 	protected $ipn;
 	protected $account;
 	protected $p;
+	private $security_code;
 	
-	function __construct($ipn,$account){
+	function __construct($ipn,$account,$security_code){
 		$this->ipn = $ipn;
 		$this->account = $account;
+		$this->security_code = $security_code;
 		
 		$this->p = new External\Alertpay();
 		
@@ -52,7 +54,7 @@ class Alertpay implements IPaymentModule {
 		
 	}
 	function ipn(){	
-		if ($this->p->validate_ipn () && $this->p->ipn_data['ap_status'] == 'Success') {
+		if ($this->p->validate_ipn ($this->security_code) && $this->p->ipn_data['ap_status'] == 'Success') {
 			$transaction = new Transaction();
 			$transaction->id = $this->p->ipn_data['ap_referencenumber'];
 			
@@ -66,6 +68,9 @@ class Alertpay implements IPaymentModule {
 			$transaction->order = $order;
 			
 			return $transaction;
+		}else{
+			//file_put_contents('/tmp/v', var_export(array($this->p->validate_ipn () && $this->p->ipn_data['ap_status'] == 'Success'),true));
+			header('X-Error: IPN Validation',true,500);
 		}
 	}
 }

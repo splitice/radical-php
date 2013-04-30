@@ -10,8 +10,8 @@ use Utility\Payment;
 abstract class PaymentBase extends HTMLPageBase {
 	protected $system;
 	
-	function __construct($data,$address = null){		
-		$this->system = new Payment\UpstreamSystem($this,$data['module'],$address);
+	function __construct($data,$address = null,$extra = null){		
+		$this->system = new Payment\UpstreamSystem($this,$data['module'],$address,$extra);
 	}
 	
 	/**

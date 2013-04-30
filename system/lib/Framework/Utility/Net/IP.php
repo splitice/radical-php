@@ -10,6 +10,9 @@ class IP {
 		if($ip instanceof self){
 			$ip = $ip->getIp();
 		}
+		if(!is_string($ip)){
+			throw new \Exception('$ip must be a string not '.gettype($ip));
+		}
 		$this->ip = $ip;
 	}
 	

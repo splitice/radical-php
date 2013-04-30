@@ -2,6 +2,7 @@
 namespace Model\Database\ORM;
 
 use Model\Database\Model\TableReferenceInstance;
+use Model\Database\DBAL\Fetch;
 
 /**
  * Global cache of table ORMs
@@ -12,8 +13,10 @@ use Model\Database\Model\TableReferenceInstance;
  * @author SplitIce
  *
  */
+
 class Cache {
-	static $data = array();
+	static $data = null;
+	static $changed = false;
 	
 	/**
 	 * Resolves the $table parameter to a scalar key
@@ -38,6 +41,8 @@ class Cache {
 	 * @return ModelData
 	 */
 	static function get($table){
+		if(self::$data === null)
+			self::init();
 		$table = self::key($table);
 		if(isset(self::$data[$table])){
 			return self::$data[$table];
@@ -57,5 +62,26 @@ class Cache {
 			$orm = $orm->toModelData();
 		}
 		self::$data[$table] = $orm;
+		self::$changed = true;
+	}
+	
+	
+	private static $key;
+	static function init(){
+		global $_SQL;
+		$sql = 'SELECT MAX(UNIX_TIMESTAMP( CREATE_TIME )) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = "'.$_SQL->db.'"';
+		self::$key = \DB::Q($sql)->Fetch(Fetch::FIRST);
+		self::$data = apc_fetch($_SQL->db.'_'.self::$key);
+		if(!is_array(self::$data))
+			self::$data = array();
+		register_shutdown_function(function(){
+			Cache::save();
+		});
+	}
+	static function save(){
+		global $_SQL;
+		if(self::$changed){
+			apc_store($_SQL->db.'_'.self::$key, self::$data);
+		}
 	}
 }

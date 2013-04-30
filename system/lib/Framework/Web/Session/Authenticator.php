@@ -15,11 +15,11 @@ use Web\Session\Authentication\IAuthenticator;
  */
 class Authenticator {
 	/**
-	 * @var Web\Session\Authentication\Source\ISessionSource
+	 * @var \Web\Session\Authentication\Source\ISessionSource
 	 */
 	private $source;
 	/**
-	 * @var Web\Session\Authentication\IAuthenticator
+	 * @var \Web\Session\Authentication\IAuthenticator
 	 */
 	private $authenticator;
 	
@@ -90,14 +90,20 @@ class Authenticator {
 		return $this->_source()->isLoggedIn();
 	}
 	function isAdmin(){
-		$user = $this->getUser();
+		if(!isset(\Web\Session::$data['user']))
+			return false;
+		
+		$user = \Web\Session::$data['user'];
 		if($user instanceof IUserAdmin){
 			return $user->isAdmin();
 		}
 		return false;
 	}
 	function getUser(){
-		return \Web\Session::$data['user'];
+		return $this->_source()->user();
+	}
+	function user(){
+		return $this->_source()->user();
 	}
 	function logout(){
 		return $this->_source()->Logout();

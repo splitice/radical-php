@@ -2,6 +2,15 @@
 namespace Model\Database\Model;
 
 class CacheableTable extends Table {
+	private $related_cache = array();
+	function _related_cache($name,$o){
+		$this->related_cache[$name] = $o;
+		return $o;
+	}
+	function _related_cache_get($name){
+		return isset($this->related_cache[$name])?$this->related_cache[$name]:null;
+	}
+	
 	static function _idString($id){
 		if(is_object($id)){
 			$id = (array)$id;

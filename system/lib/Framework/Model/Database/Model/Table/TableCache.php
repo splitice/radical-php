@@ -18,6 +18,10 @@ class TableCache {
 		self::$cache->Set($key,$value);
 	}
 	static function Add($object){
+		//Never cache for CLI
+		if(php_sapi_name() == 'cli') 
+			return $object;
+		
 		if($object instanceof TableSet){
 			self::_Add($object->sql,$object);
 		}elseif($object instanceof Table){

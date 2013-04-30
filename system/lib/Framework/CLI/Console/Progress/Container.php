@@ -31,7 +31,6 @@ class Container extends \Core\Object {
 	}
 	
 	protected function close(){
-		//debug_print_backtrace();
 		echo $this->eraseLine();
 		
 		if(ob_get_level()) ob_flush();

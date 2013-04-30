@@ -93,5 +93,6 @@ abstract class CombineBase extends IndividualBase {
 		
 		$headers = \Web\Page\Handler::top()->headers;
 		$headers->setContentLength(strlen($ret));
+		$headers['Vary'] = 'Accept-Encoding';
 	}
 }

@@ -5,6 +5,7 @@ use Model\Database\SQL;
 use Basic\Weakref\Callback as WeakrefCallback;
 use Model\Database\DBAL;
 use Model\Database\Exception;
+use Model\Database\Model\TableReference;
 
 class Instance {
 	const QUERY_TIMEOUT = 30;
@@ -68,7 +69,11 @@ class Instance {
 				$this->reConnect();
 				return $this->Q($sql,$timeout,true);
 			}else{
-				throw new Exception\QueryError ( $sql, $this->Error () );
+				if($errno == 1213){
+					throw new TransactionException($this->Error ());
+				}else{
+					throw new Exception\QueryError ( $sql, $this->Error () );
+				}
 			}
 		} else {
 			\DB::$query_log->addQuery ( $sql ); //add query to log
@@ -151,10 +156,7 @@ class Instance {
 	}
 	
 	function tableExists($table){
-		$sql = 'show tables like '.\DB::E($table);
-		$res = \DB::Q($sql);
-		if($res->Fetch()) return true;
-		return false;
+		return TableReference::getByTableClass(__CLASS)->exists();
 	}
 	
 	/**
@@ -223,6 +225,24 @@ class Instance {
 		$this->Query('START TRANSACTION');
 	}
 	function transactionCommit(){
-		$this->Query('COMMIT');
+		$result = $this->adapter->commit();
+		if(!$result){
+			throw new TransactionException("Commit failed");
+		}
+	}
+	function transactionRollback(){
+		$this->adapter->rollback();
+	}
+	
+	function transaction($method){
+		try {
+			$this->transactionStart();
+			$ret = $method();
+			$this->transactionCommit();
+			return $ret;
+		}catch(TransactionException $ex){
+			$this->transactionRollback();
+			return $method();
+		}
 	}
 }

@@ -3,9 +3,9 @@ namespace Utility\Payment;
 
 class UpstreamSystem extends System {
 	private $u;
-	function __construct($u,$module,$arg = null){
+	function __construct($u,$module,$arg = null,$arg2 = null){
 		$this->u = $u;
-		parent::__construct($module,$arg);
+		parent::__construct($module,$arg,$arg2);
 	}
 	
 	function toUrl(){

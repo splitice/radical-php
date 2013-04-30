@@ -38,9 +38,12 @@ class Internal extends ModuleBase implements ISessionStorage {
 	}
 	
 	function refresh(){
-		$this->_open();
+		$open = $this->is_open;
+		if(!$open)
+			$this->_open();
 		$this->data = $_SESSION;
-		$this->_close();
+		if(!$open)
+			$this->_close();
 	}
 	
 	function getId(){
@@ -54,26 +57,32 @@ class Internal extends ModuleBase implements ISessionStorage {
 		return isset($this->data[$offset]);
 	}
 	public function offsetUnset($offset) {
-		$this->_open();
+		$open = $this->is_open;
+		if(!$open)
+			$this->_open();
 		unset($_SESSION[$offset]);
 		$this->data = $_SESSION;
-		$this->_close();
+		if(!$open)
+			$this->_close();
 	}
 	public function offsetGet($offset) {
 		return isset($this->data[$offset]) ? $this->data[$offset] : null;
 	}
 	
 	function get($name){
-		return isset($this->data[$offset]) ? $this->data[$offset] : null;
+		return isset($this->data[$name]) ? $this->data[$name] : null;
 	}
 	function set($name,$data){
-		$this->_open();
+		$open = $this->is_open;
+		if(!$open)
+			$this->_open();
 		if (is_null($name)) {
 			$_SESSION[] = $data;
 		}else{
 			$_SESSION[$name] = $data;
 		}
 		$this->data = $_SESSION;
-		$this->_close();
+		if(!$open)
+			$this->_close();
 	}
 }

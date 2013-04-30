@@ -72,83 +72,17 @@ class Alertpay {
 	
 	}
 	
-	function validate_ipn() {
+	function validate_ipn($security_code) {
 		$log = new Logging('Alertpay');
-		$log->log($text);
 		
 		//The value is the url address of IPN V2 handler and the identifier of the token string
 		
 		// get the token from Payza
 		$token = urlencode($_POST['token']);
 		
-		//preappend the identifier string "token="
-		$token = "token=".$token;
-		$log->log($token);
-		
-		/**
-		 *
-		 * Sends the URL encoded TOKEN string to the Payza's IPN handler
-		 * using cURL and retrieves the response.
-		 *
-		 * variable $response holds the response string from the Payza's IPN V2.
-		 */
-		
-		$response = '';
-		
-		$ch = curl_init();
-		
-		curl_setopt($ch, CURLOPT_URL, $this->ipn);
-		curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $token);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_HEADER, false);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 60);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		
-		$response = curl_exec($ch);
-		$log->log($response);
-		
-		curl_close($ch);
-		
-		if(strlen($response) > 0 || true)
-		{
-			if(urldecode($response) == "INVALID TOKEN" && false)
-			{
-				//the token is not valid
-			}
-			else
-			{
-				//urldecode the received response from Payza's IPN V2
-				$response = urldecode($response);
-					
-				//split the response string by the delimeter "&"
-				$aps = explode("&", $response);
-		
-				//create a file to save the response information from Payza's IPN V2
-				$myFile = "/tmp/IPNRes.txt";
-				$fh = fopen($myFile,'a') or die("can't open the file");
-					
-				//define an array to put the IPN information
-				$info = array();
-					
-				foreach ($aps as $ap)
-				{
-					//put the IPN information into an associative array $info
-					$ele = explode("=", $ap);
-					$info[trim($ele[0])] = trim($ele[1]);
-		
-					//write the information to the file IPNRes.txt
-					fwrite($fh, trim($ele[0]));
-					fwrite($fh, "=");
-					fwrite($fh, trim($ele[1])."\r\n");
-				}
-					
-				fclose($fh);
-					
-				$this->ipn_data = $info;
-				return true;
-					
-			}
+		if($_POST['ap_securitycode'] == $security_code){
+			$this->ipn_data = $_POST;
+			return true;
 		}
 		return false;
 	}

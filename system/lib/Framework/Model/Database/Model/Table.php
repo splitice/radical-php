@@ -304,14 +304,27 @@ abstract class Table implements ITable, \JsonSerializable {
 		}
 		return $ret;
 	}
-	private function call_get_related($className){
+	
+	protected function _related_cache($name,$o){
+		return $o;
+	}
+	function _related_cache_get(){
+		
+	}
+	protected function call_get_related($className){
+		//Cacheable table provides this
+		$ret = $this->_related_cache_get($className);
+		if($ret !== null){
+			return $ret;
+		}
+		
 		//Get Class
 		try{
 			//Use schema
 			foreach($this->orm->references as $ref){
 				if($ref['from_table']->getName() == $className){
 					$select = array($ref['from_field']=>$this->getSQLField($ref['to_field']));
-					return $ref['from_table']->getAll($select);
+					return $this->_related_cache($className,$ref['from_table']->getAll($select));
 				}
 			}
 			
@@ -319,7 +332,7 @@ abstract class Table implements ITable, \JsonSerializable {
 			$relationship = TableReference::getByTableClass($className);
 			if(isset($relationship)){//Is a relationship
 				//Fallback to attempting to get 
-				return $relationship->getAll($this->getIdentifyingSQL());
+				return $this->_related_cache($className,$relationship->getAll($this->getIdentifyingSQL()));
 			}
 		}catch(\Exception $ex){
 			throw new \BadMethodCallException('Relationship doesnt exist: unable to relate');

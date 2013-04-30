@@ -249,6 +249,9 @@ class DB extends DBAL\SQLUtils {
 	static function transactionCommit(){
 		return static::__callStatic(__FUNCTION__, func_get_args());
 	}
+	static function transaction($what){
+		return static::__callStatic(__FUNCTION__, func_get_args());
+	}
 	
 	/* Sql Builders */
 	static function select($table = null, $fields = '*'){

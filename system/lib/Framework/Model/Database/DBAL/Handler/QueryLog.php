@@ -4,7 +4,8 @@ namespace Model\Database\DBAL\Handler;
 class QueryLog {
 	private $queries = array();
 	private $backtraces = array();
-	private $explain = false;
+	
+	public $explain = false;
 	
 	function __construct($explain = false){
 		$this->explain = $explain;

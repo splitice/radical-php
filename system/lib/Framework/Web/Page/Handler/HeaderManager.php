@@ -4,9 +4,9 @@ namespace Web\Page\Handler;
 use Basic\Arr\Object\CollectionObject;
 
 class HeaderManager extends CollectionObject {
-	public $status = 200;
-	
 	const DEFAULT_EXPIRE = 1200;//20minutes
+	
+	public $status = 200;
 	
 	function __construct($headers=null){
 		if($headers!==null){
@@ -46,12 +46,13 @@ class HeaderManager extends CollectionObject {
 		$this->Add('Content-Type',$mime);
 	}
 	function output(){
+		//No data
 		if(!$this->data){
 			header($this->status.' A', true, $this->status);
-		}
-		
-		foreach($this->data as $k=>$v){
-			header($k.': '.$v,true,$this->status);
+		}else{		
+			foreach($this->data as $k=>$v){
+				header($k.': '.$v,true, $this->status);
+			}
 		}
 	}
 }

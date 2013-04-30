@@ -9,7 +9,7 @@ use Basic\Arr;
  * @author SplitIce
  *
  */
-class CollectionObject extends \Core\Object implements \IteratorAggregate, \ArrayAccess, \Serializable, \Countable {
+class CollectionObject extends \Core\Object implements \IteratorAggregate, \ArrayAccess, \Countable { /*, \Serializable*/
 	/**
 	 * The array all the data is stored in
 	 * 
@@ -41,12 +41,12 @@ class CollectionObject extends \Core\Object implements \IteratorAggregate, \Arra
 	}
 	
 	/* Serializable */
-	public function serialize() {
+	/*public function serialize() {
 		return serialize($this->data);
 	}
 	public function unserialize($data) {
 		$this->data = unserialize($data);
-	}
+	}*/
 	
 	/* Countable */
 	public function count(){

@@ -1,7 +1,7 @@
 <?php
 namespace Model\Database\DBAL\Adapter;
-use Model\Database\DBAL\Instance;
 
+use Model\Database\DBAL\Instance;
 use Model\Database\Exception;
 
 class MySQLConnection implements IConnection {
@@ -10,10 +10,11 @@ class MySQLConnection implements IConnection {
 	 */
 	private $mysqli;
 	
+	//
 	private $host;
 	private $user;
 	private $pass;
-	private $db;
+	public $db;
 	private $port;
 	private $compression;
 	
@@ -51,6 +52,14 @@ class MySQLConnection implements IConnection {
 		return $this->mysqli;
 	}
 	
+	function commit(){
+		return $this->mysqli->commit();
+	}
+	
+	function rollback(){
+		return $this->mysqli->rollback();
+	}
+	
 	function ping(\mysqli $mysqli=null){
 		if(!$mysqli){
 			$mysqli = $this->Connect();
@@ -67,8 +76,10 @@ class MySQLConnection implements IConnection {
 	private $_connectCache;
 	private $_connectHit;
 	function isConnected() {
+		if(php_sapi_name() == 'fpm-fcgi') return $this->mysqli;//Web requests are short
+		
 		$ret = false;
-		if($this->_connectHit >= ($t = time())){
+		if($this->_connectHit <= ($t = time())){
 			if($this->_connectCache == \CLI\Threading\Thread::current()){
 				$ret = true;
 			}
