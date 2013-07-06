@@ -8,12 +8,14 @@ class Comparison extends Internal\PartBase implements IComparison {
 	private $b;
 	private $operation;
 	private $autoNull;
+	private $escaped;
 	
-	function __construct($a,$b,$operation = '=',$autoNull = true){
+	function __construct($a,$b,$operation = '=',$autoNull = true, $escaped = false){
 		$this->a = $a;
 		$this->b = $b;
 		$this->operation = $operation;
 		$this->autoNull = $autoNull;
+		$this->escaped = $escaped;
 	}
 	function toSQL(){
 		$a = $this->a;
@@ -35,6 +37,6 @@ class Comparison extends Internal\PartBase implements IComparison {
 			}
 		}
 		
-		return $a.' '.$op.' '.\DB::E($this->b);
+		return $a.' '.$op.' '.($this->escaped?$this->b:\DB::E($this->b));
 	}
 }

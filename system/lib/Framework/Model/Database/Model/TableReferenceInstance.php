@@ -11,6 +11,7 @@ use Model\Database\SQL\LockTable;
 use Model\Database\SQL\SelectStatement;
 
 use Model\Database\ORM;
+use Model\Database\SQL\DeleteStatement;
 
 class TableReferenceInstance extends \Core\Object {
 	protected $class;
@@ -118,6 +119,9 @@ class TableReferenceInstance extends \Core\Object {
 	}
 	function insert($values = array()){
 		return new InsertStatement($this->getTable(),$values);
+	}
+	function delete($where = array()){
+		return new DeleteStatement($this->getTable(),$where);
 	}
 	
 	function __call($method,$arguments){

@@ -28,6 +28,10 @@ class CacheableTable extends Table {
 	}
 	
 	static function fromId($id){
+		if(\Core\Server::isCLI()){
+			return parent::fromId($id);
+		}
+		
 		//Check Cache
 		$cache_string = static::_idString($id);
 		$ret = Table\TableCache::Get($cache_string);
@@ -45,6 +49,9 @@ class CacheableTable extends Table {
 	}
 	
 	static function getAll($sql = ''){
+		if(\Core\Server::isCLI())
+			return parent::getAll($sql);
+		
 		$obj = static::_getAll($sql);
 		
 		$cached = Table\TableCache::Get($obj);

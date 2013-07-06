@@ -50,7 +50,17 @@ class API implements IPageRecognise {
 			}
 			
 			//Method
-			$c = new $c($url->getQuery(),$type);
+			if(isset($_SERVER['HTTP_CONTENT_TYPE']) && $_SERVER['HTTP_CONTENT_TYPE'] == 'application/octet-stream'){
+				$query = $url->getQuery();
+			}else{
+				if($url->getQuery()){
+					$query = array_merge($url->getQuery(),$_POST);
+				}else{
+					$query = $_POST;
+				}
+				}
+			
+			$c = new $c($query,$type);
 			if($c->can($method)){
 				return Handler::Objectify ( 'API', array('object'=>$c,'method'=>$method, 'type'=>$type) );
 			}else{

@@ -3,13 +3,49 @@
 class AutoLoader {
 	const BOOTSTRAP_FILE = 'bootstrap.php';
 	static $projectDirs = array('app','system');
+	private $cache = array();
+	static $pathCache = array();
 	
 	function __construct(){
 		static::InitPathCache();
+		
+		$al_key = 'xal_'.filemtime(__FILE__);
+		$this->cache = apc_fetch($al_key);
+		if(!$this->cache){
+			$this->cache = array();
+			global $BASEPATH;
+			foreach(array_reverse(self::$pathCache) as $path){
+				$items = glob ( $path . '/*' );
+					
+				for($i = 0; $i < count ( $items ); $i ++) {
+					if (is_dir ( $items [$i] )) {
+						$add = glob ( $items [$i] . '/*' );
+						$items = array_merge ( $items, $add );
+					}
+				}
+					
+				foreach($items as $k=>$v){
+					if(is_dir($v)){
+						unset($items[$k]);
+					}else{
+						$items[$k] = realpath($v);
+					}
+				}
+				
+				foreach($items as $dir){
+					$path = substr($dir, strlen($BASEPATH));
+					$dir = str_replace('/','\\',substr(strstr($path, '/lib/'),5,-4));
+					$dir = substr(strstr($dir, '\\'),1);
+					$this->cache[$dir] = $path;
+				}
+			}
+			
+			apc_store($al_key, $this->cache, 300);
+		}
+		
 		spl_autoload_register(array($this,'__autoload'));
 	}
 	
-	static $pathCache = array();
 	private static function _buildPathCache($libDir){
 		$pathCache = array();
 		$expr = $libDir.'*';
@@ -69,10 +105,15 @@ class AutoLoader {
 	}
 	
 	function __autoload($n){
-		if($n{0} == '_' && $n{1} == '\\'){
-			$file = \Core\MagicNamespace::fromString($n)->Load();
+		if(isset($this->cache[$n])){
+			global $BASEPATH;
+			$file = $BASEPATH.$this->cache[$n];
 		}else{
-			$file = static::resolve($n);
+			if($n{0} == '_' && $n{1} == '\\'){
+				$file = \Core\MagicNamespace::fromString($n)->Load();
+			}else{
+				$file = static::resolve($n);
+			}
 		}
 		if($file){
 			include($file);

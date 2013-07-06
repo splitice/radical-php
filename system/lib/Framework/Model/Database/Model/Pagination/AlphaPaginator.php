@@ -27,7 +27,6 @@ class AlphaPaginator implements IDatabasePaginator {
 	private function _get(){
 		$sql = clone $this->sql;
 		$sql->where_and(array($this->field,'LIKE',$this->page.'%'));
-		die(var_dump((string)$sql));
 		return $this->source->Filter($sql);
 	}
 	function __construct($source,$field){

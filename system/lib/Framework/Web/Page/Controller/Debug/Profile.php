@@ -25,6 +25,10 @@ class Profile extends HTMLPageBase {
 		}
 		return ($a > $b) ? -1 : 1;
 	}
+	
+	function POST(){
+		return $this->GET();
+	}
 
 	/**
 	 * Handle GET request

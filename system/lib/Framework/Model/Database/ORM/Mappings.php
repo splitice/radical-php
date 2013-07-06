@@ -63,17 +63,20 @@ class Mappings {
 			}
 			
 			//Check if is reference
+			$translated = $this->stripPrefix($databaseField);
 			if($relation = $this->isReference($databaseField)){				
 				$rTableRef = $relation->getTableReference();
 				if(!$rTableRef){
 					throw new \Exception('No table for reference');
 				}
-				$rInfo = $rTableRef->Info();
-				if($rInfo['name'] == $this->model->tableInfo['name']) $translated = $this->stripPrefix($databaseField);
-				else $translated = rtrim($rInfo['prefix'],'_');
+				
+				if(!$translated){				
+					$rInfo = $rTableRef->Info();
+					if($rInfo['name'] == $this->model->tableInfo['name']) $translated = $this->stripPrefix($databaseField);
+					else $translated = rtrim($rInfo['prefix'],'_');
+				}
 			}else{
 				//Not reference, process normally.
-				$translated = $this->stripPrefix($databaseField);
 				if($translated === null){//Must be reference
 					throw new \Exception('Database field "'.$databaseField.'" must be a reference.');
 				}

@@ -33,6 +33,9 @@ class SMTP implements IMailHandler {
 		$this->username = $username;
 		$this->password = $password;
 		$this->secure = strtolower ( trim ( $secure ) );
+		if ($this->secure == 'ssl') {
+			$this->server = 'ssl://' . $this->server;
+		}
 		
 		if (! $this->connect ())
 			return;
@@ -42,10 +45,7 @@ class SMTP implements IMailHandler {
 	}
 	
 	/* Connect to the server */
-	private function connect() {
-		if ($this->secure == 'ssl') {
-			$this->server = 'ssl://' . $this->server;
-		}
+	protected function connect() {
 		$this->conn = fsockopen ( $this->server, $this->port, $errno, $errstr, $this->timeout );
 		if (substr ( $this->getServerResponse (), 0, 3 ) != '220') {
 			return false;
@@ -54,7 +54,7 @@ class SMTP implements IMailHandler {
 	}
 	
 	/* sign in / authenicate */
-	private function auth() {
+	protected function auth() {
 		fputs ( $this->conn, 'HELO ' . $this->localhost . $this->newline );
 		$this->getServerResponse ();
 		if ($this->secure == 'tls') {

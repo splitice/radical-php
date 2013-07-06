@@ -17,7 +17,7 @@ class Handler extends PageBase {
 		$template->vars['filename'] = $this->filename;
 		return $template;
 	}
-	function pOST(){
-		$this->GET();
+	function POST(){
+		return $this->GET();
 	}
 }

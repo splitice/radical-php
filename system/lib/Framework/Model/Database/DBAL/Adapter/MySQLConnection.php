@@ -91,12 +91,6 @@ class MySQLConnection implements IConnection {
 			$this->_connectCache = \CLI\Threading\Thread::current();
 			$this->_connectHit = $t+30;//Persume we can hold a connection for 30s
 		}
-		if(memory_get_usage()>(1024*1024*500)){
-			ob_start();
-			debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-			file_put_contents('/test.txt', ob_get_contents());
-			exit;
-		}
 		
 		return $ret;
 	}

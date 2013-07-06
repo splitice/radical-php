@@ -69,8 +69,15 @@ class Cache {
 	private static $key;
 	static function init(){
 		global $_SQL;
-		$sql = 'SELECT MAX(UNIX_TIMESTAMP( CREATE_TIME )) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = "'.$_SQL->db.'"';
-		self::$key = \DB::Q($sql)->Fetch(Fetch::FIRST);
+		$cfile = '/tmp/'.$_SQL->db;
+		if(file_exists($cfile) && filemtime($cfile) >= (time() - 30)){
+			self::$key = file_get_contents($cfile);
+		}else{
+			touch($cfile);
+			$sql = 'SELECT MAX(UNIX_TIMESTAMP( CREATE_TIME )) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = "'.$_SQL->db.'"';
+			self::$key = \DB::Q($sql)->Fetch(Fetch::FIRST);
+			file_put_contents($cfile, self::$key);
+		}
 		self::$data = apc_fetch($_SQL->db.'_'.self::$key);
 		if(!is_array(self::$data))
 			self::$data = array();

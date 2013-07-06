@@ -29,6 +29,7 @@ class InsertStatement extends Internal\StatementBase {
 	
 	private function _appendPart(){
 		$append = '';
+		//die(var_dump($ignore));
 		if(is_string($this->ignore)){
 			$append = ' ON DUPLICATE KEY UPDATE '.$this->ignore;
 			$this->ignore = false;

@@ -1,6 +1,7 @@
 <?php
 namespace Utility\Net\SSH;
 
+use Utility\Net\SSH\Exceptions\SSHException;
 class Connection {
 	//Connection Details
 	private $host;
@@ -50,6 +51,7 @@ class Connection {
 		if($this->ssh !== null){
 			$this->exec('exit');
 			$this->ssh = null;
+			$this->sftp = null;
 		}
 	}
 	function __destruct(){
@@ -72,7 +74,7 @@ class Connection {
 		$stream = ssh2_exec($this->ssh,$command,$env,$width,$height,$width_height_type);
 		
 		if(false === $stream){
-			throw new \Exception('Couldnt execute command, no stream returned');
+			throw new SSHException('Couldnt execute command, no stream returned');
 		}
 		
 		stream_set_blocking($stream, true);
@@ -97,6 +99,7 @@ class Connection {
 	
 	function onDisconnect(){
 		$this->ssh = null;
+		$this->sftp = null;
 	}
 	
 	function __toString(){

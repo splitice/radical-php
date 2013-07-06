@@ -100,7 +100,7 @@ class URL extends \Core\Object {
 	}
 	
 	function getIP(){
-		$ip = new IP($this->host);
+		$ip = new IP((string)$this->host);
 		if(!$ip->isValid()){
 			$ip = gethostbyname($this->host);
 			if($ip == $this->host){

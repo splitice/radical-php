@@ -11,12 +11,14 @@ class SFTP {
 	private $sftp;
 	
 	function __construct(Connection $ssh){
-		$ssh->inSFTP = true;
+		echo "SFTP CONSTRUCT\r\n";
 		$this->ssh = $ssh;
 		$this->Init($ssh);
 	}
 	
 	function init(Connection $ssh){
+		echo "SFTP INIT\r\n";
+		$this->ssh = $ssh;
 		$this->sftp = ssh2_sftp($ssh->getResource());
 	}
 	
@@ -64,14 +66,6 @@ class SFTP {
 		$cmd = 'stat -c %Z '.escapeshellarg($filename);
 		$ret = trim($this->ssh->Exec($cmd));
 		return (int)$ret;
-	}
-	
-	function close(){
-		$this->ssh->inSFTP = false;
-	}
-	
-	function __destruct(){
-		$this->Close();
 	}
 	
 	function __toString(){

@@ -61,7 +61,12 @@ class AAAA_Debug implements IPageRecognise {
 					if(isset($_COOKIE[session_name()])){
 						$http->curl[CURLOPT_COOKIE] = session_name().'='.$_COOKIE[session_name()];
 					}
-					$r = $http->Execute();
+					if($_SERVER['REQUEST_METHOD'] == "POST"){
+						$r = $http->post(http_build_query($_POST));
+					}else{
+						$r = $http->Execute();
+					}
+					
 					//Execute WebGrind
 					$filename = /*'cachegrind.out.5503';//*/basename((string)$r);
 					return new Controller\Debug\Profile($filename);

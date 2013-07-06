@@ -18,8 +18,6 @@ abstract class EventPageBase extends HTMLPageBase {
 					return $result;
 				}
 			}else{
-				session_start();
-				die(var_dump($_SESSION));
 				throw new \Exception('Form submission invalid');
 			}
 		}

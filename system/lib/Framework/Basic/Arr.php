@@ -7,6 +7,17 @@ namespace Basic;
  * Based on code from Kohana
  */
 class Arr {
+	static function search($array, $searchTerm) {
+	    foreach ($array as $value) {
+	        $value = strtolower($value);
+	        $searchTerm = strtolower($searchTerm);
+	        if (strpos($value, $searchTerm)) {
+	            return true;
+	        }
+	    }
+	
+	    return false;
+	}
 	protected static function _is_accessible($in){
 		if(is_array($in)){
 			return true;

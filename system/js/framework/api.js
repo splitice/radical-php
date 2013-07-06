@@ -32,7 +32,7 @@ define(["jquery"],
 				
 				var 
 					url = this.toURL(),
-					data = {cache:cache,data:args,timeout:this.timeout},
+					data = {cache:cache,data:args,timeout:this.timeout,type:'POST'},
 					a = APICall(this,args);
 				
 				//dataType:'jsonp',crossDomain:true,

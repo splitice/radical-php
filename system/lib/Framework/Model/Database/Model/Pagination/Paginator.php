@@ -41,7 +41,7 @@ class Paginator implements IDatabasePaginator {
 		$this->source = $source;
 		$this->page = $page;
 		$this->perPage = $perPage;
-		$this->sql = new SQL\SelectStatement();
+		$this->sql = new SQL\SelectStatement(null,null);
 		$this->set = $this->_get();
 		$this->totalRows = $this->source->getCount();
 	}

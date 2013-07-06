@@ -2,13 +2,17 @@
 namespace Web\Session\Storage;
 
 use Web\Session\ModuleBase;
+use Core\Server;
 
 class Internal extends ModuleBase implements ISessionStorage {
 	protected $data;
 	private $is_open = false;
+	private $is_empty = false;
+	private $is_loaded = false;
+	private $is_cli;
 	
 	function __construct(){
-		$this->refresh();
+		$this->is_cli = Server::isCLI();
 		parent::__construct();
 	}
 	
@@ -16,7 +20,12 @@ class Internal extends ModuleBase implements ISessionStorage {
 		if($this->is_open)
 			return false;
 		
-		session_start();
+		if(!$this->is_cli){
+			session_start();
+			if(count($_SESSION) == 0)
+				$this->is_empty = true;
+		}
+		
 		$this->is_open = true;
 		return true;
 	}
@@ -24,7 +33,14 @@ class Internal extends ModuleBase implements ISessionStorage {
 		if(!$this->is_open)
 			return false;
 		
-		session_write_close();
+		if(!$this->is_cli){
+			if(count($_SESSION) == 0  && $this->is_empty){
+				session_destroy();
+			}else{
+				session_write_close();
+			}
+		}
+		
 		$this->is_open = false;
 		return true;
 	}
@@ -38,10 +54,14 @@ class Internal extends ModuleBase implements ISessionStorage {
 	}
 	
 	function refresh(){
+		$this->is_loaded = true;
 		$open = $this->is_open;
 		if(!$open)
 			$this->_open();
-		$this->data = $_SESSION;
+		
+		if(!$this->is_cli)
+			$this->data = $_SESSION;
+		
 		if(!$open)
 			$this->_close();
 	}
@@ -51,12 +71,18 @@ class Internal extends ModuleBase implements ISessionStorage {
 	}
 	
 	public function offsetSet($offset, $value) {
+		if(!$this->is_loaded)
+			$this->refresh();
 		$this->set($offset,$value);
 	}
 	public function offsetExists($offset) {
+		if(!$this->is_loaded)
+			$this->refresh();
 		return isset($this->data[$offset]);
 	}
 	public function offsetUnset($offset) {
+		if(!$this->is_loaded)
+			$this->refresh();
 		$open = $this->is_open;
 		if(!$open)
 			$this->_open();
@@ -66,6 +92,8 @@ class Internal extends ModuleBase implements ISessionStorage {
 			$this->_close();
 	}
 	public function offsetGet($offset) {
+		if(!$this->is_loaded)
+			$this->refresh();
 		return isset($this->data[$offset]) ? $this->data[$offset] : null;
 	}
 	

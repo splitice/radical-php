@@ -121,8 +121,11 @@ class Scope {
 	 * @param string $container
 	 * @throws \Exception
 	 */
-	function incl($name,$container = 'HTML'){
-		$_ = $this;
+	function incl($name,$container = 'HTML', $vars = null){
+		if($vars === null)
+			$_ = $this;
+		else
+			$_ = new Scope($vars, $this->handler);
 		$___path = \Web\Template::getPath($name,$container);
 		if(!$___path){
 			throw new \Exception('Couldnt find '.$name.' from '.$container.' to include.');
