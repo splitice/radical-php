@@ -25,13 +25,14 @@ class Cache {
 	 * @return string
 	 */
 	private static function key($table){
+		global $BASEPATH;
 		if($table instanceof TableReferenceInstance){
 			//We only need the class name as our key
-			return $table->getClass();
+			return $BASEPATH.$table->getClass();
 		}elseif(!is_string($table)){
 			throw new \Exception('Invalid key specified');
 		}
-		return $table;
+		return $BASEPATH.$table;
 	}
 	
 	/**

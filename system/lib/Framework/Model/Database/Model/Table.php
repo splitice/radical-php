@@ -194,7 +194,7 @@ abstract class Table implements ITable, \JsonSerializable {
 					continue;
 				}
 			}
-			$this->$field = $dT::fromDatabaseModel($this->$field,$value['extra'],$this);
+			$this->$field = $dT::fromDatabaseModel($this->$field, $value['extra'], $this, $field);
 		}
 	}
 	

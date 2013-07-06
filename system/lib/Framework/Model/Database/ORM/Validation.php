@@ -21,4 +21,8 @@ class Validation {
 		}
 		return $this->data[$field]->Validate($value);
 	}
+	
+	function request_data($field){
+		return isset($this->data[$field])?$this->data[$field]:null;
+	}
 }
