@@ -20,7 +20,15 @@ class Comparison extends Internal\PartBase implements IComparison {
 	function toSQL(){
 		$a = $this->a;
 		if(is_string($a) && strpos($a, '(') === false && strpos($a, '`') === false){
-			$a = '`'.$a.'`';
+			$at = '';
+			foreach(explode('.',$a) as $v){
+				if($at){
+					$at .= '.';
+				}
+				
+				$at .= '`'.$v.'`';
+			}
+			$a = $at;
 		}
 		
 		$op = $this->operation;

@@ -9,7 +9,8 @@ class AutoLoader {
 	function __construct(){
 		static::InitPathCache();
 		
-		$al_key = 'xal_'.filemtime(__FILE__);
+		global $BASEPATH;
+		$al_key = 'xal_'.filemtime(__FILE__).md5($BASEPATH);
 		$this->cache = apc_fetch($al_key);
 		if(!$this->cache){
 			$this->cache = array();

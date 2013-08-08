@@ -13,10 +13,27 @@ class Set extends DynamicType implements IDynamicType,IDynamicValidate {
 		$this->setValue($value);
 	}
 	function has($name){
-		return $this->value;
+		return in_array($name, $this->value);
 	}
 	function validate($value){
-		return in_array($value, $this->keys);
+		if(!$value)
+			return true;
+		
+		foreach(explode(',',$value) as $v){
+			if(!in_array($v, $this->keys)){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	function set($name, $value){
+		$found = array_search($name, $this->value);
+		if($value && $found === false){
+			$this->value[] = $name;
+		}else if(!$value && $found !== false){
+			unset($this->value[$found]);
+		}
 	}
 	
 	static function fromDatabaseModel($value,array $extra,ITable $model,$field = null){
@@ -38,8 +55,14 @@ class Set extends DynamicType implements IDynamicType,IDynamicValidate {
 		return $this->__toString();
 	}
 	function setValue($value){
-		if(is_string($value)){
-			$this->value = explode(',', $value);
+		if(count($value) == 0){
+			$this->value = array();
+		}elseif(is_string($value)){
+			if(empty($value)){
+				$this->value = array();
+			}else{
+				$this->value = explode(',', $value);
+			}
 		}else{
 			$this->value = $value;
 		}

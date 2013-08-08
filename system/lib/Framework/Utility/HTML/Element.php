@@ -10,7 +10,16 @@ class Element extends SingleTag {
 		$this->inner = $inner;
 	}
 	
+	private $html;
+	function html_override($html){
+		$this->html = $html;
+	}
+	
 	function __toString(){
+		if($this->html !== null){
+			return $this->html;
+		}
+		
 		$ret = parent::__toString();
 		if(!$this->inner && $this->singleClose){
 			$ret = substr($ret,0,-1).'/>';

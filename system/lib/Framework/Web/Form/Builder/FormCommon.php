@@ -14,6 +14,10 @@ class FormCommon implements IFormControls {
 		return '</form>';
 	}
 	
+	function html($html){
+		return $this->_R($html);
+	}
+	
 	function label($name, Element\Internal\FormElementBase $element,$before = true){
 		if($before) $before = $element;
 		return $this->_R(new Element\Label($name, $element),$before);

@@ -29,6 +29,7 @@ class FormInstance extends FormCommon implements IFormInstance {
 	}
 	
 	protected function _R($return,$before = false){
+		$in = $return;
 		if($before){
 			foreach($this->form->inner as $k=>$v){
 				if(!$before || $v == $before){
@@ -39,7 +40,7 @@ class FormInstance extends FormCommon implements IFormInstance {
 			}
 		}
 		$this->form->inner[] = $return;
-		return parent::_R($return);
+		return parent::_R($in);
 	}
 	
 	function form(){

@@ -10,6 +10,10 @@ class Label extends Element {
 	function __construct($name,Internal\FormElementBase $element){
 		$this->element = $element;
 		
+		if($element instanceof CheckBox){
+			$element->html_override('');
+		}
+		
 		//set for
 		$attributes = array(); 
 		if(isset($element->attributes['id'])){
@@ -21,5 +25,24 @@ class Label extends Element {
 		}
 		
 		parent::__construct('label',$attributes,$name);
+	}
+	
+	function __toString(){
+		if($this->element instanceof CheckBox){
+			$this->element->html_override(null);
+
+			$inner = $this->inner;
+			$this->inner .= (string)$this->element;
+
+			$this->element->html_override('');
+			
+			$ret = parent::__toString();
+			
+			$this->inner = $inner;
+			
+			return $ret;
+		}
+		
+		return parent::__toString();
 	}
 }

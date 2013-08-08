@@ -99,7 +99,7 @@ class SelectStatement extends Internal\StatementBase {
 		return $this->_R($this->from->where_and($where));
 	}
 	function where_or($where){
-		return $this->_R($this->from->where_and($where));
+		return $this->_R($this->from->where_or($where));
 	}
 	
 	function group($group = null){
@@ -119,6 +119,12 @@ class SelectStatement extends Internal\StatementBase {
 	function remove_limit(){
 		return $this->_R($this->from->remove_limit());
 	}
+	function remove_joins(){
+		return $this->_R($this->from->remove_joins());
+	}
+	function remove_order_by(){
+		return $this->_R($this->from->remove_order_by());
+	}
 	
 	function __clone(){
 		$this->from = clone $this->from;
@@ -129,6 +135,8 @@ class SelectStatement extends Internal\StatementBase {
 		$count = clone $this;
 		$count->fields('COUNT(*)');
 		$count->remove_limit();
+		$count->remove_joins();
+		$count->remove_order_by();
 	
 		$res = \DB::Query($count);
 		return $res->Fetch(DBAL\Fetch::FIRST,new Cast\Integer());

@@ -465,7 +465,7 @@ abstract class Table implements ITable, \JsonSerializable {
 			if($k{0} == '*') {
 				$k = static::TABLE_PREFIX.substr($k,1);
 			}
-			$prefixedFields[$k] = $f;
+			$prefixedFields[static::TABLE.'.'.$k] = $f;
 		}
 		
 		//Build SQL

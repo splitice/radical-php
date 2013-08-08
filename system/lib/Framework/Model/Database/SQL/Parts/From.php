@@ -171,6 +171,11 @@ class From extends Internal\MergePartBase {
 		$where[] = new WhereAND($and);
 		return $this;
 	}
+	function where_or($or){
+		$where = $this->where();
+		$where[] = new WhereOR($or);
+		return $this;
+	}
 	
 	function group($group = null){
 		if($group === null) return $this->group_by;
@@ -243,6 +248,12 @@ class From extends Internal\MergePartBase {
 	
 	function remove_limit(){
 		$this->limit = null;
+	}
+	function remove_joins(){
+		$this->joins = array();
+	}
+	function remove_order_by(){
+		$this->order_by = null;
 	}
 	
 	function toSQL(){
