@@ -4,6 +4,7 @@ namespace Utility\HTML;
 class Element extends SingleTag {
 	public $inner;
 	protected $singleClose = true;
+	public $writeEndTag = true;
 	
 	function __construct($tag,$attributes = array(),$inner = null){
 		parent::__construct($tag,$attributes);
@@ -33,11 +34,11 @@ class Element extends SingleTag {
 			}else{
 				$ret .= $this->inner;
 			}
-			if($this->singleClose)
+			if($this->writeEndTag && $this->singleClose)
 				$ret .= '</'.$this->tag.'>';
 		}
 		
-		if(!$this->singleClose)
+		if($this->writeEndTag && !$this->singleClose)
 			$ret .= '</'.$this->tag.'>';
 		return $ret;
 	}

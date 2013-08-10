@@ -2,7 +2,7 @@
 namespace Utility\Net\URL;
 
 class Path {
-	private $query;
+	public $query;
 	private $fragment;
 	private $path = array();
 
