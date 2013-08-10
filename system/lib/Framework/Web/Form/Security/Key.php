@@ -39,11 +39,19 @@ class Key {
 	function getElement(){
 		return new HiddenInput(self::FIELD_NAME, $this->id);
 	}
-	static function fromRequest(){
-		if(isset($_POST[self::FIELD_NAME])) return $_POST[self::FIELD_NAME];
+	static function fromRequest($post = true){
+		if($post){
+			if(isset($_POST[self::FIELD_NAME])) return $_POST[self::FIELD_NAME];
+		}else{
+			if(isset($_GET[self::FIELD_NAME])) return $_GET[self::FIELD_NAME];
+		}
 	}
-	static function getData(){
-		$data = $_POST;
+	static function getData($post = true){
+		if($post){
+			$data = $_POST;
+		}else{
+			$data = $_GET;
+		}
 		unset($data[self::FIELD_NAME]);
 		return $data;
 	}

@@ -135,7 +135,7 @@ class SelectStatement extends Internal\StatementBase {
 		$count = clone $this;
 		$count->fields('COUNT(*)');
 		$count->remove_limit();
-		$count->remove_joins();
+		//$count->remove_joins();
 		$count->remove_order_by();
 	
 		$res = \DB::Query($count);

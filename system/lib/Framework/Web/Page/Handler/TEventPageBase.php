@@ -3,12 +3,14 @@ namespace Web\Page\Handler;
 
 use Web\Form\Security\KeyStorage;
 use Web\Form\Security\Key;
+use Web\Page\Controller\Special\Redirect;
+use Utility\Net\URL;
 
 trait TEventPageBase {
 	protected $eventKey;
 	
-	protected function _processEvent(){
-		$id = Key::fromRequest();
+	protected function _processEvent($post = true){
+		$id = Key::fromRequest($post);
 		if($id){
 			$key = KeyStorage::GetKey($id);
 			if($key){
@@ -18,7 +20,7 @@ trait TEventPageBase {
 					return $result;
 				}
 			}else{
-				throw new \Exception('Form submission invalid');
+				throw new \Exception('Event invalid (session timeout?)');
 			}
 		}
 	}
@@ -37,9 +39,31 @@ trait TEventPageBase {
 				$request = new PageRequest($r);
 				return $request->execute($method);
 			}
+		} else if ($method == 'GET'){
+			$r = $this->_processEvent(false);
+			if($r) {
+				$request = new PageRequest($r);
+				return $request->execute($method);
+			}
 		}
 	
 		//Normal execution
 		return parent::Execute($method);
+	}
+	
+	protected function event_redirect(){
+		if($_SERVER['REQUEST_METHOD'] == 'POST')
+			return new Redirect((string)URL::fromRequest());
+		
+		$url = URL::fromRequest();
+		$qs = $url->getQuery();
+		foreach($qs as $k=>$v){
+			if(substr($k, 0, 2) == '__'){
+				unset($qs[$k]);
+			}
+		}
+		$url->setQuery($qs);
+
+		return new Redirect((string)$url);
 	}
 }

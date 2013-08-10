@@ -171,7 +171,7 @@ class URL extends \Core\Object {
 	 * @param field_type $query
 	 */
 	public function setQuery($query) {
-		$this->query = $query;
+		$this->path->setQuery($query);
 	}
 	
 	/**
