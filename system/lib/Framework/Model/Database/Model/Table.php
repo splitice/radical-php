@@ -84,7 +84,6 @@ abstract class Table implements ITable, \JsonSerializable {
 				$id[$v] = $this->_store[$mapped];
 		}
 		if($id) return $id;
-		throw new \Exception('Invalid ID SQL');
 	}
 	function getIdentifyingKeys(){
 		$keys = $this->orm->id;
@@ -152,12 +151,16 @@ abstract class Table implements ITable, \JsonSerializable {
 		return $ret;
 	}
 	
-	protected function _handleResult($in){
+	protected function _handleResult($in_param){
+		$in = $in_param;
 		if(is_object($in)) $in = $in->toArray();
 
 		foreach($this->orm->mappings as $k=>$v){
 			if(isset($in[$k])){
-				$this->_store[$v] = $this->$v = $in[$k];
+				$this->$v = $in[$k];
+				if(!is_array($in_param)){
+					$this->_store[$v] = $in[$k];
+				}
 			}
 		}
 	}
@@ -178,7 +181,7 @@ abstract class Table implements ITable, \JsonSerializable {
 				if(is_object($v))
 					$in[$k] = $v->getId();
 			}
-			$this->_store = $in;
+			//$this->_store = $in;
 		}else{
 			throw new \Exception('Cant create table with this data');
 		}
@@ -248,6 +251,7 @@ abstract class Table implements ITable, \JsonSerializable {
 				unset($values[$k]);
 			}
 		}
+		
 		if(count($values))
 			\DB::Update($this->orm->tableInfo['name'], $values, $identifying);
 	}
@@ -258,7 +262,14 @@ abstract class Table implements ITable, \JsonSerializable {
 	
 	public function __sleep()
 	{
-		return array('_store');
+		if($this->_store){
+			return array('_store');
+		}else{
+			$keys = get_object_vars($this);
+			unset($keys['orm']);
+			$keys = array_keys($keys);
+			return $keys;
+		}
 	}
 	
 	public function __wakeup()
@@ -266,16 +277,18 @@ abstract class Table implements ITable, \JsonSerializable {
 		//Recreate ORM
 		$table = TableReference::getByTableClass($this);
 		$this->orm = $table->getORM();
-
-		//Re-get data
-		$table = $this->RefreshTableData();
-		if($table)
-			$this->_handleResult($table->toSQL(true));
-		//else
-			//throw new \Exception("Init Error");
 		
-		//Initialize dynamic types
-		$this->_dynamicType();
+		if($this->_store){
+			//Re-get data
+			$table = $this->RefreshTableData();
+			if($table)
+				$this->_handleResult($table->toSQL(true));
+			//else
+				//throw new \Exception("Init Error");
+			
+			//Initialize dynamic types
+			$this->_dynamicType();
+		}
 	}
 	
 	function __toString(){
@@ -465,6 +478,9 @@ abstract class Table implements ITable, \JsonSerializable {
 			if($k{0} == '*') {
 				$k = static::TABLE_PREFIX.substr($k,1);
 			}
+			if($f instanceof Table){
+				$f = $f->getId();
+			}
 			$prefixedFields[static::TABLE.'.'.$k] = $f;
 		}
 		
@@ -588,7 +604,7 @@ abstract class Table implements ITable, \JsonSerializable {
 			}
 		}
 		
-		$id = \DB::Insert($this->orm->tableInfo['name'],$data,$ignore);
+		$id = \DB::Insert($this->orm->tableInfo['name'],$data,is_int($ignore)?$ignore:null);
 		
 		foreach($data as $k=>$v){
 			$this->_store[$this->orm->mappings[$k]] = $v;
@@ -614,6 +630,7 @@ abstract class Table implements ITable, \JsonSerializable {
 	}
 	static function create($data,$prefix=false){
 		$res = static::fromSQL($data,$prefix);
-		return $res->Insert();
+		$res->Insert();
+		return $res;
 	}
 }

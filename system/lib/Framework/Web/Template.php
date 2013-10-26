@@ -164,7 +164,7 @@ class Template extends Page\Handler\PageBase {
 	 * 
 	 * @throws \Exception
 	 */
-	function gET() {		
+	function GET() {		
 		$adapter = $this->adapter();
 		if($adapter == null){
 			throw new \Exception('Template file couldnt be found');

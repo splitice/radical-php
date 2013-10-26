@@ -27,6 +27,13 @@ class SMTP implements IMailHandler {
 	private $localhost = 'localhost';
 	private $timeout = '60';
 	private $debug = false;
+	private $headers;
+	function getHeaders(){
+		return $this->headers;
+	}
+	function setHeaders(){
+		$this->headers = $headers;
+	}
 	public function __construct($server, $port = 21, $username = null, $password = null, $secure = null) {
 		$this->server = $server;
 		$this->port = $port;
@@ -90,16 +97,20 @@ class SMTP implements IMailHandler {
 		$from = $m->getFrom ();
 		$to = $m->getTo ();
 		$subject = $m->getSubject ();
-		$headers = null;
+		$headers = $m->getHeaders();
 		
 		/* set up the headers and message body with attachments if necessary */
 		$email = "Date: " . date ( "D, j M Y G:i:s" ) . " -0500" . $this->newline;
 		$email .= "From: $from" . $this->newline;
-		$email .= "Reply-To: $from" . $this->newline;
+		if(!isset($headers['Reply-To']))
+			$email .= "Reply-To: $from" . $this->newline;
+		
 		$email .= $this->setRecipients ( $to );
 		
 		if ($headers != null) {
-			$email .= $headers . $this->newline;
+			foreach($headers as $k=>$v){
+				$email .= $k.': '.$v . $this->newline;
+			}
 		}
 		
 		$email .= "Subject: $subject" . $this->newline;

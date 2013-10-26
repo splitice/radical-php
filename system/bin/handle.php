@@ -11,4 +11,5 @@ $handler = ErrorHandling\Handler::Handle(function(){
 	
 	return $handler;
 });
-$handler->Execute($_SERVER['REQUEST_METHOD']);
+if($handler !== true && is_object($handler))
+	$handler->Execute($_SERVER['REQUEST_METHOD']);

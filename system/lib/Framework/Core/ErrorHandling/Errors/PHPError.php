@@ -48,8 +48,8 @@ class PHPError extends Internal\ErrorBase {
 	}
 	static function handler($errno, $msg_text, $errfile, $errline) {
 		//die(var_dump( $msg_text, $errfile, $errline));
-		if(isset($_GET['action']) && $_GET['action']=='ipn')
-			file_put_contents('/tmp/tt.'.time(), $msg_text);
+		//if(isset($_GET['action']) && $_GET['action']=='ipn')
+		//	file_put_contents('/tmp/tt.'.time(), $msg_text);
 		
 		if (! (error_reporting () & $errno)) {
 			return true;

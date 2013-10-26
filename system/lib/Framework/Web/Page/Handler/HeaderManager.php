@@ -46,6 +46,7 @@ class HeaderManager extends CollectionObject {
 		$this->Add('Content-Type',$mime);
 	}
 	function output(){
+		
 		//No data
 		if(!$this->data){
 			header($this->status.' A', true, $this->status);

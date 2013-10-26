@@ -26,8 +26,16 @@ class IMAP {
 		return $ret;
 	}
 	
+	function fetch_body($msg_num){
+		//$bodyText = imap_fetchbody($connection,$emailnumber,1.2);
+		//if(!strlen($bodyText)>0){
+		$bodyText = imap_fetchbody($this->con,$msg_num,1);
+		//}
+		return $bodyText;
+	}
+	
 	function fetch_overview($msg_num){
-		return imap_fetch_overview ($this->con, $msg_num);
+		return array_pop(imap_fetch_overview ($this->con, $msg_num));
 	}
 	
 	function set_flag($msg, $flag){
@@ -42,5 +50,9 @@ class IMAP {
 	}
 	function search_unread(){
 		return $this->search('UNSEEN');
+	}
+	
+	function search_all(){
+		return $this->search('ALL');
 	}
 }

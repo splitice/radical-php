@@ -29,6 +29,9 @@ abstract class System {
 		
 			case 'ipn': // Paypal is calling page for IPN validation...
 				if($transaction = $this->module->ipn()){
+					if($transaction === true){
+						die('Not Handling');
+					}
 					$this->onReceived($transaction);
 					die('Done');
 				}else{

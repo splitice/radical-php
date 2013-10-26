@@ -1,7 +1,8 @@
 <?php
 namespace Model\Database\Model;
 
-interface ITable {
+use Model\Database\IToSQL;
+interface ITable extends IToSQL {
 	function toSQL($in = null);
 	function update();
 	function delete();

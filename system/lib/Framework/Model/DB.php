@@ -132,7 +132,7 @@ class DB extends DBAL\SQLUtils {
 	/**
 	 * Return the number of affected rows of the last MySQL query
 	 */
-	static function AffectedRows() {
+	static function affectedRows() {
 		return static::__callStatic(__FUNCTION__, func_get_args());
 	}
 	

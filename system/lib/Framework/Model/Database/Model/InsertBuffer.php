@@ -1,6 +1,7 @@
 <?php
 namespace Model\Database\Model;
 
+use Model\Database\IToSQL;
 class InsertBuffer {
 	private $table;
 	private $data = array();
@@ -9,7 +10,7 @@ class InsertBuffer {
 		$this->table = $table;
 	}
 	
-	function add(Table $table){
+	function add(IToSQL $table){
 		$this->data[] = $table->toSQL();
 	}
 	

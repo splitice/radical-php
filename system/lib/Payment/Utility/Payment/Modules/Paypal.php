@@ -54,22 +54,26 @@ class Paypal implements IPaymentModule {
 		
 	}
 	function ipn(){
-		if ($this->p->validate_ipn () && 
-				(isset($this->p->ipn_data['payment_status']) && ($this->p->ipn_data['payment_status'] == 'Completed' || $this->p->ipn_data['payment_status'] == 'Reversed'))) {
-			$transaction = new Transaction();
-			$transaction->id = $this->p->ipn_data['txn_id'];
+		if ($this->p->validate_ipn ()){
+			if(isset($this->p->ipn_data['payment_status']) && ($this->p->ipn_data['payment_status'] == 'Completed' || $this->p->ipn_data['payment_status'] == 'Reversed')) {
+				$transaction = new Transaction();
+				$transaction->id = $this->p->ipn_data['txn_id'];
+				
+				$transaction->gross = $this->p->ipn_data ['mc_gross'];
+				$transaction->fee = $this->p->ipn_data['mc_fee'];
+				$transaction->sender = $this->p->ipn_data['payer_email'];
+				
+				$order = new Order($transaction->gross - $transaction->fee);
+				$order->name = $this->p->ipn_data['item_name'];
+				$order->item = $this->p->ipn_data['item_number'];
+				
+				$transaction->order = $order;
+				
+				return $transaction;
+			}
 			
-			$transaction->gross = $this->p->ipn_data ['mc_gross'];
-			$transaction->fee = $this->p->ipn_data['mc_fee'];
-			$transaction->sender = $this->p->ipn_data['payer_email'];
-			
-			$order = new Order($transaction->gross - $transaction->fee);
-			$order->name = $this->p->ipn_data['item_name'];
-			$order->item = $this->p->ipn_data['item_number'];
-			
-			$transaction->order = $order;
-			
-			return $transaction;
+			//A message that we dont care about
+			return true;
 		}
 	}
 }

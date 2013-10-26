@@ -17,16 +17,20 @@ class EventPageLink {
 	}
 	
 	function __toString(){
+		return $this->data();
+	}
+	
+	function data($query_params = array()){
 		//Build security field
 		$securityField = new Key(array($this,'Execute'));
-		
+
 		//Event details
-		$qs = array();
+		$qs = array_merge($_GET, $query_params);
 		$qs[self::EVENT_HANDLER] = $securityField->Store(serialize($this->object));
 		$qs[self::EVENT_METHOD] = base64_encode($securityField->Encrypt($this->method));
 		$qs[Key::FIELD_NAME] = $securityField->getId();
 		
-		$str_qs = '?'.$_SERVER['QUERY_STRING']. ($_SERVER['QUERY_STRING']?'&':''). http_build_query($qs);
+		$str_qs = '?'.http_build_query($qs);
 		
 		return $str_qs;
 	}

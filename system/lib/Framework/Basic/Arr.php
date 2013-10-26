@@ -38,9 +38,15 @@ class Arr {
 				}
 				return $ret;
 			}
+			return false;
 		}
-		return false;
+		return $in;
 	}
+	
+	static function keys($in){
+		return array_keys(self::toArray($in));
+	}
+	
 	protected static function parameterHandle(&$p){
 		if(self::_is_accessible($p)){
 			return;

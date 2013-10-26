@@ -14,7 +14,7 @@ class FileNotFound extends HTMLPageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function gET() {
+	function GET() {
 		$headers = \Web\Page\Handler::$stack->top()->headers;
 		$headers->Status(404);
 

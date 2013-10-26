@@ -5,8 +5,19 @@ use Web\Session;
 use Basic\Arr\Object\CollectionObject;
 
 class KeyStorage extends CollectionObject {
+	const USE_REDIS = true;
+	
+	private function redis_key(Key $key){
+		return 'ks_'.$key->getId();
+	}
 	function Add(Key $key){
-		$ret = parent::Add($key->getId(),$key);
+		$data = $key;
+		if(self::USE_REDIS){
+			$redis = new \Redis\Store($this->redis_key($key));
+			$redis->set($data);
+			$data = $redis;
+		}
+		$ret = parent::Add($key->getId(),$data);
 		Session::$data['form_security'] = $this;
 		return $ret;
 	}
@@ -35,6 +46,10 @@ class KeyStorage extends CollectionObject {
 		if(!isset(Session::$data['form_security'])){
 			throw new \Exception('No security keys in session');
 		}
-		return Session::$data['form_security'][$key];
+		$ret = Session::$data['form_security'][$key];		
+		if($ret instanceof \Redis\Store){
+			return $ret->get();
+		}
+		return $ret;
 	}
 }

@@ -18,7 +18,22 @@ class Message {
 	private $subject;
 	private $reply_to;
 	private $html = false;
+	private $headers;
 	
+	/**
+	 * @return the $headers
+	 */
+	public function getHeaders() {
+		return $this->headers;
+	}
+
+	/**
+	 * @param field_type $headers
+	 */
+	public function setHeaders($headers) {
+		$this->headers = $headers;
+	}
+
 	function __construct(Handler\IMailHandler $handler = null){
 		if($handler === null){
 			$handler = new Handler\Internal();
@@ -106,6 +121,7 @@ class Message {
 
 	function send($body){
 		$body = self::body($body);
+		$this->handler->setHeaders($this->headers);
 		return $this->handler->Send($this,$body);
 	}
 }

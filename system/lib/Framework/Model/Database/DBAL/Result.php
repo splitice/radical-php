@@ -4,7 +4,7 @@ namespace Model\Database\DBAL;
 use Basic\Cast\ICast;
 
 class Result {
-	private $result;
+	public $result;
 	public $affected_rows;
 	static $fetchAllSupport;
 	

@@ -27,6 +27,10 @@ class Set extends DynamicType implements IDynamicType,IDynamicValidate {
 		return true;
 	}
 	
+	function getSet(){
+		return $this->value;
+	}
+	
 	function set($name, $value){
 		$found = array_search($name, $this->value);
 		if($value && $found === false){

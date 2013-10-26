@@ -20,6 +20,11 @@ class Standard implements IPageRecognise {
 						$class = $class['class'];
 					}else{
 						$data = $match;
+						
+						//matched but no data
+						if($data === true){
+							$data = array();
+						}
 					}
 					if(is_string($class)){
 						if($class{0} != '\\'){

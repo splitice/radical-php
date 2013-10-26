@@ -51,7 +51,10 @@ class FormInstance extends FormCommon implements IFormInstance {
 		return (string)$this->form;
 	}
 	
-	function action($action){
+	function action($action = null){
+		if($action === null){
+			return $this->form->attributes['action'];
+		}
 		$this->form->attributes['action'] = $action;
 	}
 	function method($method){
