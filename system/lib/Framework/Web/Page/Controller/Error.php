@@ -20,6 +20,7 @@ class Error extends HTMLPageBase {
 	 * @throws \Exception
 	 */
 	function GET(){
+		\Web\Page\Handler::top()->headers->status(500);
 		return new Template('error',array('error'=>$this->error),'framework');
 	}
 	

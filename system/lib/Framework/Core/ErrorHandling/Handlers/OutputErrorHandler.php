@@ -59,6 +59,7 @@ class OutputErrorHandler extends ErrorHandlerBase {
 				while($page){
 					$page = $page->GET();
 				}
+				\Web\Page\Handler::top()->headers->output();
 			}catch(\Exception $ex){
 				die('Error: '.$ex->getMessage());
 			}

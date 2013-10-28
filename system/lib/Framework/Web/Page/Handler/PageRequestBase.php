@@ -24,8 +24,14 @@ abstract class PageRequestBase {
 		$this->cache = new DefaultCacheManager();
 	}
 	
+	private function can_fake($method){
+		return $method == 'HEAD';
+	}
 	
 	function execute($method){
+		//No assumptions
+		$method = strtoupper($method);
+		
 		//Add to Page\Handler Stack
 		PH::Push($this);
 	
@@ -33,7 +39,7 @@ abstract class PageRequestBase {
 		ob_start();
 	
 		$depth = 0;
-		while($this->page->can($method)){
+		while($this->page->can($method) || $this->can_fake($method)){
 			$depth++;
 	
 			$return = $this->page->$method();
@@ -41,6 +47,13 @@ abstract class PageRequestBase {
 				ob_clean();
 				$this->page = $return;
 			}else{
+				if(!$this->page->can($method)){
+					if($method == 'HEAD'){
+						//$contents = ob_get_contents();
+						//Headers only, no body
+						ob_clean();
+					}
+				}
 				break;
 			}
 				

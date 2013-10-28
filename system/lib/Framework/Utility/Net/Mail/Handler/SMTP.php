@@ -31,7 +31,7 @@ class SMTP implements IMailHandler {
 	function getHeaders(){
 		return $this->headers;
 	}
-	function setHeaders(){
+	function setHeaders($headers){
 		$this->headers = $headers;
 	}
 	public function __construct($server, $port = 21, $username = null, $password = null, $secure = null) {
@@ -264,16 +264,17 @@ class SMTP implements IMailHandler {
 		
 		$parts .= "Content-Type: multipart/alternative;" . $this->newline;
 		$parts .= "    boundary=\"$altBoundary\"" . $this->newline . $this->newline;
+
+		$parts .= "--" . $altBoundary . $this->newline;
+		$parts .= "Content-Type: text/html; charset=$this->charset" . $this->newline;
+		$parts .= "Content-Transfer-Encoding: $this->transferEncodeing" . $this->newline . $this->newline;
+		$parts .= $htmlpart . $this->newline . $this->newline;
 		
 		$parts .= "--" . $altBoundary . $this->newline;
 		$parts .= "Content-Type: text/plain; charset=$this->charset" . $this->newline;
 		$parts .= "Content-Transfer-Encoding: $this->transferEncodeing" . $this->newline . $this->newline;
 		$parts .= $this->altBody . $this->newline . $this->newline;
 		
-		$parts .= "--" . $altBoundary . $this->newline;
-		$parts .= "Content-Type: text/html; charset=$this->charset" . $this->newline;
-		$parts .= "Content-Transfer-Encoding: $this->transferEncodeing" . $this->newline . $this->newline;
-		$parts .= $htmlpart . $this->newline . $this->newline;
 		
 		$parts .= "--" . $altBoundary . "--" . $this->newline . $this->newline;
 		

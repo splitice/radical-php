@@ -22,15 +22,17 @@ abstract class ModuleBase {
 	abstract function loop($parameters);
 	function execute(array $parameters){
 		while(true){
-			if($this->autoRestart && pcntl_fork()){
-				do{
-					$pid = pcntl_wait($status);
-				}while($pid == -1);
-			}else{
-				while(true){
-					$this->Loop($parameters);
+			if($this->autoRestart){
+				if(pcntl_fork()){
+					do{
+						$pid = pcntl_wait($status);
+					}while($pid == -1);
 				}
-				exit;
+			}
+			
+			$continue = true;
+			while($continue){
+				$continue = !$this->Loop($parameters);
 			}
 		}
 	}

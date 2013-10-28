@@ -12,6 +12,9 @@ class InsertBuffer {
 	
 	function add(IToSQL $table){
 		$this->data[] = $table->toSQL();
+		if(count($this->data) > 10000){
+			$this->insert();
+		}
 	}
 	
 	function insert(){

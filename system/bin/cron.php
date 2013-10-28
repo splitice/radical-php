@@ -4,7 +4,6 @@ use Core\ErrorHandling\Handler;
 include(__DIR__.'/../include/common.php');
 
 $job = $argv[1];
-echo "Running: ",$job,"\r\n";
 
 //Get Arguments
 $arguments = $argv;
