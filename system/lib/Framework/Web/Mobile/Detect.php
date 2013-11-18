@@ -2,6 +2,25 @@
 namespace Web\Mobile;
 
 class Detect {
+	const RE_MOBILE = "`(iphone|ipod|blackberry|android|palm|windows\s+ce)`i";
+	const RE_MOBILE_ALWAYS = "`(android)`i";
+	const RE_DESKTOP = "`(windows|linux|os\s+[x9]|solaris|bsd)`i";
+	const RE_BOT = "`(spider|crawl|slurp|bot)`i";
+	
+	static function isMobileV2(){
+		if (preg_match(self::RE_MOBILE, strtolower($_SERVER['HTTP_USER_AGENT']))) {
+			if (preg_match(self::RE_MOBILE_ALWAYS, strtolower($_SERVER['HTTP_USER_AGENT']))) {
+				return true;
+			}
+			if (!preg_match(self::RE_DESKTOP, strtolower($_SERVER['HTTP_USER_AGENT']))) {
+				if (!preg_match(self::RE_BOT, strtolower($_SERVER['HTTP_USER_AGENT']))) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	static function isMobile(){
 		$mobile_browser = '0';
 		

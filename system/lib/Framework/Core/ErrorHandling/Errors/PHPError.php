@@ -1,6 +1,7 @@
 <?php
 namespace Core\ErrorHandling\Errors;
 
+use Core\Server;
 class PHPError extends Internal\ErrorBase {
 	const HEADER = 'Site Error (PHP)';
 	
@@ -44,20 +45,19 @@ class PHPError extends Internal\ErrorBase {
 	}
 	static function init(){
 		ini_set('display_errors','On');
-		set_error_handler ( array (get_called_class(), 'Handler' ), E_ALL);
+		$handler = array (get_called_class(), 'handler' );
+		set_error_handler ( $handler, error_reporting ());
 	}
 	static function handler($errno, $msg_text, $errfile, $errline) {
 		//die(var_dump( $msg_text, $errfile, $errline));
 		//if(isset($_GET['action']) && $_GET['action']=='ipn')
 		//	file_put_contents('/tmp/tt.'.time(), $msg_text);
-		
 		if (! (error_reporting () & $errno)) {
 			return true;
 		}
-	
 		if ($errno != E_STRICT) { //E_STRICT, well we would like it but not PEAR
 			new static($errno, $msg_text, new Structs\LocationReference($errfile, $errline));
-			return true;
+			return Server::isProduction();
 		}
 	
 		return true;

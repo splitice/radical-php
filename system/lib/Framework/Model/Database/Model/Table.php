@@ -16,8 +16,6 @@ use Model\Database\SQL\Parts;
 abstract class Table implements ITable, \JsonSerializable {	
 	const ADAPTER = "MySQL";
 	
-	private $_db;
-	
 	/**
 	 * @return \Database\IConnection
 	 */

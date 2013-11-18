@@ -31,15 +31,15 @@ class RequireJS extends Script {
 		$config = array('baseUrl'=>'/js/');
 		
 		//If we have defined paths add to config;
+		$path = array();
 		if($this->paths){
-			$path = array();
 			foreach($this->paths as $k=>$e){
 				if($e instanceof IJavascriptLibrary){
 					$path[$k] = substr((string)$e,0,-3);
 				}
 			}
-			$config['paths'] = $path;
 		}
+		$config['paths'] = $path;
 		
 		//Return config array
 		return $config;

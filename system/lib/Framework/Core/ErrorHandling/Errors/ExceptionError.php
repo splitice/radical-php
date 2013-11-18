@@ -25,4 +25,7 @@ class ExceptionError extends Internal\ErrorBase {
 	function getTraceOutput(){
 		return $this->ex->getTraceAsString();
 	}
+	
+	//If args contains closure
+	//emulate exception
 }

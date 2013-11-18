@@ -3,6 +3,7 @@ namespace Web\Form\Builder;
 use Web\Form\Security\Key;
 
 use Web\Form\Builder\FormInstance;
+use Web\Form\Security\KeyStorage;
 
 class EventFormInstance extends FormInstance {
 	const EVENT_HANDLER = '__rp_eventA';
@@ -19,7 +20,7 @@ class EventFormInstance extends FormInstance {
 		$this->eventMethod = $method;
 		
 		//Build security field
-		$securityField = new Key(array($this,'Execute'));
+		$securityField = KeyStorage::newKey(array($this,'Execute'));
 		
 		//Event details
 		$this->hidden(self::EVENT_HANDLER,$securityField->Store(serialize($handler)));

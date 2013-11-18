@@ -7,6 +7,7 @@ use Core\ErrorHandling\Errors\Internal\ErrorException;
 use CLI\Console\Colors;
 use CLI\Threading\Thread;
 use Core\ErrorHandling\Errors;
+use Web\Page\Handler\PageRequest;
 
 class OutputErrorHandler extends ErrorHandlerBase {
 	const CLI_START = "[%s]%s\n";
@@ -54,12 +55,14 @@ class OutputErrorHandler extends ErrorHandlerBase {
 		}else{
 			if(ob_get_level()) ob_end_clean();
 			try {
+				\Web\Page\Handler::init();
+				\Web\Page\Handler::$stack->push(new PageRequest(null));
 				//@todo Remove ugly hack
 				$page = $error->getPage();
 				while($page){
 					$page = $page->GET();
 				}
-				\Web\Page\Handler::top()->headers->output();
+				\Web\Page\Handler::current(true)->headers->output();
 			}catch(\Exception $ex){
 				die('Error: '.$ex->getMessage());
 			}

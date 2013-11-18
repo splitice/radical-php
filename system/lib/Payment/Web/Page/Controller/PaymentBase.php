@@ -6,6 +6,7 @@ use Utility\Payment\Transaction;
 use Web\Page\Handler\HTMLPageBase;
 use Web\Page\Handler;
 use Utility\Payment;
+use Web\Page\Controller\Special\Redirect;
 
 abstract class PaymentBase extends HTMLPageBase {
 	protected $system;
@@ -23,7 +24,13 @@ abstract class PaymentBase extends HTMLPageBase {
 		if(isset($_GET['action']))
 			return $this->system->process();
 		else{
-			$this->bill($this->getOrder());
+			$order = $this->getOrder();
+			if($order){
+				if($order instanceof Redirect)
+					return $order;
+				
+				$this->bill($order);
+			}
 		}
 	}
 	

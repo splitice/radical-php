@@ -84,7 +84,7 @@ abstract class CombineBase extends IndividualBase {
 			}
 			
 			if(\Core\Server::isProduction()){
-				$ret = $this->Optimize($ret);
+				$ret = $this->optimize($ret);
 				$cache->set($key, $ret);
 			}
 		}
