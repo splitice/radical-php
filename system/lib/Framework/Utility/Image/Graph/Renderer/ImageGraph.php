@@ -52,6 +52,13 @@ abstract class ImageGraph {
 				throw new \Exception('Pie graph must have two series');
 			}
 		}
+		
+		foreach($graph->axis as $axis){
+			if($axis->symbol !== null){
+				$dataSet->setSerieSymbol('Status %', $axis->symbol);
+			}
+		}
+		
 		//die(var_dump($dataSet));
 		// Initialise the graph
 		if($graph->type == 'line' || $graph->type == 'plot'){
@@ -73,8 +80,17 @@ abstract class ImageGraph {
 				$data = $dataSet->GetData();
 			}
 			
-			if($data)
-				$pChart->drawScale($data,$dataSet->GetDataDescription(),pChart::SCALE_NORMAL,150,150,150,TRUE,0,2);
+			if($data){
+				$mode = pChart::SCALE_NORMAL;
+				foreach($graph->axis as $k=>$v){
+					if($k != 'X'){
+						if(!$v->autoSize){
+							$mode = pChart::SCALE_START0;
+						}
+					}
+				}
+				$pChart->drawScale($data,$dataSet->GetDataDescription(),$mode,150,150,150,TRUE,0,2);
+			}
 			
 			if($graph->grid)
 				$pChart->drawGrid(4,TRUE,230,230,230,50,(int)$graph->grid);

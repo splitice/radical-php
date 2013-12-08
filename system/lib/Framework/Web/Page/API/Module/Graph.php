@@ -71,6 +71,23 @@ class Graph extends APIBase {
 			ob_end_clean();
 		
 			return $ret;
+		}elseif($graph instanceof \Utility\Image\Graph\Schema\Graph){
+			$graph->box->width = $this->width;
+			$graph->box->height = $this->height;
+			ob_start();
+			if($this->type == 'json'){
+				$ret = $graph->render(new Renderer\JSON());
+			}elseif($this->type == 'kendo'){
+				$ret = $graph->render(new Renderer\Kendo());
+			}else{
+				$ret = $graph->render(new Renderer\Output());
+			}
+			if($ret === null){
+				$ret = ob_get_contents();
+			}
+			ob_end_clean();
+		
+			return $ret;
 		}
 	}
 }

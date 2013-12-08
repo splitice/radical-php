@@ -546,10 +546,6 @@ class pChart {
 		$YPos = $this->GArea_Y2;
 		$XMin = NULL;
 		for($i = 1; $i <= $Divisions + 1; $i ++) {
-			if ($RightScale)
-				$this->drawLine ( $this->GArea_X2, $YPos, $this->GArea_X2 + 5, $YPos, $R, $G, $B );
-			else
-				$this->drawLine ( $this->GArea_X1, $YPos, $this->GArea_X1 - 5, $YPos, $R, $G, $B );
 			
 			$Value = $this->VMin + ($i - 1) * (($this->VMax - $this->VMin) / $Divisions);
 			$Value = round ( $Value * pow ( 10, $Decimals ) ) / pow ( 10, $Decimals );
@@ -564,18 +560,26 @@ class pChart {
 			if ($DataDescription ["Format"] ["Y"] == "currency")
 				$Value = $this->ToCurrency ( $Value );
 			
-			$Position = imageftbbox ( $this->FontSize, 0, $this->FontName, $Value );
-			$TextWidth = $Position [2] - $Position [0];
-			
-			if ($RightScale) {
-				imagettftext ( $this->Picture, $this->FontSize, 0, $this->GArea_X2 + 10, $YPos + ($this->FontSize / 2), $C_TextColor, $this->FontName, $Value );
-				if ($XMin < $this->GArea_X2 + 15 + $TextWidth || $XMin == NULL) {
-					$XMin = $this->GArea_X2 + 15 + $TextWidth;
-				}
-			} else {
-				imagettftext ( $this->Picture, $this->FontSize, 0, $this->GArea_X1 - 10 - $TextWidth, $YPos + ($this->FontSize / 2), $C_TextColor, $this->FontName, $Value );
-				if ($XMin > $this->GArea_X1 - 10 - $TextWidth || $XMin == NULL) {
-					$XMin = $this->GArea_X1 - 10 - $TextWidth;
+
+			if($Value !== null){
+				if ($RightScale)
+					$this->drawLine ( $this->GArea_X2, $YPos, $this->GArea_X2 + 5, $YPos, $R, $G, $B );
+				else
+					$this->drawLine ( $this->GArea_X1, $YPos, $this->GArea_X1 - 5, $YPos, $R, $G, $B );
+				
+				$Position = imageftbbox ( $this->FontSize, 0, $this->FontName, $Value );
+				$TextWidth = $Position [2] - $Position [0];
+				
+				if ($RightScale) {
+					imagettftext ( $this->Picture, $this->FontSize, 0, $this->GArea_X2 + 10, $YPos + ($this->FontSize / 2), $C_TextColor, $this->FontName, $Value );
+					if ($XMin < $this->GArea_X2 + 15 + $TextWidth || $XMin == NULL) {
+						$XMin = $this->GArea_X2 + 15 + $TextWidth;
+					}
+				} else {
+					imagettftext ( $this->Picture, $this->FontSize, 0, $this->GArea_X1 - 10 - $TextWidth, $YPos + ($this->FontSize / 2), $C_TextColor, $this->FontName, $Value );
+					if ($XMin > $this->GArea_X1 - 10 - $TextWidth || $XMin == NULL) {
+						$XMin = $this->GArea_X1 - 10 - $TextWidth;
+					}
 				}
 			}
 			
@@ -604,7 +608,6 @@ class pChart {
 		$YMax = NULL;
 		foreach ( $Data as $Key => $Values ) {
 			if ($ID % $SkipLabels == 0) {
-				$this->drawLine ( ( int ) ($XPos), $this->GArea_Y2, ( int ) ($XPos), $this->GArea_Y2 + 5, $R, $G, $B );
 				$Value = $Data [$Key] [$DataDescription ["Position"]];
 				if ($DataDescription ["Format"] ["X"] == "number")
 					$Value = $Value . $DataDescription ["Unit"] ["X"];
@@ -617,22 +620,26 @@ class pChart {
 				if ($DataDescription ["Format"] ["X"] == "currency")
 					$Value = $this->ToCurrency ( $Value );
 				
-				$Position = imageftbbox ( $this->FontSize, $Angle, $this->FontName, $Value );
-				$TextWidth = abs ( $Position [2] ) + abs ( $Position [0] );
-				$TextHeight = abs ( $Position [1] ) + abs ( $Position [3] );
-				
-				if ($Angle == 0) {
-					$YPos = $this->GArea_Y2 + 18;
-					imagettftext ( $this->Picture, $this->FontSize, $Angle, ( int ) ($XPos) - ( int ) ($TextWidth / 2), $YPos, $C_TextColor, $this->FontName, $Value );
-				} else {
-					$YPos = $this->GArea_Y2 + 10 + $TextHeight;
-					if ($Angle <= 90)
-						imagettftext ( $this->Picture, $this->FontSize, $Angle, ( int ) ($XPos) - $TextWidth + 5, $YPos, $C_TextColor, $this->FontName, $Value );
-					else
-						imagettftext ( $this->Picture, $this->FontSize, $Angle, ( int ) ($XPos) + $TextWidth + 5, $YPos, $C_TextColor, $this->FontName, $Value );
-				}
-				if ($YMax < $YPos || $YMax == NULL) {
-					$YMax = $YPos;
+				if($Value !== null){
+					$this->drawLine ( ( int ) ($XPos), $this->GArea_Y2, ( int ) ($XPos), $this->GArea_Y2 + 5, $R, $G, $B );
+					
+					$Position = imageftbbox ( $this->FontSize, $Angle, $this->FontName, $Value );
+					$TextWidth = abs ( $Position [2] ) + abs ( $Position [0] );
+					$TextHeight = abs ( $Position [1] ) + abs ( $Position [3] );
+					
+					if ($Angle == 0) {
+						$YPos = $this->GArea_Y2 + 18;
+						imagettftext ( $this->Picture, $this->FontSize, $Angle, ( int ) ($XPos) - ( int ) ($TextWidth / 2), $YPos, $C_TextColor, $this->FontName, $Value );
+					} else {
+						$YPos = $this->GArea_Y2 + 10 + $TextHeight;
+						if ($Angle <= 90)
+							imagettftext ( $this->Picture, $this->FontSize, $Angle, ( int ) ($XPos) - $TextWidth + 5, $YPos, $C_TextColor, $this->FontName, $Value );
+						else
+							imagettftext ( $this->Picture, $this->FontSize, $Angle, ( int ) ($XPos) + $TextWidth + 5, $YPos, $C_TextColor, $this->FontName, $Value );
+					}
+					if ($YMax < $YPos || $YMax == NULL) {
+						$YMax = $YPos;
+					}
 				}
 			}
 			
@@ -1380,8 +1387,8 @@ class pChart {
 				$R2 = $Ro;
 				$G2 = $Go;
 				$B2 = $Bo;
-				
-				if (isset ( $DataDescription ["Symbol"] [$ColName] )) {
+
+				if (!empty ( $DataDescription ["Symbol"] [$ColName] )) {
 					$Is_Alpha = ((ord ( file_get_contents ( $DataDescription ["Symbol"] [$ColName], false, null, 25, 1 ) ) & 6) & 4) == 4;
 					
 					$Infos = getimagesize ( $DataDescription ["Symbol"] [$ColName] );
@@ -1451,7 +1458,9 @@ class pChart {
 								}
 							}
 						} else {
-							imagecopymerge ( $this->Picture, $Symbol, $XPos + 1 - $ImageWidth / 2, $YPos + 1 - $ImageHeight / 2, 0, 0, $ImageWidth, $ImageHeight, 100 );
+							if($DataDescription ["Symbol"] [$ColName]){
+								imagecopymerge ( $this->Picture, $Symbol, $XPos + 1 - $ImageWidth / 2, $YPos + 1 - $ImageHeight / 2, 0, 0, $ImageWidth, $ImageHeight, 100 );
+							}
 						}
 					}
 					
