@@ -17,14 +17,6 @@ function oneof($object, $class){
 	}
 	return false;
 }
-/*function cDN($url){
-	if(!\Server::isProduction()){
-		return U($url);
-	}
-	$ret = 'http://'.Framework::SITE_CDN;
-	$ret .= ltrim($url,'/');
-	return $ret;
-}*/
 function _U($url,$param=null){
 	return (string)\Utility\Net\URL::fromRequest(U($url,$param));
 }

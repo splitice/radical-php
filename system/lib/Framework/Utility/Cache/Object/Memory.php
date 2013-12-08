@@ -36,7 +36,7 @@ class Memory extends Internal\CacheBase implements ICache {
 	function set($key, $value, $ttl = 3600) {
 		$key = $this->key($key);
 		if (function_exists ( 'apc_store' )) {
-			return apc_store ( $key, $value, $ttl );
+			return @apc_store ( $key, $value, $ttl );
 		}
 		if (function_exists ( 'xcache_set' )) {
 			return xcache_set ( $key, $value, $ttl );

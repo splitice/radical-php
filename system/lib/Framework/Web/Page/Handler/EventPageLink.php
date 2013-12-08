@@ -10,11 +10,18 @@ class EventPageLink {
 	private $object;
 	private $method;
 	private $data;
+	private $securityField = null;
+	private $eHandler;
+	private $eMethod;
 	
 	function __construct($object, $method, $data = null){
 		$this->object = $object;
 		$this->method = $method;
 		$this->data = $data;
+	}
+	
+	function getObject(){
+		return $this->object;
 	}
 	
 	function __toString(){
@@ -23,18 +30,25 @@ class EventPageLink {
 	
 	function data($query_params = array()){
 		//Build security field
-		$securityField = KeyStorage::newKey(array($this,'Execute'));
+		if($this->securityField === null){
+			$this->securityField = KeyStorage::newKey(array($this,'Execute'));
+			$this->eHandler = $this->securityField->Store(serialize($this->object));
+			$this->eMethod = base64_encode($this->securityField->Encrypt($this->method));
+		}
 
 		$g = $_GET;
 		if(isset($g['error'])){
 			unset($g['error']);
-		}		
+		}
+		if(isset($g['eid'])){
+			unset($g['eid']);
+		}	
 		
 		//Event details
 		$qs = array_merge($g, $query_params);
-		$qs[self::EVENT_HANDLER] = $securityField->Store(serialize($this->object));
-		$qs[self::EVENT_METHOD] = base64_encode($securityField->Encrypt($this->method));
-		$qs[Key::FIELD_NAME] = $securityField->getId();
+		$qs[self::EVENT_HANDLER] = $this->eHandler;
+		$qs[self::EVENT_METHOD] = $this->eMethod;
+		$qs[Key::FIELD_NAME] = $this->securityField->getId();
 		
 		$str_qs = '?'.http_build_query($qs);
 		

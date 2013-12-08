@@ -36,8 +36,12 @@ abstract class Table implements ITable, \JsonSerializable {
 		return self::$_instance;
 	}
 	
+	private function getId(){
+		return $this->_getId();
+	}
+	
 	protected $_id;
-	function getId(){
+	function _getId(){
 		//Check if already done
 		if($this->_id !== null){
 			return $this->_id;
@@ -381,6 +385,9 @@ abstract class Table implements ITable, \JsonSerializable {
 		}
 	}
 	function __call($m,$a){
+		if($m === 'getId'){
+			return $this->_getId();
+		}
 		if(0 === substr_compare($m,'get',0,3)){//if starts with is get*
 			//get the action part
 			$actionPart = substr($m,3);

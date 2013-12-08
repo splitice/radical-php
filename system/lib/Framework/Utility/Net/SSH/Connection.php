@@ -28,11 +28,13 @@ class Connection {
 		$this->Connect($methods);
 	}
 	
+	
+	
 	function connect($methods = array()){
 		//Connect Resource
-		$this->ssh = ssh2_connect($this->host,$this->port,$methods,array('disconnect'=>array($this,'onDisconnect')));
+		$this->ssh = @ssh2_connect($this->host,$this->port,$methods,array('disconnect'=>array($this,'onDisconnect')));
 		
-		if($this->ssh){
+		if($this->ssh && is_resource($this->ssh)){
 			//Re-connection authentication
 			$this->authenticate->ssh = $this->ssh;
 			$this->authenticate->Authenticate($this->authenticate);
@@ -48,7 +50,7 @@ class Connection {
 	}
 	
 	function close(){
-		if($this->ssh !== null){
+		if($this->isConnected()){
 			$this->exec('exit');
 			$this->ssh = null;
 			$this->sftp = null;
@@ -67,7 +69,7 @@ class Connection {
 	}
 	
 	function isConnected(){
-		return is_resource($this->ssh);
+		return $this->ssh && is_resource($this->ssh);
 	}
 	
 	function execute($command, $pty = null, array $env = array(), $width = 80, $height = 25, $width_height_type = SSH2_TERM_UNIT_CHARS){

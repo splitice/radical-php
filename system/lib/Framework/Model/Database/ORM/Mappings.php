@@ -114,7 +114,11 @@ class Mappings {
 	function translationArray(){
 		$ret = array();
 		foreach($this->structure as $field=>$column){
-			$ret[$field] = $this->translateToObjective($field);
+			try {
+				$ret[$field] = $this->translateToObjective($field);
+			}catch(\Exception $ex){
+				
+			}
 		}
 		return $ret;
 	}

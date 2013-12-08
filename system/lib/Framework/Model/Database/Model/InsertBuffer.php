@@ -19,7 +19,13 @@ class InsertBuffer {
 	
 	function insert(){
 		if($this->data){
-			$ret = $this->table->insert($this->data)->query();
+			try {
+				$ret = $this->table->insert($this->data)->query();
+			}catch(\Exception $ex){
+				$this->data = array();
+				throw $ex;
+			}
+
 			$this->data = array();
 			return $ret;
 		}

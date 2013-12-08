@@ -224,12 +224,25 @@ class FCGIClient {
 	}
 	private static function fread($socket, $len) {
 		$buffer = '';
-
+		$start_time = time();
 		set_socket_blocking ( $socket, 1 );
 
 		while ( strlen ( $buffer ) != $len ) {
 			if (feof ( $socket ))
 				return $buffer;
+			
+			$r = array();
+			$n = array ();
+			while(!count($r)){
+				$r = array (
+						$socket
+				);
+				stream_select ( $r, $n, $n, 10 );
+				
+				if((time() - $start_time) > 300){
+					return false;
+				}
+			}
 				
 			$b = fread ( $socket, $len - strlen ( $buffer ) );
 				
@@ -238,11 +251,7 @@ class FCGIClient {
 				
 			$buffer .= $b;
 			if (strlen ( $buffer ) != $len) {
-				$r = array (
-						$socket
-				);
-				$n = array ();
-				stream_select ( $r, $n, $n, 100 );
+				
 			}
 		}
 

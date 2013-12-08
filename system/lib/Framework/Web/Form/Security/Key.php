@@ -14,7 +14,11 @@ class Key {
 	public $expires = -1;
 	
 	function __construct($callback = null,$ttl = -1){
-		$this->id = dechex(crc32(session_id())).\Basic\String\Random::GenerateBase64(6);
+		//Maximum entropy, minimum data
+		$this->id = \Basic\String\Random::GenerateBase64(6).dechex(crc32(session_id().time()));
+		$len = strlen($this->id) - rand(0,4);
+		$this->id = substr($this->id,0,$len);
+		
 		$this->key = \Basic\String\Random::GenerateBytes(32);
 		$this->callback = $callback;
 		if($ttl > 0) $this->expires = $ttl + time();

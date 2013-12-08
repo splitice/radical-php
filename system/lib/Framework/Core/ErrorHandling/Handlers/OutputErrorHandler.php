@@ -11,6 +11,16 @@ use Web\Page\Handler\PageRequest;
 
 class OutputErrorHandler extends ErrorHandlerBase {
 	const CLI_START = "[%s]%s\n";
+	private $is_cli;
+	
+	function __construct($is_cli = null){
+		if($is_cli === null){
+			$is_cli = \Core\Server::isCLI();
+		}
+		$this->is_cli = $is_cli;
+		
+		parent::__construct();
+	}
 	
 	function error(ErrorBase $error) {
 		if($error->isFatal()){
@@ -18,7 +28,7 @@ class OutputErrorHandler extends ErrorHandlerBase {
 		}
 	}
 	function exception(ErrorException $error){
-		if(\Core\Server::isCLI()){
+		if($this->is_cli){
 			$c = Colors::getInstance();
 			
 			//Code

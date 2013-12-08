@@ -11,7 +11,7 @@ trait TEventPageBase {
 	
 	protected function _processEvent($post = true){
 		$id = Key::fromRequest($post);
-		if($id){
+		if(!empty($id)){
 			$key = KeyStorage::GetKey($id);
 			if($key){
 				$this->eventKey = $key;

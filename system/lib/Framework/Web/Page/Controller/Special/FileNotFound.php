@@ -27,6 +27,10 @@ class FileNotFound extends HTMLPageBase {
 		return 'You requested a URL that we could not find. Please check the spelling of the URL and try again.';
 	}
 	
+	function getClass(){
+		return get_class($this);
+	}
+	
 	/**
 	 * Handle POST request
 	 *

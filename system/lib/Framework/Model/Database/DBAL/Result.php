@@ -10,7 +10,7 @@ class Result {
 	
 	function __construct(\MySQLi_Result $result,Instance $db){
 		$this->result = $result;
-		$this->affected_rows = $db->AffectedRows();
+		$this->affected_rows = $db->adapter->affectedRows();
 		if(null === static::$fetchAllSupport){
 			static::$fetchAllSupport = method_exists($result,'fetch_all');
 		}

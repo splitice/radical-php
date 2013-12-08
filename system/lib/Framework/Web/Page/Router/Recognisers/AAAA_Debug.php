@@ -43,7 +43,7 @@ class AAAA_Debug implements IPageRecognise {
 			//Debug Wrapper
 			switch($mode){
 				case 'webgrind':
-					return new Controller\Debug\Profile((string)$_GET['dataFile']);
+					return new Controller\Debug\Profile(isset($_GET['dataFile'])?(string)$_GET['dataFile']:null);
 					break;
 				
 				case 'profile':
@@ -58,6 +58,12 @@ class AAAA_Debug implements IPageRecognise {
 					//Execute debug request
 					$http = new HTTP\Fetch((string)$new_url);
 					$http->setHeader('Host',$host);
+					
+					if(isset($_SERVER["PHP_AUTH_USER"])){
+						$http->curl[CURLOPT_USERPWD] = $_SERVER["PHP_AUTH_USER"].':'.$_SERVER["PHP_AUTH_PW"];
+						$http->curl[CURLOPT_HTTPAUTH] = CURLAUTH_BASIC;
+					}
+					
 					if(isset($_COOKIE[session_name()])){
 						$http->curl[CURLOPT_COOKIE] = session_name().'='.$_COOKIE[session_name()];
 					}

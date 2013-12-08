@@ -33,7 +33,7 @@ class Store {
 		self::init();
 		$data = igbinary_serialize($data);
 		
-		$res = self::$redis->set($this->key, $data);
+		$res = self::$redis->set($this->key, $data, 60*60);
 		if(!$res){
 			throw new \Exception("Failed to set key, error: ".self::$redis->getLastError());	
 		}

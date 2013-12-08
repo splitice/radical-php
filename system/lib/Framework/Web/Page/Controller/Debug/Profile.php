@@ -88,7 +88,7 @@ class Profile extends HTMLPageBase {
 					}
 		
 				}
-				usort($functions,'costCmp');
+				usort($functions,array($this,'costCmp'));
 		
 				$remainingCost = $shownTotal*$this->_get('showFraction');
 		

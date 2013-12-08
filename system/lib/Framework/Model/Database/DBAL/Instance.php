@@ -13,7 +13,7 @@ class Instance {
 	/* Psudeo Returns */
 	const NOT_A_RESULT = null;
 	
-	private $adapter;
+	public $adapter;
 	function __construct(Adapter\IConnection $adapter, $host, $user, $pass, $db = null, $port = 3306, $compression=true){
 		$this->adapter = new $adapter($host, $user, $pass, $db, $port, $compression);
 	}

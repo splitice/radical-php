@@ -8,13 +8,15 @@ class Authenticate {
 	 */
 	private $auth;
 	
-	function __construct(&$ssh){
+	function __construct($ssh){
 		$this->ssh = $ssh;
 	}
 	
 	function password($username,$password){
-		$this->auth = new AuthenticatedDetails(__FUNCTION__,array($username,$password));
-		return ssh2_auth_password($this->ssh,$username,$password);
+		if($this->ssh && is_resource($this->ssh)){
+			$this->auth = new AuthenticatedDetails(__FUNCTION__,array($username,$password));
+			return ssh2_auth_password($this->ssh,$username,$password);
+		}
 	}
 	
 	function Authenticate(Authenticate $auth){

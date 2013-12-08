@@ -8,13 +8,22 @@ class SerializableErrorException implements IErrorException {
 	protected $fatal = false;
 	protected $trace_output;
 	protected $message;
+	protected $class;
 	
 	function __construct(ErrorException $ex){
 		$this->heading = $ex->getHeading();
 		$this->fatal = $ex->isFatal();
 		$this->message = $ex->getMessage();
-		$this->trace_output = $ex->getTraceAsString();
-		
+		if(method_exists($ex,'getTraceOutput')){
+			$this->trace_output = $ex->getTraceOutput();
+		}else{
+			$this->trace_output = $ex->getTraceAsString();
+		}
+		$this->class = get_class($ex);
+	}
+	
+	function getClass(){
+		return $this->class;
 	}
 
 	/**
