@@ -53,9 +53,9 @@ abstract class ImageGraph {
 			}
 		}
 		
-		foreach($graph->axis as $axis){
+		foreach($graph->axis as $k=>$axis){
 			if($axis->symbol !== null){
-				$dataSet->setSerieSymbol('Status %', $axis->symbol);
+				$dataSet->setSerieSymbol($k, $axis->symbol);
 			}
 		}
 		

@@ -33,20 +33,26 @@ trait TEventPageBase {
 	 */
 	function execute($method = 'GET'){
 		//Check for an event
-		if($method == 'POST'){
-			$r = $this->_processEvent();
+		$t = $this;
+		$processed = false;
+		$event_func = function() use($t, $method, &$processed) { 
+			$r = $t->_processEvent($method == 'POST');
 			if($r) {
+				$processed = true;
 				$request = new PageRequest($r);
 				return $request->execute($method);
 			}
-		} else if ($method == 'GET'){
-			$r = $this->_processEvent(false);
-			if($r) {
-				$request = new PageRequest($r);
-				return $request->execute($method);
-			}
+		};
+		
+		if(method_exists($this, 'event_execute')){
+			$r = $this->event_execute($event_func);
+		}else{			
+			$r = $event_func();
 		}
-	
+		
+		if($processed)
+			return $r;
+
 		//Normal execution
 		return parent::Execute($method);
 	}

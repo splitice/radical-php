@@ -7,7 +7,7 @@ use Web\Form\Element;
 class Int extends ZZ_Unknown implements IValidator {
 	const TYPE = 'int';
 	
-	static function is($type){
+	static function is($type = null){
 		switch($type){
 			case 'int':
 			case 'smallint':
