@@ -18,6 +18,11 @@ class EventPageLink {
 		$this->object = $object;
 		$this->method = $method;
 		$this->data = $data;
+		
+		//Build security field
+		$this->securityField = KeyStorage::newKey(array($this,'Execute'));
+		$this->eHandler = $this->securityField->Store(serialize($this->object));
+		$this->eMethod = base64_encode($this->securityField->Encrypt($this->method));
 	}
 	
 	function getObject(){
@@ -29,13 +34,6 @@ class EventPageLink {
 	}
 	
 	function data($query_params = array()){
-		//Build security field
-		if($this->securityField === null){
-			$this->securityField = KeyStorage::newKey(array($this,'Execute'));
-			$this->eHandler = $this->securityField->Store(serialize($this->object));
-			$this->eMethod = base64_encode($this->securityField->Encrypt($this->method));
-		}
-
 		$g = $_GET;
 		if(isset($g['error'])){
 			unset($g['error']);
